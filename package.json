@@ -10,7 +10,7 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "test": "jest --passWithNoTests",
-    "lint": "eslint .",
+    "lint": "eslint . --ext .js,.mjs",
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {

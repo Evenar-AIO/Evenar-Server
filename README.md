@@ -1,32 +1,20 @@
- # Server
- 
- JavaScript (CommonJS) Node.js server.
- 
- ## Quick start
- 
- - Install: `npm install`
- - Run: `npm run start`
- - Dev (auto-reload): `npm run dev`
- - Test: `npm test`
- - Lint: `npm run lint`
- 
- ## Setup
- 
- ### Requirements
- 
- - Node.js (recommended: LTS)
- - npm
- 
- ### Environment variables
- 
- - `PORT` (optional): server port (default: `3000`)
- 
- ## Endpoints (sample)
- 
- - `GET /` -> `Hello World`
- - `GET /health` -> `{ "ok": true }`
- 
- ## Structure
- 
- - `index.js`: Application entrypoint.
- - `src/`: Application code (routes, controllers, middleware, etc.).
+# Git Branching Convention
+
+## Main branches
+- **main**: code production, chỉ merge từ `dev`, không commit trực tiếp
+- **dev**: code đang phát triển, tích hợp các feature đã hoàn thành
+
+## Working branches
+Tạo từ `dev`, đặt tên theo format:
+
+- **feature/**`ten-tinh-nang`  
+  Ví dụ: `feature/login-form`
+- **bugfix/**`mo-ta-loi`  
+  Ví dụ: `bugfix/fix-header-overflow`
+- **hotfix/**`mo-ta-nhanh` (fix gấp trên main)  
+  Ví dụ: `hotfix/fix-build-prod`
+
+## Rules
+- Luôn tạo **Pull Request** để merge
+- Không commit trực tiếp vào `main`, `dev`
+- PR phải pass **lint + build check**
