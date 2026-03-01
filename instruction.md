@@ -66,3 +66,9 @@ The server will typically run on a port defined in your environment variables or
       |                                                                                    v
 [Client Response] <-------------------------------------------------------------------- [Data]
 ```
+
+
+
+init db -
+ b1: mở terminal  : ``` mongosh ./script/init-db.js```
+b2: mở mongoCompass: check name: EventTicketDB
