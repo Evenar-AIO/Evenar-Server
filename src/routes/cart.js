@@ -4,6 +4,6 @@ const cartController = require('../controllers/cartController');
 
 // const auth = require('../middleware/auth'); // assuming auth exists or mocked
 
-router.post('/cart', cartController.addToCart);
+router.post('/', cartController.addToCart);
 
 module.exports = router;

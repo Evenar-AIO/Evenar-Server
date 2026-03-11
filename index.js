@@ -28,6 +28,22 @@ app.use(
 );
 
 /* ---------------- Routes ---------------- */
+const eventsRouter = require('./src/routes/events');
+const searchRouter = require('./src/routes/search');
+const cartRouter = require('./src/routes/cart');
+const bookingsRouter = require('./src/routes/bookings');
+const paymentsRouter = require('./src/routes/payments');
+const ordersRouter = require('./src/routes/orders');
+const refundsRouter = require('./src/routes/refunds');
+
+app.use('/api/events', eventsRouter);
+app.use('/api/events/search', searchRouter);
+app.use('/api/cart', cartRouter);
+app.use('/api/bookings', bookingsRouter);
+app.use('/api/payments', paymentsRouter);
+app.use('/api/orders', ordersRouter);
+app.use('/api/refunds', refundsRouter);
+
 app.get("/", (req, res) => {
   res.status(200).send("Hello World");
 });

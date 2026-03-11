@@ -1,4 +1,4 @@
-const Order = require('../models/orderModel');
+const orderService = require('../services/orderService');
 
 exports.getUserOrders = async (req, res) => {
   try {
@@ -9,17 +9,9 @@ exports.getUserOrders = async (req, res) => {
       return res.status(401).json({ error: 'Unauthorized: User ID required' });
     }
 
-    const skip = (Number(page) - 1) * Number(limit);
-    const query = { userId };
-
-    const orders = await Order.find(query).skip(skip).limit(Number(limit)).sort({ createdAt: -1 });
-    const total = await Order.countDocuments(query);
+    const result = await orderService.getUserOrders(userId, page, limit);
     
-    res.status(200).json({
-      orders,
-      total,
-      page: Number(page)
-    });
+    res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

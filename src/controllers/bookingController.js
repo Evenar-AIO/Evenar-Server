@@ -1,4 +1,4 @@
-const Booking = require('../models/bookingModel');
+const bookingService = require('../services/bookingService');
 
 exports.createBooking = async (req, res) => {
   try {
@@ -9,22 +9,9 @@ exports.createBooking = async (req, res) => {
       return res.status(401).json({ error: 'Unauthorized: User ID required' });
     }
     
-    // Mock calculate total price, should query DB for true ticket prices
-    const totalPrice = tickets.reduce((sum, t) => sum + ((t.quantity || 1) * 100), 0);
+    const result = await bookingService.createBooking(userId, eventId, tickets);
     
-    const booking = await Booking.create({
-      userId,
-      eventId,
-      tickets,
-      status: 'PENDING',
-      totalPrice
-    });
-    
-    res.status(201).json({
-      bookingId: booking._id,
-      status: booking.status,
-      totalPrice: booking.totalPrice
-    });
+    res.status(201).json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
