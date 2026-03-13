@@ -1,24 +1,24 @@
 const Event = require('../models/eventModel');
+const TicketInfo = require('../models/ticketInfoModel');
 
 exports.createEvent = async (userId, eventData) => {
-  const { title, description, date, location, blocks, ticketTypes, layout } = eventData;
-  if ((!blocks || blocks.length === 0) && !layout) {
-    throw new Error('At least one section or layout required');
+  const { name, description, startTime, endTime, physicalLocation, layout, imageURL, genreId } = eventData;
+  
+  if (!name || !startTime || !endTime) {
+    throw new Error('Name, startTime, and endTime are required');
   }
-
-  const totalSeats = blocks ? blocks.reduce((sum, block) => sum + (block.seats?.length || 0), 0) : 0;
 
   const event = new Event({
     ownerId: userId,
-    title,
+    name,
     description,
-    date,
-    location,
-    blocks,
-    ticketTypes,
-    layout,
-    totalSeats,
-    status: 'PENDING'
+    startTime,
+    endTime,
+    physicalLocation,
+    layout, // Though not in model schema explicitly as typed, but could be 'Object'
+    imageURL,
+    genreId,
+    status: 'active'
   });
 
   await event.save();
@@ -26,11 +26,16 @@ exports.createEvent = async (userId, eventData) => {
 };
 
 exports.getEvents = async () => {
-  return await Event.find();
+  return await Event.find({ isDeleted: false });
 };
 
 exports.getEventById = async (id) => {
-  const event = await Event.findById(id);
+  const event = await Event.findById(id).lean();
   if (!event) throw new Error('Event not found');
+
+  // Load ticket infos for this event
+  const ticketInfos = await TicketInfo.find({ eventId: event._id }).lean();
+  event.ticketInfos = ticketInfos;
+  
   return event;
 };

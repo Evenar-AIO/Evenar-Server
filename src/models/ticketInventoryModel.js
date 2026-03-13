@@ -10,9 +10,8 @@ const ticketInventorySchema = new mongoose.Schema({
   lastUpdated: { type: Date, default: Date.now }
 }, { timestamps: true });
 
-ticketInventorySchema.pre('save', function(next) {
+ticketInventorySchema.pre('save', function() {
   this.availableQuantity = this.totalQuantity - this.soldQuantity - this.reservedQuantity;
-  next();
 });
 
 module.exports = mongoose.model('TicketInventory', ticketInventorySchema);

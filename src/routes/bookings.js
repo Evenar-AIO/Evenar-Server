@@ -1,7 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const bookingController = require('../controllers/bookingController');
+const orderController = require('../controllers/orderController');
 
-router.post('/', bookingController.createBooking);
+/**
+ * POST /api/bookings  — kept for FE backward-compatibility.
+ * Internally delegates to orderController.createOrder.
+ */
+router.post('/', orderController.createOrder);
 
 module.exports = router;
