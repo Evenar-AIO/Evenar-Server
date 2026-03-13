@@ -15,8 +15,8 @@ const refundSchema = new mongoose.Schema(
         isDeleted: { type: Boolean, default: false }
     },
     {
-        timestamps: true // Automatically adds createdAt and updatedAt
+        timestamps: true
     }
 );
 
-module.exports = mongoose.model('Refund', refundSchema);
+module.exports = mongoose.model('Refund', refundSchema, 'refunds');

@@ -5,8 +5,6 @@ exports.verifyToken = (req, res, next) => {
         const authHeader = req.headers.authorization || req.headers.Authorization;
 
         if (!authHeader || !authHeader.startsWith('Bearer ')) {
-            // Because TTV1 hasn't finished /login, we can mock a bypass for testing Admin Panel.
-            // WARNING: Remove this bypass in production!
             if (process.env.NODE_ENV !== 'production' && req.headers['x-mock-role']) {
                 req.user = { id: 'mock_id', role: req.headers['x-mock-role'] };
                 return next();
@@ -16,11 +14,10 @@ exports.verifyToken = (req, res, next) => {
 
         const token = authHeader.split(' ')[1];
 
-        // This relies on TTV1 having process.env.JWT_SECRET defined in .env
         const secret = process.env.JWT_SECRET || 'fallback_secret';
 
         const decoded = jwt.verify(token, secret);
-        req.user = decoded; // { id, role, ... }
+        req.user = decoded;
 
         next();
     } catch (error) {
@@ -29,7 +26,6 @@ exports.verifyToken = (req, res, next) => {
 };
 
 exports.verifyAdmin = (req, res, next) => {
-    // Requires verifyToken to be executed first
     if (!req.user) {
         return res.status(401).json({ success: false, message: 'Unauthorized: No user information' });
     }

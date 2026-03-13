@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: [true, 'Please add a password'],
             minlength: 6,
-            select: false // Do not return password by default
+            select: false
         },
         role: {
             type: String,
@@ -67,8 +67,8 @@ const userSchema = new mongoose.Schema(
         }
     },
     {
-        timestamps: true // Automatically adds createdAt and updatedAt
+        timestamps: true
     }
 );
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema, 'users');

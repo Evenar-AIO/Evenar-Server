@@ -2,33 +2,36 @@ const mongoose = require('mongoose');
 
 const eventSchema = new mongoose.Schema(
     {
-        title: {
+        legacyId: { type: Number },
+        name: {
             type: String,
-            required: [true, 'Please add a title'],
+            required: [true, 'Please add a name'],
             trim: true
         },
         description: {
             type: String,
             required: [true, 'Please add a description']
         },
-        location: {
+        physicalLocation: {
             type: String,
             required: [true, 'Please add a location']
         },
-        date: {
+        startTime: {
             type: Date,
-            required: [true, 'Please add a date']
+            required: [true, 'Please add starting time']
         },
-        organizer: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
+        endTime: {
+            type: Date,
+            required: [true, 'Please add ending time']
+        },
+        ownerId: {
+            type: Number,
             required: true
         },
-        price: {
-            type: Number,
-            required: [true, 'Please add a price']
+        genreId: {
+            type: Number
         },
-        totalTickets: {
+        totalTicketCount: {
             type: Number,
             required: [true, 'Please add total tickets']
         },
@@ -36,15 +39,29 @@ const eventSchema = new mongoose.Schema(
             type: Number,
             default: 0
         },
+        isApproved: {
+            type: Boolean,
+            default: false
+        },
         status: {
             type: String,
-            enum: ['pending', 'approved', 'rejected'],
-            default: 'pending'
+            default: 'active'
+        },
+        imageURL: {
+            type: String
+        },
+        hasSeatingChart: {
+            type: Boolean,
+            default: false
+        },
+        isDeleted: {
+            type: Boolean,
+            default: false
         }
     },
     {
-        timestamps: true // Automatically adds createdAt and updatedAt
+        timestamps: true
     }
 );
 
-module.exports = mongoose.model('Event', eventSchema);
+module.exports = mongoose.model('Event', eventSchema, 'events');

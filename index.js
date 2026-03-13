@@ -10,12 +10,11 @@ const swaggerJsdoc = require("swagger-jsdoc");
 require("dotenv").config();
 const connectDB = require("./src/config/db");
 
-// Connect to Database
 connectDB();
 
 const app = express();
 
-/* ---------------- Middleware ---------------- */
+
 app.use(pinoHttp());
 app.use(helmet());
 app.use(cors());
@@ -25,13 +24,16 @@ app.use(express.json());
 app.use(
   rateLimit({
     windowMs: 15 * 60 * 1000,
-    max: 100, // use "max" instead of "limit" (newer versions)
+    max: 1000,
+    message: "Hệ thống đang bận do quá nhiều yêu cầu, vui lòng thử lại sau vài phút.",
     standardHeaders: true,
     legacyHeaders: false,
   }),
 );
 
-/* ---------------- Routes ---------------- */
+const adminRoutes = require("./src/routes/admin.routes");
+
+
 app.get("/", (req, res) => {
   res.status(200).send("Hello World");
 });
@@ -40,7 +42,9 @@ app.get("/health", (req, res) => {
   res.status(200).json({ ok: true });
 });
 
-/* ---------------- Swagger ---------------- */
+app.use("/admin", adminRoutes);
+
+
 const swaggerOptions = {
   definition: {
     openapi: "3.0.0",
@@ -49,22 +53,13 @@ const swaggerOptions = {
       version: "1.0.0",
     },
   },
-  apis: ["./index.js", "./routes/*.js"],
+  apis: ["./index.js", "./src/routes/*.js"],
 };
-/**
- * @swagger
- * /health:
- *   get:
- *     summary: Health check
- *     responses:
- *       200:
- *         description: Server is healthy
- */
 
 const specs = swaggerJsdoc(swaggerOptions);
 app.use("/api.html", swaggerUi.serve, swaggerUi.setup(specs));
 
-/* ---------------- Server ---------------- */
+
 const port = Number(process.env.PORT) || 3000;
 
 if (require.main === module) {
