@@ -227,13 +227,13 @@ priority cho từng api, deadline phải xong trong 2 tuần
 | 3 | `POST /admin/users/{id}/unlock` | 🔴 P0 | T4 04/03 | Đi kèm lock |
 | 4 | `POST /admin/events/{id}/approve` | 🔴 P0 | T5 05/03 | Blocking: event phải approved mới hiển thị |
 | 5 | `DELETE /admin/users/{id}` | 🟠 P1 | T6 06/03 | Soft delete user |
-| 6 | `GET /admin/dashboard` | 🟠 P1 | T2 09/03 | Dashboard thống kê |
-| 7 | `GET /admin/transactions` | 🟠 P1 | T3 10/03 | Xem giao dịch hệ thống |
-| 8 | `POST /refunds/process` | 🟠 P1 | T4 11/03 | Phê duyệt hoàn tiền (cần TTV3 xong refunds/request) |
-| 9 | `GET /admin/audit-logs` | 🟡 P2 | T5 12/03 | Audit trail |
-| 10 | `GET /admin/stats/export` | 🟡 P2 | T6 13/03 | Xuất báo cáo |
+| 6 | [x] `GET /admin/dashboard` | 🟠 P1 | T2 09/03 | Dashboard thống kê |
+| 7 | [x] `GET /admin/transactions` | 🟠 P1 | T3 10/03 | Xem giao dịch hệ thống |
+| 8 | [x] `POST /refunds/process` | 🟠 P1 | T4 11/03 | Phê duyệt hoàn tiền (cần TTV3 xong refunds/request) |
+| 9 | [x] `GET /admin/audit-logs` | 🟡 P2 | T5 12/03 | Audit trail |
+| 10 | [x] `GET /admin/stats/export` | 🟡 P2 | T6 13/03 | Xuất báo cáo |
 
-> 📌 **FE Admin**: Quản lý user → T5 05/03 | Phê duyệt event → T6 06/03 | Dashboard → T3 10/03 | Transactions + Refund → T5 12/03 | Audit + Export → CN 14/03
+> 📌 **FE Admin**: Quản lý user → T5 05/03 | Phê duyệt event → T6 06/03 | [x] Dashboard (Charts) → T3 10/03 | [x] Transactions + Refund → T5 12/03 | [x] Audit + Export (CSV) → CN 14/03
 
 ---
 
