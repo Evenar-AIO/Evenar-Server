@@ -33,6 +33,7 @@ app.use(
 
 /* ---------------- Routes ---------------- */
 const eventsRouter = require('./src/routes/events');
+const genresRouter = require('./src/routes/genres');
 const searchRouter = require('./src/routes/search');
 const cartRouter = require('./src/routes/cart');
 const bookingsRouter = require('./src/routes/bookings');
@@ -46,6 +47,7 @@ const authRouter = require('./src/routes/authRoutes');
 // IMPORTANT: Search must be BEFORE events to avoid /api/events/:id collision (where :id="search")
 app.use('/api/events/search', searchRouter);
 app.use('/api/events', eventsRouter);
+app.use('/api/genres', genresRouter);
 app.use('/api/cart', cartRouter);
 app.use('/api/bookings', bookingsRouter);
 app.use('/api/payments', paymentsRouter);
