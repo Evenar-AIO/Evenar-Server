@@ -9,6 +9,9 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerJsdoc = require("swagger-jsdoc");
 
 require("dotenv").config();
+const connectDB = require("./src/config/db");
+
+connectDB();
 
 const { connectDB } = require("./config/database");
 const { initSocket } = require("./socket");
@@ -32,13 +35,37 @@ app.use(express.json());
 app.use(
   rateLimit({
     windowMs: 15 * 60 * 1000,
-    max: 100, // use "max" instead of "limit" (newer versions)
+    max: 1000,
+    message: "Hệ thống đang bận do quá nhiều yêu cầu, vui lòng thử lại sau vài phút.",
     standardHeaders: true,
     legacyHeaders: false,
   }),
 );
 
 /* ---------------- Routes ---------------- */
+const eventsRouter = require('./src/routes/events');
+const searchRouter = require('./src/routes/search');
+const cartRouter = require('./src/routes/cart');
+const bookingsRouter = require('./src/routes/bookings');
+const paymentsRouter = require('./src/routes/payments');
+const ordersRouter = require('./src/routes/orders');
+const refundsRouter = require('./src/routes/refunds');
+const promotionsRouter = require('./src/routes/promotions');
+const devRouter = require('./src/routes/dev');
+
+// IMPORTANT: Search must be BEFORE events to avoid /api/events/:id collision (where :id="search")
+app.use('/api/events/search', searchRouter);
+app.use('/api/events', eventsRouter);
+app.use('/api/cart', cartRouter);
+app.use('/api/bookings', bookingsRouter);
+app.use('/api/payments', paymentsRouter);
+app.use('/api/orders', ordersRouter);
+app.use('/api/refunds', refundsRouter);
+app.use('/api/promotions', promotionsRouter);
+app.use('/api/dev', devRouter);
+const adminRoutes = require("./src/routes/admin.routes");
+
+
 app.get("/", (req, res) => {
   res.status(200).send("Hello World");
 });
@@ -52,7 +79,7 @@ app.use("/api/feedback", feedbackRoutes);
 app.use("/api/support", supportRoutes);
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/users", userRoutes);
-
+app.use("/admin", adminRoutes);
 
 /* ---------------- Swagger ---------------- */
 const swaggerOptions = {
@@ -63,22 +90,13 @@ const swaggerOptions = {
       version: "1.0.0",
     },
   },
-  apis: ["./index.js", "./routes/*.js"],
+  apis: ["./index.js", "./src/routes/*.js"],
 };
-/**
- * @swagger
- * /health:
- *   get:
- *     summary: Health check
- *     responses:
- *       200:
- *         description: Server is healthy
- */
 
 const specs = swaggerJsdoc(swaggerOptions);
 app.use("/api.html", swaggerUi.serve, swaggerUi.setup(specs));
 
-/* ---------------- Server ---------------- */
+
 const port = Number(process.env.PORT) || 3000;
 
 if (require.main === module) {
