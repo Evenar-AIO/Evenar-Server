@@ -3,7 +3,7 @@ const logger = require("pino")();
 
 const connectDB = async () => {
     try {
-        const conn = await mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/combos");
+        const conn = await mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/EventTicketDB");
         logger.info(`MongoDB Connected: ${conn.connection.host}`);
     } catch (error) {
         logger.error(`Error connecting to MongoDB: ${error.message}`);
