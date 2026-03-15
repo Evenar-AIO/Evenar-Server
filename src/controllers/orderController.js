@@ -6,11 +6,11 @@ const orderService = require('../services/orderService');
  */
 exports.createOrder = async (req, res) => {
   try {
-    const userId = req.body.userId || (req.user && req.user._id);
+    const userId = req.body.userId || (req.user && (req.user.sub || req.user._id || req.user.id));
     const { eventId, tickets, promotionCode, paymentMethod } = req.body;
 
     if (!userId) {
-      return res.status(400).json({ error: 'userId is required in the request body' });
+      return res.status(400).json({ error: 'userId is required' });
     }
 
     if (!eventId || !tickets || !tickets.length) {
@@ -29,9 +29,9 @@ exports.createOrder = async (req, res) => {
  */
 exports.getUserOrders = async (req, res) => {
   try {
-    const userId = req.query.userId || (req.user && req.user._id);
+    const userId = req.query.userId || (req.user && (req.user.sub || req.user._id || req.user.id));
     if (!userId) {
-      return res.status(400).json({ error: 'userId is required as a query parameter' });
+      return res.status(400).json({ error: 'userId is required' });
     }
     const { page = 1, limit = 10 } = req.query;
     const result = await orderService.getUserOrders(userId, page, limit);
