@@ -7,7 +7,7 @@ const Feedback = require("../models/Feedback");
  */
 async function createFeedback(req, res) {
   try {
-    const userId = req.user.id;
+    const userId = req.user.sub || req.user.id || req.user._id;
     const { eventId, rating, comment } = req.body || {};
 
     if (!eventId || rating == null) {

@@ -1,8 +1,9 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const nodemailer = require('nodemailer');
 const crypto = require('crypto');
+const { sendOtpEmail } = require('../utils/email.util');
+const { otpLimiter, authLimiter } = require('../middleware/rateLimit.middleware');
 const { OAuth2Client } = require('google-auth-library');
 
 const User = require('../models/User');
@@ -18,11 +19,6 @@ const client = new OAuth2Client(
 
 const JWT_SECRET = process.env.JWT_SECRET || 'dev_secret_change_me';
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '7d';
-const SMTP_HOST = process.env.SMTP_HOST || 'smtp.gmail.com';
-const SMTP_PORT = process.env.SMTP_PORT || 587;
-const SMTP_USER = process.env.SMTP_USER;
-const SMTP_PASS = process.env.SMTP_PASS;
-const MAIL_FROM = process.env.MAIL_FROM;
 
 // Helpers
 const generateAccessToken = (user) => {
@@ -57,42 +53,11 @@ const protect = async (req, res, next) => {
   }
 };
 
-const sendOtpEmail = async (email, otp) => {
-  if (!SMTP_USER || !SMTP_PASS) {
-    throw new Error('SMTP chưa cấu hình. Vui lòng thiết lập SMTP_USER/SMTP_PASS/MAIL_FROM trong .env');
-  }
-
-  const transporter = nodemailer.createTransport({
-    host: SMTP_HOST,
-    port: SMTP_PORT,
-    secure: false,
-    auth: {
-      user: SMTP_USER,
-      pass: SMTP_PASS,
-    },
-  });
-
-  await transporter.sendMail({
-    from: MAIL_FROM,
-    to: email,
-    subject: 'Mã xác thực tài khoản - MasterTicket',
-    html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 10px;">
-        <h2 style="color: #7c3aed; text-align: center;">Xác thực tài khoản</h2>
-        <p>Chào bạn,</p>
-        <p>Mã OTP của bạn là: <strong style="font-size: 24px; color: #7c3aed;">${otp}</strong></p>
-        <p>Mã này có hiệu lực trong 10 phút. Vui lòng không chia sẻ mã này với bất kỳ ai.</p>
-        <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;" />
-        <p style="font-size: 12px; color: #888;">Đây là email tự động, vui lòng không trả lời email này.</p>
-      </div>
-    `,
-  });
-};
 
 // @route   POST api/auth/register
 // @desc    Register a new user
 // @access  Public
-router.post('/register', async (req, res) => {
+router.post('/register', otpLimiter, async (req, res) => {
   const { fullName, email, password, role } = req.body;
 
   try {
@@ -122,7 +87,7 @@ router.post('/register', async (req, res) => {
     } catch (mailError) {
       console.log('OTP for email', normalizedEmail, 'is:', otp);
       
-      if (process.env.NODE_ENV === 'development' || !SMTP_USER) {
+      if (process.env.NODE_ENV === 'development' || !process.env.SMTP_USER) {
         await user.save();
         return res.status(201).json({ 
           message: 'Đăng ký thành công. Mail server chưa cấu hình, mã OTP được in ở console BE: ' + otp 
@@ -169,7 +134,7 @@ router.post('/verify', async (req, res) => {
 // @route   POST api/auth/login
 // @desc    Login user
 // @access  Public
-router.post('/login', async (req, res) => {
+router.post('/login', authLimiter, async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -300,7 +265,7 @@ router.get('/google/callback', async (req, res) => {
 // @route   POST api/auth/send-reset-otp
 // @desc    Send password reset OTP (Used for resending too)
 // @access  Public
-router.post('/send-reset-otp', async (req, res) => {
+router.post('/send-reset-otp', otpLimiter, async (req, res) => {
   const { email } = req.body;
 
   try {

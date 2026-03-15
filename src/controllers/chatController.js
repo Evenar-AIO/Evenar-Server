@@ -10,7 +10,7 @@ const { getIO } = require("../../socket");
  */
 async function findOrCreateSupportConversation(req, res) {
   try {
-    const userId = req.user.id;
+    const userId = req.user.sub || req.user.id || req.user._id;
 
     // Tìm conversation support đang mở của customer này
     let conv = await Conversation.findOne({
@@ -48,7 +48,7 @@ async function findOrCreateSupportConversation(req, res) {
  */
 async function createConversation(req, res) {
   try {
-    const userId = req.user.id;
+    const userId = req.user.sub || req.user.id || req.user._id;
     const { otherUserId } = req.body || {};
     if (!otherUserId) return res.status(400).json({ error: "otherUserId is required" });
 
@@ -84,7 +84,7 @@ async function createConversation(req, res) {
  */
 async function getConversations(req, res) {
   try {
-    const userId = req.user.id;
+    const userId = req.user.sub || req.user.id || req.user._id;
     const conversations = await Conversation.find({ participants: userId })
       .sort({ lastMessageAt: -1 })
       .populate("participants", "name email")
@@ -101,7 +101,7 @@ async function getConversations(req, res) {
 async function getMessages(req, res) {
   try {
     const { id } = req.params;
-    const userId = req.user.id;
+    const userId = req.user.sub || req.user.id || req.user._id;
     const conv = await Conversation.findOne({ _id: id, participants: userId });
     if (!conv) return res.status(404).json({ error: "Conversation not found" });
 
@@ -141,7 +141,7 @@ async function getMessages(req, res) {
  */
 async function sendMessage(req, res) {
   try {
-    const userId = req.user.id;
+    const userId = req.user.sub || req.user.id || req.user._id;
     const { conversationId, content, attachments } = req.body || {};
 
     if (!conversationId) {

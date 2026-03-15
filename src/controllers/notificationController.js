@@ -5,7 +5,7 @@ const Notification = require("../models/Notification");
  */
 async function getNotifications(req, res) {
   try {
-    const userId = req.user.id;
+    const userId = req.user.sub || req.user.id || req.user._id;
     const role = req.user.role;
     const limit = Math.min(parseInt(req.query.limit, 10) || 20, 100);
     const skip = parseInt(req.query.skip, 10) || 0;
@@ -32,7 +32,7 @@ async function getNotifications(req, res) {
 async function markRead(req, res) {
   try {
     const { id } = req.params;
-    const userId = req.user.id;
+    const userId = req.user.sub || req.user.id || req.user._id;
     const notif = await Notification.findOneAndUpdate(
       { _id: id, userId },
       { read: true },

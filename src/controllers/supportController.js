@@ -7,7 +7,7 @@ const SupportAttachment = require("../models/SupportAttachment");
  */
 async function submitSupport(req, res) {
   try {
-    const userId = req.user.id;
+    const userId = req.user.sub || req.user.id || req.user._id;
     const { subject, description, category, attachments } = req.body || {};
 
     if (!subject || !description) {
@@ -44,7 +44,7 @@ async function submitSupport(req, res) {
  */
 async function getSupportList(req, res) {
   try {
-    const userId = req.user.id;
+    const userId = req.user.sub || req.user.id || req.user._id;
     const role = req.user.role;
     const limit = Math.min(parseInt(req.query.limit, 10) || 20, 100);
     const skip = parseInt(req.query.skip, 10) || 0;

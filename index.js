@@ -1,3 +1,24 @@
+require("dotenv").config();
+const dns = require("dns");
+
+// Increase threadpool for better network performance
+process.env.UV_THREADPOOL_SIZE = 64;
+
+// Fix for Node.js 18+ DNS resolution issues on some networks (especially IPv6/NAT64)
+// This forces IPv4 first to avoid AggregateError [ETIMEDOUT] when connecting to Cloudinary
+if (dns.setDefaultResultOrder) {
+  dns.setDefaultResultOrder("ipv4first");
+}
+
+// Global error handlers to prevent silent crashes and improve logging
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
+
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught Exception:', error);
+});
+
 const express = require("express");
 const http = require("http");
 const cors = require("cors");
@@ -8,7 +29,6 @@ const pinoHttp = require("pino-http");
 const swaggerUi = require("swagger-ui-express");
 const swaggerJsdoc = require("swagger-jsdoc");
 
-require("dotenv").config();
 const connectDB = require("./src/config/db");
 
 const { initSocket } = require("./socket");
@@ -23,21 +43,25 @@ const app = express();
 const server = http.createServer(app);
 
 /* ---------------- Middleware ---------------- */
+const path = require("path");
 app.use(pinoHttp());
-app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+      "img-src": ["'self'", "data:", "https://res.cloudinary.com", "https://avatar.vercel.sh", "http://localhost:*", "http://127.0.0.1:*"],
+    },
+  },
+  crossOriginResourcePolicy: { policy: "cross-origin" },
+  crossOriginEmbedderPolicy: false,
+}));
 app.use(cors());
 app.use(compression());
 app.use(express.json());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-app.use(
-  rateLimit({
-    windowMs: 15 * 60 * 1000,
-    max: 1000,
-    message: "Hệ thống đang bận do quá nhiều yêu cầu, vui lòng thử lại sau vài phút.",
-    standardHeaders: true,
-    legacyHeaders: false,
-  }),
-);
+const { apiLimiter } = require("./src/middleware/rateLimit.middleware");
+app.use(apiLimiter);
 
 /* ---------------- Routes ---------------- */
 const eventsRouter = require('./src/routes/events');
@@ -51,7 +75,9 @@ const refundsRouter = require('./src/routes/refunds');
 const promotionsRouter = require('./src/routes/promotions');
 const devRouter = require('./src/routes/dev');
 const authRouter = require('./src/routes/authRoutes');
+const uploadRouter = require('./src/routes/upload');
 const profileRouter = require('./src/routes/profile');
+const organizerRouter = require('./src/routes/organizerRoutes');
 const adminRoutes = require("./src/routes/admin.routes");
 
 // IMPORTANT: Search must be BEFORE events to avoid /api/events/:id collision (where :id="search")
@@ -67,6 +93,9 @@ app.use('/api/promotions', promotionsRouter);
 app.use('/api/dev', devRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/profile', profileRouter);
+app.use('/api/upload', uploadRouter);
+app.use('/api/test-upload', require('./src/routes/test-upload'));
+app.use('/api/organizer', organizerRouter);
 
 app.get("/", (req, res) => {
   res.status(200).send("Hello World");
@@ -81,7 +110,7 @@ app.use("/api/feedback", feedbackRoutes);
 app.use("/api/support", supportRoutes);
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/users", userRoutes);
-app.use("/admin", adminRoutes);
+app.use("/api/admin", adminRoutes);
 
 /* ---------------- Swagger ---------------- */
 const swaggerOptions = {

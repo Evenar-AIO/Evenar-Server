@@ -22,6 +22,7 @@ const {
     updateEvent,
     deleteEvent
 } = require('../controllers/admin.controller');
+const { getAllRequests, processRequest } = require('../controllers/organizerController');
 
 const { verifyToken, verifyAdmin } = require('../middleware/auth.middleware');
 
@@ -59,5 +60,9 @@ router.get('/audit-logs', getAuditLogs);
 router.get('/stats/export', exportStatsReport);
 
 router.get('/dashboard', getDashboardStats);
+
+// Organizer Requests
+router.get('/organizer-requests', getAllRequests);
+router.post('/organizer-requests/:requestId/process', processRequest);
 
 module.exports = router;

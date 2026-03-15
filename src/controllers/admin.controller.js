@@ -6,6 +6,7 @@ const Refund = require('../models/Refund');
 const AuditLog = require('../models/AuditLog');
 const OrderItem = require('../models/OrderItem');
 const SupportItem = require('../models/SupportItem');
+const OrganizerRequest = require('../models/OrganizerRequest');
 const { Parser } = require('json2csv');
 const { logAuditAction } = require('../utils/audit.util');
 const { 
@@ -26,6 +27,26 @@ const sendFullResponse = (res, statusCode, success, message, data = null, meta =
     if (data !== null) response.data = data;
     if (meta !== null) response.meta = meta;
     res.status(statusCode).json(response);
+};
+
+// Helper for safe lookups supporting both ObjectId and legacy numerical IDs
+const safeFindOne = async (Model, idValue) => {
+    if (!idValue) return null;
+    
+    // 1. Try ObjectId first
+    if (typeof idValue === 'string' && idValue.length === 24 && mongoose.Types.ObjectId.isValid(idValue)) {
+        const item = await Model.findById(idValue);
+        if (item) return item;
+    }
+    
+    // 2. Try legacy numerical ID
+    const numId = Number(idValue);
+    if (!isNaN(numId)) {
+        const item = await Model.findOne({ legacyId: numId });
+        if (item) return item;
+    }
+    
+    return null;
 };
 
 exports.getAllUsers = async (req, res) => {
@@ -104,8 +125,8 @@ exports.lockUserAccount = async (req, res) => {
         const { error, value } = idParamSchema.validate(req.params);
         if (error) return sendResponse(res, 400, false, error.details[0].message);
 
-        const user = await User.findByIdAndUpdate(
-            value.id,
+        const user = await User.findOneAndUpdate(
+            mongoose.Types.ObjectId.isValid(value.id) ? { _id: value.id } : { legacyId: Number(value.id) },
             { $set: { isLocked: true } },
             { new: true }
         );
@@ -124,8 +145,8 @@ exports.unlockUserAccount = async (req, res) => {
         const { error, value } = idParamSchema.validate(req.params);
         if (error) return sendResponse(res, 400, false, error.details[0].message);
 
-        const user = await User.findByIdAndUpdate(
-            value.id,
+        const user = await User.findOneAndUpdate(
+            mongoose.Types.ObjectId.isValid(value.id) ? { _id: value.id } : { legacyId: Number(value.id) },
             { $set: { isLocked: false } },
             { new: true }
         );
@@ -144,8 +165,8 @@ exports.deleteUser = async (req, res) => {
         const { error, value } = idParamSchema.validate(req.params);
         if (error) return sendResponse(res, 400, false, error.details[0].message);
 
-        const user = await User.findByIdAndUpdate(
-            value.id,
+        const user = await User.findOneAndUpdate(
+            mongoose.Types.ObjectId.isValid(value.id) ? { _id: value.id } : { legacyId: Number(value.id) },
             { $set: { isLocked: true, isDeleted: true, deletedAt: new Date() } },
             { new: true }
         );
@@ -164,11 +185,12 @@ exports.approveEvent = async (req, res) => {
         const { error, value } = idParamSchema.validate(req.params);
         if (error) return sendResponse(res, 400, false, error.details[0].message);
 
-        const existingEvent = await Event.findById(value.id);
+        const query = mongoose.Types.ObjectId.isValid(value.id) ? { _id: value.id } : { legacyId: Number(value.id) };
+        const existingEvent = await Event.findOne(query);
         if (!existingEvent) return sendResponse(res, 404, false, 'Event not found');
         
-        const event = await Event.findByIdAndUpdate(
-            value.id,
+        const event = await Event.findOneAndUpdate(
+            query,
             { $set: { isApproved: true, status: 'active' } },
             { new: true }
         );
@@ -195,15 +217,10 @@ exports.getEventById = async (req, res) => {
         const { error, value } = idParamSchema.validate(req.params);
         if (error) return sendResponse(res, 400, false, error.details[0].message);
 
-        const event = await Event.findById(value.id);
+        const event = await safeFindOne(Event, value.id);
         if (!event) return sendResponse(res, 404, false, 'Event not found');
 
-        const owner = await User.findOne({ 
-            $or: [
-                { _id: mongoose.Types.ObjectId.isValid(event.ownerId) ? event.ownerId : null },
-                { legacyId: !isNaN(Number(event.ownerId)) ? Number(event.ownerId) : -1 }
-            ]
-        });
+        const owner = await safeFindOne(User, event.ownerId);
         
         const eventData = event.toObject();
         eventData.organizerName = owner ? (owner.fullName || owner.username) : 'Unknown Organizer';
@@ -229,20 +246,28 @@ exports.processRefund = async (req, res) => {
         if (error) return sendResponse(res, 400, false, error.details[0].message);
 
         const { refundId, status } = value; 
-        const refund = await Refund.findById(refundId);
+        const query = mongoose.Types.ObjectId.isValid(refundId) ? { _id: refundId } : { legacyId: Number(refundId) };
+        const refund = await Refund.findOne(query);
         if (!refund) return sendResponse(res, 404, false, 'Refund not found');
 
-        const updatedRefund = await Refund.findByIdAndUpdate(
-            refundId,
+        const updatedRefund = await Refund.findOneAndUpdate(
+            query,
             { $set: { refundStatus: status, refundProcessedDate: new Date() } },
             { new: true }
         );
 
         if (status === 'approved') {
-            await Order.findOneAndUpdate(
-                { $or: [{ _id: updatedRefund.orderId }, { legacyId: updatedRefund.orderId }] }, 
-                { $set: { paymentStatus: 'refunded', orderStatus: 'cancelled' } }
-            );
+            if (mongoose.Types.ObjectId.isValid(updatedRefund.orderId)) {
+                await Order.findOneAndUpdate(
+                    { _id: updatedRefund.orderId },
+                    { $set: { paymentStatus: 'refunded', orderStatus: 'cancelled' } }
+                );
+            } else if (!isNaN(Number(updatedRefund.orderId))) {
+                await Order.findOneAndUpdate(
+                    { legacyId: Number(updatedRefund.orderId) },
+                    { $set: { paymentStatus: 'refunded', orderStatus: 'cancelled' } }
+                );
+            }
         }
 
         await logAuditAction(req, 'UPDATE', 'Refunds', updatedRefund.legacyId || 0, { status: 'pending' }, { status });
@@ -319,11 +344,11 @@ exports.getRefundById = async (req, res) => {
         const { error, value } = idParamSchema.validate(req.params);
         if (error) return sendResponse(res, 400, false, error.details[0].message);
 
-        const refund = await Refund.findById(value.id);
+        const refund = await safeFindOne(Refund, value.id);
         if (!refund) return sendResponse(res, 404, false, 'Refund request not found');
 
-        const user = await User.findOne({ $or: [{ _id: refund.userId }, { legacyId: refund.userId }] });
-        const order = await Order.findOne({ $or: [{ _id: refund.orderId }, { legacyId: refund.orderId }] });
+        const user = await safeFindOne(User, refund.userId);
+        const order = await safeFindOne(Order, refund.orderId);
 
         const data = refund.toObject();
         data.userInfo = user;
@@ -501,7 +526,8 @@ exports.getDashboardStats = async (req, res) => {
             totalRefunds,
             topEventsRaw,
             pendingEventsList,
-            topOrganizersRaw
+            topOrganizersRaw,
+            totalOrganizerRequests
         ] = await Promise.all([
             User.countDocuments({ isDeleted: { $ne: true } }),
             User.countDocuments({ isLocked: { $ne: true }, isDeleted: { $ne: true } }),
@@ -523,11 +549,12 @@ exports.getDashboardStats = async (req, res) => {
                 { $group: { _id: '$ownerId', totalEvents: { $sum: 1 }, ticketsSold: { $sum: '$soldTickets' } } },
                 { $sort: { ticketsSold: -1 } },
                 { $limit: 5 }
-            ])
+            ]),
+            OrganizerRequest.countDocuments({ status: 'pending' })
         ]);
 
         const topEvents = await Promise.all(topEventsRaw.map(async (item) => {
-            const event = await Event.findOne({ $or: [{ _id: item._id }, { legacyId: item._id }] });
+            const event = await safeFindOne(Event, item._id);
             return {
                 _id: event ? event.name : `Event #${item._id}`,
                 name: event ? event.name : `Event #${item._id}`,
@@ -536,12 +563,7 @@ exports.getDashboardStats = async (req, res) => {
         }));
 
         const leaderboard = await Promise.all(topOrganizersRaw.map(async (organizer) => {
-            const user = await User.findOne({ 
-                $or: [
-                    { _id: mongoose.Types.ObjectId.isValid(organizer._id) ? organizer._id : null },
-                    { legacyId: !isNaN(Number(organizer._id)) ? Number(organizer._id) : -1 }
-                ]
-            }).select('fullName username');
+            const user = await safeFindOne(User, organizer._id);
             return {
                 name: user ? (user.fullName || user.username) : `Organizer #${organizer._id}`,
                 events: organizer.totalEvents,
@@ -558,7 +580,8 @@ exports.getDashboardStats = async (req, res) => {
             totalRefunds,
             topEvents,
             pendingEventsList,
-            leaderboard
+            leaderboard,
+            pendingOrganizerRequests: totalOrganizerRequests
         };
 
         sendResponse(res, 200, true, 'Dashboard stats retrieved successfully', dashboardData);
@@ -576,8 +599,9 @@ exports.updateEvent = async (req, res) => {
         delete updates._id;
         delete updates.legacyId;
 
-        const event = await Event.findByIdAndUpdate(
-            idValue.id,
+        const query = mongoose.Types.ObjectId.isValid(idValue.id) ? { _id: idValue.id } : { legacyId: Number(idValue.id) };
+        const event = await Event.findOneAndUpdate(
+            query,
             { $set: updates },
             { new: true }
         );
@@ -597,7 +621,8 @@ exports.deleteEvent = async (req, res) => {
         const { error, value } = idParamSchema.validate(req.params);
         if (error) return sendResponse(res, 400, false, error.details[0].message);
 
-        const event = await Event.findByIdAndDelete(value.id);
+        const query = mongoose.Types.ObjectId.isValid(value.id) ? { _id: value.id } : { legacyId: Number(value.id) };
+        const event = await Event.findOneAndDelete(query);
         if (!event) return sendResponse(res, 404, false, 'Event not found');
 
         await logAuditAction(req, 'DELETE', 'Events', event.legacyId || event._id, event, null);
