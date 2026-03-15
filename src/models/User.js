@@ -46,6 +46,18 @@ const userSchema = new mongoose.Schema(
             type: String,
             default: ''
         },
+        companyName: {
+            type: String,
+            default: ''
+        },
+        description: {
+            type: String,
+            default: ''
+        },
+        contactInfo: {
+            type: String,
+            default: ''
+        },
         isLocked: {
             type: Boolean,
             default: false

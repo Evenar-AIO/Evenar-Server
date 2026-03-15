@@ -43,6 +43,7 @@ const refundsRouter = require('./src/routes/refunds');
 const promotionsRouter = require('./src/routes/promotions');
 const devRouter = require('./src/routes/dev');
 const authRouter = require('./src/routes/authRoutes');
+const profileRouter = require('./src/routes/profile');
 
 // IMPORTANT: Search must be BEFORE events to avoid /api/events/:id collision (where :id="search")
 app.use('/api/events/search', searchRouter);
@@ -56,6 +57,7 @@ app.use('/api/refunds', refundsRouter);
 app.use('/api/promotions', promotionsRouter);
 app.use('/api/dev', devRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/profile', profileRouter);
 const adminRoutes = require("./src/routes/admin.routes");
 
 

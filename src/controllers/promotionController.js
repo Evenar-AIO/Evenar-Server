@@ -3,7 +3,10 @@ const promotionService = require('../services/promotionService');
 exports.validateCode = async (req, res) => {
   try {
     const { code, eventId, totalAmount } = req.body;
-    if (!code || !eventId || !totalAmount) {
+    
+    req.log.info({ code, eventId, totalAmount }, 'Validating promotion code');
+
+    if (!code || !eventId || totalAmount === undefined) {
       return res.status(400).json({ error: 'code, eventId, and totalAmount are required' });
     }
 
@@ -16,6 +19,7 @@ exports.validateCode = async (req, res) => {
       promotionName: promo.promotionName
     });
   } catch (error) {
+    req.log.warn({ error: error.message, code: req.body.code }, 'Promotion validation failed');
     res.status(400).json({ valid: false, error: error.message });
   }
 };
