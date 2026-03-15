@@ -9,7 +9,7 @@ const fileAttachmentSchema = new mongoose.Schema(
     size: { type: Number, required: true },
     url: { type: String, required: true },
   },
-  { timestamps: true }
+  { timestamps: true, collection: 'fileAttachments' }
 );
 
 fileAttachmentSchema.index({ messageId: 1 });

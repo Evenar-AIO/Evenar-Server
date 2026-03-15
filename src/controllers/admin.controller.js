@@ -198,10 +198,15 @@ exports.getEventById = async (req, res) => {
         const event = await Event.findById(value.id);
         if (!event) return sendResponse(res, 404, false, 'Event not found');
 
-        const owner = await User.findOne({ legacyId: event.ownerId });
+        const owner = await User.findOne({ 
+            $or: [
+                { _id: mongoose.Types.ObjectId.isValid(event.ownerId) ? event.ownerId : null },
+                { legacyId: !isNaN(Number(event.ownerId)) ? Number(event.ownerId) : -1 }
+            ]
+        });
         
         const eventData = event.toObject();
-        eventData.organizerName = owner ? owner.username : 'Unknown Organizer';
+        eventData.organizerName = owner ? (owner.fullName || owner.username) : 'Unknown Organizer';
 
         sendResponse(res, 200, true, 'Event details retrieved', eventData);
     } catch (error) {
@@ -234,7 +239,10 @@ exports.processRefund = async (req, res) => {
         );
 
         if (status === 'approved') {
-            await Order.findOneAndUpdate({ legacyId: updatedRefund.orderId }, { $set: { paymentStatus: 'refunded', orderStatus: 'cancelled' } });
+            await Order.findOneAndUpdate(
+                { $or: [{ _id: updatedRefund.orderId }, { legacyId: updatedRefund.orderId }] }, 
+                { $set: { paymentStatus: 'refunded', orderStatus: 'cancelled' } }
+            );
         }
 
         await logAuditAction(req, 'UPDATE', 'Refunds', updatedRefund.legacyId || 0, { status: 'pending' }, { status });
@@ -247,12 +255,17 @@ exports.processRefund = async (req, res) => {
 
 exports.getAllRefunds = async (req, res) => {
     try {
-        const refunds = await Refund.aggregate([
+    const refunds = await Refund.aggregate([
             {
                 $lookup: {
                     from: 'users',
-                    localField: 'userId',
-                    foreignField: 'legacyId',
+                    let: { uid: '$userId' },
+                    pipeline: [
+                        { $match: { $expr: { $or: [
+                            { $eq: ['$_id', '$$uid'] },
+                            { $eq: ['$legacyId', '$$uid'] }
+                        ] } } }
+                    ],
                     as: 'userInfo'
                 }
             },
@@ -260,8 +273,13 @@ exports.getAllRefunds = async (req, res) => {
             {
                 $lookup: {
                     from: 'orders',
-                    localField: 'orderId',
-                    foreignField: 'legacyId',
+                    let: { oid: '$orderId' },
+                    pipeline: [
+                        { $match: { $expr: { $or: [
+                            { $eq: ['$_id', '$$oid'] },
+                            { $eq: ['$legacyId', '$$oid'] }
+                        ] } } }
+                    ],
                     as: 'orderInfo'
                 }
             },
@@ -304,8 +322,8 @@ exports.getRefundById = async (req, res) => {
         const refund = await Refund.findById(value.id);
         if (!refund) return sendResponse(res, 404, false, 'Refund request not found');
 
-        const user = await User.findOne({ legacyId: refund.userId });
-        const order = await Order.findOne({ legacyId: refund.orderId });
+        const user = await User.findOne({ $or: [{ _id: refund.userId }, { legacyId: refund.userId }] });
+        const order = await Order.findOne({ $or: [{ _id: refund.orderId }, { legacyId: refund.orderId }] });
 
         const data = refund.toObject();
         data.userInfo = user;
@@ -336,8 +354,13 @@ exports.getAllTransactions = async (req, res) => {
             {
                 $lookup: {
                     from: 'orders',
-                    localField: 'orderId',
-                    foreignField: 'legacyId',
+                    let: { oid: '$orderId' },
+                    pipeline: [
+                        { $match: { $expr: { $or: [
+                            { $eq: ['$_id', '$$oid'] },
+                            { $eq: ['$legacyId', '$$oid'] }
+                        ] } } }
+                    ],
                     as: 'orderInfo'
                 }
             },
@@ -346,8 +369,13 @@ exports.getAllTransactions = async (req, res) => {
             {
                 $lookup: {
                     from: 'users',
-                    localField: 'orderInfo.userId',
-                    foreignField: 'legacyId',
+                    let: { uid: '$orderInfo.userId' },
+                    pipeline: [
+                        { $match: { $expr: { $or: [
+                            { $eq: ['$_id', '$$uid'] },
+                            { $eq: ['$legacyId', '$$uid'] }
+                        ] } } }
+                    ],
                     as: 'userInfo'
                 }
             },
@@ -355,8 +383,13 @@ exports.getAllTransactions = async (req, res) => {
             {
                 $lookup: {
                     from: 'events',
-                    localField: 'eventId',
-                    foreignField: 'legacyId',
+                    let: { eid: '$eventId' },
+                    pipeline: [
+                        { $match: { $expr: { $or: [
+                            { $eq: ['$_id', '$$eid'] },
+                            { $eq: ['$legacyId', '$$eid'] }
+                        ] } } }
+                    ],
                     as: 'eventInfo'
                 }
             },
@@ -404,7 +437,11 @@ exports.getAuditLogs = async (req, res) => {
         const match = {};
 
         if (action) match.action = action;
-        if (adminID) match.userId = Number(adminID);
+        if (adminID) {
+            match.userId = mongoose.Types.ObjectId.isValid(adminID) 
+                ? new mongoose.Types.ObjectId(adminID) 
+                : (!isNaN(Number(adminID)) ? Number(adminID) : adminID);
+        }
         if (startDate && endDate) {
             match.createdAt = { $gte: new Date(startDate), $lte: new Date(endDate) };
         }
@@ -463,7 +500,8 @@ exports.getDashboardStats = async (req, res) => {
             revenueStats,
             totalRefunds,
             topEventsRaw,
-            pendingEventsList
+            pendingEventsList,
+            topOrganizersRaw
         ] = await Promise.all([
             User.countDocuments({ isDeleted: { $ne: true } }),
             User.countDocuments({ isLocked: { $ne: true }, isDeleted: { $ne: true } }),
@@ -479,11 +517,17 @@ exports.getDashboardStats = async (req, res) => {
                 { $sort: { revenue: -1 } },
                 { $limit: 5 }
             ]),
-            Event.find({ isApproved: false }).sort({ createdAt: -1 }).limit(5)
+            Event.find({ isApproved: false }).sort({ createdAt: -1 }).limit(5),
+            Event.aggregate([
+                { $match: { isApproved: true } },
+                { $group: { _id: '$ownerId', totalEvents: { $sum: 1 }, ticketsSold: { $sum: '$soldTickets' } } },
+                { $sort: { ticketsSold: -1 } },
+                { $limit: 5 }
+            ])
         ]);
 
         const topEvents = await Promise.all(topEventsRaw.map(async (item) => {
-            const event = await Event.findOne({ legacyId: item._id });
+            const event = await Event.findOne({ $or: [{ _id: item._id }, { legacyId: item._id }] });
             return {
                 _id: event ? event.name : `Event #${item._id}`,
                 name: event ? event.name : `Event #${item._id}`,
@@ -491,12 +535,19 @@ exports.getDashboardStats = async (req, res) => {
             };
         }));
 
-        const topOrganizers = await Event.aggregate([
-            { $match: { isApproved: true } },
-            { $group: { _id: '$ownerId', totalEvents: { $sum: 1 }, ticketsSold: { $sum: '$soldTickets' } } },
-            { $sort: { ticketsSold: -1 } },
-            { $limit: 5 }
-        ]);
+        const leaderboard = await Promise.all(topOrganizersRaw.map(async (organizer) => {
+            const user = await User.findOne({ 
+                $or: [
+                    { _id: mongoose.Types.ObjectId.isValid(organizer._id) ? organizer._id : null },
+                    { legacyId: !isNaN(Number(organizer._id)) ? Number(organizer._id) : -1 }
+                ]
+            }).select('fullName username');
+            return {
+                name: user ? (user.fullName || user.username) : `Organizer #${organizer._id}`,
+                events: organizer.totalEvents,
+                tickets: organizer.ticketsSold
+            };
+        }));
 
         const dashboardData = {
             totalUsers,
@@ -507,7 +558,7 @@ exports.getDashboardStats = async (req, res) => {
             totalRefunds,
             topEvents,
             pendingEventsList,
-            leaderboard: topOrganizers
+            leaderboard
         };
 
         sendResponse(res, 200, true, 'Dashboard stats retrieved successfully', dashboardData);

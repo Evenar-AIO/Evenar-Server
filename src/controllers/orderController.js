@@ -1,16 +1,16 @@
 const orderService = require('../services/orderService');
 
 /**
- * POST /api/orders  (also mounted at POST /api/bookings for FE backward-compat)
- * Body: { userId, eventId, tickets: [{ ticketInfoId, quantity }], promotionCode?, paymentMethod? }
+ * POST /api/orders
+ * Body: { eventId, tickets: [{ ticketInfoId, quantity }], promotionCode?, paymentMethod? }
  */
 exports.createOrder = async (req, res) => {
   try {
-    const userId = req.body.userId || (req.user && req.user._id);
+    const userId = req.user && (req.user.sub || req.user._id || req.user.id);
     const { eventId, tickets, promotionCode, paymentMethod } = req.body;
 
     if (!userId) {
-      return res.status(400).json({ error: 'userId is required in the request body' });
+      return res.status(401).json({ error: 'Authentication required' });
     }
 
     if (!eventId || !tickets || !tickets.length) {
@@ -20,23 +20,39 @@ exports.createOrder = async (req, res) => {
     const result = await orderService.createOrder(userId, eventId, tickets, promotionCode, paymentMethod);
     res.status(201).json(result);
   } catch (error) {
+    console.error('Create order error:', error.message);
     res.status(500).json({ error: error.message });
   }
 };
 
 /**
- * GET /api/orders?userId=xxx&page=1&limit=10
+ * GET /api/orders?page=1&limit=10
+ * Gets orders for the authenticated user
  */
 exports.getUserOrders = async (req, res) => {
   try {
-    const userId = req.query.userId || (req.user && req.user._id);
+    const userId = req.user && (req.user.sub || req.user._id || req.user.id);
     if (!userId) {
-      return res.status(400).json({ error: 'userId is required as a query parameter' });
+      return res.status(401).json({ error: 'Authentication required' });
     }
     const { page = 1, limit = 10 } = req.query;
     const result = await orderService.getUserOrders(userId, page, limit);
     res.status(200).json(result);
   } catch (error) {
+    console.error('Get orders error:', error.message);
     res.status(500).json({ error: error.message });
+  }
+};
+
+/**
+ * GET /api/orders/:id
+ * Gets a single order by ID
+ */
+exports.getOrderById = async (req, res) => {
+  try {
+    const result = await orderService.getOrderById(req.params.id);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(404).json({ error: error.message });
   }
 };

@@ -3,7 +3,7 @@ const Conversation = require("../models/Conversation");
 const Message = require("../models/Message");
 const FileAttachment = require("../models/FileAttachment");
 const User = require("../models/User");
-const { getIO } = require("../socket");
+const { getIO } = require("../../socket");
 
 /**
  * POST /chat/support - Customer liên hệ support, tự động tạo/tìm conversation với admin

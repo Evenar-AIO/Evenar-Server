@@ -55,8 +55,8 @@ exports.createOrder = async (userId, eventId, tickets, promotionCode = null, pay
     let discountAmount = 0;
     if (promotionCode) {
       try {
-        // Use atomic validation + increment (this has its own race condition protection)
-        const { promo, discount } = await promotionService.validateAndUsePromotion(
+        // Use atomic validation + increment 
+        const { discount } = await promotionService.validateAndUsePromotion(
           promotionCode, 
           eventId, 
           subtotalAmount
@@ -69,6 +69,7 @@ exports.createOrder = async (userId, eventId, tickets, promotionCode = null, pay
     }
 
     const totalAmount = Math.max(0, subtotalAmount - discountAmount);
+    const totalQuantity = resolvedTickets.reduce((sum, t) => sum + t.quantity, 0);
 
     // 4. Reserve inventory (with session for transaction safety)
     await inventoryManager.reserveSeatsWithSession(resolvedTickets, session);
@@ -81,6 +82,7 @@ exports.createOrder = async (userId, eventId, tickets, promotionCode = null, pay
       discountAmount,
       subtotalAmount,
       totalAmount,
+      totalQuantity,
       paymentStatus: 'pending',
       orderStatus: 'created',
       paymentMethod,
@@ -202,13 +204,18 @@ exports.createOrderWithoutTransaction = async (userId, eventId, tickets, promoti
 exports.getUserOrders = async (userId, page = 1, limit = 10) => {
   const skip = (Number(page) - 1) * Number(limit);
 
-  const orders = await Order.find({ userId })
+  // Support both ObjectId and legacy Number userId
+  const userFilter = mongoose.Types.ObjectId.isValid(userId)
+    ? { $or: [{ userId: userId }, { userId: new mongoose.Types.ObjectId(userId) }] }
+    : { userId };
+
+  const orders = await Order.find(userFilter)
     .populate('eventId', 'name physicalLocation startTime imageURL')
     .sort({ createdAt: -1 })
     .skip(skip)
     .limit(Number(limit));
 
-  const total = await Order.countDocuments({ userId });
+  const total = await Order.countDocuments(userFilter);
 
   // Attach order items to each order
   const ordersWithItems = await Promise.all(

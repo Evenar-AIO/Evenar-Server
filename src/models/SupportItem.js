@@ -1,26 +1,20 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const supportItemSchema = new mongoose.Schema(
-    {
-        legacyId: { type: Number },
-        userId: { type: Number },
-        fromEmail: { type: String, required: true },
-        toEmail: { type: String },
-        subject: { type: String, required: true },
-        sendDate: { type: Date },
-        sendTimestamp: { type: Date },
-        content: { type: String },
-        status: { type: String, enum: ['pending', 'resolved', 'in_progress'], default: 'pending' },
-        priority: { type: String, enum: ['low', 'medium', 'high'], default: 'medium' },
-        category: { type: String },
-        adminResponse: { type: String, default: null },
-        assignedAdminId: { type: Number, default: null },
-        eventId: { type: Number },
-        orderId: { type: Number }
-    },
-    {
-        timestamps: true
-    }
+  {
+    userId: { type: mongoose.Schema.Types.Mixed, ref: "User", required: true },
+    subject: { type: String, required: true },
+    description: { type: String, required: true },
+    category: { type: String, enum: ["technical", "billing", "event", "other"], default: "other" },
+    status: { type: String, enum: ["open", "in_progress", "resolved", "closed"], default: "open" },
+    priority: { type: String, enum: ["low", "medium", "high"], default: "medium" },
+    assignedTo: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  },
+  { timestamps: true, collection: 'supportItems' }
 );
 
-module.exports = mongoose.model('SupportItem', supportItemSchema, 'supportItems');
+supportItemSchema.index({ userId: 1 });
+supportItemSchema.index({ status: 1 });
+supportItemSchema.index({ createdAt: -1 });
+
+module.exports = mongoose.model("SupportItem", supportItemSchema);

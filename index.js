@@ -11,16 +11,13 @@ const swaggerJsdoc = require("swagger-jsdoc");
 require("dotenv").config();
 const connectDB = require("./src/config/db");
 
-connectDB();
-
-const { connectDB } = require("./config/database");
 const { initSocket } = require("./socket");
 
-const chatRoutes = require("./routes/chatRoutes");
-const feedbackRoutes = require("./routes/feedbackRoutes");
-const supportRoutes = require("./routes/supportRoutes");
-const notificationRoutes = require("./routes/notificationRoutes");
-const userRoutes = require("./routes/userRoutes");
+const chatRoutes = require("./src/routes/chatRoutes");
+const feedbackRoutes = require("./src/routes/feedbackRoutes");
+const supportRoutes = require("./src/routes/supportRoutes");
+const notificationRoutes = require("./src/routes/notificationRoutes");
+const userRoutes = require("./src/routes/userRoutes");
 
 const app = express();
 const server = http.createServer(app);
@@ -44,6 +41,7 @@ app.use(
 
 /* ---------------- Routes ---------------- */
 const eventsRouter = require('./src/routes/events');
+const genresRouter = require('./src/routes/genres');
 const searchRouter = require('./src/routes/search');
 const cartRouter = require('./src/routes/cart');
 const bookingsRouter = require('./src/routes/bookings');
@@ -52,10 +50,14 @@ const ordersRouter = require('./src/routes/orders');
 const refundsRouter = require('./src/routes/refunds');
 const promotionsRouter = require('./src/routes/promotions');
 const devRouter = require('./src/routes/dev');
+const authRouter = require('./src/routes/authRoutes');
+const profileRouter = require('./src/routes/profile');
+const adminRoutes = require("./src/routes/admin.routes");
 
 // IMPORTANT: Search must be BEFORE events to avoid /api/events/:id collision (where :id="search")
 app.use('/api/events/search', searchRouter);
 app.use('/api/events', eventsRouter);
+app.use('/api/genres', genresRouter);
 app.use('/api/cart', cartRouter);
 app.use('/api/bookings', bookingsRouter);
 app.use('/api/payments', paymentsRouter);
@@ -63,8 +65,8 @@ app.use('/api/orders', ordersRouter);
 app.use('/api/refunds', refundsRouter);
 app.use('/api/promotions', promotionsRouter);
 app.use('/api/dev', devRouter);
-const adminRoutes = require("./src/routes/admin.routes");
-
+app.use('/api/auth', authRouter);
+app.use('/api/profile', profileRouter);
 
 app.get("/", (req, res) => {
   res.status(200).send("Hello World");

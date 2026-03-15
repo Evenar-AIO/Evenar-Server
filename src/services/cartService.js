@@ -84,12 +84,22 @@ exports.addToCart = async (userId, eventId, ticketInfoId, quantity) => {
   const itemsWithNames = [];
   for (const item of cart.items) {
     const info = await TicketInfo.findById(item.ticketInfoId);
+    // Hybrid lookup for event
+    const event = await Event.findOne({ 
+      $or: [
+        { _id: mongoose.Types.ObjectId.isValid(item.eventId) ? item.eventId : null }, 
+        { legacyId: !isNaN(Number(item.eventId)) ? Number(item.eventId) : -1 }
+      ] 
+    }).select('name imageURL');
+    
     itemsWithNames.push({
       eventId: item.eventId,
       ticketInfoId: item.ticketInfoId,
       quantity: item.quantity,
       price: item.price,
       name: info ? info.ticketName : 'Unknown Ticket',
+      eventTitle: event ? event.name : 'Unknown Event',
+      image: event ? event.imageURL : null,
     });
   }
 
@@ -127,12 +137,22 @@ exports.addToCartWithoutInventoryCheck = async (userId, eventId, ticketInfoId, q
   const itemsWithNames = [];
   for (const item of cart.items) {
     const info = await TicketInfo.findById(item.ticketInfoId);
+    // Hybrid lookup for event
+    const event = await Event.findOne({ 
+      $or: [
+        { _id: mongoose.Types.ObjectId.isValid(item.eventId) ? item.eventId : null }, 
+        { legacyId: !isNaN(Number(item.eventId)) ? Number(item.eventId) : -1 }
+      ] 
+    }).select('name imageURL');
+    
     itemsWithNames.push({
       eventId: item.eventId,
       ticketInfoId: item.ticketInfoId,
       quantity: item.quantity,
       price: item.price,
       name: info ? info.ticketName : 'Unknown Ticket',
+      eventTitle: event ? event.name : 'Unknown Event',
+      image: event ? event.imageURL : null,
     });
   }
 
@@ -155,12 +175,22 @@ exports.getCart = async (userId) => {
   const itemsWithNames = [];
   for (const item of cart.items) {
     const info = await TicketInfo.findById(item.ticketInfoId);
+    // Hybrid lookup for event
+    const event = await Event.findOne({ 
+      $or: [
+        { _id: mongoose.Types.ObjectId.isValid(item.eventId) ? item.eventId : null }, 
+        { legacyId: !isNaN(Number(item.eventId)) ? Number(item.eventId) : -1 }
+      ] 
+    }).select('name imageURL');
+    
     itemsWithNames.push({
       eventId: item.eventId,
       ticketInfoId: item.ticketInfoId,
       quantity: item.quantity,
       price: item.price,
       name: info ? info.ticketName : 'Unknown Ticket',
+      eventTitle: event ? event.name : 'Unknown Event',
+      image: event ? event.imageURL : null,
     });
   }
 
@@ -190,12 +220,22 @@ exports.removeFromCart = async (userId, ticketInfoId) => {
   const itemsWithNames = [];
   for (const item of cart.items) {
     const info = await TicketInfo.findById(item.ticketInfoId);
+    // Hybrid lookup for event
+    const event = await Event.findOne({ 
+      $or: [
+        { _id: mongoose.Types.ObjectId.isValid(item.eventId) ? item.eventId : null }, 
+        { legacyId: !isNaN(Number(item.eventId)) ? Number(item.eventId) : -1 }
+      ] 
+    }).select('name imageURL');
+    
     itemsWithNames.push({
       eventId: item.eventId,
       ticketInfoId: item.ticketInfoId,
       quantity: item.quantity,
       price: item.price,
       name: info ? info.ticketName : 'Unknown Ticket',
+      eventTitle: event ? event.name : 'Unknown Event',
+      image: event ? event.imageURL : null,
     });
   }
 

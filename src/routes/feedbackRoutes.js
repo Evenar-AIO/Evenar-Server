@@ -1,11 +1,11 @@
 const express = require("express");
-const { getCurrentUser, requireRoles } = require("../middleware/auth");
+const { verifyToken, requireRoles } = require("../middleware/auth.middleware");
 const { createFeedback, getFeedbackByEvent } = require("../controllers/feedbackController");
 
 const router = express.Router();
 
 router.get("/:eventId", getFeedbackByEvent);
 
-router.post("/", getCurrentUser, requireRoles("customer", "eventowner"), createFeedback);
+router.post("/", verifyToken, createFeedback);
 
 module.exports = router;

@@ -9,7 +9,7 @@ const supportAttachmentSchema = new mongoose.Schema(
     size: { type: Number, required: true },
     url: { type: String, required: true },
   },
-  { timestamps: true }
+  { timestamps: true, collection: 'supportAttachments' }
 );
 
 supportAttachmentSchema.index({ supportItemId: 1 });

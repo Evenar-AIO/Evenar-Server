@@ -49,14 +49,15 @@ exports.requestRefund = async (orderId, reason) => {
     // Create the refund record
     const [refund] = await Refund.create([{
       orderId,
-      reason,
-      amount: order.totalAmount,
-      status: 'PENDING',
+      userId: order.userId,
+      refundReason: reason,
+      refundAmount: order.totalAmount,
+      refundStatus: 'pending',
     }], { session });
 
     // Mark order statuses
     order.paymentStatus = 'refunded';
-    order.orderStatus = 'refunded';
+    order.orderStatus = 'cancelled';
     await order.save({ session });
 
     // Release inventory so seats are available again
@@ -84,8 +85,8 @@ exports.requestRefund = async (orderId, reason) => {
 
     return {
       refundId: refund._id,
-      status: refund.status,
-      amount: refund.amount,
+      status: refund.refundStatus,
+      amount: refund.refundAmount,
     };
   } catch (error) {
     await session.abortTransaction();
@@ -112,14 +113,15 @@ exports.requestRefundWithoutTransaction = async (orderId, reason) => {
   // Create the refund record
   const refund = await Refund.create({
     orderId,
-    reason,
-    amount: order.totalAmount,
-    status: 'PENDING',
+    userId: order.userId,
+    refundReason: reason,
+    refundAmount: order.totalAmount,
+    refundStatus: 'pending',
   });
 
   // Mark order statuses
   order.paymentStatus = 'refunded';
-  order.orderStatus = 'refunded';
+  order.orderStatus = 'cancelled';
   await order.save();
 
   // Release inventory so seats are available again
@@ -130,8 +132,8 @@ exports.requestRefundWithoutTransaction = async (orderId, reason) => {
 
   return {
     refundId: refund._id,
-    status: refund.status,
-    amount: refund.amount,
+    status: refund.refundStatus,
+    amount: refund.refundAmount,
   };
 };
 
@@ -202,11 +204,12 @@ exports.approveRefund = async (refundId) => {
     const refund = await Refund.findById(refundId).session(session);
     if (!refund) throw new Error('Refund not found');
 
-    if (refund.status !== 'PENDING') {
+    if (refund.refundStatus !== 'pending') {
       throw new Error('Refund is not pending');
     }
 
-    refund.status = 'APPROVED';
+    refund.refundStatus = 'approved';
+    refund.refundProcessedDate = new Date();
     await refund.save({ session });
 
     await session.commitTransaction();
@@ -214,7 +217,7 @@ exports.approveRefund = async (refundId) => {
 
     return {
       refundId: refund._id,
-      status: refund.status,
+      status: refund.refundStatus,
     };
   } catch (error) {
     await session.abortTransaction();
@@ -234,12 +237,13 @@ exports.rejectRefund = async (refundId, rejectionReason) => {
     const refund = await Refund.findById(refundId).session(session);
     if (!refund) throw new Error('Refund not found');
 
-    if (refund.status !== 'PENDING') {
+    if (refund.refundStatus !== 'pending') {
       throw new Error('Refund is not pending');
     }
 
-    refund.status = 'REJECTED';
+    refund.refundStatus = 'rejected';
     refund.rejectionReason = rejectionReason;
+    refund.refundProcessedDate = new Date();
     await refund.save({ session });
 
     // Restore order status
@@ -255,7 +259,7 @@ exports.rejectRefund = async (refundId, rejectionReason) => {
 
     return {
       refundId: refund._id,
-      status: refund.status,
+      status: refund.refundStatus,
     };
   } catch (error) {
     await session.abortTransaction();

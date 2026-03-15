@@ -14,7 +14,7 @@ exports.verifyToken = (req, res, next) => {
 
         const token = authHeader.split(' ')[1];
 
-        const secret = process.env.JWT_SECRET || 'fallback_secret';
+        const secret = process.env.JWT_SECRET || 'dev_secret_change_me';
 
         const decoded = jwt.verify(token, secret);
         req.user = decoded;

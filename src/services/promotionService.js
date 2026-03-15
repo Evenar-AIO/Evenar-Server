@@ -1,4 +1,6 @@
 const Promotion = require('../models/promotionModel');
+const Event = require('../models/Event');
+const mongoose = require('mongoose');
 
 /**
  * validatePromotion - Validates promotion code without incrementing usage
@@ -8,30 +10,52 @@ exports.validatePromotion = async (code, eventId, totalAmount) => {
   const promo = await Promotion.findOne({ promotionCode: code, isActive: true });
   
   if (!promo) {
-    throw new Error('Invalid promotion code');
+    throw new Error('Mã giảm giá không tồn tại hoặc đã bị vô hiệu hóa.');
   }
 
   // Check timeframe
   const now = new Date();
-  if (now < promo.startTime || now > promo.endTime) {
-    throw new Error('Promotion code has expired');
+  if (now < promo.startTime) {
+    throw new Error('Chương trình khuyến mãi này chưa bắt đầu.');
+  }
+  if (now > promo.endTime) {
+    throw new Error('Mã giảm giá này đã hết hạn sử dụng.');
   }
 
   // Check usage limit
   if (promo.maxUsageCount && promo.currentUsageCount >= promo.maxUsageCount) {
-    throw new Error('Promotion code has reached its usage limit');
+    throw new Error('Mã giảm giá đã hết lượt sử dụng.');
   }
 
   // Check event restriction (if specified)
-  if (promo.eventId && promo.eventId.toString() !== eventId.toString()) {
-    // If it's a legacy number in init-db, we might need to handle ID comparison differently
-    // For now, assume it's an ObjectId or a string. 
-    // In production we'd want more robust matching if IDs vary.
+  if (promo.eventId) {
+    const promoEventIdStr = promo.eventId.toString();
+    const targetEventIdStr = eventId.toString();
+
+    // Basic string check
+    if (promoEventIdStr !== targetEventIdStr) {
+      // Robust check: if we have an ObjectId, check the event's legacyId too
+      if (mongoose.Types.ObjectId.isValid(targetEventIdStr)) {
+        const event = await Event.findById(targetEventIdStr);
+        if (event) {
+          const isLegacyMatch = event.legacyId && event.legacyId.toString() === promoEventIdStr;
+          const isIdMatch = event._id.toString() === promoEventIdStr;
+          
+          if (!isLegacyMatch && !isIdMatch) {
+            throw new Error('Mã giảm giá này không áp dụng cho sự kiện hiện tại.');
+          }
+        } else {
+          throw new Error('Mã giảm giá này không áp dụng cho sự kiện hiện tại.');
+        }
+      } else {
+        throw new Error('Mã giảm giá này không áp dụng cho sự kiện hiện tại.');
+      }
+    }
   }
 
   // Check min order amount
   if (totalAmount < promo.minOrderAmount) {
-    throw new Error(`Minimum order amount for this promotion is ${promo.minOrderAmount}`);
+    throw new Error(`Đơn hàng tối thiểu để sử dụng mã này là ${promo.minOrderAmount.toLocaleString()} VNĐ.`);
   }
 
   // Calculate discount
@@ -69,23 +93,45 @@ exports.validateAndUsePromotion = async (code, eventId, totalAmount) => {
   const promo = await Promotion.findOne({ promotionCode: code, isActive: true });
   
   if (!promo) {
-    throw new Error('Invalid promotion code');
+    throw new Error('Mã giảm giá không tồn tại hoặc đã bị vô hiệu hóa.');
   }
 
   // Check timeframe
   const now = new Date();
-  if (now < promo.startTime || now > promo.endTime) {
-    throw new Error('Promotion code has expired');
+  if (now < promo.startTime) {
+    throw new Error('Chương trình khuyến mãi này chưa bắt đầu.');
+  }
+  if (now > promo.endTime) {
+    throw new Error('Mã giảm giá này đã hết hạn sử dụng.');
   }
 
   // Check min order amount BEFORE incrementing
   if (totalAmount < promo.minOrderAmount) {
-    throw new Error(`Minimum order amount for this promotion is ${promo.minOrderAmount}`);
+    throw new Error(`Đơn hàng tối thiểu để sử dụng mã này là ${promo.minOrderAmount.toLocaleString()} VNĐ.`);
   }
 
   // Check event restriction (if specified)
-  if (promo.eventId && promo.eventId.toString() !== eventId.toString()) {
-    throw new Error('Promotion code not valid for this event');
+  if (promo.eventId) {
+    const promoEventIdStr = promo.eventId.toString();
+    const targetEventIdStr = eventId.toString();
+
+    if (promoEventIdStr !== targetEventIdStr) {
+      if (mongoose.Types.ObjectId.isValid(targetEventIdStr)) {
+        const event = await Event.findById(targetEventIdStr);
+        if (event) {
+          const isLegacyMatch = event.legacyId && event.legacyId.toString() === promoEventIdStr;
+          const isIdMatch = event._id.toString() === promoEventIdStr;
+          
+          if (!isLegacyMatch && !isIdMatch) {
+            throw new Error('Mã giảm giá này không áp dụng cho sự kiện hiện tại.');
+          }
+        } else {
+          throw new Error('Mã giảm giá này không áp dụng cho sự kiện hiện tại.');
+        }
+      } else {
+        throw new Error('Mã giảm giá này không áp dụng cho sự kiện hiện tại.');
+      }
+    }
   }
 
   // Now atomically increment usage count - this is the key race condition fix
@@ -111,9 +157,9 @@ exports.validateAndUsePromotion = async (code, eventId, totalAmount) => {
     // Re-check to provide specific error message
     const recheckPromo = await Promotion.findOne({ promotionCode: code });
     if (recheckPromo && recheckPromo.currentUsageCount >= recheckPromo.maxUsageCount) {
-      throw new Error('Promotion code has reached its usage limit');
+      throw new Error('Mã giảm giá đã hết lượt sử dụng.');
     }
-    throw new Error('Promotion code is no longer valid');
+    throw new Error('Mã giảm giá không còn hiệu lực.');
   }
 
   // Calculate discount using the updated promo

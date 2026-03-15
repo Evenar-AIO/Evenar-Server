@@ -51,17 +51,18 @@ async function getFeedbackByEvent(req, res) {
       .populate("userId", "name email")
       .lean();
 
-    const oid = mongoose.Types.ObjectId.isValid(eventId) ? new mongoose.Types.ObjectId(eventId) : null;
-    const stats = oid
-      ? await Feedback.aggregate([
-          { $match: { eventId: oid } },
-          { $group: { _id: null, avg: { $avg: "$rating" }, count: { $sum: 1 } } },
-        ]).catch(() => [])
-      : [];
+    const eventMatch = mongoose.Types.ObjectId.isValid(eventId) 
+      ? { $match: { $or: [{ eventId: new mongoose.Types.ObjectId(eventId) }, { eventId: eventId }] } }
+      : { $match: { eventId: !isNaN(Number(eventId)) ? Number(eventId) : eventId } };
+
+    const stats = await Feedback.aggregate([
+      eventMatch,
+      { $group: { _id: null, average: { $avg: "$rating" }, count: { $sum: 1 } } },
+    ]).catch(() => []);
 
     res.json({
       items,
-      stats: stats[0] ? { average: stats[0].avg, count: stats[0].count } : { average: 0, count: 0 },
+      stats: stats[0] ? { average: stats[0].average, count: stats[0].count } : { average: 0, count: 0 },
     });
   } catch (err) {
     res.status(500).json({ error: err.message });
