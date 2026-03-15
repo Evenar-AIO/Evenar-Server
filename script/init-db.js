@@ -1,5 +1,5 @@
 
-use("EventTicketDB");
+use("evenar");
 
 db.users.drop();
 db.users.insertMany([

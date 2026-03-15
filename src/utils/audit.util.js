@@ -1,14 +1,14 @@
 const AuditLog = require('../models/AuditLog');
 
-
 exports.logAuditAction = async (req, action, tableName, recordId, oldValues = null, newValues = null) => {
     try {
-        const userId = req.user?.legacyId || 1;
+        // Support both legacyId (Number) and new _id (ObjectId)
+        const userId = req.user?.legacyId || req.user?._id || req.user?.id || 1;
         const userAgent = req.headers['user-agent'] || null;
 
         await AuditLog.create({
             tableName,
-            recordId: Number(recordId),
+            recordId: recordId, // Remove Number() cast to allow strings/ObjectIds
             action,
             oldValues,
             newValues,

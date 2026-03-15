@@ -2,12 +2,13 @@ const mongoose = require('mongoose');
 
 const refundSchema = new mongoose.Schema(
     {
-        orderId: { type: Number, required: true },
-        orderItemId: { type: Number },
-        userId: { type: Number, required: true },
-        adminId: { type: Number, default: null },
+        orderId: { type: mongoose.Schema.Types.Mixed, required: true, ref: 'Order' },
+        orderItemId: { type: mongoose.Schema.Types.Mixed },
+        userId: { type: mongoose.Schema.Types.Mixed },
+        adminId: { type: mongoose.Schema.Types.Mixed, default: null },
         refundAmount: { type: Number, required: true },
         refundReason: { type: String },
+        rejectionReason: { type: String, default: null },
         refundStatus: { type: String, enum: ['pending', 'approved', 'rejected'], default: 'pending' },
         paymentMethodId: { type: Number },
         refundRequestDate: { type: Date, default: Date.now },
@@ -18,5 +19,7 @@ const refundSchema = new mongoose.Schema(
         timestamps: true
     }
 );
+
+refundSchema.index({ orderId: 1 });
 
 module.exports = mongoose.model('Refund', refundSchema, 'refunds');

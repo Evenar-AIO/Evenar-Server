@@ -56,12 +56,40 @@ exports.updateQuantity = async (req, res) => {
     const { delta } = req.body;
     const userId = req.user.sub || req.user.id || req.user._id;
 
-    if (delta === undefined) {
-      return res.status(400).json({ error: 'delta is required' });
+    if (delta === undefined || delta === 0) {
+      return res.status(400).json({ error: 'delta is required and must be non-zero' });
     }
 
-    const result = await cartService.addToCart(userId, null, ticketInfoId, delta);
-    res.status(200).json(result);
+    if (delta > 0) {
+      // Increase: reuse addToCart but we need to find the eventId from existing cart item
+      const cart = await require('../services/cartService').getCart(userId);
+      const existingItem = cart.items.find(i => i.ticketInfoId.toString() === ticketInfoId);
+      const eventId = existingItem ? existingItem.eventId : null;
+      if (!eventId) {
+        return res.status(404).json({ error: 'Item not found in cart' });
+      }
+      const result = await cartService.addToCart(userId, eventId, ticketInfoId, delta);
+      return res.status(200).json(result);
+    } else {
+      // Decrease: directly update quantity in the cart
+      const mongoose = require('mongoose');
+      const Cart = require('../models/cartModel');
+      const uid = new mongoose.Types.ObjectId(String(userId));
+      const cart = await Cart.findOne({ userId: uid });
+      if (!cart) return res.status(404).json({ error: 'Cart not found' });
+
+      const itemIndex = cart.items.findIndex(i => i.ticketInfoId.toString() === ticketInfoId);
+      if (itemIndex === -1) return res.status(404).json({ error: 'Item not found in cart' });
+
+      cart.items[itemIndex].quantity += delta; // delta is negative
+      if (cart.items[itemIndex].quantity <= 0) {
+        cart.items.splice(itemIndex, 1);
+      }
+      await cart.save();
+
+      const result = await cartService.getCart(userId);
+      return res.status(200).json(result);
+    }
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

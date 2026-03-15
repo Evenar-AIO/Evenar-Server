@@ -1,4 +1,5 @@
 const express = require("express");
+const http = require("http");
 const cors = require("cors");
 const helmet = require("helmet");
 const compression = require("compression");
@@ -10,9 +11,16 @@ const swaggerJsdoc = require("swagger-jsdoc");
 require("dotenv").config();
 const connectDB = require("./src/config/db");
 
-connectDB();
+const { initSocket } = require("./socket");
+
+const chatRoutes = require("./src/routes/chatRoutes");
+const feedbackRoutes = require("./src/routes/feedbackRoutes");
+const supportRoutes = require("./src/routes/supportRoutes");
+const notificationRoutes = require("./src/routes/notificationRoutes");
+const userRoutes = require("./src/routes/userRoutes");
 
 const app = express();
+const server = http.createServer(app);
 
 /* ---------------- Middleware ---------------- */
 app.use(pinoHttp());
@@ -44,6 +52,7 @@ const promotionsRouter = require('./src/routes/promotions');
 const devRouter = require('./src/routes/dev');
 const authRouter = require('./src/routes/authRoutes');
 const profileRouter = require('./src/routes/profile');
+const adminRoutes = require("./src/routes/admin.routes");
 
 // IMPORTANT: Search must be BEFORE events to avoid /api/events/:id collision (where :id="search")
 app.use('/api/events/search', searchRouter);
@@ -58,8 +67,6 @@ app.use('/api/promotions', promotionsRouter);
 app.use('/api/dev', devRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/profile', profileRouter);
-const adminRoutes = require("./src/routes/admin.routes");
-
 
 app.get("/", (req, res) => {
   res.status(200).send("Hello World");
@@ -69,9 +76,14 @@ app.get("/health", (req, res) => {
   res.status(200).json({ ok: true });
 });
 
+app.use("/api/chat", chatRoutes);
+app.use("/api/feedback", feedbackRoutes);
+app.use("/api/support", supportRoutes);
+app.use("/api/notifications", notificationRoutes);
+app.use("/api/users", userRoutes);
 app.use("/admin", adminRoutes);
 
-
+/* ---------------- Swagger ---------------- */
 const swaggerOptions = {
   definition: {
     openapi: "3.0.0",
@@ -90,9 +102,12 @@ app.use("/api.html", swaggerUi.serve, swaggerUi.setup(specs));
 const port = Number(process.env.PORT) || 3000;
 
 if (require.main === module) {
-  app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
+  connectDB().then(() => {
+    initSocket(server);
+    server.listen(port, () => {
+      console.log(`Server running on http://localhost:${port}`);
+    });
   });
 }
 
-module.exports = { app };
+module.exports = { app, server };

@@ -2,15 +2,15 @@ const mongoose = require('mongoose');
 
 const feedbackSchema = new mongoose.Schema({
   userId: {
-    type: Number,
+    type: mongoose.Schema.Types.Mixed,
     required: true
   },
   eventId: {
-    type: Number,
+    type: mongoose.Schema.Types.Mixed,
     required: true
   },
   orderId: {
-    type: Number,
+    type: mongoose.Schema.Types.Mixed,
     required: false
   },
   rating: {
@@ -21,7 +21,11 @@ const feedbackSchema = new mongoose.Schema({
   },
   content: {
     type: String,
-    required: true
+    required: false
+  },
+  comment: {
+    type: String,
+    default: ""
   },
   isApproved: {
     type: Boolean,
@@ -36,4 +40,7 @@ const feedbackSchema = new mongoose.Schema({
   collection: 'feedbacks'
 });
 
-module.exports = mongoose.model('Feedback', feedbackSchema);
+feedbackSchema.index({ eventId: 1, createdAt: -1 });
+feedbackSchema.index({ userId: 1 });
+
+module.exports = mongoose.models.Feedback || mongoose.model('Feedback', feedbackSchema);
