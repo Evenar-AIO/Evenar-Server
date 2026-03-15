@@ -1,0 +1,88 @@
+{
+  "users": [
+    {
+      "id": "u-customer-1",
+      "role": "Customer",
+      "name": "Nguyen Customer",
+      "phone": "0900000001",
+      "avatar": "",
+      "birthday": "2002-05-10",
+      "email": "customer@example.com"
+    },
+    {
+      "id": "u-owner-1",
+      "role": "EventOwner",
+      "name": "Vy Event Owner",
+      "phone": "0900000002",
+      "avatar": "",
+      "birthday": "1999-03-12",
+      "email": "owner@example.com",
+      "companyName": "Evenar Studio",
+      "description": "Organizer profile demo",
+      "contactInfo": "owner@example.com"
+    },
+    {
+      "id": "u-admin-1",
+      "role": "Admin",
+      "name": "System Admin",
+      "phone": "0900000003",
+      "avatar": "",
+      "birthday": "1995-01-01",
+      "email": "admin@example.com"
+    }
+  ],
+  "events": [
+    {
+      "id": "evt-001",
+      "ownerId": "u-owner-1",
+      "name": "Da Nang Music Night",
+      "description": "Live music event for testing homepage and booking.",
+      "date": "2026-04-20T19:30:00.000Z",
+      "location": "Da Nang Convention Center",
+      "genre": "Music",
+      "status": "upcoming",
+      "imageUrl": "",
+      "basePrice": 250000,
+      "zones": [
+        {
+          "name": "VIP",
+          "capacity": 100,
+          "price": 500000
+        },
+        {
+          "name": "Standard",
+          "capacity": 400,
+          "price": 250000
+        }
+      ],
+      "ticketInfo": [
+        {
+          "type": "VIP",
+          "price": 500000,
+          "quantity": 100
+        },
+        {
+          "type": "Standard",
+          "price": 250000,
+          "quantity": 400
+        }
+      ],
+      "ticketInventory": [
+        {
+          "type": "VIP",
+          "total": 100,
+          "available": 80,
+          "sold": 20
+        },
+        {
+          "type": "Standard",
+          "total": 400,
+          "available": 350,
+          "sold": 50
+        }
+      ],
+      "createdAt": "2026-03-01T08:00:00.000Z",
+      "updatedAt": "2026-03-01T08:00:00.000Z"
+    }
+  ]
+}
