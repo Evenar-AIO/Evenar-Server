@@ -1,51 +1,122 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema(
     {
-        name: {
+        legacyId: {
+            type: Number
+        },
+        username: {
             type: String,
-            trim: true,
+            required: [true, 'Please add a username']
         },
         email: {
             type: String,
-            required: true,
+            required: [true, 'Please add an email'],
             unique: true,
-            trim: true,
-            lowercase: true,
+            match: [
+                /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                'Please add a valid email'
+            ]
         },
-        phone: {
+        passwordHash: {
             type: String,
-            trim: true,
-        },
-        avatar: {
-            type: String,
-            trim: true,
-        },
-        birthday: {
-            type: Date,
+            required: [true, 'Please add a password'],
+            minlength: 6,
+            select: false
         },
         role: {
             type: String,
-            enum: ["Customer", "EventOwner", "Admin"],
-            required: true,
+            enum: ['customer', 'event_owner', 'admin', 'organizer'],
+            default: 'customer'
         },
-
+        gender: {
+            type: String
+        },
+        birthday: {
+            type: Date
+        },
+        phoneNumber: {
+            type: String
+        },
+        address: {
+            type: String
+        },
+        avatar: {
+            type: String,
+            default: ''
+        },
         companyName: {
             type: String,
-            trim: true,
+            default: ''
         },
         description: {
             type: String,
-            trim: true,
+            default: ''
         },
         contactInfo: {
             type: String,
-            trim: true,
+            default: ''
         },
+        isLocked: {
+            type: Boolean,
+            default: false
+        },
+        isDeleted: {
+            type: Boolean,
+            default: false
+        },
+        deletedAt: {
+            type: Date,
+            default: null
+        },
+        googleId: {
+            type: String,
+            default: null
+        },
+        lastLoginAt: {
+            type: Date,
+            default: null
+        },
+        isVerified: {
+            type: Boolean,
+            default: false
+        },
+        verifyOtp: {
+            type: String,
+            default: null
+        },
+        verifyOtpExpiresAt: {
+            type: Date,
+            default: null
+        },
+        resetOtp: {
+            type: String,
+            default: null
+        },
+        resetOtpExpiresAt: {
+            type: Date,
+            default: null
+        }
     },
     {
-        timestamps: true,
+        timestamps: true
     }
 );
 
-module.exports = mongoose.model("User", userSchema);
+// Encrypt password using bcrypt
+userSchema.pre('save', async function (next) {
+    if (!this.isModified('passwordHash')) {
+        next();
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    this.passwordHash = await bcrypt.hash(this.passwordHash, salt);
+});
+
+// Match user entered password to hashed password in database
+userSchema.methods.comparePassword = async function (enteredPassword) {
+    return await bcrypt.compare(enteredPassword, this.passwordHash);
+};
+
+module.exports = mongoose.model('User', userSchema, 'users');

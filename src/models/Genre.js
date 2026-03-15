@@ -1,15 +1,20 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const genreSchema = new mongoose.Schema(
     {
-        name: {
+        legacyId: { type: Number },
+        genreName: {
             type: String,
-            required: true,
-            unique: true
+            required: [true, 'Please add a genre name'],
+            trim: true
         },
-        description: String,
+        description: {
+            type: String
+        }
     },
-    { timestamps: true }
+    {
+        timestamps: true
+    }
 );
 
-module.exports = mongoose.model("Genre", genreSchema);
+module.exports = mongoose.model('Genre', genreSchema, 'genres');

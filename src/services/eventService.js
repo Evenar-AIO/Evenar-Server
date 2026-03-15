@@ -1,75 +1,86 @@
-const Event = require("../models/Event");
+const mongoose = require('mongoose');
+const Event = require('../models/Event');
+const TicketInfo = require('../models/ticketInfoModel');
+const TicketInventory = require('../models/ticketInventoryModel');
+const Feedback = require('../models/Feedback');
+const User = require('../models/User');
 
-const Zone = require("../models/Zone");
-const Seat = require("../models/Seat");
-const TicketInfo = require("../models/TicketInfo");
-const TicketInventory = require("../models/TicketInventory");
-
-const getEvents = async () => {
-  return await Event.find().populate("owner", "name email");
-};
-
-const createEvent = async (data, ownerId) => {
-  const { zones, ticketInfo, genre, ...eventData } = data;
+exports.createEvent = async (userId, eventData) => {
+  const { name, description, startTime, endTime, physicalLocation, layout, imageURL, genreId, totalTicketCount } = eventData;
+  
+  if (!name || !startTime || !endTime) {
+    throw new Error('Name, startTime, and endTime are required');
+  }
 
   const event = new Event({
-    ...eventData,
-    owner: ownerId,
-    status: data.status || "pending"
+    ownerId: userId,
+    name,
+    description,
+    startTime,
+    endTime,
+    physicalLocation,
+    layout,
+    imageURL,
+    genreId,
+    totalTicketCount: totalTicketCount || 0,
+    status: 'active'
   });
 
   await event.save();
-
-  // Create zones and seats if provided
-  const zoneMap = {};
-  if (zones && Array.isArray(zones)) {
-    for (const z of zones) {
-      const newZone = new Zone({
-        event: event._id,
-        name: z.name,
-        capacity: z.capacity
-      });
-      await newZone.save();
-      zoneMap[z.name] = newZone._id;
-
-      // Auto-generate seats for this zone
-      const seatsToCreate = [];
-      for (let i = 1; i <= z.capacity; i++) {
-        seatsToCreate.push({
-          zone: newZone._id,
-          row: 'A', // Simplified for demo
-          number: i
-        });
-      }
-      if (seatsToCreate.length > 0) {
-        await Seat.insertMany(seatsToCreate);
-      }
-    }
-  }
-
-  // Create ticket infos and inventory
-  if (ticketInfo && Array.isArray(ticketInfo)) {
-    for (const t of ticketInfo) {
-      const newTicketInfo = new TicketInfo({
-        event: event._id,
-        name: t.type,
-        price: t.price,
-        zone: zoneMap[t.type] || null // Linked if ticket type matches zone name
-      });
-      await newTicketInfo.save();
-
-      const newInventory = new TicketInventory({
-        ticketInfo: newTicketInfo._id,
-        totalQuantity: t.quantity,
-        availableQuantity: t.quantity
-      });
-      await newInventory.save();
-    }
-  }
-
   return event;
 };
 
+exports.getEvents = async () => {
+  return await Event.find({ isDeleted: false });
+};
+
+exports.getEventById = async (id) => {
+  const event = await Event.findById(id).lean();
+  if (!event) throw new Error('Event not found');
+
+  // Load ticket infos for this event using either _id or legacyId
+  const ticketInfos = await TicketInfo.find({
+    $or: [{ eventId: event._id }, { eventId: event.legacyId }]
+  }).lean();
+  
+  // Attach inventory for each ticket info
+  const ticketInfosWithInventory = await Promise.all(ticketInfos.map(async (info) => {
+    const inventory = await TicketInventory.findOne({
+      $or: [{ ticketInfoId: info._id }, { ticketInfoId: info.legacyId }]
+    }).lean();
+    return {
+      ...info,
+      availableQuantity: inventory ? inventory.availableQuantity : 0,
+      totalQuantity: inventory ? inventory.totalQuantity : 0
+    };
+  }));
+
+  event.ticketInfos = ticketInfosWithInventory;
+  
+  // Load event feedbacks
+  const feedbacks = await Feedback.find({
+    $or: [{ eventId: event._id }, { eventId: event.legacyId }],
+    isApproved: true
+  }).lean();
+
+  // Attach User info to feedbacks
+  const feedbacksWithUser = await Promise.all(feedbacks.map(async (fb) => {
+    let userQuery = { legacyId: fb.userId };
+    if (typeof fb.userId === 'string' && mongoose.Types.ObjectId.isValid(fb.userId)) {
+        userQuery = { $or: [{ _id: fb.userId }, { legacyId: fb.userId }] };
+    }
+    const user = await User.findOne(userQuery).lean();
+    return {
+      ...fb,
+      userName: user ? user.username : 'Anonymous User',
+      userRole: user && user.role === 'customer' ? 'Verified Ticket Buyer' : 'Super Fan'
+    };
+  }));
+
+  event.feedbacks = feedbacksWithUser;
+
+  return event;
+};
 const updateEvent = async (id, data) => {
   const event = await Event.findById(id);
 
@@ -92,11 +103,4 @@ const deleteEvent = async (id) => {
   event.status = "deleted";
 
   return await event.save();
-};
-
-module.exports = {
-  getEvents,
-  createEvent,
-  updateEvent,
-  deleteEvent
 };

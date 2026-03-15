@@ -66,3 +66,14 @@ The server will typically run on a port defined in your environment variables or
       |                                                                                    v
 [Client Response] <-------------------------------------------------------------------- [Data]
 ```
+
+
+
+init db -
+ b1: mở terminal  : ``` mongosh ./script/init-db.js```
+b2: mở mongoCompass: check name: EventTicketDB
+
+test api 
+
+option 1: use postman
+option 2: define apis & use swagger by access this url: http://localhost:3000/api.html
