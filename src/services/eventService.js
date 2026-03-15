@@ -1,134 +1,102 @@
-const { readStore, writeStore, generateId } = require('../utils/fileStore');
+const Event = require("../models/Event");
 
-function normalizeTicketInventory(ticketInfo = []) {
-  return ticketInfo.map((item) => ({
-    type: item.type,
-    total: item.quantity,
-    available: item.quantity,
-    sold: 0,
-  }));
-}
+const Zone = require("../models/Zone");
+const Seat = require("../models/Seat");
+const TicketInfo = require("../models/TicketInfo");
+const TicketInventory = require("../models/TicketInventory");
 
-function listEvents(filters = {}, user = null) {
-  const store = readStore();
-  let events = [...store.events];
+const getEvents = async () => {
+  return await Event.find().populate("owner", "name email");
+};
 
-  if (filters.ownerOnly === 'true' && user) {
-    events = events.filter((event) => event.ownerId === user.id);
+const createEvent = async (data, ownerId) => {
+  const { zones, ticketInfo, genre, ...eventData } = data;
+
+  const event = new Event({
+    ...eventData,
+    owner: ownerId,
+    status: data.status || "pending"
+  });
+
+  await event.save();
+
+  // Create zones and seats if provided
+  const zoneMap = {};
+  if (zones && Array.isArray(zones)) {
+    for (const z of zones) {
+      const newZone = new Zone({
+        event: event._id,
+        name: z.name,
+        capacity: z.capacity
+      });
+      await newZone.save();
+      zoneMap[z.name] = newZone._id;
+
+      // Auto-generate seats for this zone
+      const seatsToCreate = [];
+      for (let i = 1; i <= z.capacity; i++) {
+        seatsToCreate.push({
+          zone: newZone._id,
+          row: 'A', // Simplified for demo
+          number: i
+        });
+      }
+      if (seatsToCreate.length > 0) {
+        await Seat.insertMany(seatsToCreate);
+      }
+    }
   }
 
-  if (filters.name) {
-    const name = filters.name.toLowerCase();
-    events = events.filter((event) => event.name.toLowerCase().includes(name));
+  // Create ticket infos and inventory
+  if (ticketInfo && Array.isArray(ticketInfo)) {
+    for (const t of ticketInfo) {
+      const newTicketInfo = new TicketInfo({
+        event: event._id,
+        name: t.type,
+        price: t.price,
+        zone: zoneMap[t.type] || null // Linked if ticket type matches zone name
+      });
+      await newTicketInfo.save();
+
+      const newInventory = new TicketInventory({
+        ticketInfo: newTicketInfo._id,
+        totalQuantity: t.quantity,
+        availableQuantity: t.quantity
+      });
+      await newInventory.save();
+    }
   }
 
-  if (filters.genre) {
-    const genre = filters.genre.toLowerCase();
-    events = events.filter((event) => event.genre.toLowerCase().includes(genre));
-  }
-
-  if (filters.status) {
-    events = events.filter((event) => event.status === filters.status);
-  }
-
-  return events;
-}
-
-function createEvent(payload, user) {
-  const store = readStore();
-  const now = new Date().toISOString();
-  const event = {
-    id: generateId('evt'),
-    ownerId: user.id,
-    ...payload,
-    ticketInventory: normalizeTicketInventory(payload.ticketInfo),
-    createdAt: now,
-    updatedAt: now,
-  };
-
-  store.events.push(event);
-  writeStore(store);
   return event;
-}
+};
 
-function updateEvent(eventId, payload, user) {
-  const store = readStore();
-  const eventIndex = store.events.findIndex((event) => event.id === eventId);
+const updateEvent = async (id, data) => {
+  const event = await Event.findById(id);
 
-  if (eventIndex === -1) {
-    const error = new Error('Event not found');
-    error.status = 404;
-    throw error;
-  }
-
-  const existing = store.events[eventIndex];
-  const isOwner = existing.ownerId === user.id;
-  const isAdmin = user.role === 'Admin';
-  if (!isOwner && !isAdmin) {
-    const error = new Error('You do not have permission to update this event');
-    error.status = 403;
-    throw error;
-  }
-
-  const merged = {
-    ...existing,
-    ...payload,
-    updatedAt: new Date().toISOString(),
-  };
-
-  if (payload.ticketInfo) {
-    merged.ticketInventory = normalizeTicketInventory(payload.ticketInfo);
-  }
-
-  store.events[eventIndex] = merged;
-  writeStore(store);
-  return merged;
-}
-
-function deleteEvent(eventId, user) {
-  const store = readStore();
-  const eventIndex = store.events.findIndex((event) => event.id === eventId);
-
-  if (eventIndex === -1) {
-    const error = new Error('Event not found');
-    error.status = 404;
-    throw error;
-  }
-
-  const existing = store.events[eventIndex];
-  const isOwner = existing.ownerId === user.id;
-  const isAdmin = user.role === 'Admin';
-  if (!isOwner && !isAdmin) {
-    const error = new Error('You do not have permission to delete this event');
-    error.status = 403;
-    throw error;
-  }
-
-  store.events[eventIndex] = {
-    ...existing,
-    status: 'deleted',
-    deletedAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  };
-  writeStore(store);
-  return store.events[eventIndex];
-}
-
-function getEventById(eventId) {
-  const store = readStore();
-  const event = store.events.find((item) => item.id === eventId);
   if (!event) {
-    const error = new Error('Event not found');
-    error.status = 404;
-    throw error;
+    throw new Error("Event not found");
   }
-  return event;
-}
+
+  Object.assign(event, data);
+
+  return await event.save();
+};
+
+const deleteEvent = async (id) => {
+  const event = await Event.findById(id);
+
+  if (!event) {
+    throw new Error("Event not found");
+  }
+
+  event.status = "deleted";
+
+  return await event.save();
+};
 
 module.exports = {
-  listEvents,
+  getEvents,
   createEvent,
   updateEvent,
-  deleteEvent,
-  getEventById,
+  deleteEvent
 };

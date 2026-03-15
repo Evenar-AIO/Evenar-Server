@@ -1,12 +1,24 @@
-const express = require('express');
-const authMiddleware = require('../middleware/authMiddleware');
-const roleMiddleware = require('../middleware/roleMiddleware');
-const profileController = require('../controllers/profileController');
-
+const express = require("express");
 const router = express.Router();
 
-router.get('/me', authMiddleware, profileController.getMyProfile);
-router.post('/update', authMiddleware, roleMiddleware('Customer', 'Admin', 'EventOwner'), profileController.updateProfile);
-router.post('/owner/profile/update', authMiddleware, roleMiddleware('EventOwner', 'Admin'), profileController.updateOwnerProfile);
+const profileController = require("../controllers/profileController");
+const authMiddleware = require("../middleware/authMiddleware");
+const roleMiddleware = require("../middleware/roleMiddleware");
+
+router.get("/me", authMiddleware, profileController.getMe);
+
+router.post(
+    "/profile/update",
+    authMiddleware,
+    roleMiddleware("Customer"),
+    profileController.updateProfile
+);
+
+router.post(
+    "/owner/profile/update",
+    authMiddleware,
+    roleMiddleware("EventOwner"),
+    profileController.updateOwnerProfile
+);
 
 module.exports = router;

@@ -1,45 +1,58 @@
-const { profileUpdateSchema, ownerProfileUpdateSchema } = require('../validators/profileValidator');
-const profileService = require('../services/profileService');
+const profileService = require("../services/profileService");
 
-async function updateProfile(req, res, next) {
+const getMe = async (req, res) => {
   try {
-    const { error, value } = profileUpdateSchema.validate(req.body, { abortEarly: false });
-    if (error) {
-      return res.status(400).json({ success: false, message: error.details.map((x) => x.message).join(', ') });
-    }
+    const user = await profileService.getProfile(req.user.id);
 
-    const profile = profileService.updateProfile(req.user.id, value);
-    return res.status(200).json({ success: true, data: profile, message: 'Profile updated successfully' });
-  } catch (err) {
-    return next(err);
+    return res.status(200).json({
+      success: true,
+      message: "Get profile successfully",
+      data: user,
+    });
+  } catch (error) {
+    return res.status(404).json({
+      success: false,
+      message: error.message || "Failed to get profile",
+    });
   }
-}
+};
 
-async function updateOwnerProfile(req, res, next) {
+const updateProfile = async (req, res) => {
   try {
-    const { error, value } = ownerProfileUpdateSchema.validate(req.body, { abortEarly: false });
-    if (error) {
-      return res.status(400).json({ success: false, message: error.details.map((x) => x.message).join(', ') });
-    }
+    const updatedUser = await profileService.updateProfile(req.user.id, req.body);
 
-    const profile = profileService.updateProfile(req.user.id, value);
-    return res.status(200).json({ success: true, data: profile, message: 'Owner profile updated successfully' });
-  } catch (err) {
-    return next(err);
+    return res.status(200).json({
+      success: true,
+      message: "Profile updated successfully",
+      data: updatedUser,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: error.message || "Failed to update profile",
+    });
   }
-}
+};
 
-async function getMyProfile(req, res, next) {
+const updateOwnerProfile = async (req, res) => {
   try {
-    const profile = profileService.getProfile(req.user.id);
-    return res.status(200).json({ success: true, data: profile });
-  } catch (err) {
-    return next(err);
+    const updatedUser = await profileService.updateOwnerProfile(req.user.id, req.body);
+
+    return res.status(200).json({
+      success: true,
+      message: "Owner profile updated successfully",
+      data: updatedUser,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: error.message || "Failed to update owner profile",
+    });
   }
-}
+};
 
 module.exports = {
+  getMe,
   updateProfile,
   updateOwnerProfile,
-  getMyProfile,
 };

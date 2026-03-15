@@ -1,69 +1,49 @@
-const { createEventSchema, updateEventSchema } = require('../validators/eventValidator');
-const eventService = require('../services/eventService');
+const eventService = require("../services/eventService");
 
-async function getEvents(req, res, next) {
+const getEvents = async (req, res) => {
   try {
-    const events = eventService.listEvents(req.query, req.user || null);
-    return res.status(200).json({
-      success: true,
-      count: events.length,
-      data: events,
-    });
+    const events = await eventService.getEvents();
+    res.json(events);
   } catch (err) {
-    return next(err);
+    res.status(500).json({ message: err.message });
   }
-}
+};
 
-async function getEventById(req, res, next) {
+const createEvent = async (req, res) => {
   try {
-    const event = eventService.getEventById(req.params.id);
-    return res.status(200).json({ success: true, data: event });
-  } catch (err) {
-    return next(err);
-  }
-}
+    const ownerId = req.headers["x-user-id"];
 
-async function createEvent(req, res, next) {
+    const event = await eventService.createEvent(req.body, ownerId);
+
+    res.status(201).json(event);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+
+const updateEvent = async (req, res) => {
   try {
-    const { error, value } = createEventSchema.validate(req.body, { abortEarly: false });
-    if (error) {
-      return res.status(400).json({ success: false, message: error.details.map((x) => x.message).join(', ') });
-    }
+    const event = await eventService.updateEvent(req.params.id, req.body);
 
-    const event = eventService.createEvent(value, req.user);
-    return res.status(201).json({ success: true, data: event, message: 'Event created successfully' });
+    res.json(event);
   } catch (err) {
-    return next(err);
+    res.status(400).json({ message: err.message });
   }
-}
+};
 
-async function updateEvent(req, res, next) {
+const deleteEvent = async (req, res) => {
   try {
-    const { error, value } = updateEventSchema.validate(req.body, { abortEarly: false });
-    if (error) {
-      return res.status(400).json({ success: false, message: error.details.map((x) => x.message).join(', ') });
-    }
+    const event = await eventService.deleteEvent(req.params.id);
 
-    const event = eventService.updateEvent(req.params.id, value, req.user);
-    return res.status(200).json({ success: true, data: event, message: 'Event updated successfully' });
+    res.json({ message: "Event deleted", event });
   } catch (err) {
-    return next(err);
+    res.status(400).json({ message: err.message });
   }
-}
-
-async function deleteEvent(req, res, next) {
-  try {
-    const event = eventService.deleteEvent(req.params.id, req.user);
-    return res.status(200).json({ success: true, data: event, message: 'Event deleted successfully (soft delete)' });
-  } catch (err) {
-    return next(err);
-  }
-}
+};
 
 module.exports = {
   getEvents,
-  getEventById,
   createEvent,
   updateEvent,
-  deleteEvent,
+  deleteEvent
 };
