@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { submitRequest, getMyRequest } = require('../controllers/organizerController');
 const { actionLimiter } = require('../middleware/rateLimit.middleware');
+const { verifyToken } = require('../middleware/auth.middleware');
 
 router.use(verifyToken);
 
