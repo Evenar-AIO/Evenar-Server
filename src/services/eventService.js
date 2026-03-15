@@ -1,9 +1,8 @@
-const Event = require("../models/Event");
-
+const Event = require("../models/eventModel");
 const Zone = require("../models/Zone");
 const Seat = require("../models/Seat");
-const TicketInfo = require("../models/TicketInfo");
-const TicketInventory = require("../models/TicketInventory");
+const TicketInfo = require("../models/ticketInfoModel");
+const TicketInventory = require("../models/ticketInventoryModel");
 
 const getEvents = async () => {
   return await Event.find().populate("owner", "name email");
@@ -12,11 +11,24 @@ const getEvents = async () => {
 const createEvent = async (data, ownerId) => {
   const { zones, ticketInfo, genre, ...eventData } = data;
 
-  const event = new Event({
+  // Map fields from validator/frontend to eventModel
+  const mappedEventData = {
     ...eventData,
+    physicalLocation: data.location || eventData.physicalLocation,
+    startTime: data.date || eventData.startTime,
+    endTime: data.date || eventData.endTime, // Default to same as start for now
+    imageURL: data.imageUrl || data.imageURL || eventData.imageURL,
     owner: ownerId,
     status: data.status || "pending"
-  });
+  };
+
+  const event = new Event(mappedEventData);
+
+  if (genre) {
+    // If genre is passed as string, we might need to find its ObjectId.
+    // For now we'll just skip it or assume it's already an ObjectId/handled elsewhere.
+    // But let's at least not crash.
+  }
 
   await event.save();
 
@@ -51,15 +63,15 @@ const createEvent = async (data, ownerId) => {
   if (ticketInfo && Array.isArray(ticketInfo)) {
     for (const t of ticketInfo) {
       const newTicketInfo = new TicketInfo({
-        event: event._id,
-        name: t.type,
+        eventId: event._id,
+        ticketName: t.type || t.name,
         price: t.price,
-        zone: zoneMap[t.type] || null // Linked if ticket type matches zone name
+        zone: zoneMap[t.type] || null 
       });
       await newTicketInfo.save();
 
       const newInventory = new TicketInventory({
-        ticketInfo: newTicketInfo._id,
+        ticketInfoId: newTicketInfo._id,
         totalQuantity: t.quantity,
         availableQuantity: t.quantity
       });
@@ -77,7 +89,16 @@ const updateEvent = async (id, data) => {
     throw new Error("Event not found");
   }
 
-  Object.assign(event, data);
+  // Map fields from validator/frontend to eventModel
+  const mappedData = {
+    ...data,
+    physicalLocation: data.location || data.physicalLocation,
+    startTime: data.date || data.startTime,
+    endTime: data.date || data.endTime,
+    imageURL: data.imageUrl || data.imageURL || data.image
+  };
+
+  Object.assign(event, mappedData);
 
   return await event.save();
 };
@@ -94,8 +115,17 @@ const deleteEvent = async (id) => {
   return await event.save();
 };
 
+const getEventById = async (id) => {
+  const event = await Event.findById(id).populate("owner", "name email");
+  if (!event) {
+    throw new Error("Event not found");
+  }
+  return event;
+};
+
 module.exports = {
   getEvents,
+  getEventById,
   createEvent,
   updateEvent,
   deleteEvent

@@ -14,7 +14,15 @@ const eventSchema = new mongoose.Schema(
     imageURL: String,
     hasSeatingChart: { type: Boolean, default: false },
     isDeleted: { type: Boolean, default: false },
+    genres: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Genre"
+    }],
     genreId: Number,
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
+    },
     legacyId: { type: Number, unique: true, sparse: true },
   },
   { timestamps: true },

@@ -8,6 +8,7 @@ const ticketInfoSchema = new mongoose.Schema({
   salesStartTime: Date,
   salesEndTime: Date,
   eventId: { type: mongoose.Schema.Types.ObjectId, ref: 'Event' },
+  zone: { type: mongoose.Schema.Types.ObjectId, ref: 'Zone' },
   legacyEventId: Number,
   maxQuantityPerOrder: Number,
   isActive: { type: Boolean, default: true },
