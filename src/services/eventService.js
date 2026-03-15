@@ -81,3 +81,26 @@ exports.getEventById = async (id) => {
 
   return event;
 };
+const updateEvent = async (id, data) => {
+  const event = await Event.findById(id);
+
+  if (!event) {
+    throw new Error("Event not found");
+  }
+
+  Object.assign(event, data);
+
+  return await event.save();
+};
+
+const deleteEvent = async (id) => {
+  const event = await Event.findById(id);
+
+  if (!event) {
+    throw new Error("Event not found");
+  }
+
+  event.status = "deleted";
+
+  return await event.save();
+};
