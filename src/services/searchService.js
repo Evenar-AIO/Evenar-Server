@@ -1,4 +1,4 @@
-const Event = require('../models/eventModel');
+const Event = require('../models/Event');
 
 exports.searchEvents = async (searchParams) => {
   const { q, category, page = 1, limit = 10 } = searchParams;

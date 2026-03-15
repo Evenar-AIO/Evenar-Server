@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const Order = require('../models/orderModel');
+const Order = require('../models/Order');
 const Payment = require('../models/paymentModel');
-const OrderItem = require('../models/orderItemModel');
+const OrderItem = require('../models/OrderItem');
 const paymentGateway = require('../utils/paymentGateway');
 const inventoryManager = require('../utils/inventoryManager');
 

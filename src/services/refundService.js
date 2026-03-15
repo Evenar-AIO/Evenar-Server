@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const Refund = require('../models/refundModel');
-const Order = require('../models/orderModel');
-const OrderItem = require('../models/orderItemModel');
+const Refund = require('../models/Refund');
+const Order = require('../models/Order');
+const OrderItem = require('../models/OrderItem');
 const inventoryManager = require('../utils/inventoryManager');
 const promotionService = require('../services/promotionService');
 

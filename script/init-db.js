@@ -1,11 +1,6 @@
-// EventTicketDB - Mongosh seed script (FULL - 22 collections)
-// Chạy: mongosh --file init-db.js
 
 use("EventTicketDB");
 
-// ============================================
-// USERS (26 documents)
-// ============================================
 db.users.drop();
 db.users.insertMany([
   {
@@ -479,9 +474,6 @@ db.users.insertMany([
 ]);
 print("✅ users: " + db.users.countDocuments() + " docs inserted");
 
-// ============================================
-// GENRES (8 documents)
-// ============================================
 db.genres.drop();
 db.genres.insertMany([
   {
@@ -543,9 +535,6 @@ db.genres.insertMany([
 ]);
 print("✅ genres: " + db.genres.countDocuments() + " docs inserted");
 
-// ============================================
-// EVENTS (26 documents)
-// ============================================
 db.events.drop();
 db.events.insertMany([
   {
@@ -1045,9 +1034,6 @@ db.events.insertMany([
 ]);
 print("✅ events: " + db.events.countDocuments() + " docs inserted");
 
-// ============================================
-// ZONES (9 documents)
-// ============================================
 db.zones.drop();
 db.zones.insertMany([
   {
@@ -1197,9 +1183,6 @@ db.zones.insertMany([
 ]);
 print("✅ zones: " + db.zones.countDocuments() + " docs inserted");
 
-// ============================================
-// SEATS (800 documents)
-// ============================================
 db.seats.drop();
 db.seats.insertMany([
   {
@@ -12405,9 +12388,6 @@ db.seats.insertMany([
 ]);
 print("✅ seats: " + db.seats.countDocuments() + " docs inserted");
 
-// ============================================
-// TICKETINFOS (20 documents)
-// ============================================
 db.ticketInfos.drop();
 db.ticketInfos.insertMany([
   {
@@ -12713,9 +12693,6 @@ db.ticketInfos.insertMany([
 ]);
 print("✅ ticketInfos: " + db.ticketInfos.countDocuments() + " docs inserted");
 
-// ============================================
-// TICKETINVENTORIES (20 documents)
-// ============================================
 db.ticketInventories.drop();
 db.ticketInventories.insertMany([
   {
@@ -12901,9 +12878,6 @@ db.ticketInventories.insertMany([
 ]);
 print("✅ ticketInventories: " + db.ticketInventories.countDocuments() + " docs inserted");
 
-// ============================================
-// TICKETS (15 documents)
-// ============================================
 db.tickets.drop();
 db.tickets.insertMany([
   {
@@ -13059,9 +13033,6 @@ db.tickets.insertMany([
 ]);
 print("✅ tickets: " + db.tickets.countDocuments() + " docs inserted");
 
-// ============================================
-// PAYMENTMETHODS (3 documents)
-// ============================================
 db.paymentMethods.drop();
 db.paymentMethods.insertMany([
   {
@@ -13097,9 +13068,6 @@ db.paymentMethods.insertMany([
 ]);
 print("✅ paymentMethods: " + db.paymentMethods.countDocuments() + " docs inserted");
 
-// ============================================
-// ORDERS (17 documents)
-// ============================================
 db.orders.drop();
 db.orders.insertMany([
   {
@@ -13445,9 +13413,6 @@ db.orders.insertMany([
 ]);
 print("✅ orders: " + db.orders.countDocuments() + " docs inserted");
 
-// ============================================
-// ORDERITEMS (13 documents)
-// ============================================
 db.orderItems.drop();
 db.orderItems.insertMany([
   {
@@ -13609,9 +13574,6 @@ db.orderItems.insertMany([
 ]);
 print("✅ orderItems: " + db.orderItems.countDocuments() + " docs inserted");
 
-// ============================================
-// PROMOTIONS (7 documents)
-// ============================================
 db.promotions.drop();
 db.promotions.insertMany([
   {
@@ -13757,9 +13719,6 @@ db.promotions.insertMany([
 ]);
 print("✅ promotions: " + db.promotions.countDocuments() + " docs inserted");
 
-// ============================================
-// FEEDBACKS (5 documents)
-// ============================================
 db.feedbacks.drop();
 db.feedbacks.insertMany([
   {
@@ -13825,9 +13784,6 @@ db.feedbacks.insertMany([
 ]);
 print("✅ feedbacks: " + db.feedbacks.countDocuments() + " docs inserted");
 
-// ============================================
-// REPORTS (2 documents)
-// ============================================
 db.reports.drop();
 db.reports.insertMany([
   {
@@ -13855,9 +13811,6 @@ db.reports.insertMany([
 ]);
 print("✅ reports: " + db.reports.countDocuments() + " docs inserted");
 
-// ============================================
-// CONVERSATIONS (5 documents)
-// ============================================
 db.conversations.drop();
 db.conversations.insertMany([
   {
@@ -13943,9 +13896,6 @@ db.conversations.insertMany([
 ]);
 print("✅ conversations: " + db.conversations.countDocuments() + " docs inserted");
 
-// ============================================
-// MESSAGES (10 documents)
-// ============================================
 db.messages.drop();
 db.messages.insertMany([
   {
@@ -14091,9 +14041,6 @@ db.messages.insertMany([
 ]);
 print("✅ messages: " + db.messages.countDocuments() + " docs inserted");
 
-// ============================================
-// FILEATTACHMENTS (3 documents)
-// ============================================
 db.fileAttachments.drop();
 db.fileAttachments.insertMany([
   {
@@ -14132,9 +14079,6 @@ db.fileAttachments.insertMany([
 ]);
 print("✅ fileAttachments: " + db.fileAttachments.countDocuments() + " docs inserted");
 
-// ============================================
-// NOTIFICATIONS (7 documents)
-// ============================================
 db.notifications.drop();
 db.notifications.insertMany([
   {
@@ -14231,9 +14175,6 @@ db.notifications.insertMany([
 ]);
 print("✅ notifications: " + db.notifications.countDocuments() + " docs inserted");
 
-// ============================================
-// REFUNDS (1 documents)
-// ============================================
 db.refunds.drop();
 db.refunds.insertMany([
   {
@@ -14255,9 +14196,6 @@ db.refunds.insertMany([
 ]);
 print("✅ refunds: " + db.refunds.countDocuments() + " docs inserted");
 
-// ============================================
-// AUDITLOGS (3 documents)
-// ============================================
 db.auditLogs.drop();
 db.auditLogs.insertMany([
   {
@@ -14299,9 +14237,6 @@ db.auditLogs.insertMany([
 ]);
 print("✅ auditLogs: " + db.auditLogs.countDocuments() + " docs inserted");
 
-// ============================================
-// SUPPORTITEMS (5 documents)
-// ============================================
 db.supportItems.drop();
 db.supportItems.insertMany([
   {
@@ -14407,9 +14342,6 @@ db.supportItems.insertMany([
 ]);
 print("✅ supportItems: " + db.supportItems.countDocuments() + " docs inserted");
 
-// ============================================
-// SUPPORTATTACHMENTS (3 documents)
-// ============================================
 db.supportAttachments.drop();
 db.supportAttachments.insertMany([
   {

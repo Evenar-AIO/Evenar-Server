@@ -1,4 +1,4 @@
-const Event = require('../models/eventModel');
+const Event = require('../models/Event');
 const TicketInfo = require('../models/ticketInfoModel');
 
 exports.createEvent = async (userId, eventData) => {
