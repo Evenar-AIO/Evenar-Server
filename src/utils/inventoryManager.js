@@ -11,7 +11,8 @@ const TicketInventory = require('../models/ticketInventoryModel');
  */
 exports.checkAvailability = async (ticketInfoId, quantity) => {
   const inv = await TicketInventory.findOne({ ticketInfoId });
-  if (!inv) return false;
+  // No inventory record → treat as unlimited (no cap defined)
+  if (!inv) return true;
   return (inv.totalQuantity - inv.soldQuantity - inv.reservedQuantity) >= quantity;
 };
 

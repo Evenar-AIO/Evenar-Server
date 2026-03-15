@@ -1,7 +1,16 @@
 const mongoose = require('mongoose');
 const Cart = require('../models/cartModel');
 const TicketInfo = require('../models/ticketInfoModel');
+const TicketInventory = require('../models/ticketInventoryModel');
 const inventoryManager = require('../utils/inventoryManager');
+
+const toObjectId = (id) => {
+  try {
+    return new mongoose.Types.ObjectId(String(id));
+  } catch {
+    throw new Error('Invalid user ID format');
+  }
+};
 
 /**
  * addToCart - Add ticket to cart with inventory validation
@@ -13,59 +22,52 @@ const inventoryManager = require('../utils/inventoryManager');
  */
 exports.addToCart = async (userId, eventId, ticketInfoId, quantity) => {
   const qty = Number(quantity);
-  
+  const uid = toObjectId(userId);
+
   if (qty <= 0) {
     throw new Error('Quantity must be greater than 0');
   }
-  
-  let cart = await Cart.findOne({ userId });
+
   const tInfo = await TicketInfo.findById(ticketInfoId);
   if (!tInfo) throw new Error('Invalid ticket category');
-  
-  // Check if adding more would exceed available inventory
-  // First, calculate current quantity in cart for this ticket type
+
+  let cart = await Cart.findOne({ userId: uid });
+
+  // Calculate how many the user already has in cart for this ticket type
   let currentCartQty = 0;
   if (cart) {
     const existingItem = cart.items.find(
-      i => i.ticketInfoId.toString() === ticketInfoId
+      (i) => i.ticketInfoId.toString() === ticketInfoId
     );
-    if (existingItem) {
-      currentCartQty = existingItem.quantity;
-    }
+    if (existingItem) currentCartQty = existingItem.quantity;
   }
-  
-  // Total quantity user would have after adding
+
   const totalRequestedQty = currentCartQty + qty;
-  
+
   // CHECK INVENTORY BEFORE ADDING
   const hasInventory = await inventoryManager.checkAvailability(ticketInfoId, totalRequestedQty);
   if (!hasInventory) {
-    const available = tInfo.quantity || 0; // If TicketInfo has quantity field
-    // Try to get from inventory model
-    const inv = await inventoryManager.checkAvailability(ticketInfoId, 1);
-    if (!inv) {
-      throw new Error('Ticket type not available');
-    }
-    
-    // Get available quantity
-    const TicketInventory = require('../models/ticketInventoryModel');
     const inventory = await TicketInventory.findOne({ ticketInfoId });
     if (inventory) {
-      const availableQty = inventory.totalQuantity - inventory.soldQuantity - inventory.reservedQuantity;
-      const canAdd = availableQty - currentCartQty;
-      throw new Error(`Only ${canAdd} tickets available. You already have ${currentCartQty} in cart.`);
+      const availableQty =
+        inventory.totalQuantity - inventory.soldQuantity - inventory.reservedQuantity;
+      const canAdd = Math.max(0, availableQty - currentCartQty);
+      throw new Error(
+        `Only ${canAdd} more ticket(s) available. You already have ${currentCartQty} in your cart.`
+      );
     }
-    
-    throw new Error(`Not enough tickets available. You already have ${currentCartQty} in cart.`);
+    throw new Error('Not enough tickets available.');
   }
-  
+
   if (!cart) {
     cart = await Cart.create({
-      userId,
-      items: [{ eventId, ticketInfoId, quantity: qty, price: tInfo.price }]
+      userId: uid,
+      items: [{ eventId, ticketInfoId, quantity: qty, price: tInfo.price }],
     });
   } else {
-    const itemIndex = cart.items.findIndex(i => i.ticketInfoId.toString() === ticketInfoId);
+    const itemIndex = cart.items.findIndex(
+      (i) => i.ticketInfoId.toString() === ticketInfoId
+    );
     if (itemIndex > -1) {
       cart.items[itemIndex].quantity += qty;
     } else {
@@ -73,10 +75,12 @@ exports.addToCart = async (userId, eventId, ticketInfoId, quantity) => {
     }
     await cart.save();
   }
-  
-  const totalPrice = cart.items.reduce((sum, item) => sum + (item.quantity * item.price), 0);
-  
-  // Create a populated items list for the frontend to show names
+
+  const totalPrice = cart.items.reduce(
+    (sum, item) => sum + item.quantity * item.price,
+    0
+  );
+
   const itemsWithNames = [];
   for (const item of cart.items) {
     const info = await TicketInfo.findById(item.ticketInfoId);
@@ -85,15 +89,11 @@ exports.addToCart = async (userId, eventId, ticketInfoId, quantity) => {
       ticketInfoId: item.ticketInfoId,
       quantity: item.quantity,
       price: item.price,
-      name: info ? info.ticketName : 'Unknown Ticket'
+      name: info ? info.ticketName : 'Unknown Ticket',
     });
   }
 
-  return {
-    cartId: cart._id,
-    items: itemsWithNames,
-    totalPrice
-  };
+  return { cartId: cart._id, items: itemsWithNames, totalPrice };
 };
 
 /**
@@ -102,17 +102,18 @@ exports.addToCart = async (userId, eventId, ticketInfoId, quantity) => {
  */
 exports.addToCartWithoutInventoryCheck = async (userId, eventId, ticketInfoId, quantity) => {
   const qty = Number(quantity);
-  let cart = await Cart.findOne({ userId });
+  const uid = toObjectId(userId);
+  let cart = await Cart.findOne({ userId: uid });
   const tInfo = await TicketInfo.findById(ticketInfoId);
   if (!tInfo) throw new Error('Invalid ticket category');
-  
+
   if (!cart) {
     cart = await Cart.create({
-      userId,
-      items: [{ eventId, ticketInfoId, quantity: qty, price: tInfo.price }]
+      userId: uid,
+      items: [{ eventId, ticketInfoId, quantity: qty, price: tInfo.price }],
     });
   } else {
-    const itemIndex = cart.items.findIndex(i => i.ticketInfoId.toString() === ticketInfoId);
+    const itemIndex = cart.items.findIndex((i) => i.ticketInfoId.toString() === ticketInfoId);
     if (itemIndex > -1) {
       cart.items[itemIndex].quantity += qty;
     } else {
@@ -120,9 +121,9 @@ exports.addToCartWithoutInventoryCheck = async (userId, eventId, ticketInfoId, q
     }
     await cart.save();
   }
-  
-  const totalPrice = cart.items.reduce((sum, item) => sum + (item.quantity * item.price), 0);
-  
+
+  const totalPrice = cart.items.reduce((sum, item) => sum + item.quantity * item.price, 0);
+
   const itemsWithNames = [];
   for (const item of cart.items) {
     const info = await TicketInfo.findById(item.ticketInfoId);
@@ -131,33 +132,26 @@ exports.addToCartWithoutInventoryCheck = async (userId, eventId, ticketInfoId, q
       ticketInfoId: item.ticketInfoId,
       quantity: item.quantity,
       price: item.price,
-      name: info ? info.ticketName : 'Unknown Ticket'
+      name: info ? info.ticketName : 'Unknown Ticket',
     });
   }
 
-  return {
-    cartId: cart._id,
-    items: itemsWithNames,
-    totalPrice
-  };
+  return { cartId: cart._id, items: itemsWithNames, totalPrice };
 };
 
 /**
  * getCart - Get user's cart
  */
 exports.getCart = async (userId) => {
-  const cart = await Cart.findOne({ userId });
-  
+  const uid = toObjectId(userId);
+  const cart = await Cart.findOne({ userId: uid });
+
   if (!cart) {
-    return {
-      cartId: null,
-      items: [],
-      totalPrice: 0
-    };
+    return { cartId: null, items: [], totalPrice: 0 };
   }
-  
-  const totalPrice = cart.items.reduce((sum, item) => sum + (item.quantity * item.price), 0);
-  
+
+  const totalPrice = cart.items.reduce((sum, item) => sum + item.quantity * item.price, 0);
+
   const itemsWithNames = [];
   for (const item of cart.items) {
     const info = await TicketInfo.findById(item.ticketInfoId);
@@ -166,40 +160,33 @@ exports.getCart = async (userId) => {
       ticketInfoId: item.ticketInfoId,
       quantity: item.quantity,
       price: item.price,
-      name: info ? info.ticketName : 'Unknown Ticket'
+      name: info ? info.ticketName : 'Unknown Ticket',
     });
   }
 
-  return {
-    cartId: cart._id,
-    items: itemsWithNames,
-    totalPrice
-  };
+  return { cartId: cart._id, items: itemsWithNames, totalPrice };
 };
 
 /**
  * removeFromCart - Remove item from cart
  */
 exports.removeFromCart = async (userId, ticketInfoId) => {
-  const cart = await Cart.findOne({ userId });
-  
-  if (!cart) {
-    throw new Error('Cart not found');
-  }
-  
+  const uid = toObjectId(userId);
+  const cart = await Cart.findOne({ userId: uid });
+
+  if (!cart) throw new Error('Cart not found');
+
   const itemIndex = cart.items.findIndex(
-    i => i.ticketInfoId.toString() === ticketInfoId
+    (i) => i.ticketInfoId.toString() === ticketInfoId
   );
-  
-  if (itemIndex === -1) {
-    throw new Error('Item not found in cart');
-  }
-  
+
+  if (itemIndex === -1) throw new Error('Item not found in cart');
+
   cart.items.splice(itemIndex, 1);
   await cart.save();
-  
-  const totalPrice = cart.items.reduce((sum, item) => sum + (item.quantity * item.price), 0);
-  
+
+  const totalPrice = cart.items.reduce((sum, item) => sum + item.quantity * item.price, 0);
+
   const itemsWithNames = [];
   for (const item of cart.items) {
     const info = await TicketInfo.findById(item.ticketInfoId);
@@ -208,27 +195,20 @@ exports.removeFromCart = async (userId, ticketInfoId) => {
       ticketInfoId: item.ticketInfoId,
       quantity: item.quantity,
       price: item.price,
-      name: info ? info.ticketName : 'Unknown Ticket'
+      name: info ? info.ticketName : 'Unknown Ticket',
     });
   }
 
-  return {
-    cartId: cart._id,
-    items: itemsWithNames,
-    totalPrice
-  };
+  return { cartId: cart._id, items: itemsWithNames, totalPrice };
 };
 
 /**
  * clearCart - Clear user's cart
  */
 exports.clearCart = async (userId) => {
-  await Cart.deleteOne({ userId });
-  return {
-    cartId: null,
-    items: [],
-    totalPrice: 0
-  };
+  const uid = toObjectId(userId);
+  await Cart.deleteOne({ userId: uid });
+  return { cartId: null, items: [], totalPrice: 0 };
 };
 
 /**
@@ -236,33 +216,29 @@ exports.clearCart = async (userId) => {
  * Returns: { valid: boolean, issues: Array }
  */
 exports.validateCartInventory = async (userId) => {
-  const cart = await Cart.findOne({ userId });
-  
-  if (!cart) {
-    return { valid: true, issues: [] };
-  }
-  
+  const uid = toObjectId(userId);
+  const cart = await Cart.findOne({ userId: uid });
+
+  if (!cart) return { valid: true, issues: [] };
+
   const issues = [];
-  
+
   for (const item of cart.items) {
     const hasInventory = await inventoryManager.checkAvailability(
-      item.ticketInfoId, 
+      item.ticketInfoId,
       item.quantity
     );
-    
+
     if (!hasInventory) {
       const info = await TicketInfo.findById(item.ticketInfoId);
       issues.push({
         ticketInfoId: item.ticketInfoId,
         ticketName: info ? info.ticketName : 'Unknown',
         requestedQuantity: item.quantity,
-        message: `Not enough inventory for ${info?.ticketName || 'ticket'}`
+        message: `Not enough inventory for ${info?.ticketName || 'ticket'}`,
       });
     }
   }
-  
-  return {
-    valid: issues.length === 0,
-    issues
-  };
+
+  return { valid: issues.length === 0, issues };
 };
