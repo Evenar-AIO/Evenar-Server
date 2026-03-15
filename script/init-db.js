@@ -1,7 +1,7 @@
 // EventTicketDB - Mongosh seed script (FULL - 22 collections)
 // Chạy: mongosh --file init-db.js
 
-use("EventTicketDB");
+use("evenar");
 
 // ============================================
 // USERS (26 documents)
