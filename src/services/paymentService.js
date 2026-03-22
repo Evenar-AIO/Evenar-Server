@@ -25,14 +25,14 @@ exports.processPayment = async (orderId, method) => {
 
   if (method === 'PAYOS') {
     const orderCode = Math.floor(Date.now() / 1000);
-    const domain = process.env.DOMAIN || 'http://localhost:3000';
+    const domain = process.env.FRONTEND_URL || 'http://localhost:5173';
 
     const payosData = {
       orderCode,
       amount: order.totalAmount,
-      description: `Thanh toan ${order.orderNumber}`,
-      returnUrl: `${domain}/orders?status=success`,
-      cancelUrl: `${domain}/orders?status=cancelled`,
+      description: `Thanh toan ${order.orderNumber}`.substring(0, 25),
+      returnUrl: `${domain}/checkout?status=success`,
+      cancelUrl: `${domain}/checkout?status=cancelled`,
     };
 
     const payosResponse = await paymentGateway.createPaymentLink(payosData);
@@ -79,7 +79,7 @@ exports.processPayment = async (orderId, method) => {
   return {
     transactionId,
     status: 'SUCCESS',
-    redirectUrl: 'http://localhost:3000/orders',
+    redirectUrl: `${process.env.FRONTEND_URL || 'http://localhost:5173'}/checkout?status=success`,
   };
 };
 

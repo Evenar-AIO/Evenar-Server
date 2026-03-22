@@ -57,8 +57,8 @@ async function createConversation(req, res) {
     }
 
     // Nếu otherUserId không phải ObjectId hợp lệ → tìm theo tên hoặc email
-    let resolvedOtherUserId = otherUserId;
-    if (!mongoose.Types.ObjectId.isValid(otherUserId)) {
+    let resolvedOtherUserId = String(otherUserId);
+    if (!mongoose.Types.ObjectId.isValid(resolvedOtherUserId)) {
       const otherUser = await User.findOne({
         $or: [{ name: otherUserId }, { email: otherUserId }]
       });
