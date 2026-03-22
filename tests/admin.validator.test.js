@@ -1,4 +1,3 @@
-const Joi = require('joi');
 const {
     paginationSchema,
     idParamSchema,
@@ -6,7 +5,7 @@ const {
     getTransactionsSchema,
     getAuditLogsSchema,
     exportStatsSchema
-} = require('../../src/validators/admin.validator');
+} = require('../../src/validators/adminValidator');
 
 describe('Admin Validators', () => {
     describe('paginationSchema', () => {

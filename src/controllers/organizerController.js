@@ -1,6 +1,6 @@
 const OrganizerRequest = require('../models/OrganizerRequest');
 const User = require('../models/User');
-const { logAuditAction } = require('../utils/audit.util');
+const { logAuditAction } = require('../utils/auditUtil');
 
 exports.submitRequest = async (req, res) => {
     try {
@@ -71,7 +71,7 @@ exports.getAllRequests = async (req, res) => {
     }
 };
 
-const { sendOrganizerApprovalEmail, sendOrganizerRejectionEmail } = require('../utils/email.util');
+const { sendOrganizerApprovalEmail, sendOrganizerRejectionEmail } = require('../utils/emailUtil');
 
 exports.processRequest = async (req, res) => {
     try {

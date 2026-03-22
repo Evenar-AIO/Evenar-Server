@@ -22,8 +22,26 @@ const getEventById = async (req, res) => {
 
 const createEvent = async (req, res) => {
   try {
-    const ownerId = req.headers["x-user-id"];
-    const event = await eventService.createEvent(req.body, ownerId);
+    const ownerId = req.user && (req.user.sub || req.user._id || req.user.id || req.headers["x-user-id"]);
+    const { date, location, image, ticketInfo, zones, genre } = req.body;
+
+    if (!ownerId) {
+      return res.status(401).json({ message: 'Authentication required' });
+    }
+
+    const event = await eventService.createEvent(ownerId, {
+      ...req.body,
+      startTime: req.body.startTime || date,
+      endTime: req.body.endTime || date,
+      physicalLocation: req.body.physicalLocation || location,
+      imageURL: req.body.imageURL || image,
+      genreId: req.body.genreId || (Number(genre) || undefined),
+      layout: req.body.layout || zones,
+      totalTicketCount: req.body.totalTicketCount || (Array.isArray(ticketInfo)
+        ? ticketInfo.reduce((sum, t) => sum + Number(t.quantity || 0), 0)
+        : 0)
+    });
+
     res.status(201).json(event);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -32,7 +50,34 @@ const createEvent = async (req, res) => {
 
 const updateEvent = async (req, res) => {
   try {
-    const event = await eventService.updateEvent(req.params.id, req.body);
+    const ownerId = req.user && (req.user.sub || req.user._id || req.user.id || req.headers["x-user-id"]);
+    if (!ownerId) {
+      return res.status(401).json({ message: 'Authentication required' });
+    }
+
+    const { date, location, image, ticketInfo, zones, genre } = req.body;
+
+    const payload = {
+      ...req.body,
+      startTime: req.body.startTime || date,
+      endTime: req.body.endTime || date,
+      physicalLocation: req.body.physicalLocation || location,
+      imageURL: req.body.imageURL || image,
+      genreId: req.body.genreId || (Number(genre) || undefined),
+      layout: req.body.layout || zones,
+      totalTicketCount: req.body.totalTicketCount || (Array.isArray(ticketInfo)
+        ? ticketInfo.reduce((sum, t) => sum + Number(t.quantity || 0), 0)
+        : undefined)
+    };
+
+    Object.keys(payload).forEach((key) => {
+      if (payload[key] === undefined) {
+        delete payload[key];
+      }
+    });
+
+    const event = await eventService.updateEvent(req.params.id, payload);
+
     res.json(event);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -41,6 +86,11 @@ const updateEvent = async (req, res) => {
 
 const deleteEvent = async (req, res) => {
   try {
+    const ownerId = req.user && (req.user.sub || req.user._id || req.user.id || req.headers["x-user-id"]);
+    if (!ownerId) {
+      return res.status(401).json({ message: 'Authentication required' });
+    }
+
     const event = await eventService.deleteEvent(req.params.id);
     res.json({ message: "Event deleted", event });
   } catch (err) {

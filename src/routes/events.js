@@ -1,13 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const eventController = require('../controllers/eventController');
+const { verifyToken } = require('../middleware/authMiddleware');
+const { validateCreateEventPayload, validateUpdateEventPayload } = require('../validators/eventPayloadValidator');
 
-router.post('/', eventController.createEvent);
+router.post('/', verifyToken, validateCreateEventPayload, eventController.createEvent);
 
 router.get('/', eventController.getEvents);
 router.get('/:id', eventController.getEventById);
 
-router.put("/events/:id", eventController.updateEvent);
+router.put("/:id", verifyToken, validateUpdateEventPayload, eventController.updateEvent);
 
-router.delete("/events/:id", eventController.deleteEvent);
+router.delete("/:id", verifyToken, eventController.deleteEvent);
 module.exports = router;

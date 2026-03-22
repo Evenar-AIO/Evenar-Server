@@ -1,5 +1,5 @@
 const cloudinary = require('cloudinary').v2;
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const CloudinaryStorage = require('multer-storage-cloudinary');
 const multer = require('multer');
 
 console.log('Initializing Cloudinary with cloud_name:', process.env.CLOUDINARY_CLOUD_NAME);

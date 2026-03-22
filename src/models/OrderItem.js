@@ -9,6 +9,7 @@ const orderItemSchema = new mongoose.Schema(
         quantity: { type: Number, required: true },
         unitPrice: { type: Number, required: true },
         totalPrice: { type: Number, required: true },
+        seatIds: [{ type: String }],
         assignedAt: { type: Date }
     },
     {

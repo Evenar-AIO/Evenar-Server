@@ -8,15 +8,14 @@ const OrderItem = require('../models/OrderItem');
 const SupportItem = require('../models/SupportItem');
 const OrganizerRequest = require('../models/OrganizerRequest');
 const { Parser } = require('json2csv');
-const { logAuditAction } = require('../utils/audit.util');
+const { logAuditAction } = require('../utils/auditUtil');
 const { 
     paginationSchema, 
     idParamSchema, 
     processRefundSchema, 
     getTransactionsSchema, 
     getAuditLogsSchema,
-    exportStatsSchema 
-} = require('../validators/admin.validator');
+} = require('../validators/adminValidator');
 
 const sendResponse = (res, statusCode, success, message, data = {}) => {
     res.status(statusCode).json({ success, message, data });
@@ -108,7 +107,7 @@ exports.getUserGrowthStats = async (req, res) => {
             { $sort: { _id: 1 } }
         ]);
         
-        const formatted = growth.map((g, index) => ({
+        const formatted = growth.map((g) => ({
             month: g._id,
             newUsers: g.newUsers,
             returningUsers: Math.floor(Math.random() * 5)

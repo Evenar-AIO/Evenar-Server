@@ -8,7 +8,9 @@ function initSocket(server) {
 
   io.use((socket, next) => {
     const userId = socket.handshake.auth?.userId || socket.handshake.query?.userId;
-    if (!userId) return next(new Error("auth required"));
+    if (!userId) {
+      return next(new Error("auth required"));
+    }
     socket.userId = userId;
     next();
   });

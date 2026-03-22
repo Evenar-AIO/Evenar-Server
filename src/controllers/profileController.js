@@ -7,7 +7,7 @@ const User = require('../models/User');
  */
 exports.updateProfile = async (req, res) => {
   try {
-    const userId = req.user.sub || req.user.id;
+    const userId = req.user.sub || req.user.id || req.user._id;
     const { 
       name, 
       fullName, 

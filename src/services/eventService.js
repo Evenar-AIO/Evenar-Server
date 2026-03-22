@@ -6,14 +6,25 @@ const Feedback = require('../models/Feedback');
 const User = require('../models/User');
 
 exports.createEvent = async (userId, eventData) => {
-  const { name, description, startTime, endTime, physicalLocation, layout, imageURL, genreId, totalTicketCount } = eventData;
-  
+  const {
+    name,
+    description,
+    startTime,
+    endTime,
+    physicalLocation,
+    layout,
+    imageURL,
+    genreId,
+    totalTicketCount,
+    status
+  } = eventData;
+
   if (!name || !startTime || !endTime) {
     throw new Error('Name, startTime, and endTime are required');
   }
 
   const event = new Event({
-    ownerId: userId,
+    ownerId: Number(userId),
     name,
     description,
     startTime,
@@ -23,7 +34,7 @@ exports.createEvent = async (userId, eventData) => {
     imageURL,
     genreId,
     totalTicketCount: totalTicketCount || 0,
-    status: 'active'
+    status: status || 'pending'
   });
 
   await event.save();
@@ -81,7 +92,7 @@ exports.getEventById = async (id) => {
 
   return event;
 };
-const updateEvent = async (id, data) => {
+exports.updateEvent = async (id, data) => {
   const event = await Event.findById(id);
 
   if (!event) {
@@ -93,7 +104,7 @@ const updateEvent = async (id, data) => {
   return await event.save();
 };
 
-const deleteEvent = async (id) => {
+exports.deleteEvent = async (id) => {
   const event = await Event.findById(id);
 
   if (!event) {
@@ -101,6 +112,7 @@ const deleteEvent = async (id) => {
   }
 
   event.status = "deleted";
+  event.isDeleted = true;
 
   return await event.save();
 };

@@ -1,5 +1,5 @@
 const express = require("express");
-const { verifyToken, requireRoles } = require("../middleware/auth.middleware");
+const { verifyToken } = require("../middleware/authMiddleware");
 const { getNotifications, markRead } = require("../controllers/notificationController");
 
 const router = express.Router();

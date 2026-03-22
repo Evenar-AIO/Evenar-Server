@@ -1,4 +1,5 @@
-const PayOS = require('@payos/node');
+const PayOSModule = require('@payos/node');
+const PayOS = PayOSModule.PayOS || PayOSModule.default || PayOSModule;
 
 let payosInstance;
 
@@ -14,7 +15,7 @@ exports.initPayOS = () => {
 exports.createPaymentLink = async (orderData) => {
     if (!payosInstance) this.initPayOS();
     try {
-        const result = await payosInstance.createPaymentLink(orderData);
+        const result = await payosInstance.paymentRequests.create(orderData);
         return result;
     } catch (error) {
         console.error('PayOS create error:', error.message);
@@ -24,5 +25,5 @@ exports.createPaymentLink = async (orderData) => {
 
 exports.verifyTransaction = async (transactionId) => {
     if (!payosInstance) this.initPayOS();
-    return await payosInstance.getPaymentLinkInformation(transactionId);
+    return await payosInstance.paymentRequests.get(transactionId);
 };

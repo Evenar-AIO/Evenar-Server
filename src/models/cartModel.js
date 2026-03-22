@@ -5,7 +5,8 @@ const cartItemSchema = new mongoose.Schema({
   eventId: { type: mongoose.Schema.Types.Mixed, required: true },
   ticketInfoId: { type: mongoose.Schema.Types.Mixed, required: true },
   quantity: { type: Number, required: true, min: 1 },
-  price: { type: Number, required: true }
+  price: { type: Number, required: true },
+  seatIds: [{ type: String }]
 });
 
 const cartSchema = new mongoose.Schema({

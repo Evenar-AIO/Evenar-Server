@@ -202,6 +202,7 @@ exports.decrementUsageCount = async (promoId) => {
  * findByCode - Find promotion by code
  */
 exports.findByCode = async (code, eventId) => {
+  void eventId;
   const promo = await Promotion.findOne({ promotionCode: code, isActive: true });
   if (!promo) throw new Error('Invalid promotion code');
   return promo;

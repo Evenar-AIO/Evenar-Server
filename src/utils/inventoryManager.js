@@ -1,4 +1,6 @@
+const mongoose = require('mongoose');
 const TicketInventory = require('../models/ticketInventoryModel');
+const Event = require('../models/Event');
 
 /**
  * Helpers expect an array of objects with { ticketInfoId, quantity }
@@ -9,11 +11,26 @@ const TicketInventory = require('../models/ticketInventoryModel');
  * checkAvailability - checks if there are enough tickets available
  * Returns: boolean
  */
+const resolveTicketInventoryQuery = (ticketInfoId) => {
+  const numericId = Number(ticketInfoId);
+  if (Number.isFinite(numericId)) {
+    return { $or: [{ ticketInfoId: numericId }, { legacyTicketInfoId: numericId }] };
+  }
+  return { $or: [{ ticketInfoId }, { legacyTicketInfoId: ticketInfoId }] };
+};
+
 exports.checkAvailability = async (ticketInfoId, quantity) => {
-  const inv = await TicketInventory.findOne({ ticketInfoId });
-  // No inventory record → treat as unlimited (no cap defined)
-  if (!inv) return true;
-  return (inv.totalQuantity - inv.soldQuantity - inv.reservedQuantity) >= quantity;
+  try {
+    const inv = await TicketInventory.findOne(resolveTicketInventoryQuery(ticketInfoId));
+    // No inventory record → treat as unlimited (no cap defined)
+    if (!inv) return true;
+    return (inv.totalQuantity - inv.soldQuantity - inv.reservedQuantity) >= quantity;
+  } catch (error) {
+    if (error?.name === 'CastError') {
+      return true;
+    }
+    throw error;
+  }
 };
 
 /**
@@ -26,8 +43,12 @@ exports.reserveSeats = async (tickets) => {
     if (!available) {
       throw new Error(`Not enough inventory for ticket type: ${t.ticketInfoId}`);
     }
+
+    const existing = await TicketInventory.findOne(resolveTicketInventoryQuery(t.ticketInfoId));
+    if (!existing) continue;
+
     await TicketInventory.findOneAndUpdate(
-      { ticketInfoId: t.ticketInfoId },
+      resolveTicketInventoryQuery(t.ticketInfoId),
       { $inc: { reservedQuantity: t.quantity } },
       { new: true }
     );
@@ -49,7 +70,7 @@ exports.reserveSeatsAtomic = async (tickets) => {
     for (const t of tickets) {
       const result = await TicketInventory.findOneAndUpdate(
         {
-          ticketInfoId: t.ticketInfoId,
+          ...resolveTicketInventoryQuery(t.ticketInfoId),
           $expr: {
             $gte: [
               { $subtract: ['$totalQuantity', { $add: ['$soldQuantity', '$reservedQuantity'] }] },
@@ -88,33 +109,29 @@ exports.reserveSeatsAtomic = async (tickets) => {
  */
 exports.reserveSeatsWithSession = async (tickets, session) => {
   const reservedTickets = [];
-  
-  try {
-    for (const t of tickets) {
-      const result = await TicketInventory.findOneAndUpdate(
-        {
-          ticketInfoId: t.ticketInfoId,
-          $expr: {
-            $gte: [
-              { $subtract: ['$totalQuantity', { $add: ['$soldQuantity', '$reservedQuantity'] }] },
-              t.quantity
-            ]
-          }
-        },
-        { $inc: { reservedQuantity: t.quantity } },
-        { session, new: true }
-      );
-      
-      if (!result) {
-        throw new Error(`Not enough inventory for ticket type: ${t.ticketInfoId}`);
-      }
-      
-      reservedTickets.push(t);
+
+  for (const t of tickets) {
+    const result = await TicketInventory.findOneAndUpdate(
+      {
+        ...resolveTicketInventoryQuery(t.ticketInfoId),
+        $expr: {
+          $gte: [
+            { $subtract: ['$totalQuantity', { $add: ['$soldQuantity', '$reservedQuantity'] }] },
+            t.quantity
+          ]
+        }
+      },
+      { $inc: { reservedQuantity: t.quantity } },
+      { session, new: true }
+    );
+
+    if (!result) {
+      throw new Error(`Not enough inventory for ticket type: ${t.ticketInfoId}`);
     }
-    return true;
-  } catch (error) {
-    throw error;
+
+    reservedTickets.push(t);
   }
+  return true;
 };
 
 /**
@@ -124,7 +141,7 @@ exports.reserveSeatsWithSession = async (tickets, session) => {
 exports.rollbackReserve = async (tickets) => {
   for (const t of tickets) {
     await TicketInventory.findOneAndUpdate(
-      { ticketInfoId: t.ticketInfoId },
+      resolveTicketInventoryQuery(t.ticketInfoId),
       { $inc: { reservedQuantity: -t.quantity } }
     );
   }
@@ -138,7 +155,7 @@ exports.rollbackReserve = async (tickets) => {
 exports.releaseSeats = async (tickets) => {
   for (const t of tickets) {
     await TicketInventory.findOneAndUpdate(
-      { ticketInfoId: t.ticketInfoId },
+      resolveTicketInventoryQuery(t.ticketInfoId),
       { $inc: { reservedQuantity: -t.quantity } }
     );
   }
@@ -151,7 +168,7 @@ exports.releaseSeats = async (tickets) => {
 exports.releaseSeatsWithSession = async (tickets, session) => {
   for (const t of tickets) {
     await TicketInventory.findOneAndUpdate(
-      { ticketInfoId: t.ticketInfoId },
+      resolveTicketInventoryQuery(t.ticketInfoId),
       { $inc: { reservedQuantity: -t.quantity } },
       { session }
     );
@@ -166,11 +183,11 @@ exports.releaseSeatsWithSession = async (tickets, session) => {
 exports.confirmOrder = async (tickets) => {
   for (const t of tickets) {
     await TicketInventory.findOneAndUpdate(
-      { ticketInfoId: t.ticketInfoId },
+      resolveTicketInventoryQuery(t.ticketInfoId),
       {
         $inc: {
           reservedQuantity: -t.quantity,
-          soldQuantity:      t.quantity,
+          soldQuantity: t.quantity,
         },
       }
     );
@@ -184,15 +201,135 @@ exports.confirmOrder = async (tickets) => {
 exports.confirmOrderWithSession = async (tickets, session) => {
   for (const t of tickets) {
     await TicketInventory.findOneAndUpdate(
-      { ticketInfoId: t.ticketInfoId },
+      resolveTicketInventoryQuery(t.ticketInfoId),
       {
         $inc: {
           reservedQuantity: -t.quantity,
-          soldQuantity:      t.quantity,
+          soldQuantity: t.quantity,
         },
       },
       { session }
     );
   }
   return true;
+};
+
+const resolveEvent = async (eventId, session) => {
+  const idStr = String(eventId);
+  const isObjectId = mongoose.Types.ObjectId.isValid(idStr);
+  const numericId = Number(eventId);
+  const query = isObjectId
+    ? { $or: [{ _id: eventId }, { legacyId: Number.isFinite(numericId) ? numericId : -1 }] }
+    : { legacyId: Number.isFinite(numericId) ? numericId : -1 };
+  const eventQuery = Event.findOne(query);
+  return session ? await eventQuery.session(session) : await eventQuery;
+};
+
+const reserveSeatIdsForEvent = async (eventId, seatIds, status, session) => {
+  if (!seatIds.length) return;
+  const event = await resolveEvent(eventId, session);
+  if (!event) throw new Error('Event not found');
+  if (!Array.isArray(event.layout)) throw new Error('Event layout not available');
+
+  const seatIdSet = new Set(seatIds);
+  let hasAllSeats = true;
+  const remaining = new Set(seatIds);
+
+  const updatedLayout = event.layout.map(zone => {
+    const seats = (zone.seats || []).map(seat => {
+      if (seatIdSet.has(seat.id)) {
+        remaining.delete(seat.id);
+        if (status === 'reserved' && seat.status !== 'available') {
+          hasAllSeats = false;
+        }
+        if (status === 'booked' && seat.status !== 'reserved') {
+          hasAllSeats = false;
+        }
+        if (status === 'available' && seat.status !== 'reserved') {
+          hasAllSeats = false;
+        }
+        return { ...seat, status };
+      }
+      return seat;
+    });
+
+    return { ...zone, seats };
+  });
+
+  if (!hasAllSeats || remaining.size > 0) {
+    throw new Error('One or more seats are no longer available');
+  }
+
+  event.layout = updatedLayout;
+  if (session) {
+    await event.save({ session });
+  } else {
+    await event.save();
+  }
+};
+
+exports.reserveSeatIdsWithSession = async (eventId, tickets, session) => {
+  const seatIds = tickets.flatMap(t => t.seatIds || []);
+  await reserveSeatIdsForEvent(eventId, seatIds, 'reserved', session);
+};
+
+exports.reserveSeatIds = async (eventId, tickets) => {
+  const seatIds = tickets.flatMap(t => t.seatIds || []);
+  await reserveSeatIdsForEvent(eventId, seatIds, 'reserved');
+};
+
+const validateSeatIdsReservedForEvent = async (eventId, seatIds, session) => {
+  if (!seatIds.length) return;
+  const event = await resolveEvent(eventId, session);
+  if (!event) throw new Error('Event not found');
+  if (!Array.isArray(event.layout)) throw new Error('Event layout not available');
+
+  const seatIdSet = new Set(seatIds);
+  let allReserved = true;
+  const remaining = new Set(seatIds);
+
+  event.layout.forEach(zone => {
+    (zone.seats || []).forEach(seat => {
+      if (seatIdSet.has(seat.id)) {
+        remaining.delete(seat.id);
+        if (seat.status !== 'reserved') {
+          allReserved = false;
+        }
+      }
+    });
+  });
+
+  if (!allReserved || remaining.size > 0) {
+    throw new Error('One or more seats are not reserved');
+  }
+};
+
+exports.validateSeatIdsReservedWithSession = async (eventId, tickets, session) => {
+  const seatIds = tickets.flatMap(t => t.seatIds || []);
+  await validateSeatIdsReservedForEvent(eventId, seatIds, session);
+};
+
+exports.validateSeatIdsReserved = async (eventId, tickets) => {
+  const seatIds = tickets.flatMap(t => t.seatIds || []);
+  await validateSeatIdsReservedForEvent(eventId, seatIds);
+};
+
+exports.confirmSeatIdsWithSession = async (eventId, tickets, session) => {
+  const seatIds = tickets.flatMap(t => t.seatIds || []);
+  await reserveSeatIdsForEvent(eventId, seatIds, 'booked', session);
+};
+
+exports.confirmSeatIds = async (eventId, tickets) => {
+  const seatIds = tickets.flatMap(t => t.seatIds || []);
+  await reserveSeatIdsForEvent(eventId, seatIds, 'booked');
+};
+
+exports.releaseSeatIdsWithSession = async (eventId, tickets, session) => {
+  const seatIds = tickets.flatMap(t => t.seatIds || []);
+  await reserveSeatIdsForEvent(eventId, seatIds, 'available', session);
+};
+
+exports.releaseSeatIds = async (eventId, tickets) => {
+  const seatIds = tickets.flatMap(t => t.seatIds || []);
+  await reserveSeatIdsForEvent(eventId, seatIds, 'available');
 };

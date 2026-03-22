@@ -1,9 +1,8 @@
 const express = require('express');
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
-const { sendOtpEmail } = require('../utils/email.util');
-const { otpLimiter, authLimiter } = require('../middleware/rateLimit.middleware');
+const { sendOtpEmail } = require('../utils/emailUtil');
+const { otpLimiter, authLimiter } = require('../middleware/rateLimitMiddleware');
 const { OAuth2Client } = require('google-auth-library');
 
 const User = require('../models/User');

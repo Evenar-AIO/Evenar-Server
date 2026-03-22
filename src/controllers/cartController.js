@@ -2,14 +2,14 @@ const cartService = require('../services/cartService');
 
 exports.addToCart = async (req, res) => {
   try {
-    const { eventId, ticketInfoId, quantity } = req.body;
+    const { eventId, ticketInfoId, quantity, seatIds } = req.body;
     const userId = req.user.sub || req.user.id || req.user._id;
 
     if (!eventId || !ticketInfoId || !quantity) {
       return res.status(400).json({ error: 'eventId, ticketInfoId, and quantity are required' });
     }
 
-    const result = await cartService.addToCart(userId, eventId, ticketInfoId, quantity);
+    const result = await cartService.addToCart(userId, eventId, ticketInfoId, quantity, seatIds);
     res.status(200).json(result);
   } catch (error) {
     const status = error.message.includes('Invalid') || error.message.includes('required') || error.message.includes('Only')
@@ -76,10 +76,14 @@ exports.updateQuantity = async (req, res) => {
       const Cart = require('../models/cartModel');
       const uid = new mongoose.Types.ObjectId(String(userId));
       const cart = await Cart.findOne({ userId: uid });
-      if (!cart) return res.status(404).json({ error: 'Cart not found' });
+      if (!cart) {
+        return res.status(404).json({ error: 'Cart not found' });
+      }
 
       const itemIndex = cart.items.findIndex(i => i.ticketInfoId.toString() === ticketInfoId);
-      if (itemIndex === -1) return res.status(404).json({ error: 'Item not found in cart' });
+      if (itemIndex === -1) {
+        return res.status(404).json({ error: 'Item not found in cart' });
+      }
 
       cart.items[itemIndex].quantity += delta; // delta is negative
       if (cart.items[itemIndex].quantity <= 0) {

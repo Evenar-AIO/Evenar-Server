@@ -21,10 +21,10 @@ const {
     getDailyRevenue,
     updateEvent,
     deleteEvent
-} = require('../controllers/admin.controller');
+} = require('../controllers/adminController');
 const { getAllRequests, processRequest } = require('../controllers/organizerController');
 
-const { verifyToken, verifyAdmin } = require('../middleware/auth.middleware');
+const { verifyToken, verifyAdmin } = require('../middleware/authMiddleware');
 
 const router = express.Router();
 

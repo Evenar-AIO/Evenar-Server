@@ -24,7 +24,6 @@ const http = require("http");
 const cors = require("cors");
 const helmet = require("helmet");
 const compression = require("compression");
-const rateLimit = require("express-rate-limit");
 const pinoHttp = require("pino-http");
 const swaggerUi = require("swagger-ui-express");
 const swaggerJsdoc = require("swagger-jsdoc");
@@ -60,7 +59,7 @@ app.use(compression());
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-const { apiLimiter } = require("./src/middleware/rateLimit.middleware");
+const { apiLimiter } = require("./src/middleware/rateLimitMiddleware");
 app.use(apiLimiter);
 
 /* ---------------- Routes ---------------- */
@@ -73,12 +72,11 @@ const paymentsRouter = require('./src/routes/payments');
 const ordersRouter = require('./src/routes/orders');
 const refundsRouter = require('./src/routes/refunds');
 const promotionsRouter = require('./src/routes/promotions');
-const devRouter = require('./src/routes/dev');
 const authRouter = require('./src/routes/authRoutes');
 const uploadRouter = require('./src/routes/upload');
 const profileRouter = require('./src/routes/profile');
 const organizerRouter = require('./src/routes/organizerRoutes');
-const adminRoutes = require("./src/routes/admin.routes");
+const adminRoutes = require("./src/routes/adminRoutes");
 
 // IMPORTANT: Search must be BEFORE events to avoid /api/events/:id collision (where :id="search")
 app.use('/api/events/search', searchRouter);
@@ -90,11 +88,12 @@ app.use('/api/payments', paymentsRouter);
 app.use('/api/orders', ordersRouter);
 app.use('/api/refunds', refundsRouter);
 app.use('/api/promotions', promotionsRouter);
-app.use('/api/dev', devRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/profile', profileRouter);
 app.use('/api/upload', uploadRouter);
-app.use('/api/test-upload', require('./src/routes/test-upload'));
+app.use('/api/test-upload', require('./src/routes/testUpload'));
+app.use("/api/users", userRoutes);
+app.use("/api/admin", adminRoutes);
 app.use('/api/organizer', organizerRouter);
 
 app.get("/", (req, res) => {
@@ -109,8 +108,6 @@ app.use("/api/chat", chatRoutes);
 app.use("/api/feedback", feedbackRoutes);
 app.use("/api/support", supportRoutes);
 app.use("/api/notifications", notificationRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/admin", adminRoutes);
 
 /* ---------------- Swagger ---------------- */
 const swaggerOptions = {

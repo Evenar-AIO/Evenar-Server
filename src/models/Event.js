@@ -50,6 +50,18 @@ const eventSchema = new mongoose.Schema(
         imageURL: {
             type: String
         },
+        layout: {
+            type: mongoose.Schema.Types.Mixed
+        },
+        organizerName: {
+            type: String
+        },
+        ageLimit: {
+            type: Number
+        },
+        dressCode: {
+            type: String
+        },
         hasSeatingChart: {
             type: Boolean,
             default: false

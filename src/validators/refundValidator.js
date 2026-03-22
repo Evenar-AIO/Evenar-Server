@@ -1,11 +1,9 @@
 const Joi = require('joi');
 
-exports.validatePayment = (req, res, next) => {
+exports.validateRefundRequest = (req, res, next) => {
   const schema = Joi.object({
     orderId: Joi.string().required(),
-    amount: Joi.number().min(0).optional(),
-    method: Joi.string().valid('VNPAY', 'PAYOS').required(),
-    paymentToken: Joi.string().optional()
+    reason: Joi.string().min(3).required()
   });
 
   const { error } = schema.validate(req.body);

@@ -64,6 +64,7 @@ exports.requestRefund = async (orderId, reason) => {
     const items = await OrderItem.find({ orderId: order._id }).session(session);
     if (items && items.length > 0) {
       await inventoryManager.releaseSeatsWithSession(items, session);
+      await inventoryManager.releaseSeatIdsWithSession(order.eventId, items, session);
     }
 
     // Rollback promotion usage if applicable
@@ -128,6 +129,7 @@ exports.requestRefundWithoutTransaction = async (orderId, reason) => {
   const items = await OrderItem.find({ orderId: order._id });
   if (items.length) {
     await inventoryManager.releaseSeats(items);
+    await inventoryManager.releaseSeatIds(order.eventId, items);
   }
 
   return {

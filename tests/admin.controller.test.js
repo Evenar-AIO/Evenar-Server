@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const {
     getAllUsers,
     lockUserAccount,
@@ -10,22 +9,21 @@ const {
     getAuditLogs,
     exportStatsReport,
     getDashboardStats
-} = require('../../src/controllers/admin.controller');
+} = require('../../src/controllers/adminController');
 
 const User = require('../../src/models/User');
 const Event = require('../../src/models/Event');
 const Order = require('../../src/models/Order');
 const Refund = require('../../src/models/Refund');
 const AuditLog = require('../../src/models/AuditLog');
-const { logAuditAction } = require('../../src/utils/audit.util');
-const { Parser } = require('json2csv');
+const { logAuditAction } = require('../../src/utils/auditUtil');
 
 jest.mock('../../src/models/User');
 jest.mock('../../src/models/Event');
 jest.mock('../../src/models/Order');
 jest.mock('../../src/models/Refund');
 jest.mock('../../src/models/AuditLog');
-jest.mock('../../src/utils/audit.util', () => ({
+jest.mock('../../src/utils/auditUtil', () => ({
     logAuditAction: jest.fn()
 }));
 jest.mock('json2csv', () => {

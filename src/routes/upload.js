@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { cloudinary } = require('../config/cloudinary');
 const { localStorageUpload } = require('../config/localStorage');
-const { verifyToken } = require('../middleware/auth.middleware');
+const { verifyToken } = require('../middleware/authMiddleware');
 const fs = require('fs');
 
 router.post('/', verifyToken, (req, res) => {

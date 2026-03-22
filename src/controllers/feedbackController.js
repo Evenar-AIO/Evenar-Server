@@ -8,9 +8,9 @@ const Feedback = require("../models/Feedback");
 async function createFeedback(req, res) {
   try {
     const userId = req.user.sub || req.user.id || req.user._id;
-    const { eventId, rating, comment } = req.body || {};
+    const { eventId, rating, comment, content } = req.body || {};
 
-    if (!eventId || rating == null) {
+    if (!eventId || rating === null || rating === undefined) {
       return res.status(400).json({ error: "eventId and rating are required" });
     }
     if (rating < 1 || rating > 5) {
@@ -26,7 +26,8 @@ async function createFeedback(req, res) {
       eventId,
       userId,
       rating: Number(rating),
-      comment: comment || "",
+      content: content || comment || "",
+      comment: comment || content || "",
     });
 
     res.status(201).json(feedback);

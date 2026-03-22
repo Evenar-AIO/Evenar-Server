@@ -1,4 +1,4 @@
-const { verifyToken, verifyAdmin } = require('../../src/middleware/auth.middleware');
+const { verifyToken, verifyAdmin } = require('../../src/middleware/authMiddleware');
 const jwt = require('jsonwebtoken');
 
 jest.mock('jsonwebtoken', () => ({

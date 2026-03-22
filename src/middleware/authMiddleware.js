@@ -5,10 +5,6 @@ exports.verifyToken = (req, res, next) => {
         const authHeader = req.headers.authorization || req.headers.Authorization;
 
         if (!authHeader || !authHeader.startsWith('Bearer ')) {
-            if (process.env.NODE_ENV !== 'production' && req.headers['x-mock-role']) {
-                req.user = { id: 'mock_id', role: req.headers['x-mock-role'] };
-                return next();
-            }
             return res.status(401).json({ success: false, message: 'Unauthorized: No token provided' });
         }
 
@@ -20,7 +16,7 @@ exports.verifyToken = (req, res, next) => {
         req.user = decoded;
 
         next();
-    } catch (error) {
+    } catch {
         return res.status(403).json({ success: false, message: 'Forbidden: Invalid or expired token' });
     }
 };

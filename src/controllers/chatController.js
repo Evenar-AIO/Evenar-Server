@@ -17,7 +17,9 @@ async function findOrCreateSupportConversation(req, res) {
       participants: userId,
       type: "support",
     });
-    if (conv) return res.status(200).json(conv);
+    if (conv) {
+      return res.status(200).json(conv);
+    }
 
     // Tìm một admin bất kỳ để assign
     const admin = await User.findOne({ role: "admin" });
@@ -50,15 +52,19 @@ async function createConversation(req, res) {
   try {
     const userId = req.user.sub || req.user.id || req.user._id;
     const { otherUserId } = req.body || {};
-    if (!otherUserId) return res.status(400).json({ error: "otherUserId is required" });
+    if (!otherUserId) {
+      return res.status(400).json({ error: "otherUserId is required" });
+    }
 
-    // Nếu otherUserId không phải ObjectId hợp lệ → tìm theo tên
+    // Nếu otherUserId không phải ObjectId hợp lệ → tìm theo tên hoặc email
     let resolvedOtherUserId = otherUserId;
     if (!mongoose.Types.ObjectId.isValid(otherUserId)) {
-      const otherUser = await User.findOne({ name: otherUserId });
+      const otherUser = await User.findOne({
+        $or: [{ name: otherUserId }, { email: otherUserId }]
+      });
       if (!otherUser) {
         return res.status(404).json({
-          error: `Không tìm thấy người dùng "${otherUserId}". Người đó cần đăng nhập trước!`,
+          error: `Không tìm thấy người dùng có tên hoặc email "${otherUserId}"!`,
         });
       }
       resolvedOtherUserId = otherUser._id;
@@ -68,7 +74,9 @@ async function createConversation(req, res) {
       participants: { $all: [userId, resolvedOtherUserId] },
       type: "direct",
     });
-    if (conv) return res.status(200).json(conv);
+    if (conv) {
+      return res.status(200).json(conv);
+    }
     conv = await Conversation.create({
       participants: [userId, resolvedOtherUserId],
       type: "direct",
@@ -103,13 +111,17 @@ async function getMessages(req, res) {
     const { id } = req.params;
     const userId = req.user.sub || req.user.id || req.user._id;
     const conv = await Conversation.findOne({ _id: id, participants: userId });
-    if (!conv) return res.status(404).json({ error: "Conversation not found" });
+    if (!conv) {
+      return res.status(404).json({ error: "Conversation not found" });
+    }
 
     const limit = Math.min(parseInt(req.query.limit, 10) || 50, 100);
     const before = req.query.before; // cursor pagination
 
     let query = { conversationId: id };
-    if (before) query.createdAt = { $lt: new Date(before) };
+    if (before) {
+      query.createdAt = { $lt: new Date(before) };
+    }
 
     const messages = await Message.find(query)
       .sort({ createdAt: -1 })
@@ -149,7 +161,9 @@ async function sendMessage(req, res) {
     }
 
     const conv = await Conversation.findOne({ _id: conversationId, participants: userId });
-    if (!conv) return res.status(404).json({ error: "Conversation not found" });
+    if (!conv) {
+      return res.status(404).json({ error: "Conversation not found" });
+    }
 
     const type = attachments?.length ? "file" : "text";
     const message = await Message.create({
@@ -183,7 +197,9 @@ async function sendMessage(req, res) {
     if (io) {
       conv.participants.forEach((pid) => {
         const id = pid.toString ? pid.toString() : pid;
-        if (id !== userId) io.to(`user:${id}`).emit("chat:message", message);
+        if (id !== userId) {
+          io.to(`user:${id}`).emit("chat:message", message);
+        }
       });
       io.to(`conv:${conversationId}`).emit("chat:message", message);
     }

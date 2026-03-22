@@ -54,8 +54,30 @@ exports.processPayment = async (orderId, method) => {
   }
 
   // Mock VNPAY — confirm immediately for dev purposes
+  const orderCode = Math.floor(Date.now() / 1000);
+  const transactionId = `mock-txn-${Date.now()}`;
+
+  await Payment.create({
+    orderId: order._id,
+    orderCode,
+    amount: order.totalAmount,
+    method: 'VNPAY',
+    transactionId,
+    status: 'SUCCESS',
+  });
+
+  order.paymentStatus = 'paid';
+  order.orderStatus = 'confirmed';
+  await order.save();
+
+  const items = await OrderItem.find({ orderId: order._id });
+  if (items && items.length > 0) {
+    await inventoryManager.confirmOrder(items);
+    await inventoryManager.confirmSeatIds(order.eventId, items);
+  }
+
   return {
-    transactionId: `mock-txn-${Date.now()}`,
+    transactionId,
     status: 'SUCCESS',
     redirectUrl: 'http://localhost:3000/orders',
   };
@@ -117,6 +139,7 @@ exports.handleCallback = async (reqBody) => {
         const items = await OrderItem.find({ orderId: order._id }).session(session);
         if (items && items.length > 0) {
           await inventoryManager.confirmOrderWithSession(items, session);
+          await inventoryManager.confirmSeatIdsWithSession(order.eventId, items, session);
         }
       }
 
@@ -170,6 +193,7 @@ exports.handleCallbackWithoutTransaction = async (reqBody) => {
         // Confirm inventory (atomic version)
         const items = await OrderItem.find({ orderId: order._id });
         await inventoryManager.confirmOrder(items);
+        await inventoryManager.confirmSeatIds(order.eventId, items);
       }
     }
 
@@ -205,6 +229,7 @@ exports.cancelOrder = async (orderId) => {
     const items = await OrderItem.find({ orderId: order._id }).session(session);
     if (items && items.length > 0) {
       await inventoryManager.releaseSeatsWithSession(items, session);
+      await inventoryManager.releaseSeatIdsWithSession(order.eventId, items, session);
     }
 
     await session.commitTransaction();

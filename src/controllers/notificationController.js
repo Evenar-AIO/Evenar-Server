@@ -12,7 +12,9 @@ async function getNotifications(req, res) {
     const unreadOnly = req.query.unread === "true";
 
     const filter = role === "admin" ? {} : { userId };
-    if (unreadOnly) filter.read = false;
+    if (unreadOnly) {
+      filter.read = false;
+    }
 
     const items = await Notification.find(filter)
       .sort({ createdAt: -1 })
@@ -38,7 +40,9 @@ async function markRead(req, res) {
       { read: true },
       { new: true }
     );
-    if (!notif) return res.status(404).json({ error: "Notification not found" });
+    if (!notif) {
+      return res.status(404).json({ error: "Notification not found" });
+    }
     res.json(notif);
   } catch (err) {
     res.status(500).json({ error: err.message });
