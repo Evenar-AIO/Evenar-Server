@@ -55,8 +55,12 @@ const updateEvent = async (req, res) => {
       return res.status(401).json({ message: 'Authentication required' });
     }
 
-    const { date, location, image, ticketInfo, zones, genre } = req.body;
+    console.log('--- Update Event Request ---');
+    console.log('ID:', req.params.id);
+    console.log('Body:', JSON.stringify(req.body, null, 2));
 
+    const { date, location, image, ticketInfo, zones, genre } = req.body;
+    
     const payload = {
       ...req.body,
       startTime: req.body.startTime || date,
@@ -80,19 +84,39 @@ const updateEvent = async (req, res) => {
 
     res.json(event);
   } catch (err) {
+    console.error('Update Event Error:', err.message);
     res.status(400).json({ message: err.message });
   }
 };
 
 const deleteEvent = async (req, res) => {
   try {
-    const ownerId = req.user && (req.user.sub || req.user._id || req.user.id || req.headers["x-user-id"]);
-    if (!ownerId) {
-      return res.status(401).json({ message: 'Authentication required' });
-    }
-
+    const ownerId = req.user && (req.user.sub || req.user._id || req.user.id);
+    if (!ownerId) return res.status(401).json({ message: 'Authentication required' });
     const event = await eventService.deleteEvent(req.params.id);
     res.json({ message: "Event deleted", event });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+
+const withdrawEvent = async (req, res) => {
+  try {
+    const ownerId = req.user && (req.user.sub || req.user._id || req.user.id);
+    if (!ownerId) return res.status(401).json({ message: 'Authentication required' });
+    const event = await eventService.withdrawEvent(req.params.id, ownerId);
+    res.json({ message: "Event withdrawn from review", event });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+
+const submitEvent = async (req, res) => {
+  try {
+    const ownerId = req.user && (req.user.sub || req.user._id || req.user.id);
+    if (!ownerId) return res.status(401).json({ message: 'Authentication required' });
+    const event = await eventService.submitEvent(req.params.id, ownerId);
+    res.json({ message: "Event submitted for review", event });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -104,4 +128,6 @@ module.exports = {
   createEvent,
   updateEvent,
   deleteEvent,
+  withdrawEvent,
+  submitEvent,
 };

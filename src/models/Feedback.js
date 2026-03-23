@@ -2,17 +2,23 @@ const mongoose = require('mongoose');
 
 const feedbackSchema = new mongoose.Schema({
   userId: {
-    type: mongoose.Schema.Types.Mixed,
-    required: true
-  },
-  eventId: {
-    type: mongoose.Schema.Types.Mixed,
-    required: true
-  },
-  orderId: {
-    type: mongoose.Schema.Types.Mixed,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
     required: false
   },
+  legacyUserId: { type: Number },
+  eventId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Event',
+    required: false
+  },
+  legacyEventId: { type: Number },
+  orderId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Order',
+    required: false
+  },
+  legacyOrderId: { type: Number },
   rating: {
     type: Number,
     required: true,

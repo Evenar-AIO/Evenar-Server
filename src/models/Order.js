@@ -4,8 +4,8 @@ const orderSchema = new mongoose.Schema(
     {
         legacyId: { type: Number },
         orderNumber: { type: String, unique: true },
-        userId: { type: mongoose.Schema.Types.Mixed, required: true },
-        eventId: { type: mongoose.Schema.Types.Mixed, ref: 'Event' },
+        userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+        eventId: { type: mongoose.Schema.Types.ObjectId, ref: 'Event' },
         // Ticket counts
         totalQuantity: { type: Number, default: 0 },
         // Pricing

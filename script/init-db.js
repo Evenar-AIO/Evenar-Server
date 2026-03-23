@@ -8,14 +8,14 @@ db.users.insertMany([
     "legacyId": 1,
     "username": "Admin",
     "email": "adminEventWeb@support.com",
-    "passwordHash": "ddfa08f04ffbedd937ce079026ead9826c0f4572feee5e45ff2a66d058c0c9d5",
+    "passwordHash": "$2a$10$lzeD7QG96mwSyD3w4db4QeqABKroaZ1RiXdJ2qEIB/gvnWRQTXWhu", // pass: admin123@
     "role": "admin",
     "gender": "Male",
     "birthday": new Date("1980-01-01T00:00:00Z"),
     "phoneNumber": "0901234567",
     "address": "123 Admin St, HCMC",
     "avatar": "",
-    "isLocked": false,
+    "isLocked": false, "isVerified": true,
     "googleId": null,
     "createdAt": new Date("2026-03-15T09:00:00Z"),
     "updatedAt": new Date("2026-03-15T09:00:00Z"),
@@ -26,14 +26,14 @@ db.users.insertMany([
     "legacyId": 2,
     "username": "TayNguyen Sound",
     "email": "organizer@ticketbox.vn",
-    "passwordHash": "058caa5e5eec0aa2911b924607646627dbf0815d513576ada793072e78810691",
+    "passwordHash": "$2a$10$B/gKIfNa7UtBu1Apc7bBZ./69lRvWrrS6zzh9.qhWwmtjBDf0Kgu2", // pass: eventowner123
     "role": "event_owner",
     "gender": "Female",
     "birthday": new Date("1985-05-15T00:00:00Z"),
     "phoneNumber": "0912345678",
     "address": "456 Event St, HCMC",
     "avatar": "taynguyensound-avt.jpg",
-    "isLocked": false,
+    "isLocked": false, "isVerified": true,
     "googleId": null,
     "createdAt": new Date("2026-03-25T14:30:00Z"),
     "updatedAt": new Date("2026-03-25T14:30:00Z"),
@@ -44,14 +44,14 @@ db.users.insertMany([
     "legacyId": 3,
     "username": "Mây Lang Thang",
     "email": "music_events@hcmc.com",
-    "passwordHash": "e51a4dbbf6c5021893e89253da30c135286bb8cdfb8019d87d666e5483e21c21",
+    "passwordHash": "$2a$10$LmQaenXU/ZOlp0KvSvpWdOHGsQXNxSi6jSKaO8SPpBlqSG8NhSQ5e", // pass: eventowner321
     "role": "event_owner",
     "gender": "Male",
     "birthday": new Date("1990-03-20T00:00:00Z"),
     "phoneNumber": "0923456789",
     "address": "789 Music Ave, HCMC",
     "avatar": "maylangthang.jpg",
-    "isLocked": false,
+    "isLocked": false, "isVerified": true,
     "googleId": null,
     "createdAt": new Date("2026-04-05T11:15:00Z"),
     "updatedAt": new Date("2026-04-05T11:15:00Z"),
@@ -62,14 +62,14 @@ db.users.insertMany([
     "legacyId": 4,
     "username": "VFF",
     "email": "sports_events@hcmc.com",
-    "passwordHash": "42148a0e9fdc241f7d762b460c4ee97442621455745864c23adb3e4abbcdf17c",
+    "passwordHash": "$2a$10$.AIDo7h0scNzmL8MV4P/XeS9uZ86VSroPve67dLt8QTjjlVyZoWhe", // pass: testpasswords
     "role": "event_owner",
     "gender": "Other",
     "birthday": new Date("1988-07-10T00:00:00Z"),
     "phoneNumber": "0934567890",
     "address": "101 Sports Rd, HCMC",
     "avatar": "vff.png",
-    "isLocked": false,
+    "isLocked": false, "isVerified": true,
     "googleId": null,
     "createdAt": new Date("2026-04-15T16:45:00Z"),
     "updatedAt": new Date("2026-04-15T16:45:00Z"),
@@ -80,14 +80,14 @@ db.users.insertMany([
     "legacyId": 5,
     "username": "Lê Văn A",
     "email": "customer1@ticketbox.vn",
-    "passwordHash": "1f28a586d5c3af781e15c49fc8cc1b8721a8508f32f8dc4264197e4908fef2b8",
+    "passwordHash": "$2a$10$3syXxVJV3nsfc0xcQdloruJimFNhpimWzU1waj2y1bDb1FksQroJW", // pass: customer123##
     "role": "customer",
     "gender": "Female",
     "birthday": new Date("1995-11-25T00:00:00Z"),
     "phoneNumber": "0945678901",
     "address": "202 Customer Ln, HCMC",
     "avatar": "LeVanA.png",
-    "isLocked": false,
+    "isLocked": false, "isVerified": true,
     "googleId": null,
     "createdAt": new Date("2026-05-01T08:20:00Z"),
     "updatedAt": new Date("2026-05-01T08:20:00Z"),
@@ -105,7 +105,7 @@ db.users.insertMany([
     "phoneNumber": "0956789012",
     "address": "303 Customer St, HCMC",
     "avatar": "",
-    "isLocked": false,
+    "isLocked": false, "isVerified": true,
     "googleId": null,
     "createdAt": new Date("2026-05-10T13:50:00Z"),
     "updatedAt": new Date("2026-05-10T13:50:00Z"),
@@ -123,7 +123,7 @@ db.users.insertMany([
     "phoneNumber": "0967890123",
     "address": "404 Customer Rd, HCMC",
     "avatar": "",
-    "isLocked": false,
+    "isLocked": false, "isVerified": true,
     "googleId": null,
     "createdAt": new Date("2026-05-20T10:30:00Z"),
     "updatedAt": new Date("2026-05-20T10:30:00Z"),
@@ -141,7 +141,7 @@ db.users.insertMany([
     "phoneNumber": "0978901234",
     "address": "505 Event Ave, Hanoi",
     "avatar": "",
-    "isLocked": false,
+    "isLocked": false, "isVerified": true,
     "googleId": null,
     "createdAt": new Date("2026-06-01T15:15:00Z"),
     "updatedAt": new Date("2026-06-01T15:15:00Z"),
@@ -159,7 +159,7 @@ db.users.insertMany([
     "phoneNumber": "0989012345",
     "address": "606 Sports Ln, HCMC",
     "avatar": "",
-    "isLocked": false,
+    "isLocked": false, "isVerified": true,
     "googleId": null,
     "createdAt": new Date("2026-06-05T12:00:00Z"),
     "updatedAt": new Date("2026-06-05T12:00:00Z"),
@@ -177,7 +177,7 @@ db.users.insertMany([
     "phoneNumber": "0990123456",
     "address": "707 Customer Pl, HCMC",
     "avatar": "",
-    "isLocked": false,
+    "isLocked": false, "isVerified": true,
     "googleId": null,
     "createdAt": new Date("2026-06-10T09:30:00Z"),
     "updatedAt": new Date("2026-06-10T09:30:00Z"),
@@ -195,7 +195,7 @@ db.users.insertMany([
     "phoneNumber": "0123456789",
     "address": "123 Nguyễn Trãi, Hà Nội",
     "avatar": "",
-    "isLocked": false,
+    "isLocked": false, "isVerified": true,
     "googleId": null,
     "createdAt": new Date("2026-06-12T14:00:00Z"),
     "updatedAt": new Date("2026-06-12T14:00:00Z"),
@@ -213,7 +213,7 @@ db.users.insertMany([
     "phoneNumber": "0987654321",
     "address": "456 Lê Lợi, Hồ Chí Minh",
     "avatar": "",
-    "isLocked": false,
+    "isLocked": false, "isVerified": true,
     "googleId": null,
     "createdAt": new Date("2026-06-14T11:45:00Z"),
     "updatedAt": new Date("2026-06-14T11:45:00Z"),
@@ -231,7 +231,7 @@ db.users.insertMany([
     "phoneNumber": "0345678901",
     "address": "789 Trần Phú, Đà Nẵng",
     "avatar": "",
-    "isLocked": false,
+    "isLocked": false, "isVerified": true,
     "googleId": null,
     "createdAt": new Date("2026-07-15T05:31:00Z"),
     "updatedAt": new Date("2026-07-15T05:31:00Z"),
@@ -249,7 +249,7 @@ db.users.insertMany([
     "phoneNumber": "0456789012",
     "address": "321 Bạch Đằng, Hải Phòng",
     "avatar": "",
-    "isLocked": false,
+    "isLocked": false, "isVerified": true,
     "googleId": null,
     "createdAt": new Date("2025-07-01T08:00:00Z"),
     "updatedAt": new Date("2025-07-01T08:00:00Z"),
@@ -267,7 +267,7 @@ db.users.insertMany([
     "phoneNumber": "0567890123",
     "address": "654 Đồng Khởi, Cần Thơ",
     "avatar": "",
-    "isLocked": false,
+    "isLocked": false, "isVerified": true,
     "googleId": null,
     "createdAt": new Date("2025-08-15T13:30:00Z"),
     "updatedAt": new Date("2025-08-15T13:30:00Z"),
@@ -285,7 +285,7 @@ db.users.insertMany([
     "phoneNumber": "0678901234",
     "address": "987 Lý Thường Kiệt, Huế",
     "avatar": "",
-    "isLocked": false,
+    "isLocked": false, "isVerified": true,
     "googleId": null,
     "createdAt": new Date("2025-09-20T10:15:00Z"),
     "updatedAt": new Date("2025-09-20T10:15:00Z"),
@@ -303,7 +303,7 @@ db.users.insertMany([
     "phoneNumber": "0789012345",
     "address": "159 Nguyễn Huệ, Vũng Tàu",
     "avatar": "",
-    "isLocked": false,
+    "isLocked": false, "isVerified": true,
     "googleId": null,
     "createdAt": new Date("2025-10-10T15:45:00Z"),
     "updatedAt": new Date("2025-10-10T15:45:00Z"),
@@ -321,7 +321,7 @@ db.users.insertMany([
     "phoneNumber": "0890123456",
     "address": "753 Lê Thánh Tôn, Nha Trang",
     "avatar": "",
-    "isLocked": false,
+    "isLocked": false, "isVerified": true,
     "googleId": null,
     "createdAt": new Date("2025-11-05T09:20:00Z"),
     "updatedAt": new Date("2025-11-05T09:20:00Z"),
@@ -339,7 +339,7 @@ db.users.insertMany([
     "phoneNumber": "0901234567",
     "address": "852 Hai Bà Trưng, Quy Nhơn",
     "avatar": "",
-    "isLocked": false,
+    "isLocked": false, "isVerified": true,
     "googleId": null,
     "createdAt": new Date("2025-11-25T14:50:00Z"),
     "updatedAt": new Date("2025-11-25T14:50:00Z"),
@@ -357,7 +357,7 @@ db.users.insertMany([
     "phoneNumber": "0912345678",
     "address": "741 Phan Chu Trinh, Đà Lạt",
     "avatar": "",
-    "isLocked": false,
+    "isLocked": false, "isVerified": true,
     "googleId": null,
     "createdAt": new Date("2025-12-10T11:30:00Z"),
     "updatedAt": new Date("2025-12-10T11:30:00Z"),
@@ -375,7 +375,7 @@ db.users.insertMany([
     "phoneNumber": "0923456789",
     "address": "963 Nguyễn Thị Minh Khai, Phan Thiết",
     "avatar": "",
-    "isLocked": false,
+    "isLocked": false, "isVerified": true,
     "googleId": null,
     "createdAt": new Date("2025-12-20T16:15:00Z"),
     "updatedAt": new Date("2025-12-20T16:15:00Z"),
@@ -393,7 +393,7 @@ db.users.insertMany([
     "phoneNumber": "0934567890",
     "address": "147 Võ Văn Tần, Long An",
     "avatar": "",
-    "isLocked": false,
+    "isLocked": false, "isVerified": true,
     "googleId": null,
     "createdAt": new Date("2026-01-05T08:40:00Z"),
     "updatedAt": new Date("2026-01-05T08:40:00Z"),
@@ -411,7 +411,7 @@ db.users.insertMany([
     "phoneNumber": "0945678901",
     "address": "258 Cách Mạng Tháng 8, Biên Hòa",
     "avatar": "",
-    "isLocked": false,
+    "isLocked": false, "isVerified": true,
     "googleId": null,
     "createdAt": new Date("2026-01-20T13:10:00Z"),
     "updatedAt": new Date("2026-01-20T13:10:00Z"),
@@ -429,7 +429,7 @@ db.users.insertMany([
     "phoneNumber": "0956789012",
     "address": "369 An Dương Vương, Mỹ Tho",
     "avatar": "",
-    "isLocked": false,
+    "isLocked": false, "isVerified": true,
     "googleId": null,
     "createdAt": new Date("2026-02-01T10:25:00Z"),
     "updatedAt": new Date("2026-02-01T10:25:00Z"),
@@ -447,7 +447,7 @@ db.users.insertMany([
     "phoneNumber": "0967890123",
     "address": "482 Nguyễn Văn Linh, Rạch Giá",
     "avatar": "",
-    "isLocked": false,
+    "isLocked": false, "isVerified": true,
     "googleId": null,
     "createdAt": new Date("2026-02-28T15:00:00Z"),
     "updatedAt": new Date("2026-02-28T15:00:00Z"),
@@ -465,7 +465,7 @@ db.users.insertMany([
     "phoneNumber": "0901234567",
     "address": "123 Admin St, HCMC",
     "avatar": "/uploads/user_avatar/dat.jpeg",
-    "isLocked": false,
+    "isLocked": false, "isVerified": true,
     "googleId": null,
     "createdAt": new Date("2026-06-20T00:00:00Z"),
     "updatedAt": new Date("2026-06-20T00:00:00Z"),
@@ -548,8 +548,8 @@ db.events.insertMany([
     "totalTicketCount": 150,
     "isApproved": true,
     "status": "completed",
-    "genreId": 4,
-    "ownerId": 2,
+    "genreId": ObjectId("100000000000000000000004"),
+    "ownerId": ObjectId("000000000000000000000002"),
     "imageURL": "hoi_thao_ai_va_chuyen_doi_so.jpg",
     "hasSeatingChart": false,
     "isDeleted": false,
@@ -567,8 +567,8 @@ db.events.insertMany([
     "totalTicketCount": 300,
     "isApproved": true,
     "status": "completed",
-    "genreId": 3,
-    "ownerId": 4,
+    "genreId": ObjectId("100000000000000000000003"),
+    "ownerId": ObjectId("000000000000000000000004"),
     "imageURL": "giaichaybo.jpg",
     "hasSeatingChart": false,
     "isDeleted": false,
@@ -586,8 +586,8 @@ db.events.insertMany([
     "totalTicketCount": 250,
     "isApproved": true,
     "status": "completed",
-    "genreId": 4,
-    "ownerId": 2,
+    "genreId": ObjectId("100000000000000000000004"),
+    "ownerId": ObjectId("000000000000000000000002"),
     "imageURL": "lehoitraviet.webp",
     "hasSeatingChart": false,
     "isDeleted": false,
@@ -605,8 +605,8 @@ db.events.insertMany([
     "totalTicketCount": 80,
     "isApproved": true,
     "status": "completed",
-    "genreId": 4,
-    "ownerId": 2,
+    "genreId": ObjectId("100000000000000000000004"),
+    "ownerId": ObjectId("000000000000000000000002"),
     "imageURL": "Workshop-Lather-for-Health-Bot-xa-bong-Bot-suc-khoe.png",
     "hasSeatingChart": false,
     "isDeleted": false,
@@ -624,8 +624,8 @@ db.events.insertMany([
     "totalTicketCount": 200,
     "isApproved": true,
     "status": "completed",
-    "genreId": 1,
-    "ownerId": 2,
+    "genreId": ObjectId("100000000000000000000001"),
+    "ownerId": ObjectId("000000000000000000000002"),
     "imageURL": "UEH.png",
     "hasSeatingChart": false,
     "isDeleted": false,
@@ -643,8 +643,8 @@ db.events.insertMany([
     "totalTicketCount": 180,
     "isApproved": true,
     "status": "completed",
-    "genreId": 4,
-    "ownerId": 2,
+    "genreId": ObjectId("100000000000000000000004"),
+    "ownerId": ObjectId("000000000000000000000002"),
     "imageURL": "blockchain.jpg",
     "hasSeatingChart": false,
     "isDeleted": false,
@@ -662,8 +662,8 @@ db.events.insertMany([
     "totalTicketCount": 200,
     "isApproved": true,
     "status": "active",
-    "genreId": 1,
-    "ownerId": 2,
+    "genreId": ObjectId("100000000000000000000001"),
+    "ownerId": ObjectId("000000000000000000000002"),
     "imageURL": "12bamu.jpg",
     "hasSeatingChart": true,
     "isDeleted": false,
@@ -681,8 +681,8 @@ db.events.insertMany([
     "totalTicketCount": 200,
     "isApproved": true,
     "status": "active",
-    "genreId": 1,
-    "ownerId": 2,
+    "genreId": ObjectId("100000000000000000000001"),
+    "ownerId": ObjectId("000000000000000000000002"),
     "imageURL": "theIsland.jpeg",
     "hasSeatingChart": false,
     "isDeleted": false,
@@ -700,8 +700,8 @@ db.events.insertMany([
     "totalTicketCount": 200,
     "isApproved": true,
     "status": "active",
-    "genreId": 4,
-    "ownerId": 2,
+    "genreId": ObjectId("100000000000000000000004"),
+    "ownerId": ObjectId("000000000000000000000002"),
     "imageURL": "diadaocuchi.jpg",
     "hasSeatingChart": false,
     "isDeleted": false,
@@ -719,8 +719,8 @@ db.events.insertMany([
     "totalTicketCount": 200,
     "isApproved": true,
     "status": "active",
-    "genreId": 1,
-    "ownerId": 2,
+    "genreId": ObjectId("100000000000000000000001"),
+    "ownerId": ObjectId("000000000000000000000002"),
     "imageURL": "xomvittroi.jpg",
     "hasSeatingChart": false,
     "isDeleted": false,
@@ -738,8 +738,8 @@ db.events.insertMany([
     "totalTicketCount": 200,
     "isApproved": true,
     "status": "active",
-    "genreId": 4,
-    "ownerId": 2,
+    "genreId": ObjectId("100000000000000000000004"),
+    "ownerId": ObjectId("000000000000000000000002"),
     "imageURL": "khoatunganngay.jpg",
     "hasSeatingChart": false,
     "isDeleted": false,
@@ -757,8 +757,8 @@ db.events.insertMany([
     "totalTicketCount": 200,
     "isApproved": true,
     "status": "active",
-    "genreId": 2,
-    "ownerId": 3,
+    "genreId": ObjectId("100000000000000000000002"),
+    "ownerId": ObjectId("000000000000000000000003"),
     "imageURL": "haydeanhdi.jpg",
     "hasSeatingChart": true,
     "isDeleted": false,
@@ -776,8 +776,8 @@ db.events.insertMany([
     "totalTicketCount": 200,
     "isApproved": true,
     "status": "active",
-    "genreId": 4,
-    "ownerId": 2,
+    "genreId": ObjectId("100000000000000000000004"),
+    "ownerId": ObjectId("000000000000000000000002"),
     "imageURL": "issacevent.jpg",
     "hasSeatingChart": false,
     "isDeleted": false,
@@ -795,8 +795,8 @@ db.events.insertMany([
     "totalTicketCount": 200,
     "isApproved": true,
     "status": "active",
-    "genreId": 2,
-    "ownerId": 3,
+    "genreId": ObjectId("100000000000000000000002"),
+    "ownerId": ObjectId("000000000000000000000003"),
     "imageURL": "lulula.jpeg",
     "hasSeatingChart": true,
     "isDeleted": false,
@@ -814,8 +814,8 @@ db.events.insertMany([
     "totalTicketCount": 200,
     "isApproved": true,
     "status": "active",
-    "genreId": 4,
-    "ownerId": 2,
+    "genreId": ObjectId("100000000000000000000004"),
+    "ownerId": ObjectId("000000000000000000000002"),
     "imageURL": "amthucando.jpg",
     "hasSeatingChart": true,
     "isDeleted": false,
@@ -833,8 +833,8 @@ db.events.insertMany([
     "totalTicketCount": 200,
     "isApproved": true,
     "status": "active",
-    "genreId": 2,
-    "ownerId": 3,
+    "genreId": ObjectId("100000000000000000000002"),
+    "ownerId": ObjectId("000000000000000000000003"),
     "imageURL": "antraivuotchonggai.jpg",
     "hasSeatingChart": false,
     "isDeleted": false,
@@ -852,8 +852,8 @@ db.events.insertMany([
     "totalTicketCount": 200,
     "isApproved": true,
     "status": "active",
-    "genreId": 1,
-    "ownerId": 2,
+    "genreId": ObjectId("100000000000000000000001"),
+    "ownerId": ObjectId("000000000000000000000002"),
     "imageURL": "smok&silk.jpeg",
     "hasSeatingChart": false,
     "isDeleted": false,
@@ -871,8 +871,8 @@ db.events.insertMany([
     "totalTicketCount": 200,
     "isApproved": true,
     "status": "active",
-    "genreId": 3,
-    "ownerId": 4,
+    "genreId": ObjectId("100000000000000000000003"),
+    "ownerId": ObjectId("000000000000000000000004"),
     "imageURL": "lionchampion.jpg",
     "hasSeatingChart": false,
     "isDeleted": false,
@@ -890,8 +890,8 @@ db.events.insertMany([
     "totalTicketCount": 200,
     "isApproved": true,
     "status": "active",
-    "genreId": 3,
-    "ownerId": 4,
+    "genreId": ObjectId("100000000000000000000003"),
+    "ownerId": ObjectId("000000000000000000000004"),
     "imageURL": "saigonchampion.jpg",
     "hasSeatingChart": false,
     "isDeleted": false,
@@ -909,8 +909,8 @@ db.events.insertMany([
     "totalTicketCount": 200,
     "isApproved": true,
     "status": "active",
-    "genreId": 1,
-    "ownerId": 2,
+    "genreId": ObjectId("100000000000000000000001"),
+    "ownerId": ObjectId("000000000000000000000002"),
     "imageURL": "cauthoyenngua.jpg",
     "hasSeatingChart": false,
     "isDeleted": false,
@@ -928,8 +928,8 @@ db.events.insertMany([
     "totalTicketCount": 200,
     "isApproved": true,
     "status": "active",
-    "genreId": 1,
-    "ownerId": 2,
+    "genreId": ObjectId("100000000000000000000001"),
+    "ownerId": ObjectId("000000000000000000000002"),
     "imageURL": "luiza.jpeg",
     "hasSeatingChart": false,
     "isDeleted": false,
@@ -947,8 +947,8 @@ db.events.insertMany([
     "totalTicketCount": 200,
     "isApproved": true,
     "status": "active",
-    "genreId": 2,
-    "ownerId": 3,
+    "genreId": ObjectId("100000000000000000000002"),
+    "ownerId": ObjectId("000000000000000000000003"),
     "imageURL": "bachcongkhanh.jpeg",
     "hasSeatingChart": false,
     "isDeleted": false,
@@ -966,8 +966,8 @@ db.events.insertMany([
     "totalTicketCount": 200,
     "isApproved": true,
     "status": "active",
-    "genreId": 1,
-    "ownerId": 2,
+    "genreId": ObjectId("100000000000000000000001"),
+    "ownerId": ObjectId("000000000000000000000002"),
     "imageURL": "samvangdongnhunguyet.jpg",
     "hasSeatingChart": false,
     "isDeleted": false,
@@ -985,8 +985,8 @@ db.events.insertMany([
     "totalTicketCount": 200,
     "isApproved": true,
     "status": "active",
-    "genreId": 1,
-    "ownerId": 2,
+    "genreId": ObjectId("100000000000000000000001"),
+    "ownerId": ObjectId("000000000000000000000002"),
     "imageURL": "thebestpop&rok.jpeg",
     "hasSeatingChart": false,
     "isDeleted": false,
@@ -1004,8 +1004,8 @@ db.events.insertMany([
     "totalTicketCount": 200,
     "isApproved": true,
     "status": "active",
-    "genreId": 2,
-    "ownerId": 3,
+    "genreId": ObjectId("100000000000000000000002"),
+    "ownerId": ObjectId("000000000000000000000003"),
     "imageURL": "musicparty.jpg",
     "hasSeatingChart": false,
     "isDeleted": false,
@@ -1023,8 +1023,8 @@ db.events.insertMany([
     "totalTicketCount": 200,
     "isApproved": true,
     "status": "active",
-    "genreId": 4,
-    "ownerId": 2,
+    "genreId": ObjectId("100000000000000000000004"),
+    "ownerId": ObjectId("000000000000000000000002"),
     "imageURL": "automotive.jpeg",
     "hasSeatingChart": false,
     "isDeleted": false,
@@ -1039,7 +1039,7 @@ db.zones.insertMany([
   {
     "_id": ObjectId("f10000000000000000000001"),
     "legacyId": 1,
-    "eventId": 7,
+    "eventId": ObjectId("200000000000000000000007"),
     "name": "Khu VIP",
     "shape": "rectangle",
     "color": "#FFD700",
@@ -1055,7 +1055,7 @@ db.zones.insertMany([
   {
     "_id": ObjectId("f10000000000000000000002"),
     "legacyId": 2,
-    "eventId": 7,
+    "eventId": ObjectId("200000000000000000000007"),
     "name": "Khu Standard",
     "shape": "rectangle",
     "color": "#87CEEB",
@@ -1071,7 +1071,7 @@ db.zones.insertMany([
   {
     "_id": ObjectId("f10000000000000000000003"),
     "legacyId": 3,
-    "eventId": 12,
+    "eventId": ObjectId("200000000000000000000012"),
     "name": "Sân khấu VIP",
     "shape": "rectangle",
     "color": "#FF4500",
@@ -1087,7 +1087,7 @@ db.zones.insertMany([
   {
     "_id": ObjectId("f10000000000000000000004"),
     "legacyId": 4,
-    "eventId": 12,
+    "eventId": ObjectId("200000000000000000000012"),
     "name": "Khu A",
     "shape": "rectangle",
     "color": "#32CD32",
@@ -1103,7 +1103,7 @@ db.zones.insertMany([
   {
     "_id": ObjectId("f10000000000000000000005"),
     "legacyId": 5,
-    "eventId": 12,
+    "eventId": ObjectId("200000000000000000000012"),
     "name": "Khu B",
     "shape": "rectangle",
     "color": "#9370DB",
@@ -1119,7 +1119,7 @@ db.zones.insertMany([
   {
     "_id": ObjectId("f10000000000000000000006"),
     "legacyId": 6,
-    "eventId": 14,
+    "eventId": ObjectId("200000000000000000000014"),
     "name": "Diamond",
     "shape": "rectangle",
     "color": "#00CED1",
@@ -1135,7 +1135,7 @@ db.zones.insertMany([
   {
     "_id": ObjectId("f10000000000000000000007"),
     "legacyId": 7,
-    "eventId": 14,
+    "eventId": ObjectId("200000000000000000000014"),
     "name": "Premium",
     "shape": "rectangle",
     "color": "#FF69B4",
@@ -1151,7 +1151,7 @@ db.zones.insertMany([
   {
     "_id": ObjectId("f10000000000000000000008"),
     "legacyId": 8,
-    "eventId": 15,
+    "eventId": ObjectId("200000000000000000000015"),
     "name": "Bàn VIP",
     "shape": "rectangle",
     "color": "#FF8C00",
@@ -1167,7 +1167,7 @@ db.zones.insertMany([
   {
     "_id": ObjectId("f10000000000000000000009"),
     "legacyId": 9,
-    "eventId": 15,
+    "eventId": ObjectId("200000000000000000000015"),
     "name": "Bàn Thường",
     "shape": "rectangle",
     "color": "#20B2AA",
@@ -1188,7 +1188,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000001"),
     "legacyId": 1,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "A1",
     "color": "#FFD700",
     "price": 300000,
@@ -1202,7 +1202,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000002"),
     "legacyId": 2,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "A2",
     "color": "#FFD700",
     "price": 300000,
@@ -1216,7 +1216,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000003"),
     "legacyId": 3,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "A3",
     "color": "#FFD700",
     "price": 300000,
@@ -1230,7 +1230,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000004"),
     "legacyId": 4,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "A4",
     "color": "#FFD700",
     "price": 300000,
@@ -1244,7 +1244,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000005"),
     "legacyId": 5,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "A5",
     "color": "#FFD700",
     "price": 300000,
@@ -1258,7 +1258,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000006"),
     "legacyId": 6,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "A6",
     "color": "#FFD700",
     "price": 300000,
@@ -1272,7 +1272,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000007"),
     "legacyId": 7,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "A7",
     "color": "#FFD700",
     "price": 300000,
@@ -1286,7 +1286,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000008"),
     "legacyId": 8,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "A8",
     "color": "#FFD700",
     "price": 300000,
@@ -1300,7 +1300,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000009"),
     "legacyId": 9,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "A9",
     "color": "#FFD700",
     "price": 300000,
@@ -1314,7 +1314,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000010"),
     "legacyId": 10,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "A10",
     "color": "#FFD700",
     "price": 300000,
@@ -1328,7 +1328,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000011"),
     "legacyId": 11,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "B1",
     "color": "#FFD700",
     "price": 300000,
@@ -1342,7 +1342,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000012"),
     "legacyId": 12,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "B2",
     "color": "#FFD700",
     "price": 300000,
@@ -1356,7 +1356,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000013"),
     "legacyId": 13,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "B3",
     "color": "#FFD700",
     "price": 300000,
@@ -1370,7 +1370,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000014"),
     "legacyId": 14,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "B4",
     "color": "#FFD700",
     "price": 300000,
@@ -1384,7 +1384,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000015"),
     "legacyId": 15,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "B5",
     "color": "#FFD700",
     "price": 300000,
@@ -1398,7 +1398,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000016"),
     "legacyId": 16,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "B6",
     "color": "#FFD700",
     "price": 300000,
@@ -1412,7 +1412,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000017"),
     "legacyId": 17,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "B7",
     "color": "#FFD700",
     "price": 300000,
@@ -1426,7 +1426,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000018"),
     "legacyId": 18,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "B8",
     "color": "#FFD700",
     "price": 300000,
@@ -1440,7 +1440,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000019"),
     "legacyId": 19,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "B9",
     "color": "#FFD700",
     "price": 300000,
@@ -1454,7 +1454,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000020"),
     "legacyId": 20,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "B10",
     "color": "#FFD700",
     "price": 300000,
@@ -1468,7 +1468,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000021"),
     "legacyId": 21,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "C1",
     "color": "#FFD700",
     "price": 300000,
@@ -1482,7 +1482,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000022"),
     "legacyId": 22,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "C2",
     "color": "#FFD700",
     "price": 300000,
@@ -1496,7 +1496,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000023"),
     "legacyId": 23,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "C3",
     "color": "#FFD700",
     "price": 300000,
@@ -1510,7 +1510,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000024"),
     "legacyId": 24,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "C4",
     "color": "#FFD700",
     "price": 300000,
@@ -1524,7 +1524,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000025"),
     "legacyId": 25,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "C5",
     "color": "#FFD700",
     "price": 300000,
@@ -1538,7 +1538,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000026"),
     "legacyId": 26,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "C6",
     "color": "#FFD700",
     "price": 300000,
@@ -1552,7 +1552,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000027"),
     "legacyId": 27,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "C7",
     "color": "#FFD700",
     "price": 300000,
@@ -1566,7 +1566,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000028"),
     "legacyId": 28,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "C8",
     "color": "#FFD700",
     "price": 300000,
@@ -1580,7 +1580,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000029"),
     "legacyId": 29,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "C9",
     "color": "#FFD700",
     "price": 300000,
@@ -1594,7 +1594,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000030"),
     "legacyId": 30,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "C10",
     "color": "#FFD700",
     "price": 300000,
@@ -1608,7 +1608,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000031"),
     "legacyId": 31,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "D1",
     "color": "#FFD700",
     "price": 300000,
@@ -1622,7 +1622,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000032"),
     "legacyId": 32,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "D2",
     "color": "#FFD700",
     "price": 300000,
@@ -1636,7 +1636,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000033"),
     "legacyId": 33,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "D3",
     "color": "#FFD700",
     "price": 300000,
@@ -1650,7 +1650,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000034"),
     "legacyId": 34,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "D4",
     "color": "#FFD700",
     "price": 300000,
@@ -1664,7 +1664,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000035"),
     "legacyId": 35,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "D5",
     "color": "#FFD700",
     "price": 300000,
@@ -1678,7 +1678,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000036"),
     "legacyId": 36,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "D6",
     "color": "#FFD700",
     "price": 300000,
@@ -1692,7 +1692,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000037"),
     "legacyId": 37,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "D7",
     "color": "#FFD700",
     "price": 300000,
@@ -1706,7 +1706,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000038"),
     "legacyId": 38,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "D8",
     "color": "#FFD700",
     "price": 300000,
@@ -1720,7 +1720,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000039"),
     "legacyId": 39,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "D9",
     "color": "#FFD700",
     "price": 300000,
@@ -1734,7 +1734,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000040"),
     "legacyId": 40,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "D10",
     "color": "#FFD700",
     "price": 300000,
@@ -1748,7 +1748,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000041"),
     "legacyId": 41,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "E1",
     "color": "#FFD700",
     "price": 300000,
@@ -1762,7 +1762,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000042"),
     "legacyId": 42,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "E2",
     "color": "#FFD700",
     "price": 300000,
@@ -1776,7 +1776,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000043"),
     "legacyId": 43,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "E3",
     "color": "#FFD700",
     "price": 300000,
@@ -1790,7 +1790,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000044"),
     "legacyId": 44,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "E4",
     "color": "#FFD700",
     "price": 300000,
@@ -1804,7 +1804,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000045"),
     "legacyId": 45,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "E5",
     "color": "#FFD700",
     "price": 300000,
@@ -1818,7 +1818,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000046"),
     "legacyId": 46,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "E6",
     "color": "#FFD700",
     "price": 300000,
@@ -1832,7 +1832,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000047"),
     "legacyId": 47,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "E7",
     "color": "#FFD700",
     "price": 300000,
@@ -1846,7 +1846,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000048"),
     "legacyId": 48,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "E8",
     "color": "#FFD700",
     "price": 300000,
@@ -1860,7 +1860,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000049"),
     "legacyId": 49,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "E9",
     "color": "#FFD700",
     "price": 300000,
@@ -1874,7 +1874,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000050"),
     "legacyId": 50,
-    "zoneId": 1,
+    "zoneId": ObjectId("f10000000000000000000001"),
     "label": "E10",
     "color": "#FFD700",
     "price": 300000,
@@ -1888,7 +1888,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000051"),
     "legacyId": 51,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "A1",
     "color": "#87CEEB",
     "price": 150000,
@@ -1902,7 +1902,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000052"),
     "legacyId": 52,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "A2",
     "color": "#87CEEB",
     "price": 150000,
@@ -1916,7 +1916,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000053"),
     "legacyId": 53,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "A3",
     "color": "#87CEEB",
     "price": 150000,
@@ -1930,7 +1930,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000054"),
     "legacyId": 54,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "A4",
     "color": "#87CEEB",
     "price": 150000,
@@ -1944,7 +1944,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000055"),
     "legacyId": 55,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "A5",
     "color": "#87CEEB",
     "price": 150000,
@@ -1958,7 +1958,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000056"),
     "legacyId": 56,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "A6",
     "color": "#87CEEB",
     "price": 150000,
@@ -1972,7 +1972,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000057"),
     "legacyId": 57,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "A7",
     "color": "#87CEEB",
     "price": 150000,
@@ -1986,7 +1986,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000058"),
     "legacyId": 58,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "A8",
     "color": "#87CEEB",
     "price": 150000,
@@ -2000,7 +2000,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000059"),
     "legacyId": 59,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "A9",
     "color": "#87CEEB",
     "price": 150000,
@@ -2014,7 +2014,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000060"),
     "legacyId": 60,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "A10",
     "color": "#87CEEB",
     "price": 150000,
@@ -2028,7 +2028,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000061"),
     "legacyId": 61,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "A11",
     "color": "#87CEEB",
     "price": 150000,
@@ -2042,7 +2042,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000062"),
     "legacyId": 62,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "A12",
     "color": "#87CEEB",
     "price": 150000,
@@ -2056,7 +2056,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000063"),
     "legacyId": 63,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "A13",
     "color": "#87CEEB",
     "price": 150000,
@@ -2070,7 +2070,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000064"),
     "legacyId": 64,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "A14",
     "color": "#87CEEB",
     "price": 150000,
@@ -2084,7 +2084,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000065"),
     "legacyId": 65,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "A15",
     "color": "#87CEEB",
     "price": 150000,
@@ -2098,7 +2098,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000066"),
     "legacyId": 66,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "B1",
     "color": "#87CEEB",
     "price": 150000,
@@ -2112,7 +2112,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000067"),
     "legacyId": 67,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "B2",
     "color": "#87CEEB",
     "price": 150000,
@@ -2126,7 +2126,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000068"),
     "legacyId": 68,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "B3",
     "color": "#87CEEB",
     "price": 150000,
@@ -2140,7 +2140,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000069"),
     "legacyId": 69,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "B4",
     "color": "#87CEEB",
     "price": 150000,
@@ -2154,7 +2154,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000070"),
     "legacyId": 70,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "B5",
     "color": "#87CEEB",
     "price": 150000,
@@ -2168,7 +2168,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000071"),
     "legacyId": 71,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "B6",
     "color": "#87CEEB",
     "price": 150000,
@@ -2182,7 +2182,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000072"),
     "legacyId": 72,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "B7",
     "color": "#87CEEB",
     "price": 150000,
@@ -2196,7 +2196,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000073"),
     "legacyId": 73,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "B8",
     "color": "#87CEEB",
     "price": 150000,
@@ -2210,7 +2210,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000074"),
     "legacyId": 74,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "B9",
     "color": "#87CEEB",
     "price": 150000,
@@ -2224,7 +2224,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000075"),
     "legacyId": 75,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "B10",
     "color": "#87CEEB",
     "price": 150000,
@@ -2238,7 +2238,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000076"),
     "legacyId": 76,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "B11",
     "color": "#87CEEB",
     "price": 150000,
@@ -2252,7 +2252,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000077"),
     "legacyId": 77,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "B12",
     "color": "#87CEEB",
     "price": 150000,
@@ -2266,7 +2266,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000078"),
     "legacyId": 78,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "B13",
     "color": "#87CEEB",
     "price": 150000,
@@ -2280,7 +2280,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000079"),
     "legacyId": 79,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "B14",
     "color": "#87CEEB",
     "price": 150000,
@@ -2294,7 +2294,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000080"),
     "legacyId": 80,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "B15",
     "color": "#87CEEB",
     "price": 150000,
@@ -2308,7 +2308,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000081"),
     "legacyId": 81,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "C1",
     "color": "#87CEEB",
     "price": 150000,
@@ -2322,7 +2322,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000082"),
     "legacyId": 82,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "C2",
     "color": "#87CEEB",
     "price": 150000,
@@ -2336,7 +2336,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000083"),
     "legacyId": 83,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "C3",
     "color": "#87CEEB",
     "price": 150000,
@@ -2350,7 +2350,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000084"),
     "legacyId": 84,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "C4",
     "color": "#87CEEB",
     "price": 150000,
@@ -2364,7 +2364,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000085"),
     "legacyId": 85,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "C5",
     "color": "#87CEEB",
     "price": 150000,
@@ -2378,7 +2378,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000086"),
     "legacyId": 86,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "C6",
     "color": "#87CEEB",
     "price": 150000,
@@ -2392,7 +2392,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000087"),
     "legacyId": 87,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "C7",
     "color": "#87CEEB",
     "price": 150000,
@@ -2406,7 +2406,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000088"),
     "legacyId": 88,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "C8",
     "color": "#87CEEB",
     "price": 150000,
@@ -2420,7 +2420,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000089"),
     "legacyId": 89,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "C9",
     "color": "#87CEEB",
     "price": 150000,
@@ -2434,7 +2434,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000090"),
     "legacyId": 90,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "C10",
     "color": "#87CEEB",
     "price": 150000,
@@ -2448,7 +2448,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000091"),
     "legacyId": 91,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "C11",
     "color": "#87CEEB",
     "price": 150000,
@@ -2462,7 +2462,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000092"),
     "legacyId": 92,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "C12",
     "color": "#87CEEB",
     "price": 150000,
@@ -2476,7 +2476,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000093"),
     "legacyId": 93,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "C13",
     "color": "#87CEEB",
     "price": 150000,
@@ -2490,7 +2490,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000094"),
     "legacyId": 94,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "C14",
     "color": "#87CEEB",
     "price": 150000,
@@ -2504,7 +2504,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000095"),
     "legacyId": 95,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "C15",
     "color": "#87CEEB",
     "price": 150000,
@@ -2518,7 +2518,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000096"),
     "legacyId": 96,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "D1",
     "color": "#87CEEB",
     "price": 150000,
@@ -2532,7 +2532,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000097"),
     "legacyId": 97,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "D2",
     "color": "#87CEEB",
     "price": 150000,
@@ -2546,7 +2546,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000098"),
     "legacyId": 98,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "D3",
     "color": "#87CEEB",
     "price": 150000,
@@ -2560,7 +2560,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000099"),
     "legacyId": 99,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "D4",
     "color": "#87CEEB",
     "price": 150000,
@@ -2574,7 +2574,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000100"),
     "legacyId": 100,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "D5",
     "color": "#87CEEB",
     "price": 150000,
@@ -2588,7 +2588,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000101"),
     "legacyId": 101,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "D6",
     "color": "#87CEEB",
     "price": 150000,
@@ -2602,7 +2602,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000102"),
     "legacyId": 102,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "D7",
     "color": "#87CEEB",
     "price": 150000,
@@ -2616,7 +2616,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000103"),
     "legacyId": 103,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "D8",
     "color": "#87CEEB",
     "price": 150000,
@@ -2630,7 +2630,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000104"),
     "legacyId": 104,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "D9",
     "color": "#87CEEB",
     "price": 150000,
@@ -2644,7 +2644,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000105"),
     "legacyId": 105,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "D10",
     "color": "#87CEEB",
     "price": 150000,
@@ -2658,7 +2658,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000106"),
     "legacyId": 106,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "D11",
     "color": "#87CEEB",
     "price": 150000,
@@ -2672,7 +2672,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000107"),
     "legacyId": 107,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "D12",
     "color": "#87CEEB",
     "price": 150000,
@@ -2686,7 +2686,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000108"),
     "legacyId": 108,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "D13",
     "color": "#87CEEB",
     "price": 150000,
@@ -2700,7 +2700,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000109"),
     "legacyId": 109,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "D14",
     "color": "#87CEEB",
     "price": 150000,
@@ -2714,7 +2714,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000110"),
     "legacyId": 110,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "D15",
     "color": "#87CEEB",
     "price": 150000,
@@ -2728,7 +2728,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000111"),
     "legacyId": 111,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "E1",
     "color": "#87CEEB",
     "price": 150000,
@@ -2742,7 +2742,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000112"),
     "legacyId": 112,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "E2",
     "color": "#87CEEB",
     "price": 150000,
@@ -2756,7 +2756,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000113"),
     "legacyId": 113,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "E3",
     "color": "#87CEEB",
     "price": 150000,
@@ -2770,7 +2770,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000114"),
     "legacyId": 114,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "E4",
     "color": "#87CEEB",
     "price": 150000,
@@ -2784,7 +2784,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000115"),
     "legacyId": 115,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "E5",
     "color": "#87CEEB",
     "price": 150000,
@@ -2798,7 +2798,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000116"),
     "legacyId": 116,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "E6",
     "color": "#87CEEB",
     "price": 150000,
@@ -2812,7 +2812,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000117"),
     "legacyId": 117,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "E7",
     "color": "#87CEEB",
     "price": 150000,
@@ -2826,7 +2826,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000118"),
     "legacyId": 118,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "E8",
     "color": "#87CEEB",
     "price": 150000,
@@ -2840,7 +2840,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000119"),
     "legacyId": 119,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "E9",
     "color": "#87CEEB",
     "price": 150000,
@@ -2854,7 +2854,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000120"),
     "legacyId": 120,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "E10",
     "color": "#87CEEB",
     "price": 150000,
@@ -2868,7 +2868,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000121"),
     "legacyId": 121,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "E11",
     "color": "#87CEEB",
     "price": 150000,
@@ -2882,7 +2882,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000122"),
     "legacyId": 122,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "E12",
     "color": "#87CEEB",
     "price": 150000,
@@ -2896,7 +2896,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000123"),
     "legacyId": 123,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "E13",
     "color": "#87CEEB",
     "price": 150000,
@@ -2910,7 +2910,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000124"),
     "legacyId": 124,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "E14",
     "color": "#87CEEB",
     "price": 150000,
@@ -2924,7 +2924,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000125"),
     "legacyId": 125,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "E15",
     "color": "#87CEEB",
     "price": 150000,
@@ -2938,7 +2938,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000126"),
     "legacyId": 126,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "F1",
     "color": "#87CEEB",
     "price": 150000,
@@ -2952,7 +2952,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000127"),
     "legacyId": 127,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "F2",
     "color": "#87CEEB",
     "price": 150000,
@@ -2966,7 +2966,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000128"),
     "legacyId": 128,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "F3",
     "color": "#87CEEB",
     "price": 150000,
@@ -2980,7 +2980,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000129"),
     "legacyId": 129,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "F4",
     "color": "#87CEEB",
     "price": 150000,
@@ -2994,7 +2994,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000130"),
     "legacyId": 130,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "F5",
     "color": "#87CEEB",
     "price": 150000,
@@ -3008,7 +3008,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000131"),
     "legacyId": 131,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "F6",
     "color": "#87CEEB",
     "price": 150000,
@@ -3022,7 +3022,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000132"),
     "legacyId": 132,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "F7",
     "color": "#87CEEB",
     "price": 150000,
@@ -3036,7 +3036,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000133"),
     "legacyId": 133,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "F8",
     "color": "#87CEEB",
     "price": 150000,
@@ -3050,7 +3050,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000134"),
     "legacyId": 134,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "F9",
     "color": "#87CEEB",
     "price": 150000,
@@ -3064,7 +3064,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000135"),
     "legacyId": 135,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "F10",
     "color": "#87CEEB",
     "price": 150000,
@@ -3078,7 +3078,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000136"),
     "legacyId": 136,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "F11",
     "color": "#87CEEB",
     "price": 150000,
@@ -3092,7 +3092,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000137"),
     "legacyId": 137,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "F12",
     "color": "#87CEEB",
     "price": 150000,
@@ -3106,7 +3106,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000138"),
     "legacyId": 138,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "F13",
     "color": "#87CEEB",
     "price": 150000,
@@ -3120,7 +3120,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000139"),
     "legacyId": 139,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "F14",
     "color": "#87CEEB",
     "price": 150000,
@@ -3134,7 +3134,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000140"),
     "legacyId": 140,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "F15",
     "color": "#87CEEB",
     "price": 150000,
@@ -3148,7 +3148,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000141"),
     "legacyId": 141,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "G1",
     "color": "#87CEEB",
     "price": 150000,
@@ -3162,7 +3162,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000142"),
     "legacyId": 142,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "G2",
     "color": "#87CEEB",
     "price": 150000,
@@ -3176,7 +3176,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000143"),
     "legacyId": 143,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "G3",
     "color": "#87CEEB",
     "price": 150000,
@@ -3190,7 +3190,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000144"),
     "legacyId": 144,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "G4",
     "color": "#87CEEB",
     "price": 150000,
@@ -3204,7 +3204,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000145"),
     "legacyId": 145,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "G5",
     "color": "#87CEEB",
     "price": 150000,
@@ -3218,7 +3218,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000146"),
     "legacyId": 146,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "G6",
     "color": "#87CEEB",
     "price": 150000,
@@ -3232,7 +3232,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000147"),
     "legacyId": 147,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "G7",
     "color": "#87CEEB",
     "price": 150000,
@@ -3246,7 +3246,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000148"),
     "legacyId": 148,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "G8",
     "color": "#87CEEB",
     "price": 150000,
@@ -3260,7 +3260,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000149"),
     "legacyId": 149,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "G9",
     "color": "#87CEEB",
     "price": 150000,
@@ -3274,7 +3274,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000150"),
     "legacyId": 150,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "G10",
     "color": "#87CEEB",
     "price": 150000,
@@ -3288,7 +3288,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000151"),
     "legacyId": 151,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "G11",
     "color": "#87CEEB",
     "price": 150000,
@@ -3302,7 +3302,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000152"),
     "legacyId": 152,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "G12",
     "color": "#87CEEB",
     "price": 150000,
@@ -3316,7 +3316,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000153"),
     "legacyId": 153,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "G13",
     "color": "#87CEEB",
     "price": 150000,
@@ -3330,7 +3330,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000154"),
     "legacyId": 154,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "G14",
     "color": "#87CEEB",
     "price": 150000,
@@ -3344,7 +3344,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000155"),
     "legacyId": 155,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "G15",
     "color": "#87CEEB",
     "price": 150000,
@@ -3358,7 +3358,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000156"),
     "legacyId": 156,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "H1",
     "color": "#87CEEB",
     "price": 150000,
@@ -3372,7 +3372,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000157"),
     "legacyId": 157,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "H2",
     "color": "#87CEEB",
     "price": 150000,
@@ -3386,7 +3386,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000158"),
     "legacyId": 158,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "H3",
     "color": "#87CEEB",
     "price": 150000,
@@ -3400,7 +3400,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000159"),
     "legacyId": 159,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "H4",
     "color": "#87CEEB",
     "price": 150000,
@@ -3414,7 +3414,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000160"),
     "legacyId": 160,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "H5",
     "color": "#87CEEB",
     "price": 150000,
@@ -3428,7 +3428,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000161"),
     "legacyId": 161,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "H6",
     "color": "#87CEEB",
     "price": 150000,
@@ -3442,7 +3442,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000162"),
     "legacyId": 162,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "H7",
     "color": "#87CEEB",
     "price": 150000,
@@ -3456,7 +3456,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000163"),
     "legacyId": 163,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "H8",
     "color": "#87CEEB",
     "price": 150000,
@@ -3470,7 +3470,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000164"),
     "legacyId": 164,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "H9",
     "color": "#87CEEB",
     "price": 150000,
@@ -3484,7 +3484,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000165"),
     "legacyId": 165,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "H10",
     "color": "#87CEEB",
     "price": 150000,
@@ -3498,7 +3498,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000166"),
     "legacyId": 166,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "H11",
     "color": "#87CEEB",
     "price": 150000,
@@ -3512,7 +3512,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000167"),
     "legacyId": 167,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "H12",
     "color": "#87CEEB",
     "price": 150000,
@@ -3526,7 +3526,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000168"),
     "legacyId": 168,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "H13",
     "color": "#87CEEB",
     "price": 150000,
@@ -3540,7 +3540,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000169"),
     "legacyId": 169,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "H14",
     "color": "#87CEEB",
     "price": 150000,
@@ -3554,7 +3554,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000170"),
     "legacyId": 170,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "H15",
     "color": "#87CEEB",
     "price": 150000,
@@ -3568,7 +3568,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000171"),
     "legacyId": 171,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "I1",
     "color": "#87CEEB",
     "price": 150000,
@@ -3582,7 +3582,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000172"),
     "legacyId": 172,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "I2",
     "color": "#87CEEB",
     "price": 150000,
@@ -3596,7 +3596,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000173"),
     "legacyId": 173,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "I3",
     "color": "#87CEEB",
     "price": 150000,
@@ -3610,7 +3610,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000174"),
     "legacyId": 174,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "I4",
     "color": "#87CEEB",
     "price": 150000,
@@ -3624,7 +3624,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000175"),
     "legacyId": 175,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "I5",
     "color": "#87CEEB",
     "price": 150000,
@@ -3638,7 +3638,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000176"),
     "legacyId": 176,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "I6",
     "color": "#87CEEB",
     "price": 150000,
@@ -3652,7 +3652,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000177"),
     "legacyId": 177,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "I7",
     "color": "#87CEEB",
     "price": 150000,
@@ -3666,7 +3666,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000178"),
     "legacyId": 178,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "I8",
     "color": "#87CEEB",
     "price": 150000,
@@ -3680,7 +3680,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000179"),
     "legacyId": 179,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "I9",
     "color": "#87CEEB",
     "price": 150000,
@@ -3694,7 +3694,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000180"),
     "legacyId": 180,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "I10",
     "color": "#87CEEB",
     "price": 150000,
@@ -3708,7 +3708,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000181"),
     "legacyId": 181,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "I11",
     "color": "#87CEEB",
     "price": 150000,
@@ -3722,7 +3722,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000182"),
     "legacyId": 182,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "I12",
     "color": "#87CEEB",
     "price": 150000,
@@ -3736,7 +3736,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000183"),
     "legacyId": 183,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "I13",
     "color": "#87CEEB",
     "price": 150000,
@@ -3750,7 +3750,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000184"),
     "legacyId": 184,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "I14",
     "color": "#87CEEB",
     "price": 150000,
@@ -3764,7 +3764,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000185"),
     "legacyId": 185,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "I15",
     "color": "#87CEEB",
     "price": 150000,
@@ -3778,7 +3778,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000186"),
     "legacyId": 186,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "J1",
     "color": "#87CEEB",
     "price": 150000,
@@ -3792,7 +3792,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000187"),
     "legacyId": 187,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "J2",
     "color": "#87CEEB",
     "price": 150000,
@@ -3806,7 +3806,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000188"),
     "legacyId": 188,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "J3",
     "color": "#87CEEB",
     "price": 150000,
@@ -3820,7 +3820,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000189"),
     "legacyId": 189,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "J4",
     "color": "#87CEEB",
     "price": 150000,
@@ -3834,7 +3834,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000190"),
     "legacyId": 190,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "J5",
     "color": "#87CEEB",
     "price": 150000,
@@ -3848,7 +3848,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000191"),
     "legacyId": 191,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "J6",
     "color": "#87CEEB",
     "price": 150000,
@@ -3862,7 +3862,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000192"),
     "legacyId": 192,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "J7",
     "color": "#87CEEB",
     "price": 150000,
@@ -3876,7 +3876,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000193"),
     "legacyId": 193,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "J8",
     "color": "#87CEEB",
     "price": 150000,
@@ -3890,7 +3890,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000194"),
     "legacyId": 194,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "J9",
     "color": "#87CEEB",
     "price": 150000,
@@ -3904,7 +3904,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000195"),
     "legacyId": 195,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "J10",
     "color": "#87CEEB",
     "price": 150000,
@@ -3918,7 +3918,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000196"),
     "legacyId": 196,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "J11",
     "color": "#87CEEB",
     "price": 150000,
@@ -3932,7 +3932,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000197"),
     "legacyId": 197,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "J12",
     "color": "#87CEEB",
     "price": 150000,
@@ -3946,7 +3946,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000198"),
     "legacyId": 198,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "J13",
     "color": "#87CEEB",
     "price": 150000,
@@ -3960,7 +3960,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000199"),
     "legacyId": 199,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "J14",
     "color": "#87CEEB",
     "price": 150000,
@@ -3974,7 +3974,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000200"),
     "legacyId": 200,
-    "zoneId": 2,
+    "zoneId": ObjectId("f10000000000000000000002"),
     "label": "J15",
     "color": "#87CEEB",
     "price": 150000,
@@ -3988,7 +3988,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000201"),
     "legacyId": 201,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "A1",
     "color": "#FF4500",
     "price": 500000,
@@ -4002,7 +4002,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000202"),
     "legacyId": 202,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "A2",
     "color": "#FF4500",
     "price": 500000,
@@ -4016,7 +4016,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000203"),
     "legacyId": 203,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "A3",
     "color": "#FF4500",
     "price": 500000,
@@ -4030,7 +4030,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000204"),
     "legacyId": 204,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "A4",
     "color": "#FF4500",
     "price": 500000,
@@ -4044,7 +4044,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000205"),
     "legacyId": 205,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "A5",
     "color": "#FF4500",
     "price": 500000,
@@ -4058,7 +4058,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000206"),
     "legacyId": 206,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "A6",
     "color": "#FF4500",
     "price": 500000,
@@ -4072,7 +4072,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000207"),
     "legacyId": 207,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "A7",
     "color": "#FF4500",
     "price": 500000,
@@ -4086,7 +4086,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000208"),
     "legacyId": 208,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "A8",
     "color": "#FF4500",
     "price": 500000,
@@ -4100,7 +4100,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000209"),
     "legacyId": 209,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "A9",
     "color": "#FF4500",
     "price": 500000,
@@ -4114,7 +4114,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000210"),
     "legacyId": 210,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "A10",
     "color": "#FF4500",
     "price": 500000,
@@ -4128,7 +4128,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000211"),
     "legacyId": 211,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "B1",
     "color": "#FF4500",
     "price": 500000,
@@ -4142,7 +4142,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000212"),
     "legacyId": 212,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "B2",
     "color": "#FF4500",
     "price": 500000,
@@ -4156,7 +4156,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000213"),
     "legacyId": 213,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "B3",
     "color": "#FF4500",
     "price": 500000,
@@ -4170,7 +4170,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000214"),
     "legacyId": 214,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "B4",
     "color": "#FF4500",
     "price": 500000,
@@ -4184,7 +4184,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000215"),
     "legacyId": 215,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "B5",
     "color": "#FF4500",
     "price": 500000,
@@ -4198,7 +4198,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000216"),
     "legacyId": 216,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "B6",
     "color": "#FF4500",
     "price": 500000,
@@ -4212,7 +4212,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000217"),
     "legacyId": 217,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "B7",
     "color": "#FF4500",
     "price": 500000,
@@ -4226,7 +4226,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000218"),
     "legacyId": 218,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "B8",
     "color": "#FF4500",
     "price": 500000,
@@ -4240,7 +4240,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000219"),
     "legacyId": 219,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "B9",
     "color": "#FF4500",
     "price": 500000,
@@ -4254,7 +4254,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000220"),
     "legacyId": 220,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "B10",
     "color": "#FF4500",
     "price": 500000,
@@ -4268,7 +4268,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000221"),
     "legacyId": 221,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "C1",
     "color": "#FF4500",
     "price": 500000,
@@ -4282,7 +4282,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000222"),
     "legacyId": 222,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "C2",
     "color": "#FF4500",
     "price": 500000,
@@ -4296,7 +4296,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000223"),
     "legacyId": 223,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "C3",
     "color": "#FF4500",
     "price": 500000,
@@ -4310,7 +4310,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000224"),
     "legacyId": 224,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "C4",
     "color": "#FF4500",
     "price": 500000,
@@ -4324,7 +4324,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000225"),
     "legacyId": 225,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "C5",
     "color": "#FF4500",
     "price": 500000,
@@ -4338,7 +4338,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000226"),
     "legacyId": 226,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "C6",
     "color": "#FF4500",
     "price": 500000,
@@ -4352,7 +4352,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000227"),
     "legacyId": 227,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "C7",
     "color": "#FF4500",
     "price": 500000,
@@ -4366,7 +4366,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000228"),
     "legacyId": 228,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "C8",
     "color": "#FF4500",
     "price": 500000,
@@ -4380,7 +4380,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000229"),
     "legacyId": 229,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "C9",
     "color": "#FF4500",
     "price": 500000,
@@ -4394,7 +4394,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000230"),
     "legacyId": 230,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "C10",
     "color": "#FF4500",
     "price": 500000,
@@ -4408,7 +4408,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000231"),
     "legacyId": 231,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "D1",
     "color": "#FF4500",
     "price": 500000,
@@ -4422,7 +4422,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000232"),
     "legacyId": 232,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "D2",
     "color": "#FF4500",
     "price": 500000,
@@ -4436,7 +4436,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000233"),
     "legacyId": 233,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "D3",
     "color": "#FF4500",
     "price": 500000,
@@ -4450,7 +4450,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000234"),
     "legacyId": 234,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "D4",
     "color": "#FF4500",
     "price": 500000,
@@ -4464,7 +4464,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000235"),
     "legacyId": 235,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "D5",
     "color": "#FF4500",
     "price": 500000,
@@ -4478,7 +4478,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000236"),
     "legacyId": 236,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "D6",
     "color": "#FF4500",
     "price": 500000,
@@ -4492,7 +4492,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000237"),
     "legacyId": 237,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "D7",
     "color": "#FF4500",
     "price": 500000,
@@ -4506,7 +4506,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000238"),
     "legacyId": 238,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "D8",
     "color": "#FF4500",
     "price": 500000,
@@ -4520,7 +4520,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000239"),
     "legacyId": 239,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "D9",
     "color": "#FF4500",
     "price": 500000,
@@ -4534,7 +4534,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000240"),
     "legacyId": 240,
-    "zoneId": 3,
+    "zoneId": ObjectId("f10000000000000000000003"),
     "label": "D10",
     "color": "#FF4500",
     "price": 500000,
@@ -4548,7 +4548,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000241"),
     "legacyId": 241,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "A1",
     "color": "#32CD32",
     "price": 250000,
@@ -4562,7 +4562,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000242"),
     "legacyId": 242,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "A2",
     "color": "#32CD32",
     "price": 250000,
@@ -4576,7 +4576,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000243"),
     "legacyId": 243,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "A3",
     "color": "#32CD32",
     "price": 250000,
@@ -4590,7 +4590,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000244"),
     "legacyId": 244,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "A4",
     "color": "#32CD32",
     "price": 250000,
@@ -4604,7 +4604,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000245"),
     "legacyId": 245,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "A5",
     "color": "#32CD32",
     "price": 250000,
@@ -4618,7 +4618,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000246"),
     "legacyId": 246,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "A6",
     "color": "#32CD32",
     "price": 250000,
@@ -4632,7 +4632,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000247"),
     "legacyId": 247,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "A7",
     "color": "#32CD32",
     "price": 250000,
@@ -4646,7 +4646,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000248"),
     "legacyId": 248,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "A8",
     "color": "#32CD32",
     "price": 250000,
@@ -4660,7 +4660,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000249"),
     "legacyId": 249,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "A9",
     "color": "#32CD32",
     "price": 250000,
@@ -4674,7 +4674,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000250"),
     "legacyId": 250,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "A10",
     "color": "#32CD32",
     "price": 250000,
@@ -4688,7 +4688,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000251"),
     "legacyId": 251,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "A11",
     "color": "#32CD32",
     "price": 250000,
@@ -4702,7 +4702,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000252"),
     "legacyId": 252,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "A12",
     "color": "#32CD32",
     "price": 250000,
@@ -4716,7 +4716,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000253"),
     "legacyId": 253,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "B1",
     "color": "#32CD32",
     "price": 250000,
@@ -4730,7 +4730,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000254"),
     "legacyId": 254,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "B2",
     "color": "#32CD32",
     "price": 250000,
@@ -4744,7 +4744,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000255"),
     "legacyId": 255,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "B3",
     "color": "#32CD32",
     "price": 250000,
@@ -4758,7 +4758,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000256"),
     "legacyId": 256,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "B4",
     "color": "#32CD32",
     "price": 250000,
@@ -4772,7 +4772,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000257"),
     "legacyId": 257,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "B5",
     "color": "#32CD32",
     "price": 250000,
@@ -4786,7 +4786,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000258"),
     "legacyId": 258,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "B6",
     "color": "#32CD32",
     "price": 250000,
@@ -4800,7 +4800,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000259"),
     "legacyId": 259,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "B7",
     "color": "#32CD32",
     "price": 250000,
@@ -4814,7 +4814,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000260"),
     "legacyId": 260,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "B8",
     "color": "#32CD32",
     "price": 250000,
@@ -4828,7 +4828,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000261"),
     "legacyId": 261,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "B9",
     "color": "#32CD32",
     "price": 250000,
@@ -4842,7 +4842,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000262"),
     "legacyId": 262,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "B10",
     "color": "#32CD32",
     "price": 250000,
@@ -4856,7 +4856,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000263"),
     "legacyId": 263,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "B11",
     "color": "#32CD32",
     "price": 250000,
@@ -4870,7 +4870,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000264"),
     "legacyId": 264,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "B12",
     "color": "#32CD32",
     "price": 250000,
@@ -4884,7 +4884,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000265"),
     "legacyId": 265,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "C1",
     "color": "#32CD32",
     "price": 250000,
@@ -4898,7 +4898,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000266"),
     "legacyId": 266,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "C2",
     "color": "#32CD32",
     "price": 250000,
@@ -4912,7 +4912,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000267"),
     "legacyId": 267,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "C3",
     "color": "#32CD32",
     "price": 250000,
@@ -4926,7 +4926,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000268"),
     "legacyId": 268,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "C4",
     "color": "#32CD32",
     "price": 250000,
@@ -4940,7 +4940,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000269"),
     "legacyId": 269,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "C5",
     "color": "#32CD32",
     "price": 250000,
@@ -4954,7 +4954,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000270"),
     "legacyId": 270,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "C6",
     "color": "#32CD32",
     "price": 250000,
@@ -4968,7 +4968,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000271"),
     "legacyId": 271,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "C7",
     "color": "#32CD32",
     "price": 250000,
@@ -4982,7 +4982,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000272"),
     "legacyId": 272,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "C8",
     "color": "#32CD32",
     "price": 250000,
@@ -4996,7 +4996,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000273"),
     "legacyId": 273,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "C9",
     "color": "#32CD32",
     "price": 250000,
@@ -5010,7 +5010,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000274"),
     "legacyId": 274,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "C10",
     "color": "#32CD32",
     "price": 250000,
@@ -5024,7 +5024,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000275"),
     "legacyId": 275,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "C11",
     "color": "#32CD32",
     "price": 250000,
@@ -5038,7 +5038,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000276"),
     "legacyId": 276,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "C12",
     "color": "#32CD32",
     "price": 250000,
@@ -5052,7 +5052,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000277"),
     "legacyId": 277,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "D1",
     "color": "#32CD32",
     "price": 250000,
@@ -5066,7 +5066,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000278"),
     "legacyId": 278,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "D2",
     "color": "#32CD32",
     "price": 250000,
@@ -5080,7 +5080,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000279"),
     "legacyId": 279,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "D3",
     "color": "#32CD32",
     "price": 250000,
@@ -5094,7 +5094,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000280"),
     "legacyId": 280,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "D4",
     "color": "#32CD32",
     "price": 250000,
@@ -5108,7 +5108,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000281"),
     "legacyId": 281,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "D5",
     "color": "#32CD32",
     "price": 250000,
@@ -5122,7 +5122,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000282"),
     "legacyId": 282,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "D6",
     "color": "#32CD32",
     "price": 250000,
@@ -5136,7 +5136,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000283"),
     "legacyId": 283,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "D7",
     "color": "#32CD32",
     "price": 250000,
@@ -5150,7 +5150,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000284"),
     "legacyId": 284,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "D8",
     "color": "#32CD32",
     "price": 250000,
@@ -5164,7 +5164,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000285"),
     "legacyId": 285,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "D9",
     "color": "#32CD32",
     "price": 250000,
@@ -5178,7 +5178,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000286"),
     "legacyId": 286,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "D10",
     "color": "#32CD32",
     "price": 250000,
@@ -5192,7 +5192,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000287"),
     "legacyId": 287,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "D11",
     "color": "#32CD32",
     "price": 250000,
@@ -5206,7 +5206,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000288"),
     "legacyId": 288,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "D12",
     "color": "#32CD32",
     "price": 250000,
@@ -5220,7 +5220,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000289"),
     "legacyId": 289,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "E1",
     "color": "#32CD32",
     "price": 250000,
@@ -5234,7 +5234,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000290"),
     "legacyId": 290,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "E2",
     "color": "#32CD32",
     "price": 250000,
@@ -5248,7 +5248,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000291"),
     "legacyId": 291,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "E3",
     "color": "#32CD32",
     "price": 250000,
@@ -5262,7 +5262,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000292"),
     "legacyId": 292,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "E4",
     "color": "#32CD32",
     "price": 250000,
@@ -5276,7 +5276,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000293"),
     "legacyId": 293,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "E5",
     "color": "#32CD32",
     "price": 250000,
@@ -5290,7 +5290,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000294"),
     "legacyId": 294,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "E6",
     "color": "#32CD32",
     "price": 250000,
@@ -5304,7 +5304,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000295"),
     "legacyId": 295,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "E7",
     "color": "#32CD32",
     "price": 250000,
@@ -5318,7 +5318,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000296"),
     "legacyId": 296,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "E8",
     "color": "#32CD32",
     "price": 250000,
@@ -5332,7 +5332,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000297"),
     "legacyId": 297,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "E9",
     "color": "#32CD32",
     "price": 250000,
@@ -5346,7 +5346,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000298"),
     "legacyId": 298,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "E10",
     "color": "#32CD32",
     "price": 250000,
@@ -5360,7 +5360,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000299"),
     "legacyId": 299,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "E11",
     "color": "#32CD32",
     "price": 250000,
@@ -5374,7 +5374,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000300"),
     "legacyId": 300,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "E12",
     "color": "#32CD32",
     "price": 250000,
@@ -5388,7 +5388,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000301"),
     "legacyId": 301,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "F1",
     "color": "#32CD32",
     "price": 250000,
@@ -5402,7 +5402,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000302"),
     "legacyId": 302,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "F2",
     "color": "#32CD32",
     "price": 250000,
@@ -5416,7 +5416,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000303"),
     "legacyId": 303,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "F3",
     "color": "#32CD32",
     "price": 250000,
@@ -5430,7 +5430,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000304"),
     "legacyId": 304,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "F4",
     "color": "#32CD32",
     "price": 250000,
@@ -5444,7 +5444,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000305"),
     "legacyId": 305,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "F5",
     "color": "#32CD32",
     "price": 250000,
@@ -5458,7 +5458,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000306"),
     "legacyId": 306,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "F6",
     "color": "#32CD32",
     "price": 250000,
@@ -5472,7 +5472,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000307"),
     "legacyId": 307,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "F7",
     "color": "#32CD32",
     "price": 250000,
@@ -5486,7 +5486,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000308"),
     "legacyId": 308,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "F8",
     "color": "#32CD32",
     "price": 250000,
@@ -5500,7 +5500,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000309"),
     "legacyId": 309,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "F9",
     "color": "#32CD32",
     "price": 250000,
@@ -5514,7 +5514,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000310"),
     "legacyId": 310,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "F10",
     "color": "#32CD32",
     "price": 250000,
@@ -5528,7 +5528,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000311"),
     "legacyId": 311,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "F11",
     "color": "#32CD32",
     "price": 250000,
@@ -5542,7 +5542,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000312"),
     "legacyId": 312,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "F12",
     "color": "#32CD32",
     "price": 250000,
@@ -5556,7 +5556,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000313"),
     "legacyId": 313,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "G1",
     "color": "#32CD32",
     "price": 250000,
@@ -5570,7 +5570,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000314"),
     "legacyId": 314,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "G2",
     "color": "#32CD32",
     "price": 250000,
@@ -5584,7 +5584,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000315"),
     "legacyId": 315,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "G3",
     "color": "#32CD32",
     "price": 250000,
@@ -5598,7 +5598,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000316"),
     "legacyId": 316,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "G4",
     "color": "#32CD32",
     "price": 250000,
@@ -5612,7 +5612,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000317"),
     "legacyId": 317,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "G5",
     "color": "#32CD32",
     "price": 250000,
@@ -5626,7 +5626,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000318"),
     "legacyId": 318,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "G6",
     "color": "#32CD32",
     "price": 250000,
@@ -5640,7 +5640,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000319"),
     "legacyId": 319,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "G7",
     "color": "#32CD32",
     "price": 250000,
@@ -5654,7 +5654,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000320"),
     "legacyId": 320,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "G8",
     "color": "#32CD32",
     "price": 250000,
@@ -5668,7 +5668,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000321"),
     "legacyId": 321,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "G9",
     "color": "#32CD32",
     "price": 250000,
@@ -5682,7 +5682,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000322"),
     "legacyId": 322,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "G10",
     "color": "#32CD32",
     "price": 250000,
@@ -5696,7 +5696,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000323"),
     "legacyId": 323,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "G11",
     "color": "#32CD32",
     "price": 250000,
@@ -5710,7 +5710,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000324"),
     "legacyId": 324,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "G12",
     "color": "#32CD32",
     "price": 250000,
@@ -5724,7 +5724,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000325"),
     "legacyId": 325,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "H1",
     "color": "#32CD32",
     "price": 250000,
@@ -5738,7 +5738,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000326"),
     "legacyId": 326,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "H2",
     "color": "#32CD32",
     "price": 250000,
@@ -5752,7 +5752,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000327"),
     "legacyId": 327,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "H3",
     "color": "#32CD32",
     "price": 250000,
@@ -5766,7 +5766,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000328"),
     "legacyId": 328,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "H4",
     "color": "#32CD32",
     "price": 250000,
@@ -5780,7 +5780,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000329"),
     "legacyId": 329,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "H5",
     "color": "#32CD32",
     "price": 250000,
@@ -5794,7 +5794,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000330"),
     "legacyId": 330,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "H6",
     "color": "#32CD32",
     "price": 250000,
@@ -5808,7 +5808,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000331"),
     "legacyId": 331,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "H7",
     "color": "#32CD32",
     "price": 250000,
@@ -5822,7 +5822,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000332"),
     "legacyId": 332,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "H8",
     "color": "#32CD32",
     "price": 250000,
@@ -5836,7 +5836,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000333"),
     "legacyId": 333,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "H9",
     "color": "#32CD32",
     "price": 250000,
@@ -5850,7 +5850,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000334"),
     "legacyId": 334,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "H10",
     "color": "#32CD32",
     "price": 250000,
@@ -5864,7 +5864,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000335"),
     "legacyId": 335,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "H11",
     "color": "#32CD32",
     "price": 250000,
@@ -5878,7 +5878,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000336"),
     "legacyId": 336,
-    "zoneId": 4,
+    "zoneId": ObjectId("f10000000000000000000004"),
     "label": "H12",
     "color": "#32CD32",
     "price": 250000,
@@ -5892,7 +5892,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000337"),
     "legacyId": 337,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "A1",
     "color": "#9370DB",
     "price": 180000,
@@ -5906,7 +5906,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000338"),
     "legacyId": 338,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "A2",
     "color": "#9370DB",
     "price": 180000,
@@ -5920,7 +5920,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000339"),
     "legacyId": 339,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "A3",
     "color": "#9370DB",
     "price": 180000,
@@ -5934,7 +5934,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000340"),
     "legacyId": 340,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "A4",
     "color": "#9370DB",
     "price": 180000,
@@ -5948,7 +5948,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000341"),
     "legacyId": 341,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "A5",
     "color": "#9370DB",
     "price": 180000,
@@ -5962,7 +5962,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000342"),
     "legacyId": 342,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "A6",
     "color": "#9370DB",
     "price": 180000,
@@ -5976,7 +5976,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000343"),
     "legacyId": 343,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "A7",
     "color": "#9370DB",
     "price": 180000,
@@ -5990,7 +5990,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000344"),
     "legacyId": 344,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "A8",
     "color": "#9370DB",
     "price": 180000,
@@ -6004,7 +6004,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000345"),
     "legacyId": 345,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "B1",
     "color": "#9370DB",
     "price": 180000,
@@ -6018,7 +6018,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000346"),
     "legacyId": 346,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "B2",
     "color": "#9370DB",
     "price": 180000,
@@ -6032,7 +6032,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000347"),
     "legacyId": 347,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "B3",
     "color": "#9370DB",
     "price": 180000,
@@ -6046,7 +6046,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000348"),
     "legacyId": 348,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "B4",
     "color": "#9370DB",
     "price": 180000,
@@ -6060,7 +6060,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000349"),
     "legacyId": 349,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "B5",
     "color": "#9370DB",
     "price": 180000,
@@ -6074,7 +6074,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000350"),
     "legacyId": 350,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "B6",
     "color": "#9370DB",
     "price": 180000,
@@ -6088,7 +6088,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000351"),
     "legacyId": 351,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "B7",
     "color": "#9370DB",
     "price": 180000,
@@ -6102,7 +6102,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000352"),
     "legacyId": 352,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "B8",
     "color": "#9370DB",
     "price": 180000,
@@ -6116,7 +6116,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000353"),
     "legacyId": 353,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "C1",
     "color": "#9370DB",
     "price": 180000,
@@ -6130,7 +6130,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000354"),
     "legacyId": 354,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "C2",
     "color": "#9370DB",
     "price": 180000,
@@ -6144,7 +6144,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000355"),
     "legacyId": 355,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "C3",
     "color": "#9370DB",
     "price": 180000,
@@ -6158,7 +6158,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000356"),
     "legacyId": 356,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "C4",
     "color": "#9370DB",
     "price": 180000,
@@ -6172,7 +6172,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000357"),
     "legacyId": 357,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "C5",
     "color": "#9370DB",
     "price": 180000,
@@ -6186,7 +6186,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000358"),
     "legacyId": 358,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "C6",
     "color": "#9370DB",
     "price": 180000,
@@ -6200,7 +6200,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000359"),
     "legacyId": 359,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "C7",
     "color": "#9370DB",
     "price": 180000,
@@ -6214,7 +6214,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000360"),
     "legacyId": 360,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "C8",
     "color": "#9370DB",
     "price": 180000,
@@ -6228,7 +6228,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000361"),
     "legacyId": 361,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "D1",
     "color": "#9370DB",
     "price": 180000,
@@ -6242,7 +6242,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000362"),
     "legacyId": 362,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "D2",
     "color": "#9370DB",
     "price": 180000,
@@ -6256,7 +6256,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000363"),
     "legacyId": 363,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "D3",
     "color": "#9370DB",
     "price": 180000,
@@ -6270,7 +6270,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000364"),
     "legacyId": 364,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "D4",
     "color": "#9370DB",
     "price": 180000,
@@ -6284,7 +6284,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000365"),
     "legacyId": 365,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "D5",
     "color": "#9370DB",
     "price": 180000,
@@ -6298,7 +6298,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000366"),
     "legacyId": 366,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "D6",
     "color": "#9370DB",
     "price": 180000,
@@ -6312,7 +6312,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000367"),
     "legacyId": 367,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "D7",
     "color": "#9370DB",
     "price": 180000,
@@ -6326,7 +6326,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000368"),
     "legacyId": 368,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "D8",
     "color": "#9370DB",
     "price": 180000,
@@ -6340,7 +6340,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000369"),
     "legacyId": 369,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "E1",
     "color": "#9370DB",
     "price": 180000,
@@ -6354,7 +6354,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000370"),
     "legacyId": 370,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "E2",
     "color": "#9370DB",
     "price": 180000,
@@ -6368,7 +6368,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000371"),
     "legacyId": 371,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "E3",
     "color": "#9370DB",
     "price": 180000,
@@ -6382,7 +6382,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000372"),
     "legacyId": 372,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "E4",
     "color": "#9370DB",
     "price": 180000,
@@ -6396,7 +6396,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000373"),
     "legacyId": 373,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "E5",
     "color": "#9370DB",
     "price": 180000,
@@ -6410,7 +6410,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000374"),
     "legacyId": 374,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "E6",
     "color": "#9370DB",
     "price": 180000,
@@ -6424,7 +6424,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000375"),
     "legacyId": 375,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "E7",
     "color": "#9370DB",
     "price": 180000,
@@ -6438,7 +6438,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000376"),
     "legacyId": 376,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "E8",
     "color": "#9370DB",
     "price": 180000,
@@ -6452,7 +6452,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000377"),
     "legacyId": 377,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "F1",
     "color": "#9370DB",
     "price": 180000,
@@ -6466,7 +6466,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000378"),
     "legacyId": 378,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "F2",
     "color": "#9370DB",
     "price": 180000,
@@ -6480,7 +6480,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000379"),
     "legacyId": 379,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "F3",
     "color": "#9370DB",
     "price": 180000,
@@ -6494,7 +6494,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000380"),
     "legacyId": 380,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "F4",
     "color": "#9370DB",
     "price": 180000,
@@ -6508,7 +6508,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000381"),
     "legacyId": 381,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "F5",
     "color": "#9370DB",
     "price": 180000,
@@ -6522,7 +6522,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000382"),
     "legacyId": 382,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "F6",
     "color": "#9370DB",
     "price": 180000,
@@ -6536,7 +6536,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000383"),
     "legacyId": 383,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "F7",
     "color": "#9370DB",
     "price": 180000,
@@ -6550,7 +6550,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000384"),
     "legacyId": 384,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "F8",
     "color": "#9370DB",
     "price": 180000,
@@ -6564,7 +6564,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000385"),
     "legacyId": 385,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "G1",
     "color": "#9370DB",
     "price": 180000,
@@ -6578,7 +6578,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000386"),
     "legacyId": 386,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "G2",
     "color": "#9370DB",
     "price": 180000,
@@ -6592,7 +6592,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000387"),
     "legacyId": 387,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "G3",
     "color": "#9370DB",
     "price": 180000,
@@ -6606,7 +6606,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000388"),
     "legacyId": 388,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "G4",
     "color": "#9370DB",
     "price": 180000,
@@ -6620,7 +6620,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000389"),
     "legacyId": 389,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "G5",
     "color": "#9370DB",
     "price": 180000,
@@ -6634,7 +6634,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000390"),
     "legacyId": 390,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "G6",
     "color": "#9370DB",
     "price": 180000,
@@ -6648,7 +6648,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000391"),
     "legacyId": 391,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "G7",
     "color": "#9370DB",
     "price": 180000,
@@ -6662,7 +6662,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000392"),
     "legacyId": 392,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "G8",
     "color": "#9370DB",
     "price": 180000,
@@ -6676,7 +6676,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000393"),
     "legacyId": 393,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "H1",
     "color": "#9370DB",
     "price": 180000,
@@ -6690,7 +6690,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000394"),
     "legacyId": 394,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "H2",
     "color": "#9370DB",
     "price": 180000,
@@ -6704,7 +6704,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000395"),
     "legacyId": 395,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "H3",
     "color": "#9370DB",
     "price": 180000,
@@ -6718,7 +6718,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000396"),
     "legacyId": 396,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "H4",
     "color": "#9370DB",
     "price": 180000,
@@ -6732,7 +6732,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000397"),
     "legacyId": 397,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "H5",
     "color": "#9370DB",
     "price": 180000,
@@ -6746,7 +6746,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000398"),
     "legacyId": 398,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "H6",
     "color": "#9370DB",
     "price": 180000,
@@ -6760,7 +6760,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000399"),
     "legacyId": 399,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "H7",
     "color": "#9370DB",
     "price": 180000,
@@ -6774,7 +6774,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000400"),
     "legacyId": 400,
-    "zoneId": 5,
+    "zoneId": ObjectId("f10000000000000000000005"),
     "label": "H8",
     "color": "#9370DB",
     "price": 180000,
@@ -6788,7 +6788,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000401"),
     "legacyId": 401,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "A1",
     "color": "#00CED1",
     "price": 600000,
@@ -6802,7 +6802,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000402"),
     "legacyId": 402,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "A2",
     "color": "#00CED1",
     "price": 600000,
@@ -6816,7 +6816,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000403"),
     "legacyId": 403,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "A3",
     "color": "#00CED1",
     "price": 600000,
@@ -6830,7 +6830,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000404"),
     "legacyId": 404,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "A4",
     "color": "#00CED1",
     "price": 600000,
@@ -6844,7 +6844,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000405"),
     "legacyId": 405,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "A5",
     "color": "#00CED1",
     "price": 600000,
@@ -6858,7 +6858,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000406"),
     "legacyId": 406,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "A6",
     "color": "#00CED1",
     "price": 600000,
@@ -6872,7 +6872,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000407"),
     "legacyId": 407,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "A7",
     "color": "#00CED1",
     "price": 600000,
@@ -6886,7 +6886,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000408"),
     "legacyId": 408,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "A8",
     "color": "#00CED1",
     "price": 600000,
@@ -6900,7 +6900,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000409"),
     "legacyId": 409,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "A9",
     "color": "#00CED1",
     "price": 600000,
@@ -6914,7 +6914,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000410"),
     "legacyId": 410,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "A10",
     "color": "#00CED1",
     "price": 600000,
@@ -6928,7 +6928,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000411"),
     "legacyId": 411,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "B1",
     "color": "#00CED1",
     "price": 600000,
@@ -6942,7 +6942,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000412"),
     "legacyId": 412,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "B2",
     "color": "#00CED1",
     "price": 600000,
@@ -6956,7 +6956,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000413"),
     "legacyId": 413,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "B3",
     "color": "#00CED1",
     "price": 600000,
@@ -6970,7 +6970,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000414"),
     "legacyId": 414,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "B4",
     "color": "#00CED1",
     "price": 600000,
@@ -6984,7 +6984,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000415"),
     "legacyId": 415,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "B5",
     "color": "#00CED1",
     "price": 600000,
@@ -6998,7 +6998,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000416"),
     "legacyId": 416,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "B6",
     "color": "#00CED1",
     "price": 600000,
@@ -7012,7 +7012,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000417"),
     "legacyId": 417,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "B7",
     "color": "#00CED1",
     "price": 600000,
@@ -7026,7 +7026,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000418"),
     "legacyId": 418,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "B8",
     "color": "#00CED1",
     "price": 600000,
@@ -7040,7 +7040,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000419"),
     "legacyId": 419,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "B9",
     "color": "#00CED1",
     "price": 600000,
@@ -7054,7 +7054,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000420"),
     "legacyId": 420,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "B10",
     "color": "#00CED1",
     "price": 600000,
@@ -7068,7 +7068,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000421"),
     "legacyId": 421,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "C1",
     "color": "#00CED1",
     "price": 600000,
@@ -7082,7 +7082,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000422"),
     "legacyId": 422,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "C2",
     "color": "#00CED1",
     "price": 600000,
@@ -7096,7 +7096,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000423"),
     "legacyId": 423,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "C3",
     "color": "#00CED1",
     "price": 600000,
@@ -7110,7 +7110,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000424"),
     "legacyId": 424,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "C4",
     "color": "#00CED1",
     "price": 600000,
@@ -7124,7 +7124,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000425"),
     "legacyId": 425,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "C5",
     "color": "#00CED1",
     "price": 600000,
@@ -7138,7 +7138,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000426"),
     "legacyId": 426,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "C6",
     "color": "#00CED1",
     "price": 600000,
@@ -7152,7 +7152,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000427"),
     "legacyId": 427,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "C7",
     "color": "#00CED1",
     "price": 600000,
@@ -7166,7 +7166,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000428"),
     "legacyId": 428,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "C8",
     "color": "#00CED1",
     "price": 600000,
@@ -7180,7 +7180,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000429"),
     "legacyId": 429,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "C9",
     "color": "#00CED1",
     "price": 600000,
@@ -7194,7 +7194,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000430"),
     "legacyId": 430,
-    "zoneId": 6,
+    "zoneId": ObjectId("f10000000000000000000006"),
     "label": "C10",
     "color": "#00CED1",
     "price": 600000,
@@ -7208,7 +7208,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000431"),
     "legacyId": 431,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "A1",
     "color": "#FF69B4",
     "price": 280000,
@@ -7222,7 +7222,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000432"),
     "legacyId": 432,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "A2",
     "color": "#FF69B4",
     "price": 280000,
@@ -7236,7 +7236,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000433"),
     "legacyId": 433,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "A3",
     "color": "#FF69B4",
     "price": 280000,
@@ -7250,7 +7250,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000434"),
     "legacyId": 434,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "A4",
     "color": "#FF69B4",
     "price": 280000,
@@ -7264,7 +7264,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000435"),
     "legacyId": 435,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "A5",
     "color": "#FF69B4",
     "price": 280000,
@@ -7278,7 +7278,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000436"),
     "legacyId": 436,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "A6",
     "color": "#FF69B4",
     "price": 280000,
@@ -7292,7 +7292,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000437"),
     "legacyId": 437,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "A7",
     "color": "#FF69B4",
     "price": 280000,
@@ -7306,7 +7306,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000438"),
     "legacyId": 438,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "A8",
     "color": "#FF69B4",
     "price": 280000,
@@ -7320,7 +7320,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000439"),
     "legacyId": 439,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "A9",
     "color": "#FF69B4",
     "price": 280000,
@@ -7334,7 +7334,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000440"),
     "legacyId": 440,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "A10",
     "color": "#FF69B4",
     "price": 280000,
@@ -7348,7 +7348,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000441"),
     "legacyId": 441,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "A11",
     "color": "#FF69B4",
     "price": 280000,
@@ -7362,7 +7362,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000442"),
     "legacyId": 442,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "A12",
     "color": "#FF69B4",
     "price": 280000,
@@ -7376,7 +7376,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000443"),
     "legacyId": 443,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "A13",
     "color": "#FF69B4",
     "price": 280000,
@@ -7390,7 +7390,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000444"),
     "legacyId": 444,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "A14",
     "color": "#FF69B4",
     "price": 280000,
@@ -7404,7 +7404,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000445"),
     "legacyId": 445,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "A15",
     "color": "#FF69B4",
     "price": 280000,
@@ -7418,7 +7418,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000446"),
     "legacyId": 446,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "A16",
     "color": "#FF69B4",
     "price": 280000,
@@ -7432,7 +7432,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000447"),
     "legacyId": 447,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "A17",
     "color": "#FF69B4",
     "price": 280000,
@@ -7446,7 +7446,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000448"),
     "legacyId": 448,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "B1",
     "color": "#FF69B4",
     "price": 280000,
@@ -7460,7 +7460,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000449"),
     "legacyId": 449,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "B2",
     "color": "#FF69B4",
     "price": 280000,
@@ -7474,7 +7474,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000450"),
     "legacyId": 450,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "B3",
     "color": "#FF69B4",
     "price": 280000,
@@ -7488,7 +7488,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000451"),
     "legacyId": 451,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "B4",
     "color": "#FF69B4",
     "price": 280000,
@@ -7502,7 +7502,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000452"),
     "legacyId": 452,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "B5",
     "color": "#FF69B4",
     "price": 280000,
@@ -7516,7 +7516,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000453"),
     "legacyId": 453,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "B6",
     "color": "#FF69B4",
     "price": 280000,
@@ -7530,7 +7530,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000454"),
     "legacyId": 454,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "B7",
     "color": "#FF69B4",
     "price": 280000,
@@ -7544,7 +7544,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000455"),
     "legacyId": 455,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "B8",
     "color": "#FF69B4",
     "price": 280000,
@@ -7558,7 +7558,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000456"),
     "legacyId": 456,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "B9",
     "color": "#FF69B4",
     "price": 280000,
@@ -7572,7 +7572,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000457"),
     "legacyId": 457,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "B10",
     "color": "#FF69B4",
     "price": 280000,
@@ -7586,7 +7586,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000458"),
     "legacyId": 458,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "B11",
     "color": "#FF69B4",
     "price": 280000,
@@ -7600,7 +7600,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000459"),
     "legacyId": 459,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "B12",
     "color": "#FF69B4",
     "price": 280000,
@@ -7614,7 +7614,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000460"),
     "legacyId": 460,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "B13",
     "color": "#FF69B4",
     "price": 280000,
@@ -7628,7 +7628,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000461"),
     "legacyId": 461,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "B14",
     "color": "#FF69B4",
     "price": 280000,
@@ -7642,7 +7642,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000462"),
     "legacyId": 462,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "B15",
     "color": "#FF69B4",
     "price": 280000,
@@ -7656,7 +7656,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000463"),
     "legacyId": 463,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "B16",
     "color": "#FF69B4",
     "price": 280000,
@@ -7670,7 +7670,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000464"),
     "legacyId": 464,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "B17",
     "color": "#FF69B4",
     "price": 280000,
@@ -7684,7 +7684,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000465"),
     "legacyId": 465,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "C1",
     "color": "#FF69B4",
     "price": 280000,
@@ -7698,7 +7698,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000466"),
     "legacyId": 466,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "C2",
     "color": "#FF69B4",
     "price": 280000,
@@ -7712,7 +7712,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000467"),
     "legacyId": 467,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "C3",
     "color": "#FF69B4",
     "price": 280000,
@@ -7726,7 +7726,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000468"),
     "legacyId": 468,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "C4",
     "color": "#FF69B4",
     "price": 280000,
@@ -7740,7 +7740,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000469"),
     "legacyId": 469,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "C5",
     "color": "#FF69B4",
     "price": 280000,
@@ -7754,7 +7754,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000470"),
     "legacyId": 470,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "C6",
     "color": "#FF69B4",
     "price": 280000,
@@ -7768,7 +7768,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000471"),
     "legacyId": 471,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "C7",
     "color": "#FF69B4",
     "price": 280000,
@@ -7782,7 +7782,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000472"),
     "legacyId": 472,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "C8",
     "color": "#FF69B4",
     "price": 280000,
@@ -7796,7 +7796,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000473"),
     "legacyId": 473,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "C9",
     "color": "#FF69B4",
     "price": 280000,
@@ -7810,7 +7810,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000474"),
     "legacyId": 474,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "C10",
     "color": "#FF69B4",
     "price": 280000,
@@ -7824,7 +7824,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000475"),
     "legacyId": 475,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "C11",
     "color": "#FF69B4",
     "price": 280000,
@@ -7838,7 +7838,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000476"),
     "legacyId": 476,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "C12",
     "color": "#FF69B4",
     "price": 280000,
@@ -7852,7 +7852,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000477"),
     "legacyId": 477,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "C13",
     "color": "#FF69B4",
     "price": 280000,
@@ -7866,7 +7866,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000478"),
     "legacyId": 478,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "C14",
     "color": "#FF69B4",
     "price": 280000,
@@ -7880,7 +7880,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000479"),
     "legacyId": 479,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "C15",
     "color": "#FF69B4",
     "price": 280000,
@@ -7894,7 +7894,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000480"),
     "legacyId": 480,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "C16",
     "color": "#FF69B4",
     "price": 280000,
@@ -7908,7 +7908,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000481"),
     "legacyId": 481,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "C17",
     "color": "#FF69B4",
     "price": 280000,
@@ -7922,7 +7922,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000482"),
     "legacyId": 482,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "D1",
     "color": "#FF69B4",
     "price": 280000,
@@ -7936,7 +7936,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000483"),
     "legacyId": 483,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "D2",
     "color": "#FF69B4",
     "price": 280000,
@@ -7950,7 +7950,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000484"),
     "legacyId": 484,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "D3",
     "color": "#FF69B4",
     "price": 280000,
@@ -7964,7 +7964,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000485"),
     "legacyId": 485,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "D4",
     "color": "#FF69B4",
     "price": 280000,
@@ -7978,7 +7978,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000486"),
     "legacyId": 486,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "D5",
     "color": "#FF69B4",
     "price": 280000,
@@ -7992,7 +7992,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000487"),
     "legacyId": 487,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "D6",
     "color": "#FF69B4",
     "price": 280000,
@@ -8006,7 +8006,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000488"),
     "legacyId": 488,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "D7",
     "color": "#FF69B4",
     "price": 280000,
@@ -8020,7 +8020,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000489"),
     "legacyId": 489,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "D8",
     "color": "#FF69B4",
     "price": 280000,
@@ -8034,7 +8034,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000490"),
     "legacyId": 490,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "D9",
     "color": "#FF69B4",
     "price": 280000,
@@ -8048,7 +8048,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000491"),
     "legacyId": 491,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "D10",
     "color": "#FF69B4",
     "price": 280000,
@@ -8062,7 +8062,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000492"),
     "legacyId": 492,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "D11",
     "color": "#FF69B4",
     "price": 280000,
@@ -8076,7 +8076,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000493"),
     "legacyId": 493,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "D12",
     "color": "#FF69B4",
     "price": 280000,
@@ -8090,7 +8090,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000494"),
     "legacyId": 494,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "D13",
     "color": "#FF69B4",
     "price": 280000,
@@ -8104,7 +8104,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000495"),
     "legacyId": 495,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "D14",
     "color": "#FF69B4",
     "price": 280000,
@@ -8118,7 +8118,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000496"),
     "legacyId": 496,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "D15",
     "color": "#FF69B4",
     "price": 280000,
@@ -8132,7 +8132,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000497"),
     "legacyId": 497,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "D16",
     "color": "#FF69B4",
     "price": 280000,
@@ -8146,7 +8146,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000498"),
     "legacyId": 498,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "D17",
     "color": "#FF69B4",
     "price": 280000,
@@ -8160,7 +8160,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000499"),
     "legacyId": 499,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "E1",
     "color": "#FF69B4",
     "price": 280000,
@@ -8174,7 +8174,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000500"),
     "legacyId": 500,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "E2",
     "color": "#FF69B4",
     "price": 280000,
@@ -8188,7 +8188,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000501"),
     "legacyId": 501,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "E3",
     "color": "#FF69B4",
     "price": 280000,
@@ -8202,7 +8202,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000502"),
     "legacyId": 502,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "E4",
     "color": "#FF69B4",
     "price": 280000,
@@ -8216,7 +8216,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000503"),
     "legacyId": 503,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "E5",
     "color": "#FF69B4",
     "price": 280000,
@@ -8230,7 +8230,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000504"),
     "legacyId": 504,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "E6",
     "color": "#FF69B4",
     "price": 280000,
@@ -8244,7 +8244,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000505"),
     "legacyId": 505,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "E7",
     "color": "#FF69B4",
     "price": 280000,
@@ -8258,7 +8258,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000506"),
     "legacyId": 506,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "E8",
     "color": "#FF69B4",
     "price": 280000,
@@ -8272,7 +8272,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000507"),
     "legacyId": 507,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "E9",
     "color": "#FF69B4",
     "price": 280000,
@@ -8286,7 +8286,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000508"),
     "legacyId": 508,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "E10",
     "color": "#FF69B4",
     "price": 280000,
@@ -8300,7 +8300,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000509"),
     "legacyId": 509,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "E11",
     "color": "#FF69B4",
     "price": 280000,
@@ -8314,7 +8314,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000510"),
     "legacyId": 510,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "E12",
     "color": "#FF69B4",
     "price": 280000,
@@ -8328,7 +8328,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000511"),
     "legacyId": 511,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "E13",
     "color": "#FF69B4",
     "price": 280000,
@@ -8342,7 +8342,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000512"),
     "legacyId": 512,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "E14",
     "color": "#FF69B4",
     "price": 280000,
@@ -8356,7 +8356,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000513"),
     "legacyId": 513,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "E15",
     "color": "#FF69B4",
     "price": 280000,
@@ -8370,7 +8370,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000514"),
     "legacyId": 514,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "E16",
     "color": "#FF69B4",
     "price": 280000,
@@ -8384,7 +8384,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000515"),
     "legacyId": 515,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "E17",
     "color": "#FF69B4",
     "price": 280000,
@@ -8398,7 +8398,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000516"),
     "legacyId": 516,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "F1",
     "color": "#FF69B4",
     "price": 280000,
@@ -8412,7 +8412,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000517"),
     "legacyId": 517,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "F2",
     "color": "#FF69B4",
     "price": 280000,
@@ -8426,7 +8426,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000518"),
     "legacyId": 518,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "F3",
     "color": "#FF69B4",
     "price": 280000,
@@ -8440,7 +8440,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000519"),
     "legacyId": 519,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "F4",
     "color": "#FF69B4",
     "price": 280000,
@@ -8454,7 +8454,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000520"),
     "legacyId": 520,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "F5",
     "color": "#FF69B4",
     "price": 280000,
@@ -8468,7 +8468,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000521"),
     "legacyId": 521,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "F6",
     "color": "#FF69B4",
     "price": 280000,
@@ -8482,7 +8482,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000522"),
     "legacyId": 522,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "F7",
     "color": "#FF69B4",
     "price": 280000,
@@ -8496,7 +8496,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000523"),
     "legacyId": 523,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "F8",
     "color": "#FF69B4",
     "price": 280000,
@@ -8510,7 +8510,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000524"),
     "legacyId": 524,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "F9",
     "color": "#FF69B4",
     "price": 280000,
@@ -8524,7 +8524,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000525"),
     "legacyId": 525,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "F10",
     "color": "#FF69B4",
     "price": 280000,
@@ -8538,7 +8538,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000526"),
     "legacyId": 526,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "F11",
     "color": "#FF69B4",
     "price": 280000,
@@ -8552,7 +8552,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000527"),
     "legacyId": 527,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "F12",
     "color": "#FF69B4",
     "price": 280000,
@@ -8566,7 +8566,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000528"),
     "legacyId": 528,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "F13",
     "color": "#FF69B4",
     "price": 280000,
@@ -8580,7 +8580,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000529"),
     "legacyId": 529,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "F14",
     "color": "#FF69B4",
     "price": 280000,
@@ -8594,7 +8594,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000530"),
     "legacyId": 530,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "F15",
     "color": "#FF69B4",
     "price": 280000,
@@ -8608,7 +8608,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000531"),
     "legacyId": 531,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "F16",
     "color": "#FF69B4",
     "price": 280000,
@@ -8622,7 +8622,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000532"),
     "legacyId": 532,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "F17",
     "color": "#FF69B4",
     "price": 280000,
@@ -8636,7 +8636,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000533"),
     "legacyId": 533,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "G1",
     "color": "#FF69B4",
     "price": 280000,
@@ -8650,7 +8650,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000534"),
     "legacyId": 534,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "G2",
     "color": "#FF69B4",
     "price": 280000,
@@ -8664,7 +8664,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000535"),
     "legacyId": 535,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "G3",
     "color": "#FF69B4",
     "price": 280000,
@@ -8678,7 +8678,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000536"),
     "legacyId": 536,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "G4",
     "color": "#FF69B4",
     "price": 280000,
@@ -8692,7 +8692,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000537"),
     "legacyId": 537,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "G5",
     "color": "#FF69B4",
     "price": 280000,
@@ -8706,7 +8706,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000538"),
     "legacyId": 538,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "G6",
     "color": "#FF69B4",
     "price": 280000,
@@ -8720,7 +8720,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000539"),
     "legacyId": 539,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "G7",
     "color": "#FF69B4",
     "price": 280000,
@@ -8734,7 +8734,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000540"),
     "legacyId": 540,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "G8",
     "color": "#FF69B4",
     "price": 280000,
@@ -8748,7 +8748,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000541"),
     "legacyId": 541,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "G9",
     "color": "#FF69B4",
     "price": 280000,
@@ -8762,7 +8762,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000542"),
     "legacyId": 542,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "G10",
     "color": "#FF69B4",
     "price": 280000,
@@ -8776,7 +8776,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000543"),
     "legacyId": 543,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "G11",
     "color": "#FF69B4",
     "price": 280000,
@@ -8790,7 +8790,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000544"),
     "legacyId": 544,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "G12",
     "color": "#FF69B4",
     "price": 280000,
@@ -8804,7 +8804,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000545"),
     "legacyId": 545,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "G13",
     "color": "#FF69B4",
     "price": 280000,
@@ -8818,7 +8818,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000546"),
     "legacyId": 546,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "G14",
     "color": "#FF69B4",
     "price": 280000,
@@ -8832,7 +8832,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000547"),
     "legacyId": 547,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "G15",
     "color": "#FF69B4",
     "price": 280000,
@@ -8846,7 +8846,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000548"),
     "legacyId": 548,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "G16",
     "color": "#FF69B4",
     "price": 280000,
@@ -8860,7 +8860,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000549"),
     "legacyId": 549,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "G17",
     "color": "#FF69B4",
     "price": 280000,
@@ -8874,7 +8874,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000550"),
     "legacyId": 550,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "H1",
     "color": "#FF69B4",
     "price": 280000,
@@ -8888,7 +8888,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000551"),
     "legacyId": 551,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "H2",
     "color": "#FF69B4",
     "price": 280000,
@@ -8902,7 +8902,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000552"),
     "legacyId": 552,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "H3",
     "color": "#FF69B4",
     "price": 280000,
@@ -8916,7 +8916,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000553"),
     "legacyId": 553,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "H4",
     "color": "#FF69B4",
     "price": 280000,
@@ -8930,7 +8930,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000554"),
     "legacyId": 554,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "H5",
     "color": "#FF69B4",
     "price": 280000,
@@ -8944,7 +8944,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000555"),
     "legacyId": 555,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "H6",
     "color": "#FF69B4",
     "price": 280000,
@@ -8958,7 +8958,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000556"),
     "legacyId": 556,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "H7",
     "color": "#FF69B4",
     "price": 280000,
@@ -8972,7 +8972,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000557"),
     "legacyId": 557,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "H8",
     "color": "#FF69B4",
     "price": 280000,
@@ -8986,7 +8986,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000558"),
     "legacyId": 558,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "H9",
     "color": "#FF69B4",
     "price": 280000,
@@ -9000,7 +9000,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000559"),
     "legacyId": 559,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "H10",
     "color": "#FF69B4",
     "price": 280000,
@@ -9014,7 +9014,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000560"),
     "legacyId": 560,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "H11",
     "color": "#FF69B4",
     "price": 280000,
@@ -9028,7 +9028,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000561"),
     "legacyId": 561,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "H12",
     "color": "#FF69B4",
     "price": 280000,
@@ -9042,7 +9042,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000562"),
     "legacyId": 562,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "H13",
     "color": "#FF69B4",
     "price": 280000,
@@ -9056,7 +9056,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000563"),
     "legacyId": 563,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "H14",
     "color": "#FF69B4",
     "price": 280000,
@@ -9070,7 +9070,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000564"),
     "legacyId": 564,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "H15",
     "color": "#FF69B4",
     "price": 280000,
@@ -9084,7 +9084,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000565"),
     "legacyId": 565,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "H16",
     "color": "#FF69B4",
     "price": 280000,
@@ -9098,7 +9098,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000566"),
     "legacyId": 566,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "H17",
     "color": "#FF69B4",
     "price": 280000,
@@ -9112,7 +9112,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000567"),
     "legacyId": 567,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "I1",
     "color": "#FF69B4",
     "price": 280000,
@@ -9126,7 +9126,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000568"),
     "legacyId": 568,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "I2",
     "color": "#FF69B4",
     "price": 280000,
@@ -9140,7 +9140,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000569"),
     "legacyId": 569,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "I3",
     "color": "#FF69B4",
     "price": 280000,
@@ -9154,7 +9154,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000570"),
     "legacyId": 570,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "I4",
     "color": "#FF69B4",
     "price": 280000,
@@ -9168,7 +9168,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000571"),
     "legacyId": 571,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "I5",
     "color": "#FF69B4",
     "price": 280000,
@@ -9182,7 +9182,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000572"),
     "legacyId": 572,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "I6",
     "color": "#FF69B4",
     "price": 280000,
@@ -9196,7 +9196,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000573"),
     "legacyId": 573,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "I7",
     "color": "#FF69B4",
     "price": 280000,
@@ -9210,7 +9210,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000574"),
     "legacyId": 574,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "I8",
     "color": "#FF69B4",
     "price": 280000,
@@ -9224,7 +9224,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000575"),
     "legacyId": 575,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "I9",
     "color": "#FF69B4",
     "price": 280000,
@@ -9238,7 +9238,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000576"),
     "legacyId": 576,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "I10",
     "color": "#FF69B4",
     "price": 280000,
@@ -9252,7 +9252,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000577"),
     "legacyId": 577,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "I11",
     "color": "#FF69B4",
     "price": 280000,
@@ -9266,7 +9266,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000578"),
     "legacyId": 578,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "I12",
     "color": "#FF69B4",
     "price": 280000,
@@ -9280,7 +9280,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000579"),
     "legacyId": 579,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "I13",
     "color": "#FF69B4",
     "price": 280000,
@@ -9294,7 +9294,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000580"),
     "legacyId": 580,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "I14",
     "color": "#FF69B4",
     "price": 280000,
@@ -9308,7 +9308,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000581"),
     "legacyId": 581,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "I15",
     "color": "#FF69B4",
     "price": 280000,
@@ -9322,7 +9322,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000582"),
     "legacyId": 582,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "I16",
     "color": "#FF69B4",
     "price": 280000,
@@ -9336,7 +9336,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000583"),
     "legacyId": 583,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "I17",
     "color": "#FF69B4",
     "price": 280000,
@@ -9350,7 +9350,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000584"),
     "legacyId": 584,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "J1",
     "color": "#FF69B4",
     "price": 280000,
@@ -9364,7 +9364,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000585"),
     "legacyId": 585,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "J2",
     "color": "#FF69B4",
     "price": 280000,
@@ -9378,7 +9378,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000586"),
     "legacyId": 586,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "J3",
     "color": "#FF69B4",
     "price": 280000,
@@ -9392,7 +9392,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000587"),
     "legacyId": 587,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "J4",
     "color": "#FF69B4",
     "price": 280000,
@@ -9406,7 +9406,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000588"),
     "legacyId": 588,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "J5",
     "color": "#FF69B4",
     "price": 280000,
@@ -9420,7 +9420,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000589"),
     "legacyId": 589,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "J6",
     "color": "#FF69B4",
     "price": 280000,
@@ -9434,7 +9434,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000590"),
     "legacyId": 590,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "J7",
     "color": "#FF69B4",
     "price": 280000,
@@ -9448,7 +9448,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000591"),
     "legacyId": 591,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "J8",
     "color": "#FF69B4",
     "price": 280000,
@@ -9462,7 +9462,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000592"),
     "legacyId": 592,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "J9",
     "color": "#FF69B4",
     "price": 280000,
@@ -9476,7 +9476,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000593"),
     "legacyId": 593,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "J10",
     "color": "#FF69B4",
     "price": 280000,
@@ -9490,7 +9490,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000594"),
     "legacyId": 594,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "J11",
     "color": "#FF69B4",
     "price": 280000,
@@ -9504,7 +9504,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000595"),
     "legacyId": 595,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "J12",
     "color": "#FF69B4",
     "price": 280000,
@@ -9518,7 +9518,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000596"),
     "legacyId": 596,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "J13",
     "color": "#FF69B4",
     "price": 280000,
@@ -9532,7 +9532,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000597"),
     "legacyId": 597,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "J14",
     "color": "#FF69B4",
     "price": 280000,
@@ -9546,7 +9546,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000598"),
     "legacyId": 598,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "J15",
     "color": "#FF69B4",
     "price": 280000,
@@ -9560,7 +9560,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000599"),
     "legacyId": 599,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "J16",
     "color": "#FF69B4",
     "price": 280000,
@@ -9574,7 +9574,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000600"),
     "legacyId": 600,
-    "zoneId": 7,
+    "zoneId": ObjectId("f10000000000000000000007"),
     "label": "J17",
     "color": "#FF69B4",
     "price": 280000,
@@ -9588,7 +9588,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000601"),
     "legacyId": 601,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "A1",
     "color": "#FF8C00",
     "price": 200000,
@@ -9602,7 +9602,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000602"),
     "legacyId": 602,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "A2",
     "color": "#FF8C00",
     "price": 200000,
@@ -9616,7 +9616,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000603"),
     "legacyId": 603,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "A3",
     "color": "#FF8C00",
     "price": 200000,
@@ -9630,7 +9630,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000604"),
     "legacyId": 604,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "A4",
     "color": "#FF8C00",
     "price": 200000,
@@ -9644,7 +9644,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000605"),
     "legacyId": 605,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "A5",
     "color": "#FF8C00",
     "price": 200000,
@@ -9658,7 +9658,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000606"),
     "legacyId": 606,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "A6",
     "color": "#FF8C00",
     "price": 200000,
@@ -9672,7 +9672,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000607"),
     "legacyId": 607,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "A7",
     "color": "#FF8C00",
     "price": 200000,
@@ -9686,7 +9686,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000608"),
     "legacyId": 608,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "A8",
     "color": "#FF8C00",
     "price": 200000,
@@ -9700,7 +9700,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000609"),
     "legacyId": 609,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "B1",
     "color": "#FF8C00",
     "price": 200000,
@@ -9714,7 +9714,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000610"),
     "legacyId": 610,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "B2",
     "color": "#FF8C00",
     "price": 200000,
@@ -9728,7 +9728,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000611"),
     "legacyId": 611,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "B3",
     "color": "#FF8C00",
     "price": 200000,
@@ -9742,7 +9742,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000612"),
     "legacyId": 612,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "B4",
     "color": "#FF8C00",
     "price": 200000,
@@ -9756,7 +9756,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000613"),
     "legacyId": 613,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "B5",
     "color": "#FF8C00",
     "price": 200000,
@@ -9770,7 +9770,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000614"),
     "legacyId": 614,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "B6",
     "color": "#FF8C00",
     "price": 200000,
@@ -9784,7 +9784,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000615"),
     "legacyId": 615,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "B7",
     "color": "#FF8C00",
     "price": 200000,
@@ -9798,7 +9798,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000616"),
     "legacyId": 616,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "B8",
     "color": "#FF8C00",
     "price": 200000,
@@ -9812,7 +9812,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000617"),
     "legacyId": 617,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "C1",
     "color": "#FF8C00",
     "price": 200000,
@@ -9826,7 +9826,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000618"),
     "legacyId": 618,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "C2",
     "color": "#FF8C00",
     "price": 200000,
@@ -9840,7 +9840,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000619"),
     "legacyId": 619,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "C3",
     "color": "#FF8C00",
     "price": 200000,
@@ -9854,7 +9854,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000620"),
     "legacyId": 620,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "C4",
     "color": "#FF8C00",
     "price": 200000,
@@ -9868,7 +9868,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000621"),
     "legacyId": 621,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "C5",
     "color": "#FF8C00",
     "price": 200000,
@@ -9882,7 +9882,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000622"),
     "legacyId": 622,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "C6",
     "color": "#FF8C00",
     "price": 200000,
@@ -9896,7 +9896,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000623"),
     "legacyId": 623,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "C7",
     "color": "#FF8C00",
     "price": 200000,
@@ -9910,7 +9910,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000624"),
     "legacyId": 624,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "C8",
     "color": "#FF8C00",
     "price": 200000,
@@ -9924,7 +9924,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000625"),
     "legacyId": 625,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "D1",
     "color": "#FF8C00",
     "price": 200000,
@@ -9938,7 +9938,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000626"),
     "legacyId": 626,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "D2",
     "color": "#FF8C00",
     "price": 200000,
@@ -9952,7 +9952,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000627"),
     "legacyId": 627,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "D3",
     "color": "#FF8C00",
     "price": 200000,
@@ -9966,7 +9966,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000628"),
     "legacyId": 628,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "D4",
     "color": "#FF8C00",
     "price": 200000,
@@ -9980,7 +9980,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000629"),
     "legacyId": 629,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "D5",
     "color": "#FF8C00",
     "price": 200000,
@@ -9994,7 +9994,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000630"),
     "legacyId": 630,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "D6",
     "color": "#FF8C00",
     "price": 200000,
@@ -10008,7 +10008,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000631"),
     "legacyId": 631,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "D7",
     "color": "#FF8C00",
     "price": 200000,
@@ -10022,7 +10022,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000632"),
     "legacyId": 632,
-    "zoneId": 8,
+    "zoneId": ObjectId("f10000000000000000000008"),
     "label": "D8",
     "color": "#FF8C00",
     "price": 200000,
@@ -10036,7 +10036,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000633"),
     "legacyId": 633,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "A1",
     "color": "#20B2AA",
     "price": 80000,
@@ -10050,7 +10050,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000634"),
     "legacyId": 634,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "A2",
     "color": "#20B2AA",
     "price": 80000,
@@ -10064,7 +10064,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000635"),
     "legacyId": 635,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "A3",
     "color": "#20B2AA",
     "price": 80000,
@@ -10078,7 +10078,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000636"),
     "legacyId": 636,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "A4",
     "color": "#20B2AA",
     "price": 80000,
@@ -10092,7 +10092,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000637"),
     "legacyId": 637,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "A5",
     "color": "#20B2AA",
     "price": 80000,
@@ -10106,7 +10106,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000638"),
     "legacyId": 638,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "A6",
     "color": "#20B2AA",
     "price": 80000,
@@ -10120,7 +10120,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000639"),
     "legacyId": 639,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "A7",
     "color": "#20B2AA",
     "price": 80000,
@@ -10134,7 +10134,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000640"),
     "legacyId": 640,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "A8",
     "color": "#20B2AA",
     "price": 80000,
@@ -10148,7 +10148,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000641"),
     "legacyId": 641,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "A9",
     "color": "#20B2AA",
     "price": 80000,
@@ -10162,7 +10162,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000642"),
     "legacyId": 642,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "A10",
     "color": "#20B2AA",
     "price": 80000,
@@ -10176,7 +10176,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000643"),
     "legacyId": 643,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "A11",
     "color": "#20B2AA",
     "price": 80000,
@@ -10190,7 +10190,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000644"),
     "legacyId": 644,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "A12",
     "color": "#20B2AA",
     "price": 80000,
@@ -10204,7 +10204,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000645"),
     "legacyId": 645,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "A13",
     "color": "#20B2AA",
     "price": 80000,
@@ -10218,7 +10218,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000646"),
     "legacyId": 646,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "A14",
     "color": "#20B2AA",
     "price": 80000,
@@ -10232,7 +10232,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000647"),
     "legacyId": 647,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "A15",
     "color": "#20B2AA",
     "price": 80000,
@@ -10246,7 +10246,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000648"),
     "legacyId": 648,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "A16",
     "color": "#20B2AA",
     "price": 80000,
@@ -10260,7 +10260,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000649"),
     "legacyId": 649,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "A17",
     "color": "#20B2AA",
     "price": 80000,
@@ -10274,7 +10274,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000650"),
     "legacyId": 650,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "A18",
     "color": "#20B2AA",
     "price": 80000,
@@ -10288,7 +10288,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000651"),
     "legacyId": 651,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "A19",
     "color": "#20B2AA",
     "price": 80000,
@@ -10302,7 +10302,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000652"),
     "legacyId": 652,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "A20",
     "color": "#20B2AA",
     "price": 80000,
@@ -10316,7 +10316,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000653"),
     "legacyId": 653,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "A21",
     "color": "#20B2AA",
     "price": 80000,
@@ -10330,7 +10330,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000654"),
     "legacyId": 654,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "B1",
     "color": "#20B2AA",
     "price": 80000,
@@ -10344,7 +10344,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000655"),
     "legacyId": 655,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "B2",
     "color": "#20B2AA",
     "price": 80000,
@@ -10358,7 +10358,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000656"),
     "legacyId": 656,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "B3",
     "color": "#20B2AA",
     "price": 80000,
@@ -10372,7 +10372,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000657"),
     "legacyId": 657,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "B4",
     "color": "#20B2AA",
     "price": 80000,
@@ -10386,7 +10386,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000658"),
     "legacyId": 658,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "B5",
     "color": "#20B2AA",
     "price": 80000,
@@ -10400,7 +10400,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000659"),
     "legacyId": 659,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "B6",
     "color": "#20B2AA",
     "price": 80000,
@@ -10414,7 +10414,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000660"),
     "legacyId": 660,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "B7",
     "color": "#20B2AA",
     "price": 80000,
@@ -10428,7 +10428,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000661"),
     "legacyId": 661,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "B8",
     "color": "#20B2AA",
     "price": 80000,
@@ -10442,7 +10442,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000662"),
     "legacyId": 662,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "B9",
     "color": "#20B2AA",
     "price": 80000,
@@ -10456,7 +10456,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000663"),
     "legacyId": 663,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "B10",
     "color": "#20B2AA",
     "price": 80000,
@@ -10470,7 +10470,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000664"),
     "legacyId": 664,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "B11",
     "color": "#20B2AA",
     "price": 80000,
@@ -10484,7 +10484,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000665"),
     "legacyId": 665,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "B12",
     "color": "#20B2AA",
     "price": 80000,
@@ -10498,7 +10498,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000666"),
     "legacyId": 666,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "B13",
     "color": "#20B2AA",
     "price": 80000,
@@ -10512,7 +10512,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000667"),
     "legacyId": 667,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "B14",
     "color": "#20B2AA",
     "price": 80000,
@@ -10526,7 +10526,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000668"),
     "legacyId": 668,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "B15",
     "color": "#20B2AA",
     "price": 80000,
@@ -10540,7 +10540,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000669"),
     "legacyId": 669,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "B16",
     "color": "#20B2AA",
     "price": 80000,
@@ -10554,7 +10554,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000670"),
     "legacyId": 670,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "B17",
     "color": "#20B2AA",
     "price": 80000,
@@ -10568,7 +10568,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000671"),
     "legacyId": 671,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "B18",
     "color": "#20B2AA",
     "price": 80000,
@@ -10582,7 +10582,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000672"),
     "legacyId": 672,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "B19",
     "color": "#20B2AA",
     "price": 80000,
@@ -10596,7 +10596,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000673"),
     "legacyId": 673,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "B20",
     "color": "#20B2AA",
     "price": 80000,
@@ -10610,7 +10610,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000674"),
     "legacyId": 674,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "B21",
     "color": "#20B2AA",
     "price": 80000,
@@ -10624,7 +10624,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000675"),
     "legacyId": 675,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "C1",
     "color": "#20B2AA",
     "price": 80000,
@@ -10638,7 +10638,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000676"),
     "legacyId": 676,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "C2",
     "color": "#20B2AA",
     "price": 80000,
@@ -10652,7 +10652,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000677"),
     "legacyId": 677,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "C3",
     "color": "#20B2AA",
     "price": 80000,
@@ -10666,7 +10666,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000678"),
     "legacyId": 678,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "C4",
     "color": "#20B2AA",
     "price": 80000,
@@ -10680,7 +10680,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000679"),
     "legacyId": 679,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "C5",
     "color": "#20B2AA",
     "price": 80000,
@@ -10694,7 +10694,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000680"),
     "legacyId": 680,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "C6",
     "color": "#20B2AA",
     "price": 80000,
@@ -10708,7 +10708,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000681"),
     "legacyId": 681,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "C7",
     "color": "#20B2AA",
     "price": 80000,
@@ -10722,7 +10722,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000682"),
     "legacyId": 682,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "C8",
     "color": "#20B2AA",
     "price": 80000,
@@ -10736,7 +10736,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000683"),
     "legacyId": 683,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "C9",
     "color": "#20B2AA",
     "price": 80000,
@@ -10750,7 +10750,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000684"),
     "legacyId": 684,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "C10",
     "color": "#20B2AA",
     "price": 80000,
@@ -10764,7 +10764,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000685"),
     "legacyId": 685,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "C11",
     "color": "#20B2AA",
     "price": 80000,
@@ -10778,7 +10778,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000686"),
     "legacyId": 686,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "C12",
     "color": "#20B2AA",
     "price": 80000,
@@ -10792,7 +10792,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000687"),
     "legacyId": 687,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "C13",
     "color": "#20B2AA",
     "price": 80000,
@@ -10806,7 +10806,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000688"),
     "legacyId": 688,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "C14",
     "color": "#20B2AA",
     "price": 80000,
@@ -10820,7 +10820,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000689"),
     "legacyId": 689,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "C15",
     "color": "#20B2AA",
     "price": 80000,
@@ -10834,7 +10834,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000690"),
     "legacyId": 690,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "C16",
     "color": "#20B2AA",
     "price": 80000,
@@ -10848,7 +10848,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000691"),
     "legacyId": 691,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "C17",
     "color": "#20B2AA",
     "price": 80000,
@@ -10862,7 +10862,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000692"),
     "legacyId": 692,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "C18",
     "color": "#20B2AA",
     "price": 80000,
@@ -10876,7 +10876,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000693"),
     "legacyId": 693,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "C19",
     "color": "#20B2AA",
     "price": 80000,
@@ -10890,7 +10890,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000694"),
     "legacyId": 694,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "C20",
     "color": "#20B2AA",
     "price": 80000,
@@ -10904,7 +10904,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000695"),
     "legacyId": 695,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "C21",
     "color": "#20B2AA",
     "price": 80000,
@@ -10918,7 +10918,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000696"),
     "legacyId": 696,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "D1",
     "color": "#20B2AA",
     "price": 80000,
@@ -10932,7 +10932,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000697"),
     "legacyId": 697,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "D2",
     "color": "#20B2AA",
     "price": 80000,
@@ -10946,7 +10946,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000698"),
     "legacyId": 698,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "D3",
     "color": "#20B2AA",
     "price": 80000,
@@ -10960,7 +10960,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000699"),
     "legacyId": 699,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "D4",
     "color": "#20B2AA",
     "price": 80000,
@@ -10974,7 +10974,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000700"),
     "legacyId": 700,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "D5",
     "color": "#20B2AA",
     "price": 80000,
@@ -10988,7 +10988,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000701"),
     "legacyId": 701,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "D6",
     "color": "#20B2AA",
     "price": 80000,
@@ -11002,7 +11002,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000702"),
     "legacyId": 702,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "D7",
     "color": "#20B2AA",
     "price": 80000,
@@ -11016,7 +11016,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000703"),
     "legacyId": 703,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "D8",
     "color": "#20B2AA",
     "price": 80000,
@@ -11030,7 +11030,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000704"),
     "legacyId": 704,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "D9",
     "color": "#20B2AA",
     "price": 80000,
@@ -11044,7 +11044,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000705"),
     "legacyId": 705,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "D10",
     "color": "#20B2AA",
     "price": 80000,
@@ -11058,7 +11058,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000706"),
     "legacyId": 706,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "D11",
     "color": "#20B2AA",
     "price": 80000,
@@ -11072,7 +11072,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000707"),
     "legacyId": 707,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "D12",
     "color": "#20B2AA",
     "price": 80000,
@@ -11086,7 +11086,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000708"),
     "legacyId": 708,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "D13",
     "color": "#20B2AA",
     "price": 80000,
@@ -11100,7 +11100,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000709"),
     "legacyId": 709,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "D14",
     "color": "#20B2AA",
     "price": 80000,
@@ -11114,7 +11114,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000710"),
     "legacyId": 710,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "D15",
     "color": "#20B2AA",
     "price": 80000,
@@ -11128,7 +11128,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000711"),
     "legacyId": 711,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "D16",
     "color": "#20B2AA",
     "price": 80000,
@@ -11142,7 +11142,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000712"),
     "legacyId": 712,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "D17",
     "color": "#20B2AA",
     "price": 80000,
@@ -11156,7 +11156,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000713"),
     "legacyId": 713,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "D18",
     "color": "#20B2AA",
     "price": 80000,
@@ -11170,7 +11170,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000714"),
     "legacyId": 714,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "D19",
     "color": "#20B2AA",
     "price": 80000,
@@ -11184,7 +11184,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000715"),
     "legacyId": 715,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "D20",
     "color": "#20B2AA",
     "price": 80000,
@@ -11198,7 +11198,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000716"),
     "legacyId": 716,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "D21",
     "color": "#20B2AA",
     "price": 80000,
@@ -11212,7 +11212,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000717"),
     "legacyId": 717,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "E1",
     "color": "#20B2AA",
     "price": 80000,
@@ -11226,7 +11226,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000718"),
     "legacyId": 718,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "E2",
     "color": "#20B2AA",
     "price": 80000,
@@ -11240,7 +11240,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000719"),
     "legacyId": 719,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "E3",
     "color": "#20B2AA",
     "price": 80000,
@@ -11254,7 +11254,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000720"),
     "legacyId": 720,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "E4",
     "color": "#20B2AA",
     "price": 80000,
@@ -11268,7 +11268,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000721"),
     "legacyId": 721,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "E5",
     "color": "#20B2AA",
     "price": 80000,
@@ -11282,7 +11282,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000722"),
     "legacyId": 722,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "E6",
     "color": "#20B2AA",
     "price": 80000,
@@ -11296,7 +11296,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000723"),
     "legacyId": 723,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "E7",
     "color": "#20B2AA",
     "price": 80000,
@@ -11310,7 +11310,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000724"),
     "legacyId": 724,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "E8",
     "color": "#20B2AA",
     "price": 80000,
@@ -11324,7 +11324,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000725"),
     "legacyId": 725,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "E9",
     "color": "#20B2AA",
     "price": 80000,
@@ -11338,7 +11338,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000726"),
     "legacyId": 726,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "E10",
     "color": "#20B2AA",
     "price": 80000,
@@ -11352,7 +11352,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000727"),
     "legacyId": 727,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "E11",
     "color": "#20B2AA",
     "price": 80000,
@@ -11366,7 +11366,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000728"),
     "legacyId": 728,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "E12",
     "color": "#20B2AA",
     "price": 80000,
@@ -11380,7 +11380,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000729"),
     "legacyId": 729,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "E13",
     "color": "#20B2AA",
     "price": 80000,
@@ -11394,7 +11394,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000730"),
     "legacyId": 730,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "E14",
     "color": "#20B2AA",
     "price": 80000,
@@ -11408,7 +11408,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000731"),
     "legacyId": 731,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "E15",
     "color": "#20B2AA",
     "price": 80000,
@@ -11422,7 +11422,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000732"),
     "legacyId": 732,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "E16",
     "color": "#20B2AA",
     "price": 80000,
@@ -11436,7 +11436,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000733"),
     "legacyId": 733,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "E17",
     "color": "#20B2AA",
     "price": 80000,
@@ -11450,7 +11450,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000734"),
     "legacyId": 734,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "E18",
     "color": "#20B2AA",
     "price": 80000,
@@ -11464,7 +11464,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000735"),
     "legacyId": 735,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "E19",
     "color": "#20B2AA",
     "price": 80000,
@@ -11478,7 +11478,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000736"),
     "legacyId": 736,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "E20",
     "color": "#20B2AA",
     "price": 80000,
@@ -11492,7 +11492,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000737"),
     "legacyId": 737,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "E21",
     "color": "#20B2AA",
     "price": 80000,
@@ -11506,7 +11506,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000738"),
     "legacyId": 738,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "F1",
     "color": "#20B2AA",
     "price": 80000,
@@ -11520,7 +11520,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000739"),
     "legacyId": 739,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "F2",
     "color": "#20B2AA",
     "price": 80000,
@@ -11534,7 +11534,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000740"),
     "legacyId": 740,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "F3",
     "color": "#20B2AA",
     "price": 80000,
@@ -11548,7 +11548,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000741"),
     "legacyId": 741,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "F4",
     "color": "#20B2AA",
     "price": 80000,
@@ -11562,7 +11562,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000742"),
     "legacyId": 742,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "F5",
     "color": "#20B2AA",
     "price": 80000,
@@ -11576,7 +11576,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000743"),
     "legacyId": 743,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "F6",
     "color": "#20B2AA",
     "price": 80000,
@@ -11590,7 +11590,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000744"),
     "legacyId": 744,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "F7",
     "color": "#20B2AA",
     "price": 80000,
@@ -11604,7 +11604,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000745"),
     "legacyId": 745,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "F8",
     "color": "#20B2AA",
     "price": 80000,
@@ -11618,7 +11618,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000746"),
     "legacyId": 746,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "F9",
     "color": "#20B2AA",
     "price": 80000,
@@ -11632,7 +11632,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000747"),
     "legacyId": 747,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "F10",
     "color": "#20B2AA",
     "price": 80000,
@@ -11646,7 +11646,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000748"),
     "legacyId": 748,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "F11",
     "color": "#20B2AA",
     "price": 80000,
@@ -11660,7 +11660,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000749"),
     "legacyId": 749,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "F12",
     "color": "#20B2AA",
     "price": 80000,
@@ -11674,7 +11674,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000750"),
     "legacyId": 750,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "F13",
     "color": "#20B2AA",
     "price": 80000,
@@ -11688,7 +11688,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000751"),
     "legacyId": 751,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "F14",
     "color": "#20B2AA",
     "price": 80000,
@@ -11702,7 +11702,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000752"),
     "legacyId": 752,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "F15",
     "color": "#20B2AA",
     "price": 80000,
@@ -11716,7 +11716,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000753"),
     "legacyId": 753,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "F16",
     "color": "#20B2AA",
     "price": 80000,
@@ -11730,7 +11730,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000754"),
     "legacyId": 754,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "F17",
     "color": "#20B2AA",
     "price": 80000,
@@ -11744,7 +11744,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000755"),
     "legacyId": 755,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "F18",
     "color": "#20B2AA",
     "price": 80000,
@@ -11758,7 +11758,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000756"),
     "legacyId": 756,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "F19",
     "color": "#20B2AA",
     "price": 80000,
@@ -11772,7 +11772,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000757"),
     "legacyId": 757,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "F20",
     "color": "#20B2AA",
     "price": 80000,
@@ -11786,7 +11786,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000758"),
     "legacyId": 758,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "F21",
     "color": "#20B2AA",
     "price": 80000,
@@ -11800,7 +11800,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000759"),
     "legacyId": 759,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "G1",
     "color": "#20B2AA",
     "price": 80000,
@@ -11814,7 +11814,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000760"),
     "legacyId": 760,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "G2",
     "color": "#20B2AA",
     "price": 80000,
@@ -11828,7 +11828,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000761"),
     "legacyId": 761,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "G3",
     "color": "#20B2AA",
     "price": 80000,
@@ -11842,7 +11842,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000762"),
     "legacyId": 762,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "G4",
     "color": "#20B2AA",
     "price": 80000,
@@ -11856,7 +11856,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000763"),
     "legacyId": 763,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "G5",
     "color": "#20B2AA",
     "price": 80000,
@@ -11870,7 +11870,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000764"),
     "legacyId": 764,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "G6",
     "color": "#20B2AA",
     "price": 80000,
@@ -11884,7 +11884,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000765"),
     "legacyId": 765,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "G7",
     "color": "#20B2AA",
     "price": 80000,
@@ -11898,7 +11898,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000766"),
     "legacyId": 766,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "G8",
     "color": "#20B2AA",
     "price": 80000,
@@ -11912,7 +11912,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000767"),
     "legacyId": 767,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "G9",
     "color": "#20B2AA",
     "price": 80000,
@@ -11926,7 +11926,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000768"),
     "legacyId": 768,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "G10",
     "color": "#20B2AA",
     "price": 80000,
@@ -11940,7 +11940,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000769"),
     "legacyId": 769,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "G11",
     "color": "#20B2AA",
     "price": 80000,
@@ -11954,7 +11954,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000770"),
     "legacyId": 770,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "G12",
     "color": "#20B2AA",
     "price": 80000,
@@ -11968,7 +11968,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000771"),
     "legacyId": 771,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "G13",
     "color": "#20B2AA",
     "price": 80000,
@@ -11982,7 +11982,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000772"),
     "legacyId": 772,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "G14",
     "color": "#20B2AA",
     "price": 80000,
@@ -11996,7 +11996,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000773"),
     "legacyId": 773,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "G15",
     "color": "#20B2AA",
     "price": 80000,
@@ -12010,7 +12010,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000774"),
     "legacyId": 774,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "G16",
     "color": "#20B2AA",
     "price": 80000,
@@ -12024,7 +12024,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000775"),
     "legacyId": 775,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "G17",
     "color": "#20B2AA",
     "price": 80000,
@@ -12038,7 +12038,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000776"),
     "legacyId": 776,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "G18",
     "color": "#20B2AA",
     "price": 80000,
@@ -12052,7 +12052,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000777"),
     "legacyId": 777,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "G19",
     "color": "#20B2AA",
     "price": 80000,
@@ -12066,7 +12066,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000778"),
     "legacyId": 778,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "G20",
     "color": "#20B2AA",
     "price": 80000,
@@ -12080,7 +12080,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000779"),
     "legacyId": 779,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "G21",
     "color": "#20B2AA",
     "price": 80000,
@@ -12094,7 +12094,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000780"),
     "legacyId": 780,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "H1",
     "color": "#20B2AA",
     "price": 80000,
@@ -12108,7 +12108,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000781"),
     "legacyId": 781,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "H2",
     "color": "#20B2AA",
     "price": 80000,
@@ -12122,7 +12122,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000782"),
     "legacyId": 782,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "H3",
     "color": "#20B2AA",
     "price": 80000,
@@ -12136,7 +12136,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000783"),
     "legacyId": 783,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "H4",
     "color": "#20B2AA",
     "price": 80000,
@@ -12150,7 +12150,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000784"),
     "legacyId": 784,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "H5",
     "color": "#20B2AA",
     "price": 80000,
@@ -12164,7 +12164,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000785"),
     "legacyId": 785,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "H6",
     "color": "#20B2AA",
     "price": 80000,
@@ -12178,7 +12178,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000786"),
     "legacyId": 786,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "H7",
     "color": "#20B2AA",
     "price": 80000,
@@ -12192,7 +12192,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000787"),
     "legacyId": 787,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "H8",
     "color": "#20B2AA",
     "price": 80000,
@@ -12206,7 +12206,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000788"),
     "legacyId": 788,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "H9",
     "color": "#20B2AA",
     "price": 80000,
@@ -12220,7 +12220,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000789"),
     "legacyId": 789,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "H10",
     "color": "#20B2AA",
     "price": 80000,
@@ -12234,7 +12234,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000790"),
     "legacyId": 790,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "H11",
     "color": "#20B2AA",
     "price": 80000,
@@ -12248,7 +12248,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000791"),
     "legacyId": 791,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "H12",
     "color": "#20B2AA",
     "price": 80000,
@@ -12262,7 +12262,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000792"),
     "legacyId": 792,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "H13",
     "color": "#20B2AA",
     "price": 80000,
@@ -12276,7 +12276,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000793"),
     "legacyId": 793,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "H14",
     "color": "#20B2AA",
     "price": 80000,
@@ -12290,7 +12290,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000794"),
     "legacyId": 794,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "H15",
     "color": "#20B2AA",
     "price": 80000,
@@ -12304,7 +12304,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000795"),
     "legacyId": 795,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "H16",
     "color": "#20B2AA",
     "price": 80000,
@@ -12318,7 +12318,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000796"),
     "legacyId": 796,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "H17",
     "color": "#20B2AA",
     "price": 80000,
@@ -12332,7 +12332,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000797"),
     "legacyId": 797,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "H18",
     "color": "#20B2AA",
     "price": 80000,
@@ -12346,7 +12346,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000798"),
     "legacyId": 798,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "H19",
     "color": "#20B2AA",
     "price": 80000,
@@ -12360,7 +12360,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000799"),
     "legacyId": 799,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "H20",
     "color": "#20B2AA",
     "price": 80000,
@@ -12374,7 +12374,7 @@ db.seats.insertMany([
   {
     "_id": ObjectId("f20000000000000000000800"),
     "legacyId": 800,
-    "zoneId": 9,
+    "zoneId": ObjectId("f10000000000000000000009"),
     "label": "H21",
     "color": "#20B2AA",
     "price": 80000,
@@ -12399,7 +12399,7 @@ db.ticketInfos.insertMany([
     "price": 15000,
     "salesStartTime": new Date("2026-08-20T00:00:00Z"),
     "salesEndTime": new Date("2026-08-24T12:00:00Z"),
-    "eventId": 7,
+    "eventId": ObjectId("200000000000000000000007"),
     "maxQuantityPerOrder": 10,
     "isActive": true,
     "createdAt": new Date("2026-06-01T09:00:00Z"),
@@ -12414,7 +12414,7 @@ db.ticketInfos.insertMany([
     "price": 20000,
     "salesStartTime": new Date("2026-06-01T00:00:00Z"),
     "salesEndTime": new Date("2026-09-25T23:59:59Z"),
-    "eventId": 8,
+    "eventId": ObjectId("200000000000000000000008"),
     "maxQuantityPerOrder": 10,
     "isActive": true,
     "createdAt": new Date("2026-06-02T10:00:00Z"),
@@ -12429,7 +12429,7 @@ db.ticketInfos.insertMany([
     "price": 12000,
     "salesStartTime": new Date("2026-06-01T00:00:00Z"),
     "salesEndTime": new Date("2026-06-28T10:30:00Z"),
-    "eventId": 9,
+    "eventId": ObjectId("200000000000000000000009"),
     "maxQuantityPerOrder": 10,
     "isActive": true,
     "createdAt": new Date("2026-06-03T11:00:00Z"),
@@ -12444,7 +12444,7 @@ db.ticketInfos.insertMany([
     "price": 18000,
     "salesStartTime": new Date("2026-06-01T00:00:00Z"),
     "salesEndTime": new Date("2026-06-29T12:00:00Z"),
-    "eventId": 10,
+    "eventId": ObjectId("200000000000000000000010"),
     "maxQuantityPerOrder": 10,
     "isActive": true,
     "createdAt": new Date("2026-06-04T12:00:00Z"),
@@ -12459,7 +12459,7 @@ db.ticketInfos.insertMany([
     "price": 100000,
     "salesStartTime": new Date("2026-06-01T00:00:00Z"),
     "salesEndTime": new Date("2026-06-30T01:00:00Z"),
-    "eventId": 11,
+    "eventId": ObjectId("200000000000000000000011"),
     "maxQuantityPerOrder": 10,
     "isActive": true,
     "createdAt": new Date("2026-06-05T13:00:00Z"),
@@ -12474,7 +12474,7 @@ db.ticketInfos.insertMany([
     "price": 250000,
     "salesStartTime": new Date("2026-06-01T00:00:00Z"),
     "salesEndTime": new Date("2026-07-01T12:00:00Z"),
-    "eventId": 12,
+    "eventId": ObjectId("200000000000000000000012"),
     "maxQuantityPerOrder": 10,
     "isActive": true,
     "createdAt": new Date("2026-06-06T14:00:00Z"),
@@ -12489,7 +12489,7 @@ db.ticketInfos.insertMany([
     "price": 300000,
     "salesStartTime": new Date("2026-06-01T00:00:00Z"),
     "salesEndTime": new Date("2026-07-02T09:30:00Z"),
-    "eventId": 13,
+    "eventId": ObjectId("200000000000000000000013"),
     "maxQuantityPerOrder": 5,
     "isActive": true,
     "createdAt": new Date("2026-06-07T15:00:00Z"),
@@ -12504,7 +12504,7 @@ db.ticketInfos.insertMany([
     "price": 280000,
     "salesStartTime": new Date("2026-06-01T00:00:00Z"),
     "salesEndTime": new Date("2026-07-03T10:00:00Z"),
-    "eventId": 14,
+    "eventId": ObjectId("200000000000000000000014"),
     "maxQuantityPerOrder": 10,
     "isActive": true,
     "createdAt": new Date("2026-06-08T16:00:00Z"),
@@ -12519,7 +12519,7 @@ db.ticketInfos.insertMany([
     "price": 80000,
     "salesStartTime": new Date("2026-06-01T00:00:00Z"),
     "salesEndTime": new Date("2026-07-04T10:30:00Z"),
-    "eventId": 15,
+    "eventId": ObjectId("200000000000000000000015"),
     "maxQuantityPerOrder": 10,
     "isActive": true,
     "createdAt": new Date("2026-06-09T17:00:00Z"),
@@ -12534,7 +12534,7 @@ db.ticketInfos.insertMany([
     "price": 350000,
     "salesStartTime": new Date("2026-06-01T00:00:00Z"),
     "salesEndTime": new Date("2026-07-05T10:30:00Z"),
-    "eventId": 16,
+    "eventId": ObjectId("200000000000000000000016"),
     "maxQuantityPerOrder": 10,
     "isActive": true,
     "createdAt": new Date("2026-06-10T18:00:00Z"),
@@ -12549,7 +12549,7 @@ db.ticketInfos.insertMany([
     "price": 160000,
     "salesStartTime": new Date("2026-06-01T00:00:00Z"),
     "salesEndTime": new Date("2026-07-06T11:30:00Z"),
-    "eventId": 17,
+    "eventId": ObjectId("200000000000000000000017"),
     "maxQuantityPerOrder": 10,
     "isActive": true,
     "createdAt": new Date("2026-06-11T19:00:00Z"),
@@ -12564,7 +12564,7 @@ db.ticketInfos.insertMany([
     "price": 400000,
     "salesStartTime": new Date("2026-06-01T00:00:00Z"),
     "salesEndTime": new Date("2026-07-07T11:30:00Z"),
-    "eventId": 18,
+    "eventId": ObjectId("200000000000000000000018"),
     "maxQuantityPerOrder": 8,
     "isActive": true,
     "createdAt": new Date("2026-06-12T20:00:00Z"),
@@ -12579,7 +12579,7 @@ db.ticketInfos.insertMany([
     "price": 300000,
     "salesStartTime": new Date("2026-06-01T00:00:00Z"),
     "salesEndTime": new Date("2026-07-08T12:00:00Z"),
-    "eventId": 19,
+    "eventId": ObjectId("200000000000000000000019"),
     "maxQuantityPerOrder": 6,
     "isActive": true,
     "createdAt": new Date("2026-06-13T21:00:00Z"),
@@ -12594,7 +12594,7 @@ db.ticketInfos.insertMany([
     "price": 130000,
     "salesStartTime": new Date("2026-06-01T00:00:00Z"),
     "salesEndTime": new Date("2026-07-09T12:30:00Z"),
-    "eventId": 20,
+    "eventId": ObjectId("200000000000000000000020"),
     "maxQuantityPerOrder": 10,
     "isActive": true,
     "createdAt": new Date("2026-06-14T22:00:00Z"),
@@ -12609,7 +12609,7 @@ db.ticketInfos.insertMany([
     "price": 220000,
     "salesStartTime": new Date("2026-06-01T00:00:00Z"),
     "salesEndTime": new Date("2026-07-10T12:30:00Z"),
-    "eventId": 21,
+    "eventId": ObjectId("200000000000000000000021"),
     "maxQuantityPerOrder": 10,
     "isActive": true,
     "createdAt": new Date("2026-06-15T23:00:00Z"),
@@ -12624,7 +12624,7 @@ db.ticketInfos.insertMany([
     "price": 260000,
     "salesStartTime": new Date("2026-06-01T00:00:00Z"),
     "salesEndTime": new Date("2026-07-11T12:30:00Z"),
-    "eventId": 22,
+    "eventId": ObjectId("200000000000000000000022"),
     "maxQuantityPerOrder": 10,
     "isActive": true,
     "createdAt": new Date("2026-06-16T09:00:00Z"),
@@ -12639,7 +12639,7 @@ db.ticketInfos.insertMany([
     "price": 140000,
     "salesStartTime": new Date("2026-06-01T00:00:00Z"),
     "salesEndTime": new Date("2026-07-12T12:30:00Z"),
-    "eventId": 23,
+    "eventId": ObjectId("200000000000000000000023"),
     "maxQuantityPerOrder": 10,
     "isActive": true,
     "createdAt": new Date("2026-06-17T10:00:00Z"),
@@ -12654,7 +12654,7 @@ db.ticketInfos.insertMany([
     "price": 320000,
     "salesStartTime": new Date("2026-06-01T00:00:00Z"),
     "salesEndTime": new Date("2026-07-13T12:30:00Z"),
-    "eventId": 24,
+    "eventId": ObjectId("200000000000000000000024"),
     "maxQuantityPerOrder": 8,
     "isActive": true,
     "createdAt": new Date("2026-06-18T11:00:00Z"),
@@ -12669,7 +12669,7 @@ db.ticketInfos.insertMany([
     "price": 180000,
     "salesStartTime": new Date("2026-06-01T00:00:00Z"),
     "salesEndTime": new Date("2026-07-14T01:30:00Z"),
-    "eventId": 25,
+    "eventId": ObjectId("200000000000000000000025"),
     "maxQuantityPerOrder": 10,
     "isActive": true,
     "createdAt": new Date("2026-06-19T12:00:00Z"),
@@ -12684,7 +12684,7 @@ db.ticketInfos.insertMany([
     "price": 250000,
     "salesStartTime": new Date("2026-06-01T00:00:00Z"),
     "salesEndTime": new Date("2026-07-15T02:30:00Z"),
-    "eventId": 26,
+    "eventId": ObjectId("200000000000000000000026"),
     "maxQuantityPerOrder": 5,
     "isActive": true,
     "createdAt": new Date("2026-06-20T13:00:00Z"),
@@ -12697,7 +12697,7 @@ db.ticketInventories.drop();
 db.ticketInventories.insertMany([
   {
     "_id": ObjectId("400000000000000000000001"),
-    "ticketInfoId": 1,
+    "ticketInfoId": ObjectId("300000000000000000000001"),
     "totalQuantity": 200,
     "soldQuantity": 2,
     "reservedQuantity": 0,
@@ -12706,7 +12706,7 @@ db.ticketInventories.insertMany([
   },
   {
     "_id": ObjectId("400000000000000000000002"),
-    "ticketInfoId": 2,
+    "ticketInfoId": ObjectId("300000000000000000000002"),
     "totalQuantity": 200,
     "soldQuantity": 1,
     "reservedQuantity": 0,
@@ -12715,7 +12715,7 @@ db.ticketInventories.insertMany([
   },
   {
     "_id": ObjectId("400000000000000000000003"),
-    "ticketInfoId": 3,
+    "ticketInfoId": ObjectId("300000000000000000000003"),
     "totalQuantity": 200,
     "soldQuantity": 1,
     "reservedQuantity": 0,
@@ -12724,7 +12724,7 @@ db.ticketInventories.insertMany([
   },
   {
     "_id": ObjectId("400000000000000000000004"),
-    "ticketInfoId": 4,
+    "ticketInfoId": ObjectId("300000000000000000000004"),
     "totalQuantity": 200,
     "soldQuantity": 0,
     "reservedQuantity": 0,
@@ -12733,7 +12733,7 @@ db.ticketInventories.insertMany([
   },
   {
     "_id": ObjectId("400000000000000000000005"),
-    "ticketInfoId": 5,
+    "ticketInfoId": ObjectId("300000000000000000000005"),
     "totalQuantity": 200,
     "soldQuantity": 1,
     "reservedQuantity": 0,
@@ -12742,7 +12742,7 @@ db.ticketInventories.insertMany([
   },
   {
     "_id": ObjectId("400000000000000000000006"),
-    "ticketInfoId": 6,
+    "ticketInfoId": ObjectId("300000000000000000000006"),
     "totalQuantity": 200,
     "soldQuantity": 1,
     "reservedQuantity": 0,
@@ -12751,7 +12751,7 @@ db.ticketInventories.insertMany([
   },
   {
     "_id": ObjectId("400000000000000000000007"),
-    "ticketInfoId": 7,
+    "ticketInfoId": ObjectId("300000000000000000000007"),
     "totalQuantity": 200,
     "soldQuantity": 2,
     "reservedQuantity": 0,
@@ -12760,7 +12760,7 @@ db.ticketInventories.insertMany([
   },
   {
     "_id": ObjectId("400000000000000000000008"),
-    "ticketInfoId": 8,
+    "ticketInfoId": ObjectId("300000000000000000000008"),
     "totalQuantity": 200,
     "soldQuantity": 2,
     "reservedQuantity": 0,
@@ -12769,7 +12769,7 @@ db.ticketInventories.insertMany([
   },
   {
     "_id": ObjectId("400000000000000000000009"),
-    "ticketInfoId": 9,
+    "ticketInfoId": ObjectId("300000000000000000000009"),
     "totalQuantity": 200,
     "soldQuantity": 2,
     "reservedQuantity": 0,
@@ -12778,7 +12778,7 @@ db.ticketInventories.insertMany([
   },
   {
     "_id": ObjectId("400000000000000000000010"),
-    "ticketInfoId": 10,
+    "ticketInfoId": ObjectId("300000000000000000000010"),
     "totalQuantity": 200,
     "soldQuantity": 1,
     "reservedQuantity": 0,
@@ -12787,7 +12787,7 @@ db.ticketInventories.insertMany([
   },
   {
     "_id": ObjectId("400000000000000000000011"),
-    "ticketInfoId": 11,
+    "ticketInfoId": ObjectId("300000000000000000000011"),
     "totalQuantity": 200,
     "soldQuantity": 0,
     "reservedQuantity": 0,
@@ -12796,7 +12796,7 @@ db.ticketInventories.insertMany([
   },
   {
     "_id": ObjectId("400000000000000000000012"),
-    "ticketInfoId": 12,
+    "ticketInfoId": ObjectId("300000000000000000000012"),
     "totalQuantity": 200,
     "soldQuantity": 0,
     "reservedQuantity": 0,
@@ -12805,7 +12805,7 @@ db.ticketInventories.insertMany([
   },
   {
     "_id": ObjectId("400000000000000000000013"),
-    "ticketInfoId": 13,
+    "ticketInfoId": ObjectId("300000000000000000000013"),
     "totalQuantity": 200,
     "soldQuantity": 0,
     "reservedQuantity": 0,
@@ -12814,7 +12814,7 @@ db.ticketInventories.insertMany([
   },
   {
     "_id": ObjectId("400000000000000000000014"),
-    "ticketInfoId": 14,
+    "ticketInfoId": ObjectId("300000000000000000000014"),
     "totalQuantity": 200,
     "soldQuantity": 0,
     "reservedQuantity": 0,
@@ -12823,7 +12823,7 @@ db.ticketInventories.insertMany([
   },
   {
     "_id": ObjectId("400000000000000000000015"),
-    "ticketInfoId": 15,
+    "ticketInfoId": ObjectId("300000000000000000000015"),
     "totalQuantity": 200,
     "soldQuantity": 0,
     "reservedQuantity": 0,
@@ -12832,7 +12832,7 @@ db.ticketInventories.insertMany([
   },
   {
     "_id": ObjectId("400000000000000000000016"),
-    "ticketInfoId": 16,
+    "ticketInfoId": ObjectId("300000000000000000000016"),
     "totalQuantity": 200,
     "soldQuantity": 0,
     "reservedQuantity": 0,
@@ -12841,7 +12841,7 @@ db.ticketInventories.insertMany([
   },
   {
     "_id": ObjectId("400000000000000000000017"),
-    "ticketInfoId": 17,
+    "ticketInfoId": ObjectId("300000000000000000000017"),
     "totalQuantity": 200,
     "soldQuantity": 0,
     "reservedQuantity": 0,
@@ -12850,7 +12850,7 @@ db.ticketInventories.insertMany([
   },
   {
     "_id": ObjectId("400000000000000000000018"),
-    "ticketInfoId": 18,
+    "ticketInfoId": ObjectId("300000000000000000000018"),
     "totalQuantity": 200,
     "soldQuantity": 0,
     "reservedQuantity": 0,
@@ -12859,7 +12859,7 @@ db.ticketInventories.insertMany([
   },
   {
     "_id": ObjectId("400000000000000000000019"),
-    "ticketInfoId": 19,
+    "ticketInfoId": ObjectId("300000000000000000000019"),
     "totalQuantity": 200,
     "soldQuantity": 0,
     "reservedQuantity": 0,
@@ -12868,7 +12868,7 @@ db.ticketInventories.insertMany([
   },
   {
     "_id": ObjectId("400000000000000000000020"),
-    "ticketInfoId": 20,
+    "ticketInfoId": ObjectId("300000000000000000000020"),
     "totalQuantity": 200,
     "soldQuantity": 0,
     "reservedQuantity": 0,
@@ -12883,7 +12883,7 @@ db.tickets.insertMany([
   {
     "_id": ObjectId("500000000000000000000001"),
     "legacyId": 1,
-    "ticketInfoId": 1,
+    "ticketInfoId": ObjectId("300000000000000000000001"),
     "ticketCode": "TKT000000012025",
     "status": "sold",
     "seatId": null,
@@ -12893,7 +12893,7 @@ db.tickets.insertMany([
   {
     "_id": ObjectId("500000000000000000000002"),
     "legacyId": 2,
-    "ticketInfoId": 1,
+    "ticketInfoId": ObjectId("300000000000000000000001"),
     "ticketCode": "TKT000000022025",
     "status": "sold",
     "seatId": null,
@@ -12903,7 +12903,7 @@ db.tickets.insertMany([
   {
     "_id": ObjectId("500000000000000000000003"),
     "legacyId": 3,
-    "ticketInfoId": 2,
+    "ticketInfoId": ObjectId("300000000000000000000002"),
     "ticketCode": "TKT000000032025",
     "status": "sold",
     "seatId": null,
@@ -12913,7 +12913,7 @@ db.tickets.insertMany([
   {
     "_id": ObjectId("500000000000000000000004"),
     "legacyId": 4,
-    "ticketInfoId": 3,
+    "ticketInfoId": ObjectId("300000000000000000000003"),
     "ticketCode": "TKT000000042025",
     "status": "sold",
     "seatId": null,
@@ -12923,7 +12923,7 @@ db.tickets.insertMany([
   {
     "_id": ObjectId("500000000000000000000005"),
     "legacyId": 5,
-    "ticketInfoId": 4,
+    "ticketInfoId": ObjectId("300000000000000000000004"),
     "ticketCode": "TKT000000142025",
     "status": "sold",
     "seatId": null,
@@ -12933,7 +12933,7 @@ db.tickets.insertMany([
   {
     "_id": ObjectId("500000000000000000000006"),
     "legacyId": 6,
-    "ticketInfoId": 4,
+    "ticketInfoId": ObjectId("300000000000000000000004"),
     "ticketCode": "TKT000000152025",
     "status": "sold",
     "seatId": null,
@@ -12943,7 +12943,7 @@ db.tickets.insertMany([
   {
     "_id": ObjectId("500000000000000000000007"),
     "legacyId": 7,
-    "ticketInfoId": 5,
+    "ticketInfoId": ObjectId("300000000000000000000005"),
     "ticketCode": "TKT000000052025",
     "status": "sold",
     "seatId": null,
@@ -12953,7 +12953,7 @@ db.tickets.insertMany([
   {
     "_id": ObjectId("500000000000000000000008"),
     "legacyId": 8,
-    "ticketInfoId": 6,
+    "ticketInfoId": ObjectId("300000000000000000000006"),
     "ticketCode": "TKT000000062025",
     "status": "sold",
     "seatId": null,
@@ -12963,7 +12963,7 @@ db.tickets.insertMany([
   {
     "_id": ObjectId("500000000000000000000009"),
     "legacyId": 9,
-    "ticketInfoId": 7,
+    "ticketInfoId": ObjectId("300000000000000000000007"),
     "ticketCode": "TKT000000072025",
     "status": "sold",
     "seatId": null,
@@ -12973,7 +12973,7 @@ db.tickets.insertMany([
   {
     "_id": ObjectId("500000000000000000000010"),
     "legacyId": 10,
-    "ticketInfoId": 7,
+    "ticketInfoId": ObjectId("300000000000000000000007"),
     "ticketCode": "TKT000000082025",
     "status": "sold",
     "seatId": null,
@@ -12983,7 +12983,7 @@ db.tickets.insertMany([
   {
     "_id": ObjectId("500000000000000000000011"),
     "legacyId": 11,
-    "ticketInfoId": 8,
+    "ticketInfoId": ObjectId("300000000000000000000008"),
     "ticketCode": "TKT000000092025",
     "status": "sold",
     "seatId": null,
@@ -12993,7 +12993,7 @@ db.tickets.insertMany([
   {
     "_id": ObjectId("500000000000000000000012"),
     "legacyId": 12,
-    "ticketInfoId": 8,
+    "ticketInfoId": ObjectId("300000000000000000000008"),
     "ticketCode": "TKT000000102025",
     "status": "sold",
     "seatId": null,
@@ -13003,7 +13003,7 @@ db.tickets.insertMany([
   {
     "_id": ObjectId("500000000000000000000013"),
     "legacyId": 13,
-    "ticketInfoId": 9,
+    "ticketInfoId": ObjectId("300000000000000000000009"),
     "ticketCode": "TKT000000112025",
     "status": "sold",
     "seatId": null,
@@ -13013,7 +13013,7 @@ db.tickets.insertMany([
   {
     "_id": ObjectId("500000000000000000000014"),
     "legacyId": 14,
-    "ticketInfoId": 9,
+    "ticketInfoId": ObjectId("300000000000000000000009"),
     "ticketCode": "TKT000000122025",
     "status": "sold",
     "seatId": null,
@@ -13023,7 +13023,7 @@ db.tickets.insertMany([
   {
     "_id": ObjectId("500000000000000000000015"),
     "legacyId": 15,
-    "ticketInfoId": 10,
+    "ticketInfoId": ObjectId("300000000000000000000010"),
     "ticketCode": "TKT000000132025",
     "status": "sold",
     "seatId": null,
@@ -13074,14 +13074,14 @@ db.orders.insertMany([
     "_id": ObjectId("700000000000000000000001"),
     "legacyId": 1,
     "orderNumber": "ORD00000001",
-    "userId": 5,
+    "userId": ObjectId("000000000000000000000005"),
     "totalQuantity": 2,
     "subtotalAmount": 300000,
     "discountAmount": 0,
     "totalAmount": 300000,
     "paymentStatus": "paid",
     "orderStatus": "delivered",
-    "paymentMethodId": 1,
+    "paymentMethodId": ObjectId("600000000000000000000001"),
     "contactPhone": "0945678901",
     "contactEmail": "customer1@ticketbox.vn",
     "deliveryMethod": "Mail",
@@ -13094,14 +13094,14 @@ db.orders.insertMany([
     "_id": ObjectId("700000000000000000000002"),
     "legacyId": 2,
     "orderNumber": "ORD00000002",
-    "userId": 5,
+    "userId": ObjectId("000000000000000000000005"),
     "totalQuantity": 2,
     "subtotalAmount": 530000,
     "discountAmount": 0,
     "totalAmount": 530000,
     "paymentStatus": "paid",
     "orderStatus": "delivered",
-    "paymentMethodId": 2,
+    "paymentMethodId": ObjectId("600000000000000000000002"),
     "contactPhone": "0945678901",
     "contactEmail": "customer1@ticketbox.vn",
     "deliveryMethod": "Mail",
@@ -13114,14 +13114,14 @@ db.orders.insertMany([
     "_id": ObjectId("700000000000000000000003"),
     "legacyId": 3,
     "orderNumber": "ORD00000003",
-    "userId": 5,
+    "userId": ObjectId("000000000000000000000005"),
     "totalQuantity": 2,
     "subtotalAmount": 220000,
     "discountAmount": 0,
     "totalAmount": 220000,
     "paymentStatus": "pending",
     "orderStatus": "created",
-    "paymentMethodId": 3,
+    "paymentMethodId": ObjectId("600000000000000000000003"),
     "contactPhone": "0945678901",
     "contactEmail": "customer1@ticketbox.vn",
     "deliveryMethod": "Mail",
@@ -13134,14 +13134,14 @@ db.orders.insertMany([
     "_id": ObjectId("700000000000000000000004"),
     "legacyId": 4,
     "orderNumber": "ORD00000004",
-    "userId": 5,
+    "userId": ObjectId("000000000000000000000005"),
     "totalQuantity": 2,
     "subtotalAmount": 600000,
     "discountAmount": 0,
     "totalAmount": 600000,
     "paymentStatus": "paid",
     "orderStatus": "delivered",
-    "paymentMethodId": 1,
+    "paymentMethodId": ObjectId("600000000000000000000001"),
     "contactPhone": "0945678901",
     "contactEmail": "customer1@ticketbox.vn",
     "deliveryMethod": "Mail",
@@ -13154,14 +13154,14 @@ db.orders.insertMany([
     "_id": ObjectId("700000000000000000000005"),
     "legacyId": 5,
     "orderNumber": "ORD00000005",
-    "userId": 5,
+    "userId": ObjectId("000000000000000000000005"),
     "totalQuantity": 1,
     "subtotalAmount": 200000,
     "discountAmount": 0,
     "totalAmount": 200000,
     "paymentStatus": "failed",
     "orderStatus": "cancelled",
-    "paymentMethodId": 2,
+    "paymentMethodId": ObjectId("600000000000000000000002"),
     "contactPhone": "0945678901",
     "contactEmail": "customer1@ticketbox.vn",
     "deliveryMethod": "Mail",
@@ -13174,14 +13174,14 @@ db.orders.insertMany([
     "_id": ObjectId("700000000000000000000006"),
     "legacyId": 6,
     "orderNumber": "ORD00000006",
-    "userId": 5,
+    "userId": ObjectId("000000000000000000000005"),
     "totalQuantity": 1,
     "subtotalAmount": 280000,
     "discountAmount": 0,
     "totalAmount": 280000,
     "paymentStatus": "paid",
     "orderStatus": "delivered",
-    "paymentMethodId": 3,
+    "paymentMethodId": ObjectId("600000000000000000000003"),
     "contactPhone": "0945678901",
     "contactEmail": "customer1@ticketbox.vn",
     "deliveryMethod": "Mail",
@@ -13194,14 +13194,14 @@ db.orders.insertMany([
     "_id": ObjectId("700000000000000000000007"),
     "legacyId": 7,
     "orderNumber": "ORD00000007",
-    "userId": 5,
+    "userId": ObjectId("000000000000000000000005"),
     "totalQuantity": 1,
     "subtotalAmount": 350000,
     "discountAmount": 0,
     "totalAmount": 350000,
     "paymentStatus": "pending",
     "orderStatus": "created",
-    "paymentMethodId": 1,
+    "paymentMethodId": ObjectId("600000000000000000000001"),
     "contactPhone": "0945678901",
     "contactEmail": "customer1@ticketbox.vn",
     "deliveryMethod": "Mail",
@@ -13214,14 +13214,14 @@ db.orders.insertMany([
     "_id": ObjectId("700000000000000000000008"),
     "legacyId": 8,
     "orderNumber": "ORD00000008",
-    "userId": 14,
+    "userId": ObjectId("000000000000000000000014"),
     "totalQuantity": 2,
     "subtotalAmount": 2000000,
     "discountAmount": 0,
     "totalAmount": 2000000,
     "paymentStatus": "paid",
     "orderStatus": "delivered",
-    "paymentMethodId": 1,
+    "paymentMethodId": ObjectId("600000000000000000000001"),
     "contactPhone": "0945678903",
     "contactEmail": "pham.thuy.dung@gmail.com",
     "deliveryMethod": "Mail",
@@ -13234,14 +13234,14 @@ db.orders.insertMany([
     "_id": ObjectId("700000000000000000000009"),
     "legacyId": 9,
     "orderNumber": "ORD00000009",
-    "userId": 17,
+    "userId": ObjectId("000000000000000000000017"),
     "totalQuantity": 5,
     "subtotalAmount": 5000000,
     "discountAmount": 500000,
     "totalAmount": 450000,
     "paymentStatus": "paid",
     "orderStatus": "delivered",
-    "paymentMethodId": 1,
+    "paymentMethodId": ObjectId("600000000000000000000001"),
     "contactPhone": "0945678923",
     "contactEmail": "mai.thi.quynh@gmail.com",
     "deliveryMethod": "Mail",
@@ -13254,14 +13254,14 @@ db.orders.insertMany([
     "_id": ObjectId("700000000000000000000010"),
     "legacyId": 10,
     "orderNumber": "ORD00000010",
-    "userId": 18,
+    "userId": ObjectId("000000000000000000000018"),
     "totalQuantity": 3,
     "subtotalAmount": 3000000,
     "discountAmount": 0,
     "totalAmount": 3000000,
     "paymentStatus": "paid",
     "orderStatus": "delivered",
-    "paymentMethodId": 1,
+    "paymentMethodId": ObjectId("600000000000000000000001"),
     "contactPhone": "0945678912",
     "contactEmail": "chu.thi.suong@gmail.com",
     "deliveryMethod": "Mail",
@@ -13274,14 +13274,14 @@ db.orders.insertMany([
     "_id": ObjectId("700000000000000000000011"),
     "legacyId": 11,
     "orderNumber": "ORD00000011",
-    "userId": 15,
+    "userId": ObjectId("000000000000000000000015"),
     "totalQuantity": 10,
     "subtotalAmount": 10000000,
     "discountAmount": 1000000,
     "totalAmount": 9000000,
     "paymentStatus": "paid",
     "orderStatus": "delivered",
-    "paymentMethodId": 2,
+    "paymentMethodId": ObjectId("600000000000000000000002"),
     "contactPhone": "0945678888",
     "contactEmail": "dang.thi.lan@gmail.com",
     "deliveryMethod": "Mail",
@@ -13294,14 +13294,14 @@ db.orders.insertMany([
     "_id": ObjectId("700000000000000000000012"),
     "legacyId": 12,
     "orderNumber": "ORD00000012",
-    "userId": 11,
+    "userId": ObjectId("000000000000000000000011"),
     "totalQuantity": 1,
     "subtotalAmount": 1500000,
     "discountAmount": 0,
     "totalAmount": 1500000,
     "paymentStatus": "paid",
     "orderStatus": "delivered",
-    "paymentMethodId": 1,
+    "paymentMethodId": ObjectId("600000000000000000000001"),
     "contactPhone": "123456789",
     "contactEmail": "chu.thi.suong@gmail.com",
     "deliveryMethod": "Mail",
@@ -13314,14 +13314,14 @@ db.orders.insertMany([
     "_id": ObjectId("700000000000000000000013"),
     "legacyId": 13,
     "orderNumber": "ORD00000013",
-    "userId": 12,
+    "userId": ObjectId("000000000000000000000012"),
     "totalQuantity": 20,
     "subtotalAmount": 20000000,
     "discountAmount": 2000000,
     "totalAmount": 180000,
     "paymentStatus": "paid",
     "orderStatus": "delivered",
-    "paymentMethodId": 1,
+    "paymentMethodId": ObjectId("600000000000000000000001"),
     "contactPhone": "0945678123",
     "contactEmail": "trinh.minh.vu@gmail.com",
     "deliveryMethod": "Mail",
@@ -13334,14 +13334,14 @@ db.orders.insertMany([
     "_id": ObjectId("700000000000000000000014"),
     "legacyId": 14,
     "orderNumber": "ORD00000014",
-    "userId": 11,
+    "userId": ObjectId("000000000000000000000011"),
     "totalQuantity": 4,
     "subtotalAmount": 4000000,
     "discountAmount": 400000,
     "totalAmount": 3600000,
     "paymentStatus": "paid",
     "orderStatus": "delivered",
-    "paymentMethodId": 1,
+    "paymentMethodId": ObjectId("600000000000000000000001"),
     "contactPhone": "0945678122",
     "contactEmail": "tran.thi.binh@gmail.com",
     "deliveryMethod": "Mail",
@@ -13354,14 +13354,14 @@ db.orders.insertMany([
     "_id": ObjectId("700000000000000000000015"),
     "legacyId": 15,
     "orderNumber": "ORD00000015",
-    "userId": 6,
+    "userId": ObjectId("000000000000000000000006"),
     "totalQuantity": 15,
     "subtotalAmount": 15000000,
     "discountAmount": 0,
     "totalAmount": 15000000,
     "paymentStatus": "paid",
     "orderStatus": "cancelled",
-    "paymentMethodId": 2,
+    "paymentMethodId": ObjectId("600000000000000000000002"),
     "contactPhone": "09456789312",
     "contactEmail": "bui.van.minh@gmail.com",
     "deliveryMethod": "Mail",
@@ -13374,14 +13374,14 @@ db.orders.insertMany([
     "_id": ObjectId("700000000000000000000016"),
     "legacyId": 16,
     "orderNumber": "ORD00000016",
-    "userId": 6,
+    "userId": ObjectId("000000000000000000000006"),
     "totalQuantity": 8,
     "subtotalAmount": 8000000,
     "discountAmount": 800000,
     "totalAmount": 720000,
     "paymentStatus": "paid",
     "orderStatus": "cancelled",
-    "paymentMethodId": 1,
+    "paymentMethodId": ObjectId("600000000000000000000001"),
     "contactPhone": "0945678321",
     "contactEmail": "mai.thi.quynh@gmail.com",
     "deliveryMethod": "Mail",
@@ -13394,14 +13394,14 @@ db.orders.insertMany([
     "_id": ObjectId("700000000000000000000017"),
     "legacyId": 17,
     "orderNumber": "ORD00000017",
-    "userId": 7,
+    "userId": ObjectId("000000000000000000000007"),
     "totalQuantity": 25,
     "subtotalAmount": 25000000,
     "discountAmount": 2500000,
     "totalAmount": 22500000,
     "paymentStatus": "paid",
     "orderStatus": "cancelled",
-    "paymentMethodId": 2,
+    "paymentMethodId": ObjectId("600000000000000000000002"),
     "contactPhone": "0945678111",
     "contactEmail": "trinh.minh.vu@gmail.com",
     "deliveryMethod": "Mail",
@@ -13417,10 +13417,10 @@ db.orderItems.drop();
 db.orderItems.insertMany([
   {
     "_id": ObjectId("800000000000000000000001"),
-    "orderId": 1,
-    "ticketInfoId": 1,
-    "eventId": 1,
-    "ticketId": 1,
+    "orderId": ObjectId("700000000000000000000001"),
+    "ticketInfoId": ObjectId("300000000000000000000001"),
+    "eventId": ObjectId("200000000000000000000001"),
+    "ticketId": ObjectId("500000000000000000000001"),
     "unitPrice": 150000,
     "quantity": 1,
     "totalPrice": 150000,
@@ -13429,10 +13429,10 @@ db.orderItems.insertMany([
   },
   {
     "_id": ObjectId("800000000000000000000002"),
-    "orderId": 1,
-    "ticketInfoId": 1,
-    "eventId": 1,
-    "ticketId": 2,
+    "orderId": ObjectId("700000000000000000000001"),
+    "ticketInfoId": ObjectId("300000000000000000000001"),
+    "eventId": ObjectId("200000000000000000000001"),
+    "ticketId": ObjectId("500000000000000000000002"),
     "unitPrice": 150000,
     "quantity": 1,
     "totalPrice": 150000,
@@ -13441,10 +13441,10 @@ db.orderItems.insertMany([
   },
   {
     "_id": ObjectId("800000000000000000000003"),
-    "orderId": 2,
-    "ticketInfoId": 6,
-    "eventId": 6,
-    "ticketId": 6,
+    "orderId": ObjectId("700000000000000000000002"),
+    "ticketInfoId": ObjectId("300000000000000000000006"),
+    "eventId": ObjectId("200000000000000000000006"),
+    "ticketId": ObjectId("500000000000000000000006"),
     "unitPrice": 250000,
     "quantity": 1,
     "totalPrice": 250000,
@@ -13453,10 +13453,10 @@ db.orderItems.insertMany([
   },
   {
     "_id": ObjectId("800000000000000000000004"),
-    "orderId": 2,
-    "ticketInfoId": 8,
-    "eventId": 8,
-    "ticketId": 9,
+    "orderId": ObjectId("700000000000000000000002"),
+    "ticketInfoId": ObjectId("300000000000000000000008"),
+    "eventId": ObjectId("200000000000000000000008"),
+    "ticketId": ObjectId("500000000000000000000009"),
     "unitPrice": 280000,
     "quantity": 1,
     "totalPrice": 280000,
@@ -13465,10 +13465,10 @@ db.orderItems.insertMany([
   },
   {
     "_id": ObjectId("800000000000000000000005"),
-    "orderId": 3,
-    "ticketInfoId": 3,
-    "eventId": 3,
-    "ticketId": 4,
+    "orderId": ObjectId("700000000000000000000003"),
+    "ticketInfoId": ObjectId("300000000000000000000003"),
+    "eventId": ObjectId("200000000000000000000003"),
+    "ticketId": ObjectId("500000000000000000000004"),
     "unitPrice": 120000,
     "quantity": 1,
     "totalPrice": 120000,
@@ -13477,10 +13477,10 @@ db.orderItems.insertMany([
   },
   {
     "_id": ObjectId("800000000000000000000006"),
-    "orderId": 3,
-    "ticketInfoId": 5,
-    "eventId": 5,
-    "ticketId": 5,
+    "orderId": ObjectId("700000000000000000000003"),
+    "ticketInfoId": ObjectId("300000000000000000000005"),
+    "eventId": ObjectId("200000000000000000000005"),
+    "ticketId": ObjectId("500000000000000000000005"),
     "unitPrice": 100000,
     "quantity": 1,
     "totalPrice": 100000,
@@ -13489,10 +13489,10 @@ db.orderItems.insertMany([
   },
   {
     "_id": ObjectId("800000000000000000000007"),
-    "orderId": 4,
-    "ticketInfoId": 7,
-    "eventId": 7,
-    "ticketId": 7,
+    "orderId": ObjectId("700000000000000000000004"),
+    "ticketInfoId": ObjectId("300000000000000000000007"),
+    "eventId": ObjectId("200000000000000000000007"),
+    "ticketId": ObjectId("500000000000000000000007"),
     "unitPrice": 300000,
     "quantity": 1,
     "totalPrice": 300000,
@@ -13501,10 +13501,10 @@ db.orderItems.insertMany([
   },
   {
     "_id": ObjectId("800000000000000000000008"),
-    "orderId": 2,
-    "ticketInfoId": 7,
-    "eventId": 7,
-    "ticketId": 8,
+    "orderId": ObjectId("700000000000000000000002"),
+    "ticketInfoId": ObjectId("300000000000000000000007"),
+    "eventId": ObjectId("200000000000000000000007"),
+    "ticketId": ObjectId("500000000000000000000008"),
     "unitPrice": 300000,
     "quantity": 1,
     "totalPrice": 300000,
@@ -13513,10 +13513,10 @@ db.orderItems.insertMany([
   },
   {
     "_id": ObjectId("800000000000000000000009"),
-    "orderId": 6,
-    "ticketInfoId": 8,
-    "eventId": 8,
-    "ticketId": 10,
+    "orderId": ObjectId("700000000000000000000006"),
+    "ticketInfoId": ObjectId("300000000000000000000008"),
+    "eventId": ObjectId("200000000000000000000008"),
+    "ticketId": ObjectId("500000000000000000000010"),
     "unitPrice": 280000,
     "quantity": 1,
     "totalPrice": 280000,
@@ -13525,10 +13525,10 @@ db.orderItems.insertMany([
   },
   {
     "_id": ObjectId("800000000000000000000010"),
-    "orderId": 7,
-    "ticketInfoId": 10,
-    "eventId": 10,
-    "ticketId": 13,
+    "orderId": ObjectId("700000000000000000000007"),
+    "ticketInfoId": ObjectId("300000000000000000000010"),
+    "eventId": ObjectId("200000000000000000000010"),
+    "ticketId": ObjectId("500000000000000000000013"),
     "unitPrice": 350000,
     "quantity": 1,
     "totalPrice": 350000,
@@ -13537,10 +13537,10 @@ db.orderItems.insertMany([
   },
   {
     "_id": ObjectId("800000000000000000000011"),
-    "orderId": 8,
-    "ticketInfoId": 3,
-    "eventId": 3,
-    "ticketId": 3,
+    "orderId": ObjectId("700000000000000000000008"),
+    "ticketInfoId": ObjectId("300000000000000000000003"),
+    "eventId": ObjectId("200000000000000000000003"),
+    "ticketId": ObjectId("500000000000000000000003"),
     "unitPrice": 120000,
     "quantity": 1,
     "totalPrice": 120000,
@@ -13549,10 +13549,10 @@ db.orderItems.insertMany([
   },
   {
     "_id": ObjectId("800000000000000000000012"),
-    "orderId": 9,
-    "ticketInfoId": 9,
-    "eventId": 9,
-    "ticketId": 11,
+    "orderId": ObjectId("700000000000000000000009"),
+    "ticketInfoId": ObjectId("300000000000000000000009"),
+    "eventId": ObjectId("200000000000000000000009"),
+    "ticketId": ObjectId("500000000000000000000011"),
     "unitPrice": 80000,
     "quantity": 1,
     "totalPrice": 80000,
@@ -13561,10 +13561,10 @@ db.orderItems.insertMany([
   },
   {
     "_id": ObjectId("800000000000000000000013"),
-    "orderId": 10,
-    "ticketInfoId": 9,
-    "eventId": 9,
-    "ticketId": 12,
+    "orderId": ObjectId("700000000000000000000010"),
+    "ticketInfoId": ObjectId("300000000000000000000009"),
+    "eventId": ObjectId("200000000000000000000009"),
+    "ticketId": ObjectId("500000000000000000000012"),
     "unitPrice": 80000,
     "quantity": 1,
     "totalPrice": 80000,
@@ -13584,7 +13584,7 @@ db.promotions.insertMany([
     "promotionType": "percentage",
     "startTime": new Date("2026-07-31T17:07:00Z"),
     "endTime": new Date("2026-07-31T23:59:00Z"),
-    "eventId": 29,
+    "eventId": ObjectId("200000000000000000000029"),
     "discountPercentage": 15.0,
     "discountAmount": null,
     "minOrderAmount": 400000,
@@ -13604,7 +13604,7 @@ db.promotions.insertMany([
     "promotionType": "percentage",
     "startTime": new Date("2026-07-01T00:00:00Z"),
     "endTime": new Date("2026-07-03T11:00:00Z"),
-    "eventId": 15,
+    "eventId": ObjectId("200000000000000000000015"),
     "discountPercentage": 25.0,
     "discountAmount": null,
     "minOrderAmount": 500000,
@@ -13624,7 +13624,7 @@ db.promotions.insertMany([
     "promotionType": "percentage",
     "startTime": new Date("2026-07-01T00:00:00Z"),
     "endTime": new Date("2026-07-07T12:30:00Z"),
-    "eventId": 19,
+    "eventId": ObjectId("200000000000000000000019"),
     "discountPercentage": 10.0,
     "discountAmount": null,
     "minOrderAmount": 200000,
@@ -13644,7 +13644,7 @@ db.promotions.insertMany([
     "promotionType": "fixed_amount",
     "startTime": new Date("2026-07-01T00:00:00Z"),
     "endTime": new Date("2026-07-09T10:00:00Z"),
-    "eventId": 20,
+    "eventId": ObjectId("200000000000000000000020"),
     "discountPercentage": null,
     "discountAmount": 50000,
     "minOrderAmount": 300000,
@@ -13664,7 +13664,7 @@ db.promotions.insertMany([
     "promotionType": "percentage",
     "startTime": new Date("2026-08-20T00:00:00Z"),
     "endTime": new Date("2026-08-24T12:00:00Z"),
-    "eventId": 7,
+    "eventId": ObjectId("200000000000000000000007"),
     "discountPercentage": 20.0,
     "discountAmount": null,
     "minOrderAmount": 300000,
@@ -13684,7 +13684,7 @@ db.promotions.insertMany([
     "promotionType": "fixed_amount",
     "startTime": new Date("2026-06-01T00:00:00Z"),
     "endTime": new Date("2026-09-25T23:59:59Z"),
-    "eventId": 8,
+    "eventId": ObjectId("200000000000000000000008"),
     "discountPercentage": null,
     "discountAmount": 30000,
     "minOrderAmount": 200000,
@@ -13704,7 +13704,7 @@ db.promotions.insertMany([
     "promotionType": "percentage",
     "startTime": new Date("2026-06-01T00:00:00Z"),
     "endTime": new Date("2026-07-05T10:30:00Z"),
-    "eventId": 16,
+    "eventId": ObjectId("200000000000000000000016"),
     "discountPercentage": 15.0,
     "discountAmount": null,
     "minOrderAmount": 400000,
@@ -13723,9 +13723,9 @@ db.feedbacks.drop();
 db.feedbacks.insertMany([
   {
     "_id": ObjectId("a00000000000000000000001"),
-    "userId": 5,
-    "eventId": 1,
-    "orderId": 1,
+    "userId": ObjectId("000000000000000000000005"),
+    "eventId": ObjectId("200000000000000000000001"),
+    "orderId": ObjectId("700000000000000000000001"),
     "rating": 5,
     "content": "Absolutely fantastic theater performance! The actors were brilliant and the story was captivating.",
     "isApproved": true,
@@ -13735,9 +13735,9 @@ db.feedbacks.insertMany([
   },
   {
     "_id": ObjectId("a00000000000000000000002"),
-    "userId": 5,
-    "eventId": 6,
-    "orderId": 2,
+    "userId": ObjectId("000000000000000000000005"),
+    "eventId": ObjectId("200000000000000000000006"),
+    "orderId": ObjectId("700000000000000000000002"),
     "rating": 4,
     "content": "Great concert with amazing vocals. The venue was perfect and the atmosphere was incredible.",
     "isApproved": true,
@@ -13747,9 +13747,9 @@ db.feedbacks.insertMany([
   },
   {
     "_id": ObjectId("a00000000000000000000003"),
-    "userId": 5,
-    "eventId": 3,
-    "orderId": 3,
+    "userId": ObjectId("000000000000000000000005"),
+    "eventId": ObjectId("200000000000000000000003"),
+    "orderId": ObjectId("700000000000000000000003"),
     "rating": 4,
     "content": "Very educational and moving experience. Well worth the visit to learn about history.",
     "isApproved": true,
@@ -13759,9 +13759,9 @@ db.feedbacks.insertMany([
   },
   {
     "_id": ObjectId("a00000000000000000000004"),
-    "userId": 5,
-    "eventId": 7,
-    "orderId": 4,
+    "userId": ObjectId("000000000000000000000005"),
+    "eventId": ObjectId("200000000000000000000007"),
+    "orderId": ObjectId("700000000000000000000004"),
     "rating": 5,
     "content": "Isaac was amazing! The fanmeeting was well organized and he was so kind to all fans.",
     "isApproved": true,
@@ -13771,9 +13771,9 @@ db.feedbacks.insertMany([
   },
   {
     "_id": ObjectId("a00000000000000000000005"),
-    "userId": 5,
-    "eventId": 8,
-    "orderId": 6,
+    "userId": ObjectId("000000000000000000000005"),
+    "eventId": ObjectId("200000000000000000000008"),
+    "orderId": ObjectId("700000000000000000000006"),
     "rating": 3,
     "content": "Good show but the sound system had some issues. Hương Tràm sang beautifully though.",
     "isApproved": false,
@@ -13788,8 +13788,8 @@ db.reports.drop();
 db.reports.insertMany([
   {
     "_id": ObjectId("b00000000000000000000001"),
-    "reporterId": 5,
-    "eventId": 8,
+    "reporterId": ObjectId("000000000000000000000005"),
+    "eventId": ObjectId("200000000000000000000008"),
     "description": "Sound system issues during the concert",
     "adminId": 1,
     "isResolved": false,
@@ -13799,8 +13799,8 @@ db.reports.insertMany([
   },
   {
     "_id": ObjectId("b00000000000000000000002"),
-    "reporterId": 5,
-    "eventId": 6,
+    "reporterId": ObjectId("000000000000000000000005"),
+    "eventId": ObjectId("200000000000000000000006"),
     "description": "Late start time reported",
     "adminId": 1,
     "isResolved": true,
@@ -13818,7 +13818,7 @@ db.conversations.insertMany([
     "legacyId": 1,
     "customerId": 5,
     "eventOwnerId": 2,
-    "eventId": 7,
+    "eventId": ObjectId("200000000000000000000007"),
     "subject": "Hỏi về chỗ ngồi sự kiện 12 Bà Mụ",
     "status": "active",
     "lastMessageAt": new Date("2026-06-20T14:30:00Z"),
@@ -13834,7 +13834,7 @@ db.conversations.insertMany([
     "legacyId": 2,
     "customerId": 5,
     "eventOwnerId": 3,
-    "eventId": 12,
+    "eventId": ObjectId("200000000000000000000012"),
     "subject": "Hỏi về vé concert Dốc Mộng Mơ",
     "status": "active",
     "lastMessageAt": new Date("2026-06-20T15:00:00Z"),
@@ -13850,7 +13850,7 @@ db.conversations.insertMany([
     "legacyId": 3,
     "customerId": 6,
     "eventOwnerId": 3,
-    "eventId": 14,
+    "eventId": ObjectId("200000000000000000000014"),
     "subject": "Hỏi về show Hương Tràm",
     "status": "closed",
     "lastMessageAt": new Date("2026-06-21T10:00:00Z"),
@@ -13866,7 +13866,7 @@ db.conversations.insertMany([
     "legacyId": 4,
     "customerId": 10,
     "eventOwnerId": 2,
-    "eventId": 8,
+    "eventId": ObjectId("200000000000000000000008"),
     "subject": "Thắc mắc về The Island And The Bay",
     "status": "active",
     "lastMessageAt": new Date("2026-06-22T09:30:00Z"),
@@ -13882,7 +13882,7 @@ db.conversations.insertMany([
     "legacyId": 5,
     "customerId": 7,
     "eventOwnerId": 4,
-    "eventId": 18,
+    "eventId": ObjectId("200000000000000000000018"),
     "subject": "Hỏi về Lion Championship",
     "status": "active",
     "lastMessageAt": new Date("2026-06-23T11:00:00Z"),
@@ -13901,8 +13901,8 @@ db.messages.insertMany([
   {
     "_id": ObjectId("f40000000000000000000001"),
     "legacyId": 1,
-    "conversationId": 1,
-    "senderId": 5,
+    "conversationId": ObjectId("f30000000000000000000001"),
+    "senderId": ObjectId("000000000000000000000005"),
     "messageContent": "Xin chào, tôi muốn hỏi về sơ đồ chỗ ngồi của sự kiện 12 Bà Mụ. Khu VIP có view như thế nào?",
     "messageType": "text",
     "isRead": true,
@@ -13915,8 +13915,8 @@ db.messages.insertMany([
   {
     "_id": ObjectId("f40000000000000000000002"),
     "legacyId": 2,
-    "conversationId": 1,
-    "senderId": 2,
+    "conversationId": ObjectId("f30000000000000000000001"),
+    "senderId": ObjectId("000000000000000000000002"),
     "messageContent": "Chào bạn! Khu VIP nằm ngay hàng đầu, view sân khấu rất đẹp. Khoảng cách từ hàng ghế đến sân khấu chỉ khoảng 5m thôi ạ.",
     "messageType": "text",
     "isRead": true,
@@ -13929,8 +13929,8 @@ db.messages.insertMany([
   {
     "_id": ObjectId("f40000000000000000000003"),
     "legacyId": 3,
-    "conversationId": 2,
-    "senderId": 5,
+    "conversationId": ObjectId("f30000000000000000000002"),
+    "senderId": ObjectId("000000000000000000000005"),
     "messageContent": "Tôi muốn mua vé concert nhưng không thấy còn ghế khu A. Bạn có thể kiểm tra giúp không?",
     "messageType": "text",
     "isRead": true,
@@ -13943,8 +13943,8 @@ db.messages.insertMany([
   {
     "_id": ObjectId("f40000000000000000000004"),
     "legacyId": 4,
-    "conversationId": 2,
-    "senderId": 3,
+    "conversationId": ObjectId("f30000000000000000000002"),
+    "senderId": ObjectId("000000000000000000000003"),
     "messageContent": "Khu A hiện tại còn khoảng 40 ghế bạn nhé. Bạn đặt sớm thôi vì gần sold out rồi đó!",
     "messageType": "text",
     "isRead": false,
@@ -13957,8 +13957,8 @@ db.messages.insertMany([
   {
     "_id": ObjectId("f40000000000000000000005"),
     "legacyId": 5,
-    "conversationId": 3,
-    "senderId": 6,
+    "conversationId": ObjectId("f30000000000000000000003"),
+    "senderId": ObjectId("000000000000000000000006"),
     "messageContent": "Bạn có thể cho tôi biết thêm về chương trình của Hương Tràm không? Set list gồm những bài nào?",
     "messageType": "text",
     "isRead": true,
@@ -13971,8 +13971,8 @@ db.messages.insertMany([
   {
     "_id": ObjectId("f40000000000000000000006"),
     "legacyId": 6,
-    "conversationId": 3,
-    "senderId": 3,
+    "conversationId": ObjectId("f30000000000000000000003"),
+    "senderId": ObjectId("000000000000000000000003"),
     "messageContent": "Set list gồm 20 bài hit của Hương Tràm, có cả Một Nửa Sự Thật, Em Gái Mưa và nhiều bài mới. Chương trình kéo dài 2 tiếng.",
     "messageType": "text",
     "isRead": true,
@@ -13985,8 +13985,8 @@ db.messages.insertMany([
   {
     "_id": ObjectId("f40000000000000000000007"),
     "legacyId": 7,
-    "conversationId": 4,
-    "senderId": 10,
+    "conversationId": ObjectId("f30000000000000000000004"),
+    "senderId": ObjectId("000000000000000000000010"),
     "messageContent": "Sự kiện The Island And The Bay có phù hợp cho trẻ em không? Con tôi 10 tuổi.",
     "messageType": "text",
     "isRead": true,
@@ -13999,8 +13999,8 @@ db.messages.insertMany([
   {
     "_id": ObjectId("f40000000000000000000008"),
     "legacyId": 8,
-    "conversationId": 4,
-    "senderId": 2,
+    "conversationId": ObjectId("f30000000000000000000004"),
+    "senderId": ObjectId("000000000000000000000002"),
     "messageContent": "Sự kiện hoàn toàn phù hợp cho gia đình và trẻ em. Chúng tôi có khu vực riêng cho gia đình với trẻ nhỏ.",
     "messageType": "text",
     "isRead": false,
@@ -14013,8 +14013,8 @@ db.messages.insertMany([
   {
     "_id": ObjectId("f40000000000000000000009"),
     "legacyId": 9,
-    "conversationId": 5,
-    "senderId": 7,
+    "conversationId": ObjectId("f30000000000000000000005"),
+    "senderId": ObjectId("000000000000000000000007"),
     "messageContent": "Lion Championship có phát trực tuyến không? Tôi ở xa không thể đến trực tiếp.",
     "messageType": "text",
     "isRead": true,
@@ -14027,8 +14027,8 @@ db.messages.insertMany([
   {
     "_id": ObjectId("f40000000000000000000010"),
     "legacyId": 10,
-    "conversationId": 5,
-    "senderId": 4,
+    "conversationId": ObjectId("f30000000000000000000005"),
+    "senderId": ObjectId("000000000000000000000004"),
     "messageContent": "Rất tiếc, hiện tại chúng tôi chưa có phát trực tuyến. Nhưng sẽ có highlight video sau sự kiện bạn nhé!",
     "messageType": "text",
     "isRead": false,
@@ -14046,7 +14046,7 @@ db.fileAttachments.insertMany([
   {
     "_id": ObjectId("f50000000000000000000001"),
     "legacyId": 1,
-    "messageId": 2,
+    "messageId": ObjectId("f40000000000000000000002"),
     "originalFilename": "so_do_cho_ngoi_12bamu.jpg",
     "storedFilename": "att_20260620_001.jpg",
     "filePath": "/uploads/attachments/att_20260620_001.jpg",
@@ -14057,7 +14057,7 @@ db.fileAttachments.insertMany([
   {
     "_id": ObjectId("f50000000000000000000002"),
     "legacyId": 2,
-    "messageId": 6,
+    "messageId": ObjectId("f40000000000000000000006"),
     "originalFilename": "setlist_huongtram.pdf",
     "storedFilename": "att_20260621_001.pdf",
     "filePath": "/uploads/attachments/att_20260621_001.pdf",
@@ -14068,7 +14068,7 @@ db.fileAttachments.insertMany([
   {
     "_id": ObjectId("f50000000000000000000003"),
     "legacyId": 3,
-    "messageId": 8,
+    "messageId": ObjectId("f40000000000000000000008"),
     "originalFilename": "ban_do_khu_vuc_family.png",
     "storedFilename": "att_20260622_001.png",
     "filePath": "/uploads/attachments/att_20260622_001.png",
@@ -14083,7 +14083,7 @@ db.notifications.drop();
 db.notifications.insertMany([
   {
     "_id": ObjectId("c00000000000000000000001"),
-    "userId": 5,
+    "userId": ObjectId("000000000000000000000005"),
     "title": "Order Confirmation",
     "content": "Your order ORD00000001 has been confirmed.",
     "notificationType": "order",
@@ -14096,7 +14096,7 @@ db.notifications.insertMany([
   },
   {
     "_id": ObjectId("c00000000000000000000002"),
-    "userId": 5,
+    "userId": ObjectId("000000000000000000000005"),
     "title": "New Message",
     "content": "You have a new message about 12 Bà Mụ.",
     "notificationType": "message",
@@ -14109,7 +14109,7 @@ db.notifications.insertMany([
   },
   {
     "_id": ObjectId("c00000000000000000000003"),
-    "userId": 6,
+    "userId": ObjectId("000000000000000000000006"),
     "title": "Order Confirmation",
     "content": "Your order ORD00000002 has been confirmed.",
     "notificationType": "order",
@@ -14122,7 +14122,7 @@ db.notifications.insertMany([
   },
   {
     "_id": ObjectId("c00000000000000000000004"),
-    "userId": 6,
+    "userId": ObjectId("000000000000000000000006"),
     "title": "New Message",
     "content": "You have a new message about concert seating.",
     "notificationType": "message",
@@ -14135,7 +14135,7 @@ db.notifications.insertMany([
   },
   {
     "_id": ObjectId("c00000000000000000000005"),
-    "userId": 7,
+    "userId": ObjectId("000000000000000000000007"),
     "title": "Order Confirmation",
     "content": "Your order ORD00000003 has been confirmed.",
     "notificationType": "order",
@@ -14148,7 +14148,7 @@ db.notifications.insertMany([
   },
   {
     "_id": ObjectId("c00000000000000000000006"),
-    "userId": 10,
+    "userId": ObjectId("000000000000000000000010"),
     "title": "Order Confirmation",
     "content": "Your order ORD00000004 has been confirmed.",
     "notificationType": "order",
@@ -14161,7 +14161,7 @@ db.notifications.insertMany([
   },
   {
     "_id": ObjectId("c00000000000000000000007"),
-    "userId": 10,
+    "userId": ObjectId("000000000000000000000010"),
     "title": "New Message",
     "content": "You have a new message about Hương Tràm concert.",
     "notificationType": "message",
@@ -14179,14 +14179,14 @@ db.refunds.drop();
 db.refunds.insertMany([
   {
     "_id": ObjectId("d00000000000000000000001"),
-    "orderId": 8,
-    "orderItemId": 8,
-    "userId": 14,
+    "orderId": ObjectId("700000000000000000000008"),
+    "orderItemId": ObjectId("800000000000000000000008"),
+    "userId": ObjectId("000000000000000000000014"),
     "adminId": null,
     "refundAmount": 150000,
     "refundReason": "Change of plans",
     "refundStatus": "pending",
-    "paymentMethodId": 2,
+    "paymentMethodId": ObjectId("600000000000000000000002"),
     "refundRequestDate": new Date("2026-06-20T15:00:00Z"),
     "refundProcessedDate": null,
     "isDeleted": false,
@@ -14206,7 +14206,7 @@ db.auditLogs.insertMany([
     "oldValues": { "LastLoginAt": null },
     "newValues": { "LastLoginAt": "2025-06-20T14:00:00" },
     "changedColumns": "LastLoginAt",
-    "userId": 1,
+    "userId": ObjectId("000000000000000000000001"),
     "userAgent": "Mozilla/5.0",
     "createdAt": new Date("2026-06-20T14:00:00Z")
   },
@@ -14218,7 +14218,7 @@ db.auditLogs.insertMany([
     "oldValues": null,
     "newValues": { "OrderID": 1, "OrderNumber": "ORD00000001", "UserID": 5 },
     "changedColumns": null,
-    "userId": 5,
+    "userId": ObjectId("000000000000000000000005"),
     "userAgent": "Mozilla/5.0",
     "createdAt": new Date("2026-06-20T14:00:00Z")
   },
@@ -14230,7 +14230,7 @@ db.auditLogs.insertMany([
     "oldValues": null,
     "newValues": { "MessageID": 1, "ConversationID": 1, "SenderID": 5 },
     "changedColumns": null,
-    "userId": 5,
+    "userId": ObjectId("000000000000000000000005"),
     "userAgent": "Mozilla/5.0",
     "createdAt": new Date("2026-06-20T14:00:00Z")
   }
@@ -14242,7 +14242,7 @@ db.supportItems.insertMany([
   {
     "_id": ObjectId("f60000000000000000000001"),
     "legacyId": 1,
-    "userId": 5,
+    "userId": ObjectId("000000000000000000000005"),
     "fromEmail": "customer1@ticketbox.vn",
     "toEmail": "support@eventticket.vn",
     "subject": "Không nhận được vé sau khi thanh toán",
@@ -14256,13 +14256,13 @@ db.supportItems.insertMany([
     "lastModified": new Date("2026-06-20T00:00:00Z"),
     "adminResponse": "Chúng tôi đã kiểm tra và gửi lại vé vào email của bạn. Vui lòng kiểm tra hộp thư spam.",
     "assignedAdminId": 1,
-    "eventId": 7,
-    "orderId": 1
+    "eventId": ObjectId("200000000000000000000007"),
+    "orderId": ObjectId("700000000000000000000001")
   },
   {
     "_id": ObjectId("f60000000000000000000002"),
     "legacyId": 2,
-    "userId": 6,
+    "userId": ObjectId("000000000000000000000006"),
     "fromEmail": "tranvanb@ticketbox.vn",
     "toEmail": "support@eventticket.vn",
     "subject": "Muốn đổi lịch xem sự kiện",
@@ -14276,13 +14276,13 @@ db.supportItems.insertMany([
     "lastModified": new Date("2026-06-21T00:00:00Z"),
     "adminResponse": null,
     "assignedAdminId": 1,
-    "eventId": 14,
-    "orderId": 2
+    "eventId": ObjectId("200000000000000000000014"),
+    "orderId": ObjectId("700000000000000000000002")
   },
   {
     "_id": ObjectId("f60000000000000000000003"),
     "legacyId": 3,
-    "userId": 7,
+    "userId": ObjectId("000000000000000000000007"),
     "fromEmail": "nguyenthic@ticketbox.vn",
     "toEmail": "support@eventticket.vn",
     "subject": "Lỗi hiển thị sơ đồ ghế",
@@ -14296,13 +14296,13 @@ db.supportItems.insertMany([
     "lastModified": new Date("2026-06-22T00:00:00Z"),
     "adminResponse": "Chúng tôi đang kiểm tra sự cố kỹ thuật này. Sẽ phản hồi trong 24 giờ.",
     "assignedAdminId": 1,
-    "eventId": 7,
+    "eventId": ObjectId("200000000000000000000007"),
     "orderId": null
   },
   {
     "_id": ObjectId("f60000000000000000000004"),
     "legacyId": 4,
-    "userId": 10,
+    "userId": ObjectId("000000000000000000000010"),
     "fromEmail": "phamthid@ticketbox.vn",
     "toEmail": "support@eventticket.vn",
     "subject": "Yêu cầu hóa đơn VAT",
@@ -14317,12 +14317,12 @@ db.supportItems.insertMany([
     "adminResponse": "Hóa đơn VAT đã được gửi vào email của bạn trong vòng 24 giờ làm việc.",
     "assignedAdminId": 1,
     "eventId": null,
-    "orderId": 4
+    "orderId": ObjectId("700000000000000000000004")
   },
   {
     "_id": ObjectId("f60000000000000000000005"),
     "legacyId": 5,
-    "userId": 14,
+    "userId": ObjectId("000000000000000000000014"),
     "fromEmail": "pham.thuy.dung@gmail.com",
     "toEmail": "support@eventticket.vn",
     "subject": "Hoàn tiền cho đơn hàng bị huỷ",
@@ -14337,7 +14337,7 @@ db.supportItems.insertMany([
     "adminResponse": "Chúng tôi đã liên hệ bộ phận tài chính. Tiền sẽ được hoàn trong 3-5 ngày làm việc.",
     "assignedAdminId": 1,
     "eventId": null,
-    "orderId": 8
+    "orderId": ObjectId("700000000000000000000008")
   }
 ]);
 print("✅ supportItems: " + db.supportItems.countDocuments() + " docs inserted");
@@ -14347,7 +14347,7 @@ db.supportAttachments.insertMany([
   {
     "_id": ObjectId("f70000000000000000000001"),
     "legacyId": 1,
-    "supportId": 1,
+    "supportId": ObjectId("f60000000000000000000001"),
     "fileName": "supp_20260620_001.png",
     "originalFileName": "screenshot_thanh_toan.png",
     "filePath": "/uploads/support/supp_20260620_001.png",
@@ -14359,7 +14359,7 @@ db.supportAttachments.insertMany([
   {
     "_id": ObjectId("f70000000000000000000002"),
     "legacyId": 2,
-    "supportId": 3,
+    "supportId": ObjectId("f60000000000000000000003"),
     "fileName": "supp_20260622_001.mp4",
     "originalFileName": "video_loi_so_do_ghe.mp4",
     "filePath": "/uploads/support/supp_20260622_001.mp4",
@@ -14371,7 +14371,7 @@ db.supportAttachments.insertMany([
   {
     "_id": ObjectId("f70000000000000000000003"),
     "legacyId": 3,
-    "supportId": 5,
+    "supportId": ObjectId("f60000000000000000000005"),
     "fileName": "supp_20260624_001.pdf",
     "originalFileName": "bien_lai_thanh_toan.pdf",
     "filePath": "/uploads/support/supp_20260624_001.pdf",
@@ -14384,3 +14384,13 @@ db.supportAttachments.insertMany([
 print("✅ supportAttachments: " + db.supportAttachments.countDocuments() + " docs inserted");
 
 print("🎉 EventTicketDB seed hoàn tất! 22 collections.");
+
+
+
+// -- select * from Users
+// --select * from users;
+// --adminEventWeb@support.com: admin123@
+// --organizer@ticketbox.vn: eventowner123
+// --music_events@hcmc.com: eventowner321
+// --sports_events@hcmc.com: testpasswords
+// --customer1@ticketbox.vn: customer123##

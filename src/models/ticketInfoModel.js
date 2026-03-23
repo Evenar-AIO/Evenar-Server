@@ -7,7 +7,7 @@ const ticketInfoSchema = new mongoose.Schema({
   price: { type: Number, required: true },
   salesStartTime: Date,
   salesEndTime: Date,
-  eventId: { type: Number }, // Seed data uses legacy numeric ID
+  eventId: { type: mongoose.Schema.Types.ObjectId, ref: 'Event' },
   legacyEventId: Number,
   maxQuantityPerOrder: Number,
   isActive: { type: Boolean, default: true },

@@ -76,7 +76,8 @@ const authRouter = require('./src/routes/authRoutes');
 const uploadRouter = require('./src/routes/upload');
 const profileRouter = require('./src/routes/profile');
 const organizerRouter = require('./src/routes/organizerRoutes');
-const adminRoutes = require("./src/routes/adminRoutes");
+const ownerRouter = require('./src/routes/ownerRoutes');
+const adminRouter = require('./src/routes/adminRoutes');
 
 // IMPORTANT: Search must be BEFORE events to avoid /api/events/:id collision (where :id="search")
 app.use('/api/events/search', searchRouter);
@@ -93,8 +94,9 @@ app.use('/api/profile', profileRouter);
 app.use('/api/upload', uploadRouter);
 app.use('/api/test-upload', require('./src/routes/testUpload'));
 app.use("/api/users", userRoutes);
-app.use("/api/admin", adminRoutes);
+app.use("/api/admin", adminRouter);
 app.use('/api/organizer', organizerRouter);
+app.use('/api/owner', ownerRouter);
 
 app.get("/", (req, res) => {
   res.status(200).send("Hello World");

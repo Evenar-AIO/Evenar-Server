@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const ticketInventorySchema = new mongoose.Schema({
-  ticketInfoId: { type: Number, required: true }, // Referencing TicketInfo.legacyId
+  ticketInfoId: { type: mongoose.Schema.Types.ObjectId, ref: 'TicketInfo', required: true },
   legacyTicketInfoId: { type: Number },
   totalQuantity: { type: Number, required: true },
   soldQuantity: { type: Number, default: 0 },

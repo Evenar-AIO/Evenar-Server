@@ -9,6 +9,8 @@ router.post('/', verifyToken, validateCreateEventPayload, eventController.create
 router.get('/', eventController.getEvents);
 router.get('/:id', eventController.getEventById);
 
+router.put("/:id/withdraw", verifyToken, eventController.withdrawEvent);
+router.put("/:id/submit", verifyToken, eventController.submitEvent);
 router.put("/:id", verifyToken, validateUpdateEventPayload, eventController.updateEvent);
 
 router.delete("/:id", verifyToken, eventController.deleteEvent);

@@ -25,11 +25,13 @@ const eventSchema = new mongoose.Schema(
             required: [true, 'Please add ending time']
         },
         ownerId: {
-            type: Number,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
             required: true
         },
         genreId: {
-            type: Number
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Genre'
         },
         totalTicketCount: {
             type: Number,
