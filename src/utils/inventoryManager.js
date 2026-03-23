@@ -12,11 +12,14 @@ const Event = require('../models/Event');
  * Returns: boolean
  */
 const resolveTicketInventoryQuery = (ticketInfoId) => {
+  if (mongoose.Types.ObjectId.isValid(String(ticketInfoId))) {
+    return { ticketInfoId };
+  }
   const numericId = Number(ticketInfoId);
   if (Number.isFinite(numericId)) {
     return { $or: [{ ticketInfoId: numericId }, { legacyTicketInfoId: numericId }] };
   }
-  return { $or: [{ ticketInfoId }, { legacyTicketInfoId: ticketInfoId }] };
+  return { ticketInfoId };
 };
 
 exports.checkAvailability = async (ticketInfoId, quantity) => {
@@ -231,14 +234,15 @@ const reserveSeatIdsForEvent = async (eventId, seatIds, status, session) => {
   if (!event) throw new Error('Event not found');
   if (!Array.isArray(event.layout)) throw new Error('Event layout not available');
 
-  const seatIdSet = new Set(seatIds);
+  const seatIdSet = new Set(seatIds.map(id => String(id)));
   let hasAllSeats = true;
-  const remaining = new Set(seatIds);
+  const remaining = new Set(seatIds.map(id => String(id)));
 
   const updatedLayout = event.layout.map(zone => {
     const seats = (zone.seats || []).map(seat => {
-      if (seatIdSet.has(seat.id)) {
-        remaining.delete(seat.id);
+      const seatId = String(seat.id);
+      if (seatIdSet.has(seatId)) {
+        remaining.delete(seatId);
         if (status === 'reserved' && seat.status !== 'available') {
           hasAllSeats = false;
         }
@@ -284,14 +288,15 @@ const validateSeatIdsReservedForEvent = async (eventId, seatIds, session) => {
   if (!event) throw new Error('Event not found');
   if (!Array.isArray(event.layout)) throw new Error('Event layout not available');
 
-  const seatIdSet = new Set(seatIds);
+  const seatIdSet = new Set(seatIds.map(id => String(id)));
   let allReserved = true;
-  const remaining = new Set(seatIds);
+  const remaining = new Set(seatIds.map(id => String(id)));
 
   event.layout.forEach(zone => {
     (zone.seats || []).forEach(seat => {
-      if (seatIdSet.has(seat.id)) {
-        remaining.delete(seat.id);
+      const seatId = String(seat.id);
+      if (seatIdSet.has(seatId)) {
+        remaining.delete(seatId);
         if (seat.status !== 'reserved') {
           allReserved = false;
         }

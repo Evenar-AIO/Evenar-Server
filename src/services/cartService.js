@@ -28,13 +28,6 @@ const resolveTicketInfo = async (ticketInfoId) => {
   return TicketInfo.findOne({ $or: query.length ? query : [{ _id: ticketInfoId }] });
 };
 
-const normalizeTicketInfoId = (ticketInfoId, ticketInfo) => {
-  if (ticketInfo && ticketInfo.legacyId !== undefined && ticketInfo.legacyId !== null) {
-    return ticketInfo.legacyId;
-  }
-  return ticketInfoId;
-};
-
 const idsMatch = (left, right) => String(left) === String(right);
 
 const buildItemsWithNames = async (items) => {
@@ -79,7 +72,7 @@ exports.addToCart = async (userId, eventId, ticketInfoId, quantity, seatIds = []
 
   const tInfo = await resolveTicketInfo(ticketInfoId);
   if (!tInfo) throw new Error('Invalid ticket category');
-  const normalizedTicketInfoId = normalizeTicketInfoId(ticketInfoId, tInfo);
+  const normalizedTicketInfoId = tInfo._id;
 
   const seats = Array.isArray(seatIds) ? seatIds : [];
 
@@ -179,7 +172,7 @@ exports.addToCartWithoutInventoryCheck = async (userId, eventId, ticketInfoId, q
   let cart = await Cart.findOne({ userId: uid });
   const tInfo = await resolveTicketInfo(ticketInfoId);
   if (!tInfo) throw new Error('Invalid ticket category');
-  const normalizedTicketInfoId = normalizeTicketInfoId(ticketInfoId, tInfo);
+  const normalizedTicketInfoId = tInfo._id;
   const seats = Array.isArray(seatIds) ? seatIds : [];
 
   if (seats.length > 0 && seats.length !== qty) {

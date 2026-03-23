@@ -96,7 +96,7 @@ exports.createOrder = async (userId, eventId, tickets, promotionCode = null, pay
       subtotalAmount += unitPrice * qty;
 
       resolvedTickets.push({
-        ticketInfoId: tInfo.legacyId ?? tInfo._id,
+        ticketInfoId: tInfo._id,
         quantity: qty,
         unitPrice,
         totalPrice: unitPrice * qty,
@@ -127,6 +127,7 @@ exports.createOrder = async (userId, eventId, tickets, promotionCode = null, pay
     // 4. Reserve inventory (with session for transaction safety)
     await inventoryManager.reserveSeatsWithSession(resolvedTickets, session);
     if (event.hasSeatingChart) {
+      await inventoryManager.reserveSeatIdsWithSession(event._id, resolvedTickets, session);
       await inventoryManager.validateSeatIdsReservedWithSession(event._id, resolvedTickets, session);
     }
 
@@ -226,7 +227,7 @@ exports.createOrderWithoutTransaction = async (userId, eventId, tickets, promoti
     subtotalAmount += unitPrice * qty;
 
     resolvedTickets.push({
-      ticketInfoId: tInfo.legacyId ?? tInfo._id,
+      ticketInfoId: tInfo._id,
       quantity: qty,
       unitPrice,
       totalPrice: unitPrice * qty,
@@ -252,6 +253,7 @@ exports.createOrderWithoutTransaction = async (userId, eventId, tickets, promoti
   // 4. Reserve inventory (atomic version without transaction)
   await inventoryManager.reserveSeatsAtomic(resolvedTickets);
   if (event.hasSeatingChart) {
+    await inventoryManager.reserveSeatIds(event._id, resolvedTickets);
     await inventoryManager.validateSeatIdsReserved(event._id, resolvedTickets);
   }
 
