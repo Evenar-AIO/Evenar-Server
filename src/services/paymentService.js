@@ -31,8 +31,8 @@ exports.processPayment = async (orderId, method) => {
       orderCode,
       amount: order.totalAmount,
       description: `Thanh toan ${order.orderNumber}`.substring(0, 25),
-      returnUrl: `${domain}/checkout?status=success`,
-      cancelUrl: `${domain}/checkout?status=cancelled`,
+      returnUrl: `${domain}/checkout?status=success&orderId=${order._id}`,
+      cancelUrl: `${domain}/checkout?status=cancelled&orderId=${order._id}`,
     };
 
     const payosResponse = await paymentGateway.createPaymentLink(payosData);
@@ -241,4 +241,39 @@ exports.cancelOrder = async (orderId) => {
     session.endSession();
     throw error;
   }
+};
+
+exports.confirmPayment = async (orderId) => {
+  return exports.confirmPaymentWithoutTransaction(orderId);
+};
+
+exports.confirmPaymentWithoutTransaction = async (orderId) => {
+  const order = await Order.findById(orderId);
+  if (!order) throw new Error('Order not found');
+
+  if (order.paymentStatus === 'paid') {
+    return { status: 'ALREADY_CONFIRMED' };
+  }
+
+  if (order.paymentStatus !== 'pending') {
+    throw new Error('Order not in pending state');
+  }
+
+  order.paymentStatus = 'paid';
+  order.orderStatus = 'confirmed';
+  await order.save();
+
+  const items = await OrderItem.find({ orderId: order._id });
+  if (items && items.length > 0) {
+    await inventoryManager.confirmOrder(items);
+    try {
+      await inventoryManager.confirmSeatIds(order.eventId, items);
+    } catch (error) {
+      if (!String(error?.message || '').includes('no longer available')) {
+        throw error;
+      }
+    }
+  }
+
+  return { status: 'CONFIRMED' };
 };

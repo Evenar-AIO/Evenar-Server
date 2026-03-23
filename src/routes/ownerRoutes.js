@@ -15,6 +15,11 @@ const verifyOwner = (req, res, next) => {
 
 router.use(verifyToken, verifyOwner);
 
+router.use((req, res, next) => {
+    console.log(`[OwnerRequest] Path: ${req.path}, User: ${JSON.stringify(req.user)}`);
+    next();
+});
+
 router.get('/stats', ownerController.getStats);
 router.get('/revenue', ownerController.getRevenueData);
 router.get('/buyers', ownerController.getBuyers);

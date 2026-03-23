@@ -22,3 +22,19 @@ exports.handleCallback = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.confirmPayment = async (req, res) => {
+  try {
+    const { orderId } = req.body;
+
+    if (!orderId) {
+      return res.status(400).json({ error: 'orderId is required' });
+    }
+
+    const result = await paymentService.confirmPayment(orderId);
+    res.status(200).json(result);
+  } catch (error) {
+    console.error('Confirm payment error:', error.message);
+    res.status(500).json({ error: error.message });
+  }
+};
