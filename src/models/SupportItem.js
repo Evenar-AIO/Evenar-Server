@@ -5,10 +5,11 @@ const supportItemSchema = new mongoose.Schema(
     userId: { type: mongoose.Schema.Types.Mixed, ref: "User", required: true },
     subject: { type: String, required: true },
     description: { type: String, required: true },
-    category: { type: String, enum: ["technical", "billing", "event", "other"], default: "other" },
-    status: { type: String, enum: ["open", "in_progress", "resolved", "closed"], default: "open" },
+    category: { type: String, default: "other" },
+    status: { type: String, enum: ["pending", "in_progress", "resolved", "rejected"], default: "pending" },
     priority: { type: String, enum: ["low", "medium", "high"], default: "medium" },
-    assignedTo: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    adminResponse: { type: String },
+    lastModified: { type: Date },
   },
   { timestamps: true, collection: 'supportItems' }
 );

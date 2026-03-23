@@ -60,7 +60,13 @@ async function getSupportList(req, res) {
       .populate("userId", "name email")
       .lean();
 
-    res.json(items);
+    // Fetch attachments for each item
+    const itemsWithAttachments = await Promise.all(items.map(async (item) => {
+      const attachments = await SupportAttachment.find({ supportItemId: item._id }).lean();
+      return { ...item, attachments };
+    }));
+
+    res.json(itemsWithAttachments);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

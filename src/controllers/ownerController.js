@@ -40,7 +40,20 @@ exports.getStats = async (req, res) => {
         const totalRevenue = paidOrders.reduce((sum, order) => sum + (order.totalAmount || 0), 0);
         const totalTicketsSold = paidOrders.reduce((sum, order) => sum + (order.totalQuantity || 0), 0);
 
-        console.log(`[OwnerStats] Stats - Revenue: ${totalRevenue}, Tickets: ${totalTicketsSold}, Active Events: ${activeEventsCount}`);
+        // User Acquisition calculation
+        const uniqueBuyerIds = [...new Set(paidOrders.map(o => String(o.userId)))];
+        const totalUniqueBuyers = uniqueBuyerIds.length;
+        
+        // Calculate returning customers (those with more than 1 paid order for this owner)
+        const orderCounts = {};
+        paidOrders.forEach(o => {
+            const uid = String(o.userId);
+            orderCounts[uid] = (orderCounts[uid] || 0) + 1;
+        });
+        const returningCustomers = Object.values(orderCounts).filter(count => count > 1).length;
+        const newCustomers = totalUniqueBuyers - returningCustomers;
+
+        console.log(`[OwnerStats] Stats - Revenue: ${totalRevenue}, Tickets: ${totalTicketsSold}, Active Events: ${activeEventsCount}, Buyers: ${totalUniqueBuyers}`);
 
         res.json({
             success: true,
@@ -48,7 +61,12 @@ exports.getStats = async (req, res) => {
                 totalRevenue,
                 totalTicketsSold,
                 activeEventsCount,
-                eventCount: events.length
+                eventCount: events.length,
+                acquisition: {
+                    new: newCustomers,
+                    returning: returningCustomers,
+                    total: totalUniqueBuyers
+                }
             }
         });
     } catch (error) {
@@ -73,21 +91,39 @@ exports.getRevenueData = async (req, res) => {
         const events = await Event.find(query);
         const eventIds = events.map(e => e._id);
 
+        const sixMonthsAgo = new Date();
+        sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+
         const orders = await Order.find({
             eventId: { $in: eventIds },
-            paymentStatus: 'paid'
+            paymentStatus: 'paid',
+            createdAt: { $gte: sixMonthsAgo }
         }).sort({ createdAt: 1 });
 
-        // Simple aggregation by month/day
-        const revenueByDate = {};
+        // Aggregate by Month for the last 6 months
+        const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+        const monthlyRevenue = {};
+        
+        // Pre-fill last 6 months with 0
+        const now = new Date();
+        for (let i = 5; i >= 0; i--) {
+            const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+            const monthName = months[d.getMonth()];
+            monthlyRevenue[monthName] = 0;
+        }
+
         orders.forEach(order => {
-            const date = new Date(order.createdAt).toISOString().split('T')[0];
-            revenueByDate[date] = (revenueByDate[date] || 0) + (order.totalAmount || 0);
+            const date = new Date(order.createdAt);
+            const monthName = months[date.getMonth()];
+            // Only aggregate if it belongs to the pre-filled last 6 months
+            if (monthlyRevenue.hasOwnProperty(monthName)) {
+                monthlyRevenue[monthName] += (order.totalAmount || 0);
+            }
         });
 
         res.json({
             success: true,
-            data: revenueByDate
+            data: monthlyRevenue
         });
     } catch (error) {
         console.error('Owner Revenue Data Error:', error);
@@ -175,7 +211,26 @@ exports.getAnalytics = async (req, res) => {
             soldMap[String(og._id)] = og.totalSold;
         });
 
-        const performance = events.map(event => {
+        // Calculate Ticket Distribution
+        const orderItems = await mongoose.model('OrderItem').find({
+            eventId: { $in: eventIds }
+        }).populate('ticketInfoId', 'ticketName');
+
+        const distribution = {};
+        orderItems.forEach(item => {
+            if (item.ticketInfoId && item.ticketInfoId.ticketName) {
+                const name = item.ticketInfoId.ticketName;
+                distribution[name] = (distribution[name] || 0) + item.quantity;
+            } else {
+                distribution['Other'] = (distribution['Other'] || 0) + item.quantity;
+            }
+        });
+
+        // Calculate Conversion Rate (Paid / Total Orders)
+        const totalOrdersCount = await Order.countDocuments({ eventId: { $in: eventIds } });
+        const paidOrdersCount = await Order.countDocuments({ eventId: { $in: eventIds }, paymentStatus: 'paid' });
+        const conversionRate = totalOrdersCount > 0 ? (paidOrdersCount / totalOrdersCount) * 100 : 0;
+        const performanceData = events.map(event => {
             const actualSold = soldMap[String(event._id)] || (event.soldTickets || 0);
             return {
                 eventId: event._id,
@@ -188,7 +243,11 @@ exports.getAnalytics = async (req, res) => {
 
         res.json({
             success: true,
-            data: performance
+            data: {
+                performance: performanceData,
+                ticketDistribution: distribution,
+                conversionRate: conversionRate.toFixed(1)
+            }
         });
     } catch (error) {
         console.error('Owner Analytics Error:', error);

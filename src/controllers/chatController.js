@@ -18,7 +18,8 @@ async function findOrCreateSupportConversation(req, res) {
       type: "support",
     });
     if (conv) {
-      return res.status(200).json(conv);
+      const populated = await Conversation.findById(conv._id).populate("participants", "username email avatar").lean();
+      return res.status(200).json(populated);
     }
 
     // Tìm một admin bất kỳ để assign
@@ -38,7 +39,8 @@ async function findOrCreateSupportConversation(req, res) {
       io.to(`user:${admin._id.toString()}`).emit("chat:newConversation", conv);
     }
 
-    res.status(201).json(conv);
+    const populated = await Conversation.findById(conv._id).populate("participants", "username email avatar").lean();
+    res.status(201).json(populated);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -75,13 +77,15 @@ async function createConversation(req, res) {
       type: "direct",
     });
     if (conv) {
-      return res.status(200).json(conv);
+      const populated = await Conversation.findById(conv._id).populate("participants", "username email avatar").lean();
+      return res.status(200).json(populated);
     }
     conv = await Conversation.create({
       participants: [userId, resolvedOtherUserId],
       type: "direct",
     });
-    res.status(201).json(conv);
+    const populated = await Conversation.findById(conv._id).populate("participants", "username email avatar").lean();
+    res.status(201).json(populated);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -93,9 +97,12 @@ async function createConversation(req, res) {
 async function getConversations(req, res) {
   try {
     const userId = req.user.sub || req.user.id || req.user._id;
-    const conversations = await Conversation.find({ participants: userId })
+    const conversations = await Conversation.find({ 
+        participants: userId,
+        hiddenBy: { $ne: userId }
+      })
       .sort({ lastMessageAt: -1 })
-      .populate("participants", "name email")
+      .populate("participants", "username email avatar")
       .lean();
     res.json(conversations);
   } catch (err) {
@@ -126,19 +133,20 @@ async function getMessages(req, res) {
     const messages = await Message.find(query)
       .sort({ createdAt: -1 })
       .limit(limit)
-      .populate("senderId", "name email")
+      .populate("senderId", "username email avatar")
       .lean();
 
     const messageIds = messages.map((m) => m._id);
     const attachments = await FileAttachment.find({ messageId: { $in: messageIds } }).lean();
     const byMessage = {};
     attachments.forEach((a) => {
-      if (!byMessage[a.messageId]) byMessage[a.messageId] = [];
-      byMessage[a.messageId].push(a);
+      const mid = a.messageId.toString();
+      if (!byMessage[mid]) byMessage[mid] = [];
+      byMessage[mid].push(a);
     });
     const result = messages.reverse().map((m) => ({
       ...m,
-      attachments: byMessage[m._id] || [],
+      attachments: byMessage[m._id.toString()] || [],
     }));
 
     res.json(result);
@@ -190,25 +198,50 @@ async function sendMessage(req, res) {
       {
         lastMessageAt: new Date(),
         lastMessagePreview: (content || "[File]").slice(0, 100),
+        $pull: { hiddenBy: { $in: conv.participants } }
       }
     );
+
+    const populated = await Message.findById(message._id).populate("senderId", "username email avatar").lean();
+    const finalAttachments = await FileAttachment.find({ messageId: message._id }).lean();
+    const fullMessage = { ...populated, attachments: finalAttachments };
 
     const io = getIO();
     if (io) {
       conv.participants.forEach((pid) => {
         const id = pid.toString ? pid.toString() : pid;
         if (id !== userId) {
-          io.to(`user:${id}`).emit("chat:message", message);
+          io.to(`user:${id}`).emit("chat:message", fullMessage);
         }
       });
-      io.to(`conv:${conversationId}`).emit("chat:message", message);
+      io.to(`conv:${conversationId}`).emit("chat:message", fullMessage);
     }
 
-    const populated = await Message.findById(message._id).populate("senderId", "name email").lean();
-    res.status(201).json(populated);
+    res.status(201).json(fullMessage);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 }
 
-module.exports = { findOrCreateSupportConversation, createConversation, getConversations, getMessages, sendMessage };
+async function deleteConversation(req, res) {
+  try {
+    const { id } = req.params;
+    const userId = req.user.sub || req.user.id || req.user._id;
+
+    const conv = await Conversation.findOne({ _id: id, participants: userId });
+    if (!conv) {
+      return res.status(404).json({ error: "Conversation not found" });
+    }
+
+    await Conversation.updateOne(
+      { _id: id },
+      { $addToSet: { hiddenBy: userId } }
+    );
+
+    res.json({ success: true, message: "Conversation hidden" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
+
+module.exports = { findOrCreateSupportConversation, createConversation, getConversations, getMessages, sendMessage, deleteConversation };

@@ -20,7 +20,8 @@ const {
     getEventById,
     getDailyRevenue,
     updateEvent,
-    deleteEvent
+    deleteEvent,
+    updateSupportStatus
 } = require('../controllers/adminController');
 const { getAllRequests, processRequest } = require('../controllers/organizerController');
 
@@ -51,6 +52,7 @@ router.get('/refunds/stats', getRefundStats);
 router.get('/refunds/:id', getRefundById);
 router.post('/refunds/process', processRefund);
 router.get('/support', getAllSupportItems);
+router.put('/support/:id', updateSupportStatus);
 router.get('/revenue-daily', getDailyRevenue);
 
 router.get('/transactions', getAllTransactions);

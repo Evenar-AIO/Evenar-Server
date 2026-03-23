@@ -6,7 +6,11 @@ const Refund = require('../models/Refund');
 const AuditLog = require('../models/AuditLog');
 const OrderItem = require('../models/OrderItem');
 const SupportItem = require('../models/SupportItem');
+const Notification = require('../models/Notification');
+const { getIO } = require('../../socket');
 const OrganizerRequest = require('../models/OrganizerRequest');
+const TicketInfo = require('../models/ticketInfoModel');
+const TicketInventory = require('../models/ticketInventoryModel');
 const { Parser } = require('json2csv');
 const { logAuditAction } = require('../utils/auditUtil');
 const { 
@@ -219,10 +223,26 @@ exports.getEventById = async (req, res) => {
         const event = await safeFindOne(Event, value.id);
         if (!event) return sendResponse(res, 404, false, 'Event not found');
 
+        // Fetch associated tickets and inventory (mirroring eventService logic)
+        const TicketInfo = mongoose.model('TicketInfo');
+        const TicketInventory = mongoose.model('TicketInventory');
+        
+        const tickets = await TicketInfo.find({ eventId: event._id }).lean();
+        const ticketsWithInventory = await Promise.all(tickets.map(async (t) => {
+            const inv = await TicketInventory.findOne({ ticketInfoId: t._id }).lean();
+            return {
+                ...t,
+                quantity: inv ? inv.totalQuantity : 0,
+                available: inv ? inv.availableQuantity : 0,
+                type: t.ticketName
+            };
+        }));
+
         const owner = await safeFindOne(User, event.ownerId);
         
         const eventData = event.toObject();
         eventData.organizerName = owner ? (owner.fullName || owner.username) : 'Unknown Organizer';
+        eventData.ticketInfo = ticketsWithInventory;
 
         sendResponse(res, 200, true, 'Event details retrieved', eventData);
     } catch (error) {
@@ -232,8 +252,91 @@ exports.getEventById = async (req, res) => {
 
 exports.getAllSupportItems = async (req, res) => {
     try {
-        const items = await SupportItem.find().sort({ createdAt: -1 });
+        const items = await SupportItem.aggregate([
+            {
+                $lookup: {
+                    from: 'users',
+                    let: { uid: '$userId' },
+                    pipeline: [
+                        { $match: { $expr: { $or: [
+                            { $eq: ['$_id', '$$uid'] },
+                            { $eq: ['$legacyId', '$$uid'] }
+                        ] } } }
+                    ],
+                    as: 'userInfo'
+                }
+            },
+            { $unwind: { path: '$userInfo', preserveNullAndEmptyArrays: true } },
+            {
+                $lookup: {
+                    from: 'supportAttachments',
+                    localField: '_id',
+                    foreignField: 'supportItemId',
+                    as: 'attachments'
+                }
+            },
+            { $sort: { createdAt: -1 } }
+        ]);
         sendResponse(res, 200, true, 'Support items retrieved successfully', items);
+    } catch (error) {
+        sendResponse(res, 500, false, error.message);
+    }
+};
+
+exports.updateSupportStatus = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { status, adminResponse } = req.body;
+        
+        if (!['pending', 'in_progress', 'resolved', 'rejected'].includes(status)) {
+            return sendResponse(res, 400, false, 'Invalid status format');
+        }
+
+        const updatedItem = await SupportItem.findByIdAndUpdate(
+            id,
+            { 
+                status, 
+                adminResponse,
+                lastModified: new Date()
+            },
+            { new: true }
+        );
+
+        if (!updatedItem) return sendResponse(res, 404, false, 'Support item not found');
+
+        // Send real-time notification to user
+        try {
+            const io = getIO();
+            if (io) {
+                const userId = updatedItem.userId.toString();
+                const statusText = status === 'resolved' ? 'Đã giải quyết' : 
+                                 status === 'in_progress' ? 'Đang xử lý' : 
+                                 status === 'rejected' ? 'Từ chối' : 'Cập nhật';
+                
+                const notifData = {
+                    userId: updatedItem.userId,
+                    title: `Cập nhật yêu cầu hỗ trợ #${updatedItem._id.toString().slice(-6).toUpperCase()}`,
+                    body: `Yêu cầu: "${updatedItem.subject}" đã được chuyển sang trạng thái: ${statusText}.`,
+                    type: 'support',
+                    read: false,
+                    targetId: updatedItem._id,
+                    targetModel: 'SupportItem'
+                };
+
+                // Create persistent notification in DB
+                const newNotif = await Notification.create(notifData);
+                
+                // Emit via WebSocket
+                io.to(`user:${userId}`).emit('notification', newNotif);
+                console.log(`Notification sent to user ${userId} via socket`);
+            }
+        } catch (socketErr) {
+            console.error('Socket notification error:', socketErr);
+            // Non-blocking error, we still return successful update response
+        }
+
+        await logAuditAction(req, 'UPDATE', 'SupportItems', updatedItem.legacyId || updatedItem._id, {}, { status, adminResponse });
+        sendResponse(res, 200, true, 'Support item updated successfully', updatedItem);
     } catch (error) {
         sendResponse(res, 500, false, error.message);
     }
@@ -526,7 +629,8 @@ exports.getDashboardStats = async (req, res) => {
             topEventsRaw,
             pendingEventsList,
             topOrganizersRaw,
-            totalOrganizerRequests
+            totalOrganizerRequests,
+            revenueTrends
         ] = await Promise.all([
             User.countDocuments({ isDeleted: { $ne: true } }),
             User.countDocuments({ isLocked: { $ne: true }, isDeleted: { $ne: true } }),
@@ -539,34 +643,87 @@ exports.getDashboardStats = async (req, res) => {
             Refund.countDocuments({ refundStatus: 'pending' }),
             OrderItem.aggregate([
                 { $group: { _id: '$eventId', revenue: { $sum: '$totalPrice' } } },
+                {
+                    $lookup: {
+                        from: 'events',
+                        localField: '_id',
+                        foreignField: '_id',
+                        as: 'eventInfo'
+                    }
+                },
+                { $unwind: { path: '$eventInfo', preserveNullAndEmptyArrays: true } },
+                {
+                    $project: {
+                        _id: 1,
+                        revenue: 1,
+                        name: { $ifNull: ['$eventInfo.name', { $concat: ['Event #', { $toString: '$_id' }] }] }
+                    }
+                },
                 { $sort: { revenue: -1 } },
                 { $limit: 5 }
             ]),
             Event.find({ isApproved: false }).sort({ createdAt: -1 }).limit(5),
             Event.aggregate([
-                { $match: { isApproved: true } },
-                { $group: { _id: '$ownerId', totalEvents: { $sum: 1 }, ticketsSold: { $sum: '$soldTickets' } } },
-                { $sort: { ticketsSold: -1 } },
+                { $match: { isApproved: true, isDeleted: false } },
+                {
+                   $lookup: {
+                      from: 'orders',
+                      localField: '_id',
+                      foreignField: 'eventId',
+                      as: 'orderDocs'
+                   }
+                },
+                {
+                   $addFields: {
+                      realSold: {
+                         $sum: {
+                            $map: {
+                               input: {
+                                  $filter: {
+                                     input: '$orderDocs',
+                                     as: 'o',
+                                     cond: { $eq: ['$$o.paymentStatus', 'paid'] }
+                                  }
+                               },
+                               as: 'po',
+                               in: '$$po.totalQuantity'
+                            }
+                         }
+                      }
+                   }
+                },
+                { 
+                   $group: { 
+                      _id: '$ownerId', 
+                      totalEvents: { $sum: 1 }, 
+                      ticketsSold: { $sum: '$realSold' } 
+                   } 
+                },
+                { $sort: { ticketsSold: -1, totalEvents: -1 } },
                 { $limit: 5 }
             ]),
-            OrganizerRequest.countDocuments({ status: 'pending' })
+            OrganizerRequest.countDocuments({ status: 'pending' }),
+            Order.aggregate([
+                { $match: { paymentStatus: 'paid' } },
+                {
+                    $group: {
+                        _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+                        revenue: { $sum: "$totalAmount" }
+                    }
+                },
+                { $sort: { _id: 1 } },
+                { $limit: 30 }
+            ])
         ]);
 
-        const topEvents = await Promise.all(topEventsRaw.map(async (item) => {
-            const event = await safeFindOne(Event, item._id);
-            return {
-                _id: event ? event.name : `Event #${item._id}`,
-                name: event ? event.name : `Event #${item._id}`,
-                revenue: item.revenue
-            };
-        }));
+        const topEvents = topEventsRaw;
 
         const leaderboard = await Promise.all(topOrganizersRaw.map(async (organizer) => {
             const user = await safeFindOne(User, organizer._id);
             return {
-                name: user ? (user.fullName || user.username) : `Organizer #${organizer._id}`,
-                events: organizer.totalEvents,
-                tickets: organizer.ticketsSold
+                _id: user ? (user.fullName || user.username) : `Organizer #${organizer._id}`,
+                totalEvents: organizer.totalEvents,
+                ticketsSold: organizer.ticketsSold
             };
         }));
 
@@ -580,7 +737,8 @@ exports.getDashboardStats = async (req, res) => {
             topEvents,
             pendingEventsList,
             leaderboard,
-            pendingOrganizerRequests: totalOrganizerRequests
+            pendingOrganizerRequests: totalOrganizerRequests,
+            revenueTrends
         };
 
         sendResponse(res, 200, true, 'Dashboard stats retrieved successfully', dashboardData);
@@ -590,26 +748,57 @@ exports.getDashboardStats = async (req, res) => {
 };
 exports.updateEvent = async (req, res) => {
     try {
-        const { error: idError, value: idValue } = idParamSchema.validate(req.params);
-        if (idError) return sendResponse(res, 400, false, idError.details[0].message);
+        const { error, value } = idParamSchema.validate(req.params);
+        if (error) return sendResponse(res, 400, false, error.details[0].message);
 
-        const updates = req.body;
-        
-        delete updates._id;
-        delete updates.legacyId;
-
-        const query = mongoose.Types.ObjectId.isValid(idValue.id) ? { _id: idValue.id } : { legacyId: Number(idValue.id) };
-        const event = await Event.findOneAndUpdate(
-            query,
-            { $set: updates },
-            { new: true }
-        );
-
+        const event = await Event.findById(value.id);
         if (!event) return sendResponse(res, 404, false, 'Event not found');
 
-        await logAuditAction(req, 'UPDATE', 'Events', event.legacyId || event._id, {}, updates);
+        const { ticketInfo, ...restData } = req.body;
+        
+        // Update core event fields
+        Object.assign(event, restData);
+        const updatedEvent = await event.save();
 
-        sendResponse(res, 200, true, 'Event updated successfully', event);
+        // Sync TicketInfo if provided (mirroring eventService logic)
+        if (Array.isArray(ticketInfo)) {
+            const TicketInfo = mongoose.model('TicketInfo');
+            const TicketInventory = mongoose.model('TicketInventory');
+
+            for (const t of ticketInfo) {
+                const ticketId = t._id || t.id;
+                const price = Number(t.price);
+                const qty = Number(t.quantity);
+
+                if (ticketId && mongoose.Types.ObjectId.isValid(ticketId)) {
+                    await TicketInfo.findByIdAndUpdate(ticketId, {
+                        ticketName: t.type || t.ticketName,
+                        price: price,
+                        isActive: true
+                    });
+                    await TicketInventory.findOneAndUpdate(
+                        { ticketInfoId: ticketId },
+                        { totalQuantity: qty, availableQuantity: qty }
+                    );
+                } else {
+                    const ti = await TicketInfo.create({
+                        ticketName: t.type || t.ticketName || 'Standard',
+                        price: price,
+                        eventId: event._id,
+                        isActive: true
+                    });
+                    await TicketInventory.create({
+                        ticketInfoId: ti._id,
+                        totalQuantity: qty,
+                        availableQuantity: qty,
+                        eventId: event._id
+                    });
+                }
+            }
+        }
+
+        await logAuditAction(req, 'UPDATE', 'Events', updatedEvent.legacyId || 0, {}, updatedEvent);
+        sendResponse(res, 200, true, 'Event updated successfully', updatedEvent);
     } catch (error) {
         sendResponse(res, 500, false, error.message);
     }
@@ -621,12 +810,16 @@ exports.deleteEvent = async (req, res) => {
         if (error) return sendResponse(res, 400, false, error.details[0].message);
 
         const query = mongoose.Types.ObjectId.isValid(value.id) ? { _id: value.id } : { legacyId: Number(value.id) };
-        const event = await Event.findOneAndDelete(query);
+        const event = await Event.findOneAndUpdate(
+            query,
+            { $set: { isDeleted: true, status: 'deleted', deletedAt: new Date() } },
+            { new: true }
+        );
         if (!event) return sendResponse(res, 404, false, 'Event not found');
 
-        await logAuditAction(req, 'DELETE', 'Events', event.legacyId || event._id, event, null);
+        await logAuditAction(req, 'DELETE', 'Events', event.legacyId || event._id, event, { isDeleted: true });
 
-        sendResponse(res, 200, true, 'Event deleted successfully');
+        sendResponse(res, 200, true, 'Event soft-deleted successfully');
     } catch (error) {
         sendResponse(res, 500, false, error.message);
     }

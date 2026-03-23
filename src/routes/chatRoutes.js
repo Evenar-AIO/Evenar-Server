@@ -1,6 +1,6 @@
 const express = require("express");
 const { verifyToken } = require("../middleware/authMiddleware");
-const { findOrCreateSupportConversation, createConversation, getConversations, getMessages, sendMessage } = require("../controllers/chatController");
+const { findOrCreateSupportConversation, createConversation, getConversations, getMessages, sendMessage, deleteConversation } = require("../controllers/chatController");
 
 const router = express.Router();
 
@@ -9,6 +9,7 @@ router.post("/support", findOrCreateSupportConversation); // Customer tự độ
 router.post("/conversations", createConversation);
 router.get("/conversations", getConversations);
 router.get("/conversations/:id/messages", getMessages);
+router.delete("/conversations/:id", deleteConversation);
 router.post("/send", sendMessage);
 
 module.exports = router;
