@@ -64,6 +64,9 @@ const eventSchema = new mongoose.Schema(
         dressCode: {
             type: String
         },
+        venueMap: {
+            type: String
+        },
         hasSeatingChart: {
             type: Boolean,
             default: false

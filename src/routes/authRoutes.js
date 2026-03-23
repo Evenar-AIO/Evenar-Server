@@ -139,19 +139,23 @@ router.post('/login', authLimiter, async (req, res) => {
   try {
     const user = await User.findOne({ email: email.toLowerCase() }).select('+passwordHash');
     if (!user) {
+      console.log(`Login failed: User not found for email ${email.toLowerCase()}`);
       return res.status(401).json({ message: 'Thông tin đăng nhập không chính xác' });
     }
 
     if (!user.isVerified) {
+      console.log(`Login failed: User ${email.toLowerCase()} is not verified`);
       return res.status(403).json({ message: 'Tài khoản chưa được xác thực email' });
     }
 
     if (user.isLocked) {
+      console.log(`Login failed: User ${email.toLowerCase()} is locked`);
       return res.status(403).json({ message: 'Tài khoản của bạn đang bị khóa' });
     }
 
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
+      console.log(`Login failed: Password mismatch for user ${email.toLowerCase()}`);
       return res.status(401).json({ message: 'Thông tin đăng nhập không chính xác' });
     }
 

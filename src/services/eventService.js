@@ -2,9 +2,46 @@ const mongoose = require('mongoose');
 const Event = require('../models/Event');
 const TicketInfo = require('../models/ticketInfoModel');
 const TicketInventory = require('../models/ticketInventoryModel');
-const Feedback = require('../models/Feedback');
 const User = require('../models/User');
 
+/**
+ * getEvents
+ * Returns all non-deleted events, sorted by creation date.
+ */
+exports.getEvents = async () => {
+    return await Event.find({ isDeleted: { $ne: true } }).sort({ createdAt: -1 });
+};
+
+/**
+ * getEventById
+ * Returns a single event by ID or legacyId, with ticket info populated.
+ */
+exports.getEventById = async (id) => {
+    const query = mongoose.Types.ObjectId.isValid(id) ? { _id: id } : { legacyId: Number(id) };
+    const event = await Event.findOne(query).populate('genreId').lean();
+    if (!event) throw new Error("Event not found");
+
+    // Fetch associated tickets
+    const tickets = await TicketInfo.find({ eventId: event._id }).lean();
+    
+    // Get ticket inventories for each ticket
+    const ticketsWithInventory = await Promise.all(tickets.map(async (t) => {
+        const inv = await TicketInventory.findOne({ ticketInfoId: t._id }).lean();
+        return {
+            ...t,
+            quantity: inv ? inv.totalQuantity : 0,
+            available: inv ? inv.availableQuantity : 0,
+            type: t.ticketName // Mapping for frontend consistency
+        };
+    }));
+
+    return { ...event, ticketInfo: ticketsWithInventory };
+};
+
+/**
+ * createEvent
+ * Creates a new event and its initial ticket tiers.
+ */
 exports.createEvent = async (userId, eventData) => {
   const {
     name,
@@ -17,8 +54,13 @@ exports.createEvent = async (userId, eventData) => {
     genreId,
     totalTicketCount,
     status,
-    ticketInfo
+    ticketInfo,
+    venueMap,
+    hasSeatingChart,
+    zones
   } = eventData;
+
+  const finalLayout = layout || zones;
 
   if (!name || !startTime || !endTime) {
     throw new Error('Name, startTime, and endTime are required');
@@ -31,8 +73,10 @@ exports.createEvent = async (userId, eventData) => {
     startTime,
     endTime,
     physicalLocation,
-    layout,
+    layout: finalLayout,
     imageURL,
+    venueMap,
+    hasSeatingChart: hasSeatingChart || (Array.isArray(finalLayout) && finalLayout.length > 0),
     genreId: mongoose.Types.ObjectId.isValid(genreId) ? (typeof genreId === 'string' ? new mongoose.Types.ObjectId(genreId) : genreId) : undefined,
     totalTicketCount: totalTicketCount || 0,
     status: status || 'editing'
@@ -58,225 +102,118 @@ exports.createEvent = async (userId, eventData) => {
         ticketInfoId: ti._id,
         totalQuantity: Number(ticket.quantity) || 0,
         availableQuantity: Number(ticket.quantity) || 0,
-        soldQuantity: 0,
-        reservedQuantity: 0
+        eventId: event._id
       });
       await inv.save();
-
-      createdTickets.push({
-        ...ti.toObject(),
-        availableQuantity: inv.availableQuantity,
-        totalQuantity: inv.totalQuantity
-      });
+      createdTickets.push({ ticketInfo: ti, inventory: inv });
     }
   }
 
-  const result = event.toObject();
-  result.ticketInfos = createdTickets;
-  return result;
+  return { event, tickets: createdTickets };
 };
 
-exports.getEvents = async () => {
-  return await Event.find({ isDeleted: false });
-};
-
-exports.getEventById = async (id) => {
-  const event = await Event.findById(id).lean();
-  if (!event) throw new Error('Event not found');
-
-  // Build query: only include legacy condition if the event has a legacyId
-  const eventQuery = [{ eventId: event._id }];
-  if (event.legacyId != null) {
-    eventQuery.push({ legacyEventId: event.legacyId });
-  }
-
-  // Load ticket infos for this event (must be active)
-  const ticketInfos = await TicketInfo.find({ $or: eventQuery, isActive: { $ne: false } }).lean();
-  
-  // Attach inventory for each ticket info
-  const ticketInfosWithInventory = await Promise.all(ticketInfos.map(async (info) => {
-    const invQuery = [{ ticketInfoId: info._id }];
-    if (info.legacyId != null) {
-      invQuery.push({ legacyTicketInfoId: info.legacyId });
-    }
-    const inventory = await TicketInventory.findOne({ $or: invQuery }).lean();
-    return {
-      ...info,
-      availableQuantity: inventory ? inventory.availableQuantity : 0,
-      totalQuantity: inventory ? inventory.totalQuantity : 0
-    };
-  }));
-
-  event.ticketInfos = ticketInfosWithInventory;
-  
-  // Load event feedbacks
-  const feedbackQuery = [{ eventId: event._id }];
-  if (event.legacyId != null) {
-    feedbackQuery.push({ legacyEventId: event.legacyId });
-  }
-  
-  const feedbacks = await Feedback.find({
-    $or: feedbackQuery,
-    isApproved: true
-  }).lean();
-
-  // Attach User info to feedbacks
-  const feedbacksWithUser = await Promise.all(feedbacks.map(async (fb) => {
-    let user = null;
-    if (fb.userId) {
-      const userQuery = [{ _id: fb.userId }];
-      if (fb.legacyUserId != null) userQuery.push({ legacyId: fb.legacyUserId });
-      user = await User.findOne({ $or: userQuery }).lean();
-    }
-    return {
-      ...fb,
-      userName: user ? user.username : 'Anonymous User',
-      userRole: user && user.role === 'customer' ? 'Verified Ticket Buyer' : 'Super Fan'
-    };
-  }));
-
-  event.feedbacks = feedbacksWithUser;
-
-  return event;
-};
+/**
+ * updateEvent
+ * Updates an existing event. Handles soft updates for live events and full updates for others.
+ */
 exports.updateEvent = async (id, data) => {
-  const event = await Event.findById(id);
-  if (!event) throw new Error("Event not found");
+    const event = await Event.findById(id);
+    if (!event) throw new Error("Event not found");
 
-  const status = event.status?.toLowerCase() || 'editing';
+    const currentStatus = (event.status || 'editing').toLowerCase();
 
-  // Only 'editing' status allows full updates
-  // 'live' allows only soft fields (description, imageURL)
-  if (status === 'live') {
-    const softFields = ['description', 'imageURL', 'image'];
-    const keys = Object.keys(data);
+    // Partial update for LIVE events
+    if (currentStatus === 'live') {
+        const allowedFields = ['description', 'imageURL', 'organizerName', 'ageLimit', 'dressCode'];
+        const updateData = {};
+        allowedFields.forEach(f => {
+            if (data[f] !== undefined) updateData[f] = data[f];
+        });
+        
+        Object.assign(event, updateData);
+        return await event.save();
+    }
+
+    // Full update for non-live events
+    const { ticketInfo, zones, layout, ...restData } = data;
+    const finalLayout = layout || zones;
     
-    // Allow soft-only updates for live events
-    const softData = {};
-    for (const f of softFields) {
-      if (data[f] !== undefined) softData[f] = data[f];
+    // Update core fields
+    Object.assign(event, restData);
+    if (finalLayout !== undefined) {
+        event.layout = finalLayout;
+        event.hasSeatingChart = Array.isArray(finalLayout) && finalLayout.length > 0;
     }
-    Object.assign(event, softData);
-    return await event.save();
-  }
 
-  if (status !== 'editing' && status !== 'pending') {
-    throw new Error(`Cannot update event in '${event.status}' status. Withdraw it first to make changes.`);
-  }
+    await event.save();
 
-  // Update main event data
-  const { ticketInfo, ...restData } = data;
-  Object.assign(event, restData);
+    // Sync TicketInfo if provided
+    if (Array.isArray(ticketInfo)) {
+        // Simple logic: delete old, create new (or identify by name to preserve IDs if needed)
+        // For now, let's keep it simple as per existing patterns
+        for (const t of ticketInfo) {
+            const ticketId = t._id || t.id;
+            const price = Number(t.price);
+            const qty = Number(t.quantity);
 
-  // Handle TicketInfo updates if present
-  if (Array.isArray(ticketInfo)) {
-    // 1. Get existing tickets for this event
-    const existingTickets = await TicketInfo.find({ eventId: event._id });
-    const existingTicketIds = existingTickets.map(t => t._id.toString());
-    const incomingData = ticketInfo.filter(t => t != null);
-    const incomingTicketIds = incomingData.filter(t => (t.id || t._id)).map(t => (t.id || t._id).toString());
-
-    // 2. Prepare to track updated totals
-    let updatedTotalCount = 0;
-
-    // 3. Process each ticket in incoming list
-    for (const t of incomingData) {
-      const ticketId = (t.id || t._id);
-      let ti;
-
-      if (ticketId && existingTicketIds.includes(ticketId.toString())) {
-        // Update existing ticket
-        ti = await TicketInfo.findById(ticketId);
-        if (ti) {
-          ti.ticketName = t.type || t.ticketName || ti.ticketName;
-          ti.price = Number(t.price) || ti.price;
-          ti.category = t.type || t.category || ti.category;
-          ti.ticketDescription = t.description || t.ticketDescription || ti.ticketDescription;
-          ti.isActive = true;
-          await ti.save();
-
-          // Update inventory
-          const inv = await TicketInventory.findOne({ ticketInfoId: ti._id });
-          if (inv) {
-            inv.totalQuantity = Number(t.quantity) || inv.totalQuantity;
-            await inv.save();
-          }
+            if (ticketId && mongoose.Types.ObjectId.isValid(ticketId)) {
+                // Update existing
+                await TicketInfo.findByIdAndUpdate(ticketId, {
+                    ticketName: t.type || t.ticketName,
+                    price: price,
+                    isActive: true
+                });
+                await TicketInventory.findOneAndUpdate(
+                    { ticketInfoId: ticketId },
+                    { totalQuantity: qty, availableQuantity: qty }
+                );
+            } else {
+                // Create new
+                const ti = await TicketInfo.create({
+                    ticketName: t.type || t.ticketName || 'Standard',
+                    price: price,
+                    eventId: event._id,
+                    isActive: true
+                });
+                await TicketInventory.create({
+                    ticketInfoId: ti._id,
+                    totalQuantity: qty,
+                    availableQuantity: qty,
+                    eventId: event._id
+                });
+            }
         }
-      } else {
-        // Create new ticket
-        ti = new TicketInfo({
-          ticketName: t.type || t.ticketName || 'Standard',
-          ticketDescription: t.description || t.ticketDescription || '',
-          category: t.type || t.category || 'General',
-          price: Number(t.price) || 0,
-          eventId: event._id,
-          isActive: true
-        });
-        await ti.save();
-
-        const inv = new TicketInventory({
-          ticketInfoId: ti._id,
-          totalQuantity: Number(t.quantity) || 0,
-          availableQuantity: Number(t.quantity) || 0,
-          soldQuantity: 0,
-          reservedQuantity: 0
-        });
-        await inv.save();
-      }
-      updatedTotalCount += (Number(t.quantity) || 0);
     }
 
-    // 4. Deactivate tickets not in incoming list
-    for (const extantTi of existingTickets) {
-      if (!incomingTicketIds.includes(extantTi._id.toString())) {
-        extantTi.isActive = false;
-        await extantTi.save();
-      }
-    }
-
-    // Update total count on event
-    event.totalTicketCount = updatedTotalCount;
-  }
-
-  return await event.save();
+    return event;
 };
 
-// Withdraw: draft -> editing (pull back from admin review)
-exports.withdrawEvent = async (id, ownerId) => {
-  const event = await Event.findById(id);
-  if (!event) throw new Error("Event not found");
-
-  if (event.status !== 'draft') {
-    throw new Error(`Cannot withdraw. Event is '${event.status}', not 'draft'.`);
-  }
-
-  event.status = 'editing';
-  return await event.save();
-};
-
-// Submit: editing -> draft (send for admin review)
-exports.submitEvent = async (id, ownerId) => {
-  const event = await Event.findById(id);
-  if (!event) throw new Error("Event not found");
-
-  if (event.status !== 'editing' && event.status !== 'pending') {
-    throw new Error(`Cannot submit. Event is '${event.status}', not 'editing'.`);
-  }
-
-  // Basic validation before submitting
-  if (!event.name || !event.startTime || !event.endTime || !event.physicalLocation) {
-    throw new Error('Please fill in all required fields (name, dates, location) before submitting.');
-  }
-
-  event.status = 'draft';
-  return await event.save();
-};
-
+/**
+ * deleteEvent
+ * Marks an event as deleted.
+ */
 exports.deleteEvent = async (id) => {
-  const event = await Event.findById(id);
-  if (!event) throw new Error("Event not found");
+    return await Event.findByIdAndUpdate(id, { isDeleted: true }, { new: true });
+};
 
-  event.status = "deleted";
-  event.isDeleted = true;
-  return await event.save();
+/**
+ * withdrawEvent
+ * Moves an event from 'pending' or 'draft' back to 'editing'.
+ */
+exports.withdrawEvent = async (id, ownerId) => {
+    const event = await Event.findById(id);
+    if (!event) throw new Error("Event not found");
+    event.status = 'editing';
+    return await event.save();
+};
+
+/**
+ * submitEvent
+ * Moves an event from 'editing' to 'pending' for admin approval.
+ */
+exports.submitEvent = async (id, ownerId) => {
+    const event = await Event.findById(id);
+    if (!event) throw new Error("Event not found");
+    event.status = 'pending';
+    return await event.save();
 };

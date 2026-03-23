@@ -11,7 +11,7 @@ const ticketInfoSchema = new mongoose.Schema({
   legacyEventId: Number,
   maxQuantityPerOrder: Number,
   isActive: { type: Boolean, default: true },
-  legacyId: { type: Number, unique: true }
+  legacyId: { type: Number, unique: true, sparse: true }
 }, { 
   timestamps: true,
   collection: 'ticketInfos'

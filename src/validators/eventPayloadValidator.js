@@ -47,8 +47,9 @@ exports.validateCreateEventPayload = (req, res, next) => {
     basePrice: Joi.number().min(0).optional(),
     totalTicketCount: Joi.number().integer().min(0).optional(),
     ticketInfo: Joi.array().items(ticketInfoSchema).optional(),
-    zones: Joi.array().items(zoneSchema).optional()
-  });
+    zones: Joi.array().items(zoneSchema).optional(),
+    hasSeatingChart: Joi.boolean().optional()
+  }).unknown(true);
 
   const { error } = schema.validate(req.body);
   if (error) {
@@ -80,8 +81,9 @@ exports.validateUpdateEventPayload = (req, res, next) => {
     zones: Joi.array().items(zoneSchema).optional(),
     organizerName: Joi.string().optional(),
     ageLimit: Joi.number().integer().min(0).optional(),
-    dressCode: Joi.string().allow('', null).optional()
-  });
+    dressCode: Joi.string().allow('', null).optional(),
+    hasSeatingChart: Joi.boolean().optional()
+  }).unknown(true);
 
   const { error } = schema.validate(req.body);
   if (error) {
