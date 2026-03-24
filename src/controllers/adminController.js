@@ -468,35 +468,20 @@ exports.getAllTransactions = async (req, res) => {
         if (error) return sendResponse(res, 400, false, error.details[0].message);
 
         const { page = 1, limit = 10, status, startDate, endDate } = value;
-        const match = {};
+        const skip = (page - 1) * limit;
 
+        const match = {};
         if (status) match.paymentStatus = status;
         if (startDate && endDate) {
             match.createdAt = { $gte: new Date(startDate), $lte: new Date(endDate) };
         }
 
-        const skip = (page - 1) * limit;
-
-        const items = await OrderItem.aggregate([
-            {
-                $lookup: {
-                    from: 'orders',
-                    let: { oid: '$orderId' },
-                    pipeline: [
-                        { $match: { $expr: { $or: [
-                            { $eq: ['$_id', '$$oid'] },
-                            { $eq: ['$legacyId', '$$oid'] }
-                        ] } } }
-                    ],
-                    as: 'orderInfo'
-                }
-            },
-            { $unwind: '$orderInfo' },
-            { $match: status ? { 'orderInfo.paymentStatus': status } : {} },
+        const pipeline = [
+            { $match: match },
             {
                 $lookup: {
                     from: 'users',
-                    let: { uid: '$orderInfo.userId' },
+                    let: { uid: '$userId' },
                     pipeline: [
                         { $match: { $expr: { $or: [
                             { $eq: ['$_id', '$$uid'] },
@@ -521,14 +506,20 @@ exports.getAllTransactions = async (req, res) => {
                 }
             },
             { $unwind: { path: '$eventInfo', preserveNullAndEmptyArrays: true } },
-            { $sort: { 'orderInfo.createdAt': -1 } },
-            { $skip: skip },
-            { $limit: limit }
-        ]);
-        
-        const total = await OrderItem.countDocuments();
+            { $sort: { createdAt: -1 } }
+        ];
 
-        sendFullResponse(res, 200, true, 'Transactions retrieved successfully', items, { 
+        // Only apply skip/limit if explicitly requested to favor 'show all' behavior for Admin
+        if (req.query.page && req.query.limit) {
+            pipeline.push({ $skip: skip });
+            pipeline.push({ $limit: Number(limit) });
+        }
+
+        const items = await Order.aggregate(pipeline);
+        
+        const total = await Order.countDocuments(match);
+
+        sendFullResponse(res, 200, true, 'Orders retrieved successfully', items, { 
             total, page, limit 
         });
     } catch (error) {
@@ -619,12 +610,20 @@ exports.exportStatsReport = async (req, res) => {
 
 exports.getDashboardStats = async (req, res) => {
     try {
+        const now = new Date();
+        const startOfThisMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+        const startOfLastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+        const endOfLastMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+
         const [
             totalUsers,
             totalActiveUsers,
+            usersThisMonth,
+            usersLastMonth,
             approvedEvents,
             pendingEvents,
             revenueStats,
+            revenueLastMonthStats,
             totalRefunds,
             topEventsRaw,
             pendingEventsList,
@@ -634,10 +633,16 @@ exports.getDashboardStats = async (req, res) => {
         ] = await Promise.all([
             User.countDocuments({ isDeleted: { $ne: true } }),
             User.countDocuments({ isLocked: { $ne: true }, isDeleted: { $ne: true } }),
+            User.countDocuments({ createdAt: { $gte: startOfThisMonth }, isDeleted: false }),
+            User.countDocuments({ createdAt: { $gte: startOfLastMonth, $lte: endOfLastMonth }, isDeleted: false }),
             Event.countDocuments({ isApproved: true }),
             Event.countDocuments({ isApproved: false }),
             Order.aggregate([
                 { $match: { paymentStatus: 'paid' } },
+                { $group: { _id: null, total: { $sum: '$totalAmount' } } }
+            ]),
+            Order.aggregate([
+                { $match: { paymentStatus: 'paid', createdAt: { $gte: startOfLastMonth, $lte: endOfLastMonth } } },
                 { $group: { _id: null, total: { $sum: '$totalAmount' } } }
             ]),
             Refund.countDocuments({ refundStatus: 'pending' }),
@@ -716,7 +721,40 @@ exports.getDashboardStats = async (req, res) => {
             ])
         ]);
 
-        const topEvents = topEventsRaw;
+        // Calculate growth percentages
+        const userGrowth = usersLastMonth === 0 ? 100 : Math.round(((usersThisMonth - usersLastMonth) / usersLastMonth) * 100);
+        const revenueLastMonth = revenueLastMonthStats.length > 0 ? revenueLastMonthStats[0].total : 0;
+        const totalRevenue = revenueStats.length > 0 ? revenueStats[0].total : 0;
+        const revenueGrowth = revenueLastMonth === 0 ? 100 : Math.round(((totalRevenue - revenueLastMonth) / revenueLastMonth) * 100);
+
+        // Fetch small trend data for each top event (last 7 days)
+        const topEvents = await Promise.all(topEventsRaw.map(async (event) => {
+            const trend = await Order.aggregate([
+                { 
+                    $match: { 
+                        eventId: event._id, 
+                        paymentStatus: 'paid',
+                        createdAt: { $gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) }
+                    } 
+                },
+                {
+                    $group: {
+                        _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+                        count: { $sum: "$totalQuantity" }
+                    }
+                },
+                { $sort: { _id: 1 } }
+            ]);
+            
+            // Normalize to 7 days
+            const trendData = trend.map(t => t.count);
+            while (trendData.length < 7) trendData.unshift(0);
+
+            return {
+                ...event,
+                trend: trendData
+            };
+        }));
 
         const leaderboard = await Promise.all(topOrganizersRaw.map(async (organizer) => {
             const user = await safeFindOne(User, organizer._id);
@@ -730,9 +768,11 @@ exports.getDashboardStats = async (req, res) => {
         const dashboardData = {
             totalUsers,
             activeUsers: totalActiveUsers,
+            userGrowth: (userGrowth >= 0 ? '+' : '') + userGrowth + '%',
             totalEvents: approvedEvents,
             pendingApprovals: pendingEvents,
-            totalRevenue: revenueStats.length > 0 ? revenueStats[0].total : 0,
+            totalRevenue,
+            revenueGrowth: (revenueGrowth >= 0 ? '+' : '') + revenueGrowth + '%',
             totalRefunds,
             topEvents,
             pendingEventsList,
