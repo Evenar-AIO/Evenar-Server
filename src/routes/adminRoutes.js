@@ -6,6 +6,8 @@ const {
     lockUserAccount,
     unlockUserAccount,
     deleteUser,
+    getUserById,
+    updateUser, // Added updateUser
     approveEvent,
     processRefund,
     getAllTransactions,
@@ -35,10 +37,10 @@ router.get('/users', getAllUsers);
 router.get('/users/stats/roles', getUserRoleStats);
 router.get('/users/stats/growth', getUserGrowthStats);
 
+router.get('/users/:id', getUserById);
+router.put('/users/:id', updateUser);
 router.post('/users/:id/lock', lockUserAccount);
-
 router.post('/users/:id/unlock', unlockUserAccount);
-
 router.delete('/users/:id', deleteUser);
 
 router.get('/events', getAllEvents);

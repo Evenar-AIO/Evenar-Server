@@ -263,7 +263,7 @@ router.get('/google/callback', async (req, res) => {
     const accessToken = generateAccessToken(user);
 
     // Redirect to frontend with token
-    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5174';
+    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:8081';
     res.redirect(`${frontendUrl}/login?token=${accessToken}&role=${user.role}`);
   } catch (error) {
     console.error('Google Auth Error:', error);
@@ -347,6 +347,32 @@ router.post('/reset-password', async (req, res) => {
   } catch (error) {
     console.error('Reset password error:', error);
     res.status(500).json({ message: 'Lỗi khi đặt lại mật khẩu' });
+  }
+});
+
+// @route   POST api/auth/change-password
+// @access  Private
+router.post('/change-password', protect, async (req, res) => {
+  const { oldPassword, newPassword } = req.body;
+
+  try {
+    const user = await User.findById(req.user._id).select('+passwordHash');
+    if (!user) {
+      return res.status(404).json({ message: 'Người dùng không tồn tại' });
+    }
+
+    const isMatch = await user.comparePassword(oldPassword);
+    if (!isMatch) {
+      return res.status(401).json({ message: 'Mật khẩu hiện tại không chính xác' });
+    }
+
+    user.passwordHash = newPassword;
+    await user.save();
+
+    res.json({ success: true, message: 'Đổi mật khẩu thành công' });
+  } catch (error) {
+    console.error('Change password error:', error);
+    res.status(500).json({ message: 'Lỗi khi đổi mật khẩu' });
   }
 });
 

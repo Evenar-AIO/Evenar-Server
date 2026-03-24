@@ -5,6 +5,7 @@ const { validatePayment } = require('../validators/paymentValidator');
 
 router.post('/', validatePayment, paymentController.processPayment);
 router.post('/callback', paymentController.handleCallback);
-router.post('/confirm', paymentController.confirmPayment);
+router.all('/confirm', paymentController.confirmPayment);
+router.all('/cancel', paymentController.cancelPayment);
 
 module.exports = router;

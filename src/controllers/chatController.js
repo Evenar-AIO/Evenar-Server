@@ -77,6 +77,11 @@ async function createConversation(req, res) {
       type: "direct",
     });
     if (conv) {
+      // Un-hide if previously hidden by current user
+      await Conversation.updateOne(
+        { _id: conv._id },
+        { $pull: { hiddenBy: userId } }
+      );
       const populated = await Conversation.findById(conv._id).populate("participants", "username email avatar").lean();
       return res.status(200).json(populated);
     }

@@ -5,7 +5,9 @@ exports.validatePayment = (req, res, next) => {
     orderId: Joi.string().required(),
     amount: Joi.number().min(0).optional(),
     method: Joi.string().valid('VNPAY', 'PAYOS').required(),
-    paymentToken: Joi.string().optional()
+    paymentToken: Joi.string().optional(),
+    returnUrl: Joi.string().uri().optional(),
+    cancelUrl: Joi.string().uri().optional()
   });
 
   const { error } = schema.validate(req.body);

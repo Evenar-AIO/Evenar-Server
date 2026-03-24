@@ -55,13 +55,52 @@ exports.getStats = async (req, res) => {
 
         console.log(`[OwnerStats] Stats - Revenue: ${totalRevenue}, Tickets: ${totalTicketsSold}, Active Events: ${activeEventsCount}, Buyers: ${totalUniqueBuyers}`);
 
+        // Calculate Weekly Trend (last 7 days)
+        const weeklyTrend = [];
+        const days = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
+        for (let i = 6; i >= 0; i--) {
+            const date = new Date();
+            date.setHours(0,0,0,0);
+            date.setDate(date.getDate() - i);
+            const nextDate = new Date(date);
+            nextDate.setDate(nextDate.getDate() + 1);
+            
+            const dayRev = paidOrders
+                .filter(o => o.createdAt >= date && o.createdAt < nextDate)
+                .reduce((sum, o) => sum + (o.totalAmount || 0), 0);
+            
+            weeklyTrend.push({
+                day: days[date.getDay()],
+                revenue: dayRev,
+                height: 0 // Will be calculated on frontend or normalized
+            });
+        }
+
+        // Top Events by Revenue
+        const eventRevenueMap = {};
+        paidOrders.forEach(o => {
+            const eid = String(o.eventId);
+            eventRevenueMap[eid] = (eventRevenueMap[eid] || 0) + (o.totalAmount || 0);
+        });
+        const topEvents = events
+            .map(e => ({
+                _id: e._id,
+                name: e.name,
+                revenue: eventRevenueMap[String(e._id)] || 0
+            }))
+            .sort((a, b) => b.revenue - a.revenue)
+            .slice(0, 5)
+            .map(e => ({ ...e, revenue: `₫${e.revenue.toLocaleString('vi-VN')}` }));
+
         res.json({
             success: true,
             data: {
-                totalRevenue,
-                totalTicketsSold,
-                activeEventsCount,
+                totalRevenue: `₫${totalRevenue.toLocaleString('vi-VN')}`,
+                ticketsSold: totalTicketsSold.toLocaleString('vi-VN'),
+                activeEvents: activeEventsCount,
                 eventCount: events.length,
+                weeklyTrend,
+                topEvents,
                 acquisition: {
                     new: newCustomers,
                     returning: returningCustomers,
@@ -241,12 +280,36 @@ exports.getAnalytics = async (req, res) => {
             };
         });
 
+        // Additional Stats for Dashboard
+        const totalRevenue = await Order.aggregate([
+            { $match: { eventId: { $in: eventIds }, paymentStatus: 'paid' } },
+            { $group: { _id: null, total: { $sum: '$totalAmount' } } }
+        ]);
+
+        const totalSold = Object.values(soldMap).reduce((a, b) => a + b, 0);
+        const revenue = totalRevenue[0]?.total || 0;
+
+        // Weekly Revenue
+        const sevenDaysAgo = new Date();
+        sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+        const weeklyRev = await Order.aggregate([
+            { $match: { eventId: { $in: eventIds }, paymentStatus: 'paid', createdAt: { $gte: sevenDaysAgo } } },
+            { $group: { _id: null, total: { $sum: '$totalAmount' } } }
+        ]);
+
+        // Unique Customers (Simplified)
+        const uniqueCustomers = await Order.distinct('userId', { eventId: { $in: eventIds }, paymentStatus: 'paid' });
+
         res.json({
             success: true,
             data: {
                 performance: performanceData,
                 ticketDistribution: distribution,
-                conversionRate: conversionRate.toFixed(1)
+                conversionRate: conversionRate.toFixed(1) + '%',
+                weeklyRevenue: `₫${(weeklyRev[0]?.total || 0).toLocaleString('vi-VN')}`,
+                avgTicketPrice: `₫${totalSold > 0 ? Math.round(revenue / totalSold).toLocaleString('vi-VN') : '0'}`,
+                newCustomers: uniqueCustomers.length,
+                revenueNote: `Tăng trưởng dựa trên ${events.length} sự kiện đang hoạt động`
             }
         });
     } catch (error) {

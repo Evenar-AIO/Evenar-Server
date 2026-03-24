@@ -21,8 +21,18 @@ exports.getEventById = async (id) => {
     const event = await Event.findOne(query).populate('genreId').lean();
     if (!event) throw new Error("Event not found");
 
-    // Fetch associated tickets
-    const tickets = await TicketInfo.find({ eventId: event._id }).lean();
+    // Fetch associated tickets using both Mongoose _id and legacyId for robustness
+    const ticketQuery = { 
+        $or: [
+            { eventId: event._id },
+        ]
+    };
+    
+    if (event.legacyId) {
+        ticketQuery.$or.push({ legacyEventId: event.legacyId });
+    }
+
+    const tickets = await TicketInfo.find(ticketQuery).lean();
     
     // Get ticket inventories for each ticket
     const ticketsWithInventory = await Promise.all(tickets.map(async (t) => {
@@ -35,7 +45,13 @@ exports.getEventById = async (id) => {
         };
     }));
 
-    return { ...event, ticketInfo: ticketsWithInventory };
+    // Explicitly return a clean object to avoid Mongoose internal field issues
+    const result = {
+        ...event,
+        ticketInfo: ticketsWithInventory
+    };
+    
+    return result;
 };
 
 /**

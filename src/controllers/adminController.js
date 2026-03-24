@@ -183,6 +183,45 @@ exports.deleteUser = async (req, res) => {
     }
 };
 
+exports.getUserById = async (req, res) => {
+    try {
+        const { error, value } = idParamSchema.validate(req.params);
+        if (error) return sendResponse(res, 400, false, error.details[0].message);
+
+        const user = await safeFindOne(User, value.id);
+        if (!user) return sendResponse(res, 404, false, 'User not found');
+
+        sendResponse(res, 200, true, 'User details retrieved', user);
+    } catch (error) {
+        sendResponse(res, 500, false, error.message);
+    }
+};
+
+exports.updateUser = async (req, res) => {
+    try {
+        const { error, value } = idParamSchema.validate(req.params);
+        if (error) return sendResponse(res, 400, false, error.details[0].message);
+
+        const { ...updateData } = req.body;
+        // Basic security: don't allow password update via this admin endpoint
+        delete updateData.password;
+        delete updateData._id;
+
+        const user = await User.findOneAndUpdate(
+            mongoose.Types.ObjectId.isValid(value.id) ? { _id: value.id } : { legacyId: Number(value.id) },
+            { $set: updateData },
+            { new: true, runValidators: true }
+        );
+        if (!user) return sendResponse(res, 404, false, 'User not found');
+
+        await logAuditAction(req, 'UPDATE', 'Users', user.legacyId, {}, updateData);
+
+        sendResponse(res, 200, true, 'User updated successfully', user);
+    } catch (error) {
+        sendResponse(res, 500, false, error.message);
+    }
+};
+
 exports.approveEvent = async (req, res) => {
     try {
         const { error, value } = idParamSchema.validate(req.params);
@@ -208,8 +247,19 @@ exports.approveEvent = async (req, res) => {
 
 exports.getAllEvents = async (req, res) => {
     try {
-        const events = await Event.find({ isDeleted: { $ne: true } }).sort({ createdAt: -1 });
-        sendResponse(res, 200, true, 'Events retrieved successfully', events);
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
+        const skip = (page - 1) * limit;
+
+        const [events, total] = await Promise.all([
+            Event.find({ isDeleted: { $ne: true } })
+                .sort({ createdAt: -1 })
+                .skip(skip)
+                .limit(limit),
+            Event.countDocuments({ isDeleted: { $ne: true } })
+        ]);
+
+        sendFullResponse(res, 200, true, 'Events retrieved successfully', events, { total, page, limit });
     } catch (error) {
         sendResponse(res, 500, false, error.message);
     }
@@ -791,14 +841,18 @@ exports.updateEvent = async (req, res) => {
         const { error, value } = idParamSchema.validate(req.params);
         if (error) return sendResponse(res, 400, false, error.details[0].message);
 
-        const event = await Event.findById(value.id);
+        const query = mongoose.Types.ObjectId.isValid(value.id) ? { _id: value.id } : { legacyId: Number(value.id) };
+        const event = await Event.findOne(query);
         if (!event) return sendResponse(res, 404, false, 'Event not found');
 
         const { ticketInfo, ...restData } = req.body;
-        
-        // Update core event fields
-        Object.assign(event, restData);
-        const updatedEvent = await event.save();
+
+        // Update core event fields (using findOneAndUpdate for atomicity)
+        const updatedEvent = await Event.findOneAndUpdate(
+            query,
+            { $set: restData },
+            { new: true, runValidators: true }
+        );
 
         // Sync TicketInfo if provided (mirroring eventService logic)
         if (Array.isArray(ticketInfo)) {
