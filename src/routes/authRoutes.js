@@ -61,7 +61,7 @@ router.post('/register', otpLimiter, async (req, res) => {
 
   try {
     const normalizedEmail = email.toLowerCase();
-    
+
     const existed = await User.findOne({ email: normalizedEmail });
     if (existed) {
       return res.status(409).json({ message: 'Email đã tồn tại' });
@@ -85,14 +85,14 @@ router.post('/register', otpLimiter, async (req, res) => {
       res.status(201).json({ message: 'Đăng ký thành công. Vui lòng kiểm tra email để lấy OTP.' });
     } catch (mailError) {
       console.log('OTP for email', normalizedEmail, 'is:', otp);
-      
+
       if (process.env.NODE_ENV === 'development' || !process.env.SMTP_USER) {
         await user.save();
-        return res.status(201).json({ 
-          message: 'Đăng ký thành công. Mail server chưa cấu hình, mã OTP được in ở console BE: ' + otp 
+        return res.status(201).json({
+          message: 'Đăng ký thành công. Mail server chưa cấu hình, mã OTP được in ở console BE: ' + otp
         });
       }
-      
+
       res.status(500).json({ message: mailError.message });
     }
   } catch (error) {
@@ -108,7 +108,7 @@ router.post('/verify', async (req, res) => {
   const { email, otp } = req.body;
 
   try {
-    const user = await User.findOne({ 
+    const user = await User.findOne({
       email: email.toLowerCase(),
       verifyOtp: otp,
       verifyOtpExpiresAt: { $gt: new Date() }
@@ -137,9 +137,9 @@ router.post('/login', authLimiter, async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({ email: email.toLowerCase() }).select('+passwordHash');
+    const user = await User.findOne({ email: email }).select('+passwordHash');
     if (!user) {
-      console.log(`Login failed: User not found for email ${email.toLowerCase()}`);
+      console.log(`Login failed: User not found for email ${email}`);
       return res.status(401).json({ message: 'Thông tin đăng nhập không chính xác' });
     }
 
@@ -254,7 +254,7 @@ router.get('/google/callback', async (req, res) => {
 
     // Generate tokens
     const accessToken = generateAccessToken(user);
-    
+
     // Redirect to frontend with token
     const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5174';
     res.redirect(`${frontendUrl}/login?token=${accessToken}&role=${user.role}`);
@@ -297,7 +297,7 @@ router.post('/verify-reset-otp', async (req, res) => {
   const { email, otp } = req.body;
 
   try {
-    const user = await User.findOne({ 
+    const user = await User.findOne({
       email: email.toLowerCase(),
       resetOtp: otp,
       resetOtpExpiresAt: { $gt: new Date() }
@@ -321,7 +321,7 @@ router.post('/reset-password', async (req, res) => {
   const { email, otp, newPassword } = req.body;
 
   try {
-    const user = await User.findOne({ 
+    const user = await User.findOne({
       email: email.toLowerCase(),
       resetOtp: otp,
       resetOtpExpiresAt: { $gt: new Date() }
