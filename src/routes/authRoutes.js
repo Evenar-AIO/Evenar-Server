@@ -70,11 +70,14 @@ router.post('/register', otpLimiter, async (req, res) => {
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     const otpExpires = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
 
+    let normalizedRole = (role || 'customer').toLowerCase();
+    if (normalizedRole === 'eventowner') normalizedRole = 'event_owner';
+
     const user = new User({
       username: fullName,
       email: normalizedEmail,
       passwordHash: password, // Model handles hashing via pre-save middleware
-      role: (role || 'customer').toLowerCase(),
+      role: normalizedRole,
       gender,
       birthday,
       address,
