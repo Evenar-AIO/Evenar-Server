@@ -57,7 +57,7 @@ const protect = async (req, res, next) => {
 // @desc    Register a new user
 // @access  Public
 router.post('/register', otpLimiter, async (req, res) => {
-  const { fullName, email, password, role } = req.body;
+  const { fullName, email, password, role, gender, birthday, address, phoneNumber } = req.body;
 
   try {
     const normalizedEmail = email.toLowerCase();
@@ -74,7 +74,11 @@ router.post('/register', otpLimiter, async (req, res) => {
       username: fullName,
       email: normalizedEmail,
       passwordHash: password, // Model handles hashing via pre-save middleware
-      role: role || 'customer',
+      role: (role || 'customer').toLowerCase(),
+      gender,
+      birthday,
+      address,
+      phoneNumber,
       verifyOtp: otp,
       verifyOtpExpiresAt: otpExpires,
     });
