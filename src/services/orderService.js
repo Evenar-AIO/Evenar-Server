@@ -163,6 +163,14 @@ exports.createOrder = async (userId, eventId, tickets, promotionCode = null, pay
     await session.commitTransaction();
     session.endSession();
 
+    // 7. Clear the user's cart (no session needed, independent action)
+    try {
+      const cartService = require('./cartService');
+      await cartService.clearCart(userId);
+    } catch (err) {
+      console.warn('Failed to clear cart after order creation:', err.message);
+    }
+
     return {
       orderId: order._id,
       orderNumber: order.orderNumber,
@@ -284,6 +292,14 @@ exports.createOrderWithoutTransaction = async (userId, eventId, tickets, promoti
     seatIds: t.seatIds || [],
   }));
   await OrderItem.insertMany(orderItems);
+
+  // 7. Clear the user's cart
+  try {
+    const cartService = require('./cartService');
+    await cartService.clearCart(userId);
+  } catch (err) {
+    console.warn('Failed to clear cart after order creation (no-transaction path):', err.message);
+  }
 
   return {
     orderId: order._id,

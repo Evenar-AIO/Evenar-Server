@@ -22,7 +22,6 @@ router.use((req, res, next) => {
 
 router.get('/stats', ownerController.getStats);
 router.get('/revenue', ownerController.getRevenueData);
-router.get('/buyers', ownerController.getBuyers);
 router.get('/analytics', ownerController.getAnalytics);
 
 module.exports = router;

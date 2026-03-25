@@ -1,8 +1,24 @@
 const eventService = require("../services/eventService");
+const { getIO } = require("../../socket");
+const Notification = require("../models/Notification");
+const User = require("../models/User");
 
 const getEvents = async (req, res) => {
   try {
     const events = await eventService.getEvents();
+    res.json(events);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+const getMyEvents = async (req, res) => {
+  try {
+    const ownerId = req.user && (req.user.sub || req.user._id || req.user.id);
+    if (!ownerId) {
+      return res.status(401).json({ message: 'Authentication required' });
+    }
+    const events = await eventService.getEventsByOwner(ownerId);
     res.json(events);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -115,7 +131,34 @@ const submitEvent = async (req, res) => {
   try {
     const ownerId = req.user && (req.user.sub || req.user._id || req.user.id);
     if (!ownerId) return res.status(401).json({ message: 'Authentication required' });
+    
     const event = await eventService.submitEvent(req.params.id, ownerId);
+
+    // Notify admins
+    try {
+        const admins = await User.find({ role: 'admin' });
+        const io = getIO();
+        
+        if (io && admins.length > 0) {
+            for (const admin of admins) {
+                const adminId = admin._id.toString();
+                const notifData = {
+                    userId: admin._id,
+                    title: 'Yêu cầu duyệt sự kiện mới',
+                    body: `Sự kiện "${event.name}" vừa được gửi chờ duyệt.`,
+                    type: 'system',
+                    read: false,
+                    targetId: event._id,
+                    targetModel: 'Event'
+                };
+                const newNotif = await Notification.create(notifData);
+                io.to(`user:${adminId}`).emit('notification', newNotif);
+            }
+        }
+    } catch (notifErr) {
+        console.error('Submit event notification error:', notifErr);
+    }
+
     res.json({ message: "Event submitted for review", event });
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -124,6 +167,7 @@ const submitEvent = async (req, res) => {
 
 module.exports = {
   getEvents,
+  getMyEvents,
   getEventById,
   createEvent,
   updateEvent,

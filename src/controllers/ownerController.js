@@ -297,6 +297,48 @@ exports.getAnalytics = async (req, res) => {
             { $group: { _id: null, total: { $sum: '$totalAmount' } } }
         ]);
 
+        // Dynamic Revenue Trend
+        const period = Number(req.query.period) || 7;
+        const revenueTrend = [];
+        
+        if (period >= 180) {
+            // Group by months for 6 months (180 days) or 12 months (365 days)
+            const numMonths = period === 180 ? 6 : 12;
+            for (let i = numMonths - 1; i >= 0; i--) {
+                const start = new Date();
+                start.setDate(1);
+                start.setHours(0,0,0,0);
+                start.setMonth(start.getMonth() - i);
+                const end = new Date(start);
+                end.setMonth(end.getMonth() + 1);
+
+                const monthOrders = await Order.find({
+                    eventId: { $in: eventIds },
+                    paymentStatus: 'paid',
+                    createdAt: { $gte: start, $lt: end }
+                });
+                const monthRev = monthOrders.reduce((sum, o) => sum + (o.totalAmount || 0), 0);
+                revenueTrend.push(monthRev);
+            }
+        } else {
+            // Group by days map to 7 or 30 days
+            for (let i = period - 1; i >= 0; i--) {
+                const start = new Date();
+                start.setHours(0,0,0,0);
+                start.setDate(start.getDate() - i);
+                const end = new Date(start);
+                end.setDate(end.getDate() + 1);
+
+                const dayOrders = await Order.find({
+                    eventId: { $in: eventIds },
+                    paymentStatus: 'paid',
+                    createdAt: { $gte: start, $lt: end }
+                });
+                const dayRev = dayOrders.reduce((sum, o) => sum + (o.totalAmount || 0), 0);
+                revenueTrend.push(dayRev);
+            }
+        }
+
         // Unique Customers (Simplified)
         const uniqueCustomers = await Order.distinct('userId', { eventId: { $in: eventIds }, paymentStatus: 'paid' });
 
@@ -305,6 +347,7 @@ exports.getAnalytics = async (req, res) => {
             data: {
                 performance: performanceData,
                 ticketDistribution: distribution,
+                revenueTrend, // Real trend data
                 conversionRate: conversionRate.toFixed(1) + '%',
                 weeklyRevenue: `₫${(weeklyRev[0]?.total || 0).toLocaleString('vi-VN')}`,
                 avgTicketPrice: `₫${totalSold > 0 ? Math.round(revenue / totalSold).toLocaleString('vi-VN') : '0'}`,

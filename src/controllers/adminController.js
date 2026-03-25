@@ -237,6 +237,26 @@ exports.approveEvent = async (req, res) => {
             { new: true }
         );
 
+        // Notify event owner
+        try {
+            const io = getIO();
+            if (io && event.ownerId) {
+                const notifData = {
+                    userId: event.ownerId,
+                    title: 'Sự kiện đã được duyệt',
+                    body: `Sự kiện "${event.name}" của bạn đã được Admin phê duyệt và đang hoạt động.`,
+                    type: 'system',
+                    read: false,
+                    targetId: event._id,
+                    targetModel: 'Event'
+                };
+                const newNotif = await Notification.create(notifData);
+                io.to(`user:${event.ownerId.toString()}`).emit('notification', newNotif);
+            }
+        } catch (notifErr) {
+            console.error('Approve event notification error:', notifErr);
+        }
+
         await logAuditAction(req, 'APPROVE', 'Events', event.legacyId, { isApproved: false }, { isApproved: true });
 
         sendResponse(res, 200, true, 'Event approved successfully', event);
@@ -853,6 +873,30 @@ exports.updateEvent = async (req, res) => {
             { $set: restData },
             { new: true, runValidators: true }
         );
+
+        // Notify event owner if status changed
+        if (restData.status && restData.status !== event.status) {
+            try {
+                const io = getIO();
+                if (io && event.ownerId) {
+                    const statusText = restData.status === 'active' ? 'đã được duyệt và đang hoạt động' : 
+                                     restData.status === 'rejected' ? 'đã bị từ chối' : `được đổi sang trạng thái: ${restData.status}`;
+                    const notifData = {
+                        userId: event.ownerId,
+                        title: 'Cập nhật trạng thái sự kiện',
+                        body: `Sự kiện "${event.name}" của bạn ${statusText}.`,
+                        type: 'system',
+                        read: false,
+                        targetId: event._id,
+                        targetModel: 'Event'
+                    };
+                    const newNotif = await Notification.create(notifData);
+                    io.to(`user:${event.ownerId.toString()}`).emit('notification', newNotif);
+                }
+            } catch (notifErr) {
+                console.error('Update event status notification error:', notifErr);
+            }
+        }
 
         // Sync TicketInfo if provided (mirroring eventService logic)
         if (Array.isArray(ticketInfo)) {

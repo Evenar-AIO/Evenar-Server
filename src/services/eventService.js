@@ -13,6 +13,18 @@ exports.getEvents = async () => {
 };
 
 /**
+ * getEventsByOwner
+ * Returns all non-deleted events belonging to a specific owner.
+ */
+exports.getEventsByOwner = async (ownerId) => {
+  const query = mongoose.Types.ObjectId.isValid(ownerId) 
+    ? { ownerId: new mongoose.Types.ObjectId(ownerId), isDeleted: { $ne: true } }
+    : { ownerId, isDeleted: { $ne: true } };
+    
+  return await Event.find(query).sort({ createdAt: -1 });
+};
+
+/**
  * getEventById
  * Returns a single event by ID or legacyId, with ticket info populated.
  */

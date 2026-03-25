@@ -353,20 +353,19 @@ router.post('/reset-password', async (req, res) => {
 // @route   POST api/auth/change-password
 // @access  Private
 router.post('/change-password', protect, async (req, res) => {
-  const { oldPassword, newPassword } = req.body;
+  const { newPassword } = req.body;
+
+  if (!newPassword) {
+    return res.status(400).json({ message: 'Vui lòng cung cấp mật khẩu mới' });
+  }
 
   try {
-    const user = await User.findById(req.user._id).select('+passwordHash');
+    const user = await User.findById(req.user._id);
     if (!user) {
       return res.status(404).json({ message: 'Người dùng không tồn tại' });
     }
 
-    const isMatch = await user.comparePassword(oldPassword);
-    if (!isMatch) {
-      return res.status(401).json({ message: 'Mật khẩu hiện tại không chính xác' });
-    }
-
-    user.passwordHash = newPassword;
+    user.passwordHash = newPassword; // Pre-save middleware handles hashing
     await user.save();
 
     res.json({ success: true, message: 'Đổi mật khẩu thành công' });

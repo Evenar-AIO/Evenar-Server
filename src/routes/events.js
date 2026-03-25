@@ -6,6 +6,7 @@ const { validateCreateEventPayload, validateUpdateEventPayload } = require('../v
 
 router.post('/', verifyToken, validateCreateEventPayload, eventController.createEvent);
 
+router.get('/my', verifyToken, eventController.getMyEvents);
 router.get('/', eventController.getEvents);
 router.get('/:id', eventController.getEventById);
 

@@ -60,10 +60,18 @@ exports.updateProfile = async (req, res) => {
     // Save and return
     const updatedUser = await user.save();
     
+    // Convert to plain object and add fullName for frontend compatibility
+    const userObj = updatedUser.toObject();
+    const result = {
+      ...userObj,
+      id: userObj._id,
+      fullName: userObj.username
+    };
+
     res.status(200).json({
       success: true,
       message: 'Cập nhật thông tin thành công.',
-      data: updatedUser
+      data: result
     });
   } catch (error) {
     console.error('Update profile error:', error);
